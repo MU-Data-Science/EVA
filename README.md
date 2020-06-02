@@ -1,1 +1,1 @@
-# Exhaustive Variant Analysis on Whole Genome Sequences
+# Exhaustive Variant Analysis on Human Genome Sequences
