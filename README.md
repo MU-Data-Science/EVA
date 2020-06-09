@@ -6,4 +6,4 @@ This site is under development and will be updated in the coming months with cod
 
 # Acknowledgments
 
-This work is supported by the National Science Foundation under Grant No. 2034247.
+This work is supported by the National Science Foundation under [Grant No. 2034247](https://nsf.gov/awardsearch/showAward?AWD_ID=2034247).
