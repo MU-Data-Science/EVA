@@ -59,13 +59,13 @@ else
     exit
 fi
 
-echo "👉 Running freebayes for variant analysis"
+echo "👉 Running freebayes for variant calling"
 FREEBAYES_CMD="${FREEBAYES_HOME}/bin/freebayes -f ${1}.fa ${2}.final.bam > ${2}.output.vcf"
 eval ${FREEBAYES_CMD}
 if [[ $? -eq 0 ]]; then
-    echo "👉 Done with variant analysis. See ${2}.output.vcf file."
+    echo "👉 Done with variant calling. See ${2}.output.vcf file."
 else
-    echo "😡 Failed performing variant analysis"
+    echo "😡 Failed performing variant calling"
     exit
 fi
 

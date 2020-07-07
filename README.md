@@ -30,7 +30,7 @@ It will take a few minutes to start the experiment; so please be patient.
 
        ~/EVA/scripts/setup_reference_genome.sh hs38
 
-    f. Now download a whole genome sequence (paired-end) from [The 1000 Genomes Project](ftp://ftp.1000genomes.ebi.ac.uk/vol1/ftp/phase3/data/).
+    f. Now download a whole genome sequence (paired-end) from The 1000 Genomes Project: `ftp://ftp.1000genomes.ebi.ac.uk/vol1/ftp/phase3/data`
 
        wget ftp://ftp.1000genomes.ebi.ac.uk/vol1/ftp/phase3/data/HG00096/sequence_read/SRR062635_1.filt.fastq.gz
        wget ftp://ftp.1000genomes.ebi.ac.uk/vol1/ftp/phase3/data/HG00096/sequence_read/SRR062635_2.filt.fastq.gz
@@ -58,13 +58,10 @@ Please report them [here](https://github.com/MU-Data-Science/EVA/issues).
 # References
 1. https://github.com/ekg/alignment-and-variant-calling-tutorial
 2. https://github.com/biod/sambamba
-3. ftp://ftp.1000genomes.ebi.ac.uk/vol1/ftp/phase3/data/HG00096/sequence_read/
-4. http://bdgenomics.org/
-5. https://github.com/lh3/bwa
-6. https://github.com/ekg/freebayes
-7. https://github.com/samtools/samtools
-8. https://docs.brew.sh/Homebrew-on-Linux
-9. http://evomicsorg.wpengine.netdna-cdn.com/wp-content/uploads/2019/01/genomics_tutorial_2019.pdf
+3. https://github.com/lh3/bwa
+4. https://github.com/ekg/freebayes
+5. https://github.com/samtools/samtools
+6. https://docs.brew.sh/Homebrew-on-Linux
 
 # Acknowledgments
 
