@@ -5,6 +5,7 @@ This site is under development and will be updated in the coming months with cod
 # Contributors
 
 **Faculty PI:** Dr. Praveen Rao
+
 **PhD Students:** Arun Zachariah
 
 # Acknowledgments
