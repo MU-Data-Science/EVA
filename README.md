@@ -7,7 +7,7 @@ This site is ***under active development*** and will be updated in the coming mo
 1. Create an account on CloudLab by signing up [here](https://cloudlab.us/signup.php).  Select "Join Existing Project" with `EVA-public` as the project name.
 2. By signing up, you agree to follow the [Acceptable Use Policy of CloudLab](https://cloudlab.us/aup.php).
 3. After your account is approved, you can login to your account. Read the [CloudLab manual](http://docs.cloudlab.us/) on how to start an experiment.
-4. Start an experiment using the profile `EVA-single-node-profile`.
+4. Start an experiment using the profile ["EVA-single-node-profile"](https://www.cloudlab.us/p/8d74b0b9-bfd5-11ea-b1eb-e4434b2381fc).
 You will need to select a machine type such as `xl170`, `c240g5`, etc. Also provide your CloudLab user name.
 It will take a few minutes to start the experiment; so please be patient.
 
@@ -35,7 +35,7 @@ It will take a few minutes to start the experiment; so please be patient.
        wget ftp://ftp.1000genomes.ebi.ac.uk/vol1/ftp/phase3/data/HG00096/sequence_read/SRR062635_1.filt.fastq.gz
        wget ftp://ftp.1000genomes.ebi.ac.uk/vol1/ftp/phase3/data/HG00096/sequence_read/SRR062635_2.filt.fastq.gz
 
-    g. Run the variant analysis script by passing the required arguments.
+    g. Run the variant analysis script by passing the required arguments. This script will perform the alignment, sorting, marking duplicates, and variant calling.
 
        ~/EVA/scripts/run_variant_analysis.sh hs38 SRR062635
 
