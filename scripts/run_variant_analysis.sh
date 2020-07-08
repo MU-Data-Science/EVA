@@ -2,6 +2,7 @@
 
 BWA_HOME=${HOME}/bwa
 FREEBAYES_HOME=${HOME}/freebayes
+TMP_DIR=/mydata/tmp
 
 if [[ $# -ne 2 ]]; then
     echo "Usage: run_variant_analysis.sh <hs38|hs38a|hs37> <sequence_prefix>"
@@ -40,7 +41,9 @@ else
 fi
 
 echo "👉 Performing sorting of BAM file"
-SORT_CMD="sambamba sort ${2}.bam"
+rm -rf ${TMP_DIR}
+mkdir ${TMP_DIR}
+SORT_CMD="sambamba sort ${2}.bam --tmpdir=${TMP_DIR}"
 eval ${SORT_CMD}
 if [[ $? -eq 0 ]]; then
     echo "👉 Done with sorting BAM file"
@@ -50,7 +53,7 @@ else
 fi
 
 echo "👉 Marking duplicates in BAM file"
-MARKDUP_CMD="sambamba markdup ${2}.sorted.bam ${2}.final.bam"
+MARKDUP_CMD="sambamba markdup ${2}.sorted.bam ${2}.final.bam --tmpdir=${TMP_DIR}"
 eval ${MARKDUP_CMD}
 if [[ $? -eq 0 ]]; then
     echo "👉 Done with marking duplicates in BAM file"

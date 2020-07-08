@@ -19,6 +19,7 @@ echo "👉 Done with Brew installation 😎"
 # get sambamba
 brew install brewsci/bio/sambamba
 cd ${HOME}
+ln -sf /home/linuxbrew/.linuxbrew/bin/sambamba .
 echo "👉 Done with Sambamba installation 😎"
 
 # get samtools and hstlib
@@ -46,5 +47,5 @@ sudo apt-get install cmake -y
 cd freebayes
 make
 cd  ${HOME}
-echo "👉 Done with Freebayes installation 😎"
+    echo "👉 Done with Freebayes installation 😎"
 echo "👉 Successful installation of the required tools. 😎"
