@@ -40,7 +40,7 @@ It will take a few minutes to start the experiment; so please be patient.
 
        $ ~/EVA/scripts/run_variant_analysis.sh hs38 SRR062635
 
-    h. The output of variant analysis is stored in a `.output.vcf` file. You can view this file using visualization tools such as [IGV](https://software.broadinstitute.org/software/igv/download).
+    h. The output of variant analysis is stored in a `.output.vcf` file. Such files can be further processed using widely available tools [scikit-allel](http://alimanfoo.github.io/2017/06/14/read-vcf.html), [VCFtools](https://vcftools.github.io/index.html), [GATK](https://gatk.broadinstitute.org/hc/en-us/articles/360036711531-VariantsToTable). You can also use visualization tools such as [IGV](https://software.broadinstitute.org/software/igv/download).
 
 ### Simple steps to run the screen command
 

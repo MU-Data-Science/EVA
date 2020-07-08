@@ -5,8 +5,8 @@ FREEBAYES_HOME=${HOME}/freebayes
 TMP_DIR=/mydata/tmp
 
 if [[ $# -ne 2 ]]; then
-    echo "Usage: run_variant_analysis.sh <hs38|hs38a|hs37> <sequence_prefix>"
-    echo "       (example of a sequence prefix: SRR062635)"
+    echo "Usage: run_variant_analysis.sh <hs38|hs38a|hs37> <sample_ID>"
+    echo "       (example of sample ID: SRR062635)"
     exit
 fi
 
