@@ -5,10 +5,11 @@ This site is ***under active development*** and will be updated in the coming mo
 ## Running variant analysis on human genomes using a single CloudLab node
 
 1. Create an account on CloudLab by signing up [here](https://cloudlab.us/signup.php).  Select "Join Existing Project" with `EVA-public` as the project name.
+<!--[(Screenshot)](images/CloudLab_signup.png?raw=true)("CloudLab Signup")-->
 2. By signing up, you agree to follow the [Acceptable Use Policy of CloudLab](https://cloudlab.us/aup.php).
 3. After your account is approved, you can login to your account. Read the [CloudLab manual](http://docs.cloudlab.us/) on how to start an experiment.
 4. Start an experiment using the profile `EVA-single-node-profile` on CloudLab. (Or just click [here](https://www.cloudlab.us/p/8d74b0b9-bfd5-11ea-b1eb-e4434b2381fc).)
-You will need to select a node/hardware type such as `xl170`, `c240g5`, etc. Also provide your CloudLab user name. Check the box to agree to using only deidentified data.
+You will need to select a node/hardware type such as `xl170` (Utah), `c240g5` (Wisc), etc. Also provide your CloudLab user name. Check the box to agree to using only deidentified data.
 It will take a few minutes to start the experiment; so please be patient.
 
 5. Open the shell/terminal for connecting to the CloudLab node in your browser.

@@ -21,7 +21,8 @@ if [[ ! -f "${2}_1.filt.fastq.gz" || ! -f "${2}_2.filt.fastq.gz" ]]; then
 fi
 
 echo "👉 Starting alignment with bwa"
-BWA_CMD="${BWA_HOME}/bwa mem ${1}.fa ${2}_1.filt.fastq.gz ${2}_2.filt.fastq.gz | gzip > ${2}.sam.gz"
+num_threads=$(nproc)
+BWA_CMD="${BWA_HOME}/bwa mem -t ${num_threads} ${1}.fa ${2}_1.filt.fastq.gz ${2}_2.filt.fastq.gz | gzip > ${2}.sam.gz"
 eval ${BWA_CMD}
 if [[ $? -eq 0 ]]; then
     echo "👉 Done with alignment"
