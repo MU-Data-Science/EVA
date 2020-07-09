@@ -1,10 +1,15 @@
 # Exhaustive Variant Analysis (EVA) on Human Genome Sequences
 
-This site is ***under active development*** and will be updated in the coming months with code and documentation.
+The goal of this [NSF RAPID project](https://nsf.gov/awardsearch/showAward?AWD_ID=2034247) is to democratize genome sequence analysis for enabling researchers to
+better understand how COVID-19 affects individuals based on their genetic makeup. Using CloudLab, a researcher can perform
+variant analysis on genomes at no charge.
+
+This site is ***under active development*** and will be continuously updated with code and documentation.
 
 ## Running variant analysis on human genomes using a single CloudLab node
 
 1. Create an account on CloudLab by signing up [here](https://cloudlab.us/signup.php).  Select "Join Existing Project" with `EVA-public` as the project name.
+(If you already have a CloudLab account, then join the project `EVA-public` after logging in to CloudLab.)
 <!--[(Screenshot)](images/CloudLab_signup.png?raw=true)("CloudLab Signup")-->
 2. By signing up, you agree to follow the [Acceptable Use Policy of CloudLab](https://cloudlab.us/aup.php).
 3. After your account is approved, you can login to your account. Read the [CloudLab manual](http://docs.cloudlab.us/) on how to start an experiment.
@@ -12,14 +17,17 @@ This site is ***under active development*** and will be updated in the coming mo
 You will need to select a node/hardware type such as `xl170` (Utah), `c240g5` (Wisc), etc. Also provide your CloudLab user name. Check the box to agree to using only deidentified data.
 It will take a few minutes to start the experiment; so please be patient.
 
-5. Open the shell/terminal for connecting to the CloudLab node in your browser.
+5. Go to your experiment and in `Topology View` click the node icon and open a shell/terminal to connect to that node.
+Alternatively, you can use `SSH` to login to the node: `$ ssh -i /path/to/CloudLab/private_key_file  CloudLab_username@CloudLab_hostname`.
+(You can also add your private key using [ssh-agent](https://www.ssh.com/ssh/agent).)
+
 6. Run the following commands on the shell:
 
     a. Clone the repo
 
        $ git clone https://github.com/MU-Data-Science/EVA.git
 
-    b. Set up all the tools such as bwa, samtools, sambamba, Freebayes, etc.
+    b. Set up all the tools such as [bwa](https://github.com/lh3/bwa), [samtools](https://github.com/samtools/samtools), [sambamba](https://github.com/biod/sambamba), [Freebayes](https://github.com/ekg/freebayes), etc. Feel free to modify our scripts if you intend to use other tools for variant analysis.
 
        $ ~/EVA/scripts/setup_tools.sh
 
@@ -40,7 +48,11 @@ It will take a few minutes to start the experiment; so please be patient.
 
        $ ~/EVA/scripts/run_variant_analysis.sh hs38 SRR062635
 
-    h. The output of variant analysis is stored in a `.output.vcf` file. Such files can be further processed using widely available tools [scikit-allel](http://alimanfoo.github.io/2017/06/14/read-vcf.html), [VCFtools](https://vcftools.github.io/index.html), [GATK](https://gatk.broadinstitute.org/hc/en-us/articles/360036711531-VariantsToTable). You can also use visualization tools such as [IGV](https://software.broadinstitute.org/software/igv/download).
+    h. The output of variant analysis is stored in a `.output.vcf` file. Download to your local machine using `scp`.
+
+       $ scp  -i /path/to/CloudLab/private_key_file  CloudLab_username@CloudLab_hostname:/path/to/the/output_VCF_file
+
+    A `.vcf` file can be further processed using readily available tools such as [scikit-allel](http://alimanfoo.github.io/2017/06/14/read-vcf.html), [VCFtools](https://vcftools.github.io/index.html), and [GATK](https://gatk.broadinstitute.org/hc/en-us/articles/360036711531-VariantsToTable). You can also use visualization tools such as [IGV](https://software.broadinstitute.org/software/igv/download).
 
 ### Simple steps to run the screen command
 
@@ -62,13 +74,16 @@ It will take a few minutes to start the experiment; so please be patient.
 
 ***🚧 💻 Under active development 💻 🚧***
 
+We are currently working with [Apache Spark](https://spark.apache.org), [Apache Hadoop](https://hadoop.apache.org), and [Adam/Cannoli](http://bdgenomics.org/) to enable large-scale variant analysis on CloudLab.
+
+
 ## Issues?
 
 Please report them [here](https://github.com/MU-Data-Science/EVA/issues).
 
-## Contributors
+## Team
 
-**Faculty PI:** Dr. Praveen Rao
+**Faculty:** Drs. Praveen Rao (**PI**), Deepthi Rao, Peter Tonellato, Wesley Warren, and Eduardo Simoes
 
 **Ph.D. Students:** Arun Zachariah
 
@@ -79,6 +94,10 @@ Please report them [here](https://github.com/MU-Data-Science/EVA/issues).
 4. https://github.com/ekg/freebayes
 5. https://github.com/samtools/samtools
 6. https://docs.brew.sh/Homebrew-on-Linux
+7. https://spark.apache.org
+8. https://hadoop.apache.org
+9. http://bdgenomics.org/
+10. https://cloudlab.us/
 
 # Acknowledgments
 
