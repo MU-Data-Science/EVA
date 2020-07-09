@@ -1,10 +1,8 @@
 # Exhaustive Variant Analysis (EVA) on Human Genome Sequences
 
-The goal of this [NSF RAPID project](https://nsf.gov/awardsearch/showAward?AWD_ID=2034247) is to democratize genome sequence analysis for enabling researchers to
-better understand how COVID-19 affects individuals based on their genetic makeup. Using CloudLab, a researcher can perform
-variant analysis on genomes at no charge.
-
-This site is ***under active development*** and will be continuously updated with code and documentation.
+The goal of this [NSF RAPID project](https://nsf.gov/awardsearch/showAward?AWD_ID=2034247) is to democratize genome sequence analysis so
+that researchers can better understand how COVID-19 affects individuals based on their genetic makeup. Using CloudLab, researchers can perform
+variant analysis on genomes ***at no charge***.
 
 ## Running variant analysis on human genomes using a single CloudLab node
 
@@ -19,7 +17,7 @@ It will take a few minutes to start the experiment; so please be patient.
 
 5. Go to your experiment and in `Topology View` click the node icon and open a shell/terminal to connect to that node.
 Alternatively, you can use `SSH` to login to the node: `$ ssh -i /path/to/CloudLab/private_key_file  CloudLab_username@CloudLab_hostname`.
-(You can also add your private key using [ssh-agent](https://www.ssh.com/ssh/agent).)
+(You can also run [ssh-agent](https://www.ssh.com/ssh/agent) on your local machine to add your private key.)
 
 6. Run the following commands on the shell:
 
@@ -87,6 +85,9 @@ Please report them [here](https://github.com/MU-Data-Science/EVA/issues).
 
 **Ph.D. Students:** Arun Zachariah
 
+# Acknowledgments
+This work is supported by the National Science Foundation under [Grant No. 2034247](https://nsf.gov/awardsearch/showAward?AWD_ID=2034247).
+
 ## References
 1. https://github.com/ekg/alignment-and-variant-calling-tutorial
 2. https://github.com/biod/sambamba
@@ -99,6 +100,3 @@ Please report them [here](https://github.com/MU-Data-Science/EVA/issues).
 9. http://bdgenomics.org/
 10. https://cloudlab.us/
 
-# Acknowledgments
-
-This work is supported by the National Science Foundation under [Grant No. 2034247](https://nsf.gov/awardsearch/showAward?AWD_ID=2034247).
