@@ -22,7 +22,7 @@ Alternatively, you can use `SSH` to login to the node: `$ ssh -i /path/to/CloudL
 
 6. Run the following commands on the shell:
 
-    **a.** Clone the repo.
+    **a.** Clone the repo in your home directory.
 
        $ git clone https://github.com/MU-Data-Science/EVA.git
 
@@ -34,7 +34,7 @@ Alternatively, you can use `SSH` to login to the node: `$ ssh -i /path/to/CloudL
 
        $ cd /mydata
 
-    **d.** Set up and index the reference genome (e.g., hs38, hs38a, hs37). This is a one-time step and can take a hour or so depending on the node hardware type. To avoid killing the process when the SSH session terminates due to disconnection, use the `screen` command.
+    **d.** Set up and index the reference genome (e.g., hs38 ([GRCh38](http://genome.ucsc.edu/cgi-bin/hgTracks?chromInfoPage=&hgsid=857863917_wUC9aW3i9gDVwLAEnS4rRn1MT5Vx)), hs37 ([GRCh37](http://genome.ucsc.edu/cgi-bin/hgTracks?chromInfoPage=&hgsid=857862399_mBXxSwaQbVpPzDMpmtmrA1TeR8WL))). This is a one-time step and can take a hour or so depending on the node hardware type. To avoid killing the process when the SSH session terminates due to disconnection, use the `screen` command.
 
        $ ~/EVA/scripts/setup_reference_genome.sh hs38
 
