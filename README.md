@@ -38,21 +38,21 @@ Alternatively, you can use `SSH` to login to the node: `$ ssh -i /path/to/CloudL
 
        $ ~/EVA/scripts/setup_reference_genome.sh hs38
 
-    **f.** Now copy a whole genome sequence (paired-end) to the CloudLab node. It is the user's responsibility to ensure that the data are de-identified prior to storing them on the CloudLab node. Also see the [Acceptable Use Policy of CloudLab](https://cloudlab.us/aup.php). As an example, let's use whole genome sequences from [The 1000 Genomes Project](https://www.internationalgenome.org/). The FTP site is `ftp://ftp.1000genomes.ebi.ac.uk/vol1/ftp/phase3/data`.
+    **f.** Now copy a whole genome sequence (paired-end) sample to the CloudLab node. It is the user's responsibility to ensure that the data are de-identified prior to storing them on the CloudLab node. Also see the [Acceptable Use Policy of CloudLab](https://cloudlab.us/aup.php). Let's use a whole genome sequence sample from [The 1000 Genomes Project](https://www.internationalgenome.org/). The FTP site is `ftp://ftp.1000genomes.ebi.ac.uk/vol1/ftp/phase3/data`.
 
        $ wget ftp://ftp.1000genomes.ebi.ac.uk/vol1/ftp/phase3/data/HG00096/sequence_read/SRR062635_1.filt.fastq.gz
        $ wget ftp://ftp.1000genomes.ebi.ac.uk/vol1/ftp/phase3/data/HG00096/sequence_read/SRR062635_2.filt.fastq.gz
 
-    If you want to try a whole exome sequence (paired-end), here is an example.
+    If you want to perform variant analysis on a whole exome sequence (paired-end) sample, try the following.
 
        $ wget ftp://ftp.sra.ebi.ac.uk/vol1/fastq/SRR077/SRR077312/SRR077312_1.fastq.gz
        $ wget ftp://ftp.sra.ebi.ac.uk/vol1/fastq/SRR077/SRR077312/SRR077312_2.fastq.gz 
 
     If you have deidentified sequences on your local machine to analyze, copy to the CloudLab node using `scp`.
 
-    **g.** Run the variant analysis script by passing the required arguments. This script will perform the alignment, sorting, marking duplicates, and variant calling.  Here is an example.
+    **g.** Run the variant analysis script by passing the required arguments. (See usage statement of the script.) This script will perform the alignment, sorting, marking duplicates, and variant calling.  Here is an example.
 
-       $ ~/EVA/scripts/run_variant_analysis.sh hs38 SRR062635
+       $ ~/EVA/scripts/run_variant_analysis.sh hs38 SRR062635_1.fastq.gz SRR062635_2.fastq.gz
 
     **h.** The output of variant analysis is stored in a `.output.vcf` file. Download to your local machine using `scp`.
 
@@ -65,7 +65,7 @@ Alternatively, you can use `SSH` to login to the node: `$ ssh -i /path/to/CloudL
 ### Simple steps to run the screen command
 
     $ screen -s my_session_name
-    $ ~/EVA/scripts/run_variant_analysis.sh hs38 SRR062635
+    $ ~/EVA/scripts/run_variant_analysis.sh hs38 SRR062635_1.fastq.gz SRR062635_2.fastq.gz
 
    Press "Ctrl-a" "d" (i.e., control-a followed by d) to detach from the screen session.
 
