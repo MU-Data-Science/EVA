@@ -9,7 +9,7 @@ PICARD_JAR=${HOME}/picard.jar
 GATK_HOME=${HOME}/gatk-4.1.8.0
 
 if [[ $# -lt 2 || $# -gt 3 ]]; then
-    echo "Usage: run_variant_analysis.sh <hs38|hs38a|hs38DH|hs37|hs37d5> <FASTQ_file1> [FASTQ_file2]"
+    echo "Usage: run_variant_analysis_gatk.sh <hs38|hs38a|hs38DH|hs37|hs37d5> <FASTQ_file1> [FASTQ_file2]"
     exit
 fi
 
