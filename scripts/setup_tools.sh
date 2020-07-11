@@ -55,4 +55,17 @@ sudo apt-get install default-jre -y
 sudo apt-get install default-jdk -y
 echo "👉 Done with Java installation 😎"
 
+# setup Picard
+cd ${HOME}
+PICARD_JAR_RELEASE=https://github.com/broadinstitute/picard/releases/download/2.23.2/picard.jar
+wget ${PICARD_JAR_RELEASE}
+echo "👉 Done with Picard download 😎"
+
+# setup GATK
+cd ${HOME}
+GATK_ZIP_RELEASE=https://github.com/broadinstitute/gatk/releases/download/4.1.8.0/gatk-4.1.8.0.zip
+wget ${GATK_ZIP_RELEASE}
+unzip ${GATK_ZIP_RELEASE}
+echo "👉 Done with GATK download 😎"
+
 echo "👉 Successful installation of the required tools. 😎"
