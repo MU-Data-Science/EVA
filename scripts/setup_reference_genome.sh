@@ -19,7 +19,7 @@ samtools faidx ${1}.fa
 echo "👉 Done with indexing the reference genome 😎"
 
 echo "👉 Starting to create dictionary the reference genome 😎"
-samtools dict -o ${1}.dict
+samtools dict -o ${1}.dict ${1}.fa
 echo "👉 Done with creating the dictionary 😎"
 
 echo "👉 Done!"
