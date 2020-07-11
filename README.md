@@ -109,4 +109,5 @@ This work is supported by the National Science Foundation under [Grant No. 20342
 8. https://hadoop.apache.org
 9. http://bdgenomics.org/
 10. https://cloudlab.us/
+11. https://biohpc.cornell.edu/lab/doc/Variant_workshop_Part1.pdf
 
