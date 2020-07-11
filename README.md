@@ -24,11 +24,12 @@ Alternatively, you can use `SSH` to login to the node: `$ ssh -i /path/to/CloudL
 
     **a.** Clone the repo in your home directory.
 
+       $ cd ${HOME}
        $ git clone https://github.com/MU-Data-Science/EVA.git
 
     **b.** Set up all the tools such as [bwa](https://github.com/lh3/bwa), [samtools](https://github.com/samtools/samtools), [sambamba](https://github.com/biod/sambamba), [Freebayes](https://github.com/ekg/freebayes), etc. Feel free to modify our scripts if you intend to use other tools for variant analysis.
 
-       $ ~/EVA/scripts/setup_tools.sh
+       $ ${HOME}/EVA/scripts/setup_tools.sh
 
     **c.** Change directory to local block storage as we need ample space for running variant analysis.
 
@@ -36,7 +37,7 @@ Alternatively, you can use `SSH` to login to the node: `$ ssh -i /path/to/CloudL
 
     **d.** Set up and index the reference genome (e.g., hs38 ([GRCh38](http://genome.ucsc.edu/cgi-bin/hgTracks?chromInfoPage=&hgsid=857863917_wUC9aW3i9gDVwLAEnS4rRn1MT5Vx)), hs37 ([GRCh37](http://genome.ucsc.edu/cgi-bin/hgTracks?chromInfoPage=&hgsid=857862399_mBXxSwaQbVpPzDMpmtmrA1TeR8WL))). This is a one-time step and can take a hour or so depending on the node hardware type. To avoid killing the process when the SSH session terminates due to disconnection, use the `screen` command.
 
-       $ ~/EVA/scripts/setup_reference_genome.sh hs38
+       $ ${HOME}/EVA/scripts/setup_reference_genome.sh hs38
 
     **f.** Now copy a whole genome sequence (paired-end) sample to the CloudLab node. It is the user's responsibility to ensure that the data are de-identified prior to storing them on the CloudLab node. Also see the [Acceptable Use Policy of CloudLab](https://cloudlab.us/aup.php). Let's use a whole genome sequence sample from [The 1000 Genomes Project](https://www.internationalgenome.org/). The FTP site is `ftp://ftp.1000genomes.ebi.ac.uk/vol1/ftp/phase3/data`.
 
@@ -52,7 +53,7 @@ Alternatively, you can use `SSH` to login to the node: `$ ssh -i /path/to/CloudL
 
     **g.** Run the variant analysis script by passing the required arguments. (See usage statement of the script.) This script will perform the alignment, sorting, marking duplicates, and variant calling.  Here is an example.
 
-       $ ~/EVA/scripts/run_variant_analysis.sh hs38 SRR062635_1.fastq.gz SRR062635_2.fastq.gz
+       $ ${HOME}/EVA/scripts/run_variant_analysis.sh hs38 SRR062635_1.fastq.gz SRR062635_2.fastq.gz
 
     **h.** The output of variant analysis is stored in a `.output.vcf` file. Download to your local machine using `scp`.
 
@@ -65,7 +66,7 @@ Alternatively, you can use `SSH` to login to the node: `$ ssh -i /path/to/CloudL
 ### Simple steps to run the screen command
 
     $ screen -s my_session_name
-    $ ~/EVA/scripts/run_variant_analysis.sh hs38 SRR062635_1.fastq.gz SRR062635_2.fastq.gz
+    $ ${HOME}/EVA/scripts/run_variant_analysis.sh hs38 SRR062635_1.fastq.gz SRR062635_2.fastq.gz
 
    Press "Ctrl-a" "d" (i.e., control-a followed by d) to detach from the screen session.
 
