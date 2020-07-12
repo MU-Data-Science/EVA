@@ -5,6 +5,16 @@ that researchers can better understand how COVID-19 affects individuals based on
 variant analysis on genomes ***at no charge***. A recent genomic-wide association study linked genes and blood type of individuals
 to risk of severe COVID-19 [(NEJM '2020)](https://www.nejm.org/doi/full/10.1056/NEJMoa2020283).
 
+[Using a single node](#running-variant-analysis-on-human-genomes-using-a-single-cloudlab-node)
+
+[Using a cluster](#running-variant-analysis-on-a-cluster-of-cloudlab-nodes)
+
+[Report issues](#report-issues)
+
+[Team](#team)
+
+[Acknowledgments](#acknowledgments)
+
 ## Running variant analysis on human genomes using a single CloudLab node
 
 1. Create an account on CloudLab by signing up [here](https://cloudlab.us/signup.php).  Select "Join Existing Project" with `EVA-public` as the project name.
@@ -92,7 +102,7 @@ Alternatively, you can use `SSH` to login to the node: `$ ssh -i /path/to/CloudL
 We are currently working with [Apache Spark](https://spark.apache.org), [Apache Hadoop](https://hadoop.apache.org), and [Adam/Cannoli](http://bdgenomics.org/) to enable large-scale variant analysis on CloudLab.
 
 
-## Issues?
+## Report Issues
 
 Please report them [here](https://github.com/MU-Data-Science/EVA/issues).
 
