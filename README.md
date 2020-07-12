@@ -27,7 +27,7 @@ Alternatively, you can use `SSH` to login to the node: `$ ssh -i /path/to/CloudL
        $ cd ${HOME}
        $ git clone https://github.com/MU-Data-Science/EVA.git
 
-    **b.** Set up all the tools such as [bwa](https://github.com/lh3/bwa), [samtools](https://github.com/samtools/samtools), [sambamba](https://github.com/biod/sambamba), [Freebayes](https://github.com/ekg/freebayes), etc. Feel free to modify our scripts if you intend to use other tools for variant analysis.
+    **b.** Set up all the tools such as [bwa](https://github.com/lh3/bwa), [samtools](https://github.com/samtools/samtools), [sambamba](https://github.com/biod/sambamba), [Freebayes](https://github.com/ekg/freebayes), [Picard](https://github.com/broadinstitute/picard), [GATK](https://github.com/broadinstitute/gatk), etc. Feel free to modify our scripts if you intend to use other tools for variant analysis.
 
        $ ${HOME}/EVA/scripts/setup_tools.sh
 
@@ -51,9 +51,15 @@ Alternatively, you can use `SSH` to login to the node: `$ ssh -i /path/to/CloudL
 
     If you have deidentified sequences on your local machine to analyze, copy to the CloudLab node using `scp`.
 
-    **g.** Run the variant analysis script by passing the required arguments. (See usage statement of the script.) This script will perform the alignment, sorting, marking duplicates, and variant calling.  Here is an example.
+    **g.** There are two variant analysis scripts. Each of them will perform the alignment, sorting, marking duplicates, and variant calling. The script `run_variant_analysis_fbayes.sh` uses Freebayes for variant calling; `run_variant_analysis_gatk.sh` uses GATK's HaplotypeCaller. Run a variant analysis script by passing the required arguments. (See usage statement of the script.)  Here are two examples.
 
-       $ ${HOME}/EVA/scripts/run_variant_analysis.sh hs38 SRR062635_1.fastq.gz SRR062635_2.fastq.gz
+       $ ${HOME}/EVA/scripts/run_variant_analysis_fbayes.sh hs38 SRR062635_1.fastq.gz SRR062635_2.fastq.gz
+
+   OR
+
+       $ ${HOME}/EVA/scripts/run_variant_analysis_gatk.sh hs38 SRR062635_1.fastq.gz SRR062635_2.fastq.gz
+
+    Note that for the GATK pipeline, a dummy [read group](https://gatk.broadinstitute.org/hc/en-us/articles/360035890671-Read-groups) is added to the `.bam` file.
 
     **h.** The output of variant analysis is stored in a `.output.vcf` file. Download to your local machine using `scp`.
 
@@ -111,4 +117,6 @@ This work is supported by the National Science Foundation under [Grant No. 20342
 9. http://bdgenomics.org/
 10. https://cloudlab.us/
 11. https://biohpc.cornell.edu/lab/doc/Variant_workshop_Part1.pdf
+12. https://github.com/broadinstitute/picard
+13. https://github.com/broadinstitute/gatk
 

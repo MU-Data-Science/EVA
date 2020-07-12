@@ -1,4 +1,5 @@
 #!/usr/bin/env bash
+# Variant calling using freebayes
 
 BWA_HOME=${HOME}/bwa
 SAMBAMBA_HOME=${HOME}
