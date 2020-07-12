@@ -20,7 +20,7 @@ It will take a few minutes to start the experiment; so please be patient.
 Alternatively, you can use `SSH` to login to the node: `$ ssh -i /path/to/CloudLab/private_key_file  CloudLab_username@CloudLab_hostname`.
 (You can also run [ssh-agent](https://www.ssh.com/ssh/agent) on your local machine to add your private key.)
 
-6. Run the following commands on the shell:
+6. Run the following commands in the shell/terminal:
 
     **a.** Clone the repo in your home directory.
 
