@@ -63,11 +63,11 @@ Alternatively, you can use `SSH` to login to the node: `$ ssh -i /path/to/CloudL
 
     **g.** There are two variant analysis scripts. Each of them will perform the alignment, sorting, marking duplicates, and variant calling. The script `run_variant_analysis_fbayes.sh` uses Freebayes for variant calling; `run_variant_analysis_gatk.sh` uses GATK's HaplotypeCaller. Run a variant analysis script by passing the required arguments. (See usage statement of the script.)  Here are two examples.
 
-       $ ${HOME}/EVA/scripts/run_variant_analysis_fbayes.sh hs38 SRR062635_1.fastq.gz SRR062635_2.fastq.gz
+       $ ${HOME}/EVA/scripts/run_variant_analysis_fbayes.sh hs38 SRR062635_1.filt.fastq.gz SRR062635_2.filt.fastq.gz
 
    OR
 
-       $ ${HOME}/EVA/scripts/run_variant_analysis_gatk.sh hs38 SRR062635_1.fastq.gz SRR062635_2.fastq.gz
+       $ ${HOME}/EVA/scripts/run_variant_analysis_gatk.sh hs38 SRR062635_1.filt.fastq.gz SRR062635_2.filt.fastq.gz
 
     Note that for the GATK pipeline, a dummy [read group](https://gatk.broadinstitute.org/hc/en-us/articles/360035890671-Read-groups) is added to the `.bam` file.
 
