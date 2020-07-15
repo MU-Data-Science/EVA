@@ -57,7 +57,8 @@ echo "👉 Done with Java installation 😎"
 
 # setup Picard
 cd ${HOME}
-PICARD_JAR_RELEASE=https://github.com/broadinstitute/picard/releases/download/2.23.2/picard.jar
+PICARD_VERSION=2.23.2
+PICARD_JAR_RELEASE=https://github.com/broadinstitute/picard/releases/download/${PICARD_VERSION}/picard.jar
 wget ${PICARD_JAR_RELEASE}
 echo "👉 Done with Picard download 😎"
 
