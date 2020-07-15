@@ -1,0 +1,23 @@
+Utah Data Center
+----------------
+m510
+xl170
+
+Wisconsin Data Center
+---------------------
+c220g1
+c240g1
+c220g2
+c240g2
+c220g5
+c240g5
+c4130
+
+Clemson Data Center
+-------------------
+c8220
+c8220x
+c6320
+c4130
+dss7500
+c6420
