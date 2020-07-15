@@ -7,7 +7,7 @@ FREEBAYES_HOME=${HOME}/freebayes
 TMP_DIR="/mydata/tmp"
 OUTPUT_PREFIX="VA-"${USER}"-result"
 PICARD_JAR=${HOME}/picard.jar
-GATK_HOME=${HOME}/gatk-4.1.8.0
+GATK_HOME=${HOME}/gatk
 
 if [[ $# -lt 2 || $# -gt 3 ]]; then
     echo "Usage: run_variant_analysis_gatk.sh <hs38|hs38a|hs38DH|hs37|hs37d5> <FASTQ_file1> [FASTQ_file2]"
