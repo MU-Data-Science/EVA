@@ -46,7 +46,7 @@ else
 fi
 
 echo "👉 Converting to BAM file."
-SAM2BAM_CMD="samtools view -b ${OUTPUT_PREFIX}.sam.gz > ${OUTPUT_PREFIX}.bam"
+SAM2BAM_CMD="samtools view -@${num_threads} -b ${OUTPUT_PREFIX}.sam.gz > ${OUTPUT_PREFIX}.bam"
 eval ${SAM2BAM_CMD}
 if [[ $? -eq 0 ]]; then
     echo "👉 Done with BAM conversion."
@@ -84,7 +84,7 @@ echo "👉 Index processed BAM file before variant calling."
 samtools index ${OUTPUT_PREFIX}.rg.sorted.final.bam
 
 echo "👉 Running GATK HaplotypeCaller for variant calling."
-${GATK_HOME}/gatk HaplotypeCaller -R ${1}.fa -I ${OUTPUT_PREFIX}.rg.sorted.final.bam -O ${OUTPUT_PREFIX}.output.vcf
-echo "👉 Done with variant calling. See ${OUTPUT_PREFIX}.output.vcf file."
+${GATK_HOME}/gatk HaplotypeCaller -R ${1}.fa -I ${OUTPUT_PREFIX}.rg.sorted.final.bam -O ${OUTPUT_PREFIX}-gatk.output.vcf
+echo "👉 Done with variant calling. See ${OUTPUT_PREFIX}-gatk.output.vcf file."
 
 echo "👉 Done!"

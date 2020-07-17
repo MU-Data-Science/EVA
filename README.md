@@ -5,32 +5,36 @@ that researchers can better understand how COVID-19 affects individuals based on
 variant analysis on genomes ***at no charge***. A recent genomic-wide association study linked genes and blood type of individuals
 to risk of severe COVID-19 [(NEJM '2020)](https://www.nejm.org/doi/full/10.1056/NEJMoa2020283).
 
-[Using a single node](#running-variant-analysis-on-human-genomes-using-a-single-cloudlab-node)
+[[CloudLab account]](#signup-for-a-cloudlab-account)
 
-[Using a cluster](#running-variant-analysis-on-a-cluster-of-cloudlab-nodes)
+[[Variant analysis (single node)]](#running-variant-analysis-on-human-genomes-using-a-single-cloudlab-node)  
+[[Variant analysis (cluster)]](#running-variant-analysis-on-a-cluster-of-cloudlab-nodes)
 
-[Report issues](#report-issues)
+[[Report issues]](#report-issues)
 
-[Team](#team)
+[[Team]](#team)
 
-[Acknowledgments](#acknowledgments)
+[[Acknowledgments]](#acknowledgments)
 
-## Running variant analysis on human genomes using a single CloudLab node
+## Signup for a CloudLab account
 
 1. Create an account on CloudLab by signing up [here](https://cloudlab.us/signup.php).  Select "Join Existing Project" with `EVA-public` as the project name.
 (If you already have a CloudLab account, then join the project `EVA-public` after logging in to CloudLab.)
 <!--[(Screenshot)](images/CloudLab_signup.png?raw=true)("CloudLab Signup")-->
 2. By signing up, you agree to follow the [Acceptable Use Policy of CloudLab](https://cloudlab.us/aup.php).
 3. After your account is approved, you can login to your account. Read the [CloudLab manual](http://docs.cloudlab.us/) on how to start an experiment.
-4. Start an experiment using the profile `EVA-single-node-profile` on CloudLab. (Or just click [here](https://www.cloudlab.us/p/8d74b0b9-bfd5-11ea-b1eb-e4434b2381fc).)
+
+## Running variant analysis on human genomes using a single CloudLab node
+
+1. Start an experiment using the profile `EVA-single-node-profile` on CloudLab. (Or just click [here](https://www.cloudlab.us/p/8d74b0b9-bfd5-11ea-b1eb-e4434b2381fc).)
 You will need to select a node/hardware type such as `xl170` (Utah), `c240g5` (Wisc), etc. The complete list of supported hardware can be found [here](Supported_Machines.txt).  Also provide your CloudLab user name. Check the box to agree to using only deidentified data.
 It will take a few minutes to start the experiment; so please be patient.
 
-5. Go to your experiment and in `Topology View` click the node icon and open a shell/terminal to connect to that node.
+2. Go to your experiment and in `Topology View` click the node icon and open a shell/terminal to connect to that node.
 Alternatively, you can use `SSH` to login to the node: `$ ssh -i /path/to/CloudLab/private_key_file  CloudLab_username@CloudLab_hostname`.
 (You can also run [ssh-agent](https://www.ssh.com/ssh/agent) on your local machine to add your private key.)
 
-6. Run the following commands in the shell/terminal:
+3. Run the following commands in the shell/terminal:
 
     **a.** Clone the repo in your home directory.
 
