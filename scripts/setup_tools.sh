@@ -65,10 +65,12 @@ echo "👉 Done with Picard download 😎"
 # setup GATK
 cd ${HOME}
 GATK_VERSION=4.1.8.0
+GATK_LOCAL_ZIP=gatk.zip
 GATK_ZIP_RELEASE=https://github.com/broadinstitute/gatk/releases/download/${GATK_VERSION}/gatk-${GATK_VERSION}.zip
-wget ${GATK_ZIP_RELEASE} -O gatk.zip
-unzip gatk.zip
+wget ${GATK_ZIP_RELEASE} -O ${GATK_LOCAL_ZIP}
+unzip ${GATK_LOCAL_ZIP}
 mv gatk-${GATK_VERSION} gatk
+rm -rf ${GATK_LOCAL_ZIP}
 echo "👉 Done with GATK download 😎"
 
 echo "👉 Successful installation of the required tools. 😎"
