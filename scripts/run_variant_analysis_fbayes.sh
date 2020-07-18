@@ -56,7 +56,7 @@ fi
 echo "👉 Performing sorting of BAM file."
 rm -rf ${TMP_DIR}
 mkdir ${TMP_DIR}
-SORT_CMD="${SAMBAMBA_HOME}/sambamba sort -t ${num_threads} ${OUTPUT_PREFIX}.bam --tmpdir=${TMP_DIR}"
+SORT_CMD="${SAMBAMBA_HOME}/sambamba sort -t ${num_threads} ${OUTPUT_PREFIX}.bam -o ${OUTPUT_PREFIX}-sorted.bam --tmpdir=${TMP_DIR}"
 eval ${SORT_CMD}
 if [[ $? -eq 0 ]]; then
     echo "👉 Done with sorting BAM file."
@@ -66,7 +66,7 @@ else
 fi
 
 echo "👉 Marking duplicates in BAM file."
-MARKDUP_CMD="${SAMBAMBA_HOME}/sambamba markdup -t ${num_threads} ${OUTPUT_PREFIX}.sorted.bam ${OUTPUT_PREFIX}.final.bam --tmpdir=${TMP_DIR}"
+MARKDUP_CMD="${SAMBAMBA_HOME}/sambamba markdup -t ${num_threads} ${OUTPUT_PREFIX}-sorted.bam ${OUTPUT_PREFIX}-final.bam --tmpdir=${TMP_DIR}"
 eval ${MARKDUP_CMD}
 if [[ $? -eq 0 ]]; then
     echo "👉 Done with marking duplicates in BAM file."
@@ -76,10 +76,10 @@ else
 fi
 
 echo "👉 Running freebayes for variant calling."
-FREEBAYES_CMD="${FREEBAYES_HOME}/bin/freebayes -f ${1}.fa ${OUTPUT_PREFIX}.final.bam > ${OUTPUT_PREFIX}-fbayes.output.vcf"
+FREEBAYES_CMD="${FREEBAYES_HOME}/bin/freebayes -f ${1}.fa ${OUTPUT_PREFIX}-final.bam > ${OUTPUT_PREFIX}-fbayes-output.vcf"
 eval ${FREEBAYES_CMD}
 if [[ $? -eq 0 ]]; then
-    echo "👉 Done with variant calling. See ${OUTPUT_PREFIX}-fbayes.output.vcf file."
+    echo "👉 Done with variant calling. See ${OUTPUT_PREFIX}-fbayes-output.vcf file."
 else
     echo "😡 Failed performing variant calling."
     exit

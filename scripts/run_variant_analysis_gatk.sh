@@ -3,7 +3,6 @@
 
 BWA_HOME=${HOME}/bwa
 SAMBAMBA_HOME=${HOME}
-FREEBAYES_HOME=${HOME}/freebayes
 TMP_DIR="/mydata/tmp"
 OUTPUT_PREFIX="VA-"${USER}"-result"
 PICARD_JAR=${HOME}/picard.jar
@@ -60,7 +59,7 @@ echo "👉 Adding Read Group to BAM file."
 
 java -jar ${PICARD_JAR} AddOrReplaceReadGroups \
     I=${OUTPUT_PREFIX}.bam \
-    O=${OUTPUT_PREFIX}.rg.bam \
+    O=${OUTPUT_PREFIX}-rg.bam \
     RGSM=mysample \
     RGPU=myunit \
     RGID=mygroupID \
@@ -70,21 +69,21 @@ java -jar ${PICARD_JAR} AddOrReplaceReadGroups \
 echo "👉 Performing sorting of BAM file."
 
 java -jar ${PICARD_JAR} SortSam \
-    I=${OUTPUT_PREFIX}.rg.bam \
-    O=${OUTPUT_PREFIX}.rg.sorted.bam \
+    I=${OUTPUT_PREFIX}-rg.bam \
+    O=${OUTPUT_PREFIX}-rg-sorted.bam \
     SORT_ORDER=coordinate
 
 echo "👉 Marking duplicates in BAM file."
 java -jar ${PICARD_JAR} MarkDuplicates \
-    I=${OUTPUT_PREFIX}.rg.sorted.bam \
-    O=${OUTPUT_PREFIX}.rg.sorted.final.bam \
-    M=${OUTPUT_PREFIX}.rg.sorted.final.bam.dup_metrics.txt
+    I=${OUTPUT_PREFIX}-rg-sorted.bam \
+    O=${OUTPUT_PREFIX}-rg-sorted-final.bam \
+    M=${OUTPUT_PREFIX}-rg-sorted-final-dup_metrics.txt
 
 echo "👉 Index processed BAM file before variant calling."
-samtools index ${OUTPUT_PREFIX}.rg.sorted.final.bam
+samtools index ${OUTPUT_PREFIX}-rg-sorted-final.bam
 
 echo "👉 Running GATK HaplotypeCaller for variant calling."
-${GATK_HOME}/gatk HaplotypeCaller -R ${1}.fa -I ${OUTPUT_PREFIX}.rg.sorted.final.bam -O ${OUTPUT_PREFIX}-gatk.output.vcf
-echo "👉 Done with variant calling. See ${OUTPUT_PREFIX}-gatk.output.vcf file."
+${GATK_HOME}/gatk HaplotypeCaller -R ${1}.fa -I ${OUTPUT_PREFIX}-rg-sorted=final.bam -O ${OUTPUT_PREFIX}-gatk-output.vcf
+echo "👉 Done with variant calling. See ${OUTPUT_PREFIX}-gatk-output.vcf file."
 
 echo "👉 Done!"
