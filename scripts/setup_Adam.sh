@@ -22,6 +22,7 @@ cd $HOME
 git clone https://github.com/bigdatagenomics/adam.git
 cd adam
 ./scripts/move_to_scala_2.12.sh
+./scripts/move_to_spark_3.sh
 mvn install
 
 echo "👉 Done with installing Adam 😎"
@@ -30,6 +31,8 @@ echo "👉 Done with installing Adam 😎"
 cd $HOME
 git clone https://github.com/bigdatagenomics/cannoli.git
 cd cannoli
+./scripts/move_to_scala_2.12.sh
+./scripts/move_to_spark_3.sh
 mvn install
 
 echo "👉 Done with installing Cannoli 😎"
