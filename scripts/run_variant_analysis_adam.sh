@@ -21,8 +21,7 @@ let NUM_CORES=$(nproc)-4
 
 # Cleanup
 echo "👉 Deleting files..."
-hdfs dfs -rm -r ${HDFS_PREFIX}/${INPUT_FILE}.ifq ${HDFS_PREFIX}/${INPUT_FILE}.bam \
-    ${HDFS_PREFIX}/${INPUT_FILE}.bam.adam ${HDFS_PREFIX}/${INPUT_FILE}.variants.adam
+hdfs dfs -rm -r ${HDFS_PREFIX}/${INPUT_FILE}.*
 
 date
 echo "👉 Interleaving FASTQ files."
