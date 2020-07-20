@@ -1,13 +1,13 @@
 #!/usr/bin/env bash
 
 if [[ $# -ne 3 ]]; then
-    echo "Usage: run_variant_analysis_adam.sh <HDFS-PATH-FASTQ_file1> <HDFS-PATH-FASTQ_file2> <cluster size>"
+    echo "Usage: run_variant_analysis_adam.sh <HDFS_PATH_OF_FASTQ_file1> <HDFS_PATH_OF_FASTQ_file2> <cluster size>"
     exit
 fi
 
 SPARK_MASTER="spark://vm0:7077"
-CANNOLI_SUBMIT="./cannoli/bin/cannoli-submit"
-ADAM_SUBMIT="./adam/bin/adam-submit"
+CANNOLI_SUBMIT=${HOME}"/cannoli/bin/cannoli-submit"
+ADAM_SUBMIT=${HOME}"/adam/bin/adam-submit"
 HDFS_PREFIX="hdfs://vm0:9000"
 EXECUTOR_MEMORY=50g
 DRIVER_MEMORY=50g
