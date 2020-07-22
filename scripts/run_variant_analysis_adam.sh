@@ -43,5 +43,5 @@ ${CANNOLI_SUBMIT} --master ${SPARK_MASTER} --driver-memory ${DRIVER_MEMORY} --nu
     -- freebayes ${HDFS_PREFIX}/${INPUT_FILE}.bam.adam ${HDFS_PREFIX}/${INPUT_FILE}.variants.adam \
     -executable ${FREE_BAYES} -reference ${REFERENCE}
 
-echo "👉 Done with variant analysis. See ${HDFS_PREFIX}.variants.adam."
+echo "👉 Done with variant analysis. See ${HDFS_PREFIX}/${INPUT_FILE}.variants.adam."
 date
