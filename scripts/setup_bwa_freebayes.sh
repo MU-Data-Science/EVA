@@ -3,6 +3,7 @@
 cd ${HOME}
 
 # Get bwa
+rm -rf bwa
 git clone https://github.com/lh3/bwa
 cd bwa
 make
@@ -23,7 +24,10 @@ ln -sf /home/linuxbrew/.linuxbrew/bin/sambamba .
 echo "👉 Done with Sambamba installation 😎"
 
 # get samtools and hstlib
+rm -rf samtools
 git clone https://github.com/samtools/samtools
+
+rm -rf htslib
 git clone https://github.com/samtools/htslib
 
 cd htslib
@@ -42,6 +46,7 @@ echo "👉 Done with Samtools installation 😎"
 
 # get freebayes
 cd  ${HOME}
+rm -rf freebayes
 git clone --recursive git://github.com/ekg/freebayes.git
 sudo apt-get install cmake -y
 cd freebayes
