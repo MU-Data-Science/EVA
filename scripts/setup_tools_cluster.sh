@@ -15,6 +15,6 @@ ${HOME}/EVA/scripts/setup_bwa_freebayes.sh
 for ((i=1;i<${1};i++));
 do
   ssh vm${i} 'cd ${HOME}; rm -rf EVA; git clone -b development https://github.com/MU-Data-Science/EVA.git; ${HOME}/EVA/scripts/setup_bwa_freebayes.sh'
-  scp /mydata/hs38.* vm${i}:/mydata/
+  #scp /mydata/hs38.* vm${i}:/mydata/
   echo ${i}
 done
