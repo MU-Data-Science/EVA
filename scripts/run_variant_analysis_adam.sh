@@ -36,7 +36,7 @@ ${CANNOLI_SUBMIT} --master ${SPARK_MASTER} --driver-memory ${DRIVER_MEMORY} --nu
 echo "👉 Sorting and marking duplicates before variant calling."
 ${ADAM_SUBMIT} --master ${SPARK_MASTER} --driver-memory ${DRIVER_MEMORY} --num-executors ${NUM_EXECUTORS} --executor-cores ${NUM_CORES} --executor-memory ${EXECUTOR_MEMORY} \
     -- transformAlignments ${HDFS_PREFIX}/${INPUT_FILE}.bam ${HDFS_PREFIX}/${INPUT_FILE}.bam.adam \
-    -mark_duplicate_reads -sort_by_reference_position_and_index -reference ${REFERENCE} -add_files
+    -mark_duplicate_reads -sort_by_reference_position_and_index
 
 echo "👉 Variant calling using freebayes."
 ${CANNOLI_SUBMIT} --master ${SPARK_MASTER} --driver-memory ${DRIVER_MEMORY} --num-executors ${NUM_EXECUTORS} --executor-cores ${NUM_CORES} --executor-memory ${EXECUTOR_MEMORY} \
