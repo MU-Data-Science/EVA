@@ -9,6 +9,37 @@ make
 cd ${HOME}
 echo "👉 Done with bwa setup 😎"
 
+# get brew
+/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install.sh)" < /dev/null
+echo 'eval $(/home/linuxbrew/.linuxbrew/bin/brew shellenv)' >> /users/${USER}/.profile
+eval $(/home/linuxbrew/.linuxbrew/bin/brew shellenv)
+
+echo "👉 Done with Brew installation 😎"
+
+# get sambamba
+brew install brewsci/bio/sambamba
+cd ${HOME}
+ln -sf /home/linuxbrew/.linuxbrew/bin/sambamba .
+echo "👉 Done with Sambamba installation 😎"
+
+# get samtools and hstlib
+git clone https://github.com/samtools/samtools
+git clone https://github.com/samtools/htslib
+
+cd htslib
+sudo apt-get update
+sudo apt-get install libbz2-dev -y
+sudo apt-get install liblzma-dev -y
+autoheader; autoconf -Wno-syntax; ./configure; make
+sudo make install
+echo "👉 Done with Hstlib installation 😎"
+
+cd ../samtools
+autoheader; autoconf -Wno-syntax; ./configure; make
+sudo make install
+
+echo "👉 Done with Samtools installation 😎"
+
 # get freebayes
 cd  ${HOME}
 git clone --recursive git://github.com/ekg/freebayes.git
