@@ -7,3 +7,7 @@
 *.iml
 out
 gen
+cluster_config/pswd.txt
+*/*.log
+cluster_config/*.txt
+cluster_config/cluster-machines.txt

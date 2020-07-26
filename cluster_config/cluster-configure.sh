@@ -1,0 +1,55 @@
+#!/bin/bash
+
+nodes="$1"
+user_name="$2"
+data_dir="$3"
+
+# configuration constants.
+machines="cluster-machines.txt"
+shareDir="/proj/eva-public-PG0"
+
+experiment=$(basename $machines)
+scripts=(\
+  "set-cluster-permissions" \
+  "set-cluster-etchost" \
+  "set-cluster-passwd" \
+  "set-cluster-dependencies" \
+  "set-cluster-iptables" \
+  "set-cluster-hadoop" \
+  "set-cluster-spark" \
+  "set-cluster-bashrc")
+
+# Write the node list to cluster-machines.txt.
+for ((i=0;i<=$nodes;i++)); do
+  # Generating the node name.
+  nodeName="vm"$i
+
+  # Writing to a file.
+  echo $nodeName >> $machines
+done
+
+# Generating a private key on the master node.
+ssh-keygen -q -t rsa -N '' -f /users/$USER/.ssh/id_rsa <<<y 2>&1 >/dev/null
+
+# Copying the contents of the public key to authorized keys across hosts.
+pubKey=$(cat /users/$USER/.ssh/id_rsa.pub)
+for machine in $(cat $machines)
+do
+  sudo ssh $machine "echo $pubKey >> /users/$USER/.ssh/authorized_keys"
+done
+
+# Generate a file to set a unique variable
+install_id=$(date +"%s")
+echo "$install_id" > "$machines-INSTALL_ID.txt"
+
+echo ">> WAIT FOR IT YOUNG BLOOD 👽 ID: $install_id"
+for script in "${scripts[@]}"
+do
+  log_file="LOG-"$script"-"$experiment".log"
+  cmd="./$script.sh $machines $user_name ~/.ssh/id_rsa $data_dir $shareDir&> $log_file"
+  
+  eval "$cmd"
+  echo ">> FINISHED $script.sh LOG $log_file 🕶"
+done
+
+echo ">> WORK IS DONE 🥃"

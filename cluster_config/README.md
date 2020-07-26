@@ -1,0 +1,21 @@
+# ClusterConfig
+
+ClusterConfig holds the necessary setup scripts required to set up Hadoop and Spark on cluster mode.
+
+## Setup
+1. Start an experiment using the profile `EVA-multi-node-profile` on CloudLab. (Or just click [here](https://www.cloudlab.us/p/EVA-public/EVA-multi-node-profile).)
+Provide your CloudLab user name, and the number of nodes required (which must be a value greater than 2) and a node/hardware type such as `xl170` (Utah), `c240g5` (Wisc), etc . Make sure to agree to use only deidentified data.
+It will take a few minutes to start the experiment; so please be patient.
+
+2. Go to your experiment and in `Topology View` click the node icon and open a shell/terminal to connect to that node.
+Alternatively, you can use `SSH` to login to the node: `$ ssh -i /path/to/CloudLab/private_key_file  CloudLab_username@CloudLab_hostname`.
+(You can also run [ssh-agent](https://www.ssh.com/ssh/agent) on your local machine to add your private key.)
+
+3. Connect to the master node `vm0` and clone the repository. 
+
+4. To setup Hadoop and Spark, execute `bash cluster-configure.sh no_of_nodes CloudLab_username /mydata` in the shell/terminal:
+
+5. After successful setup, re-connect to the master node and execute:
+    * `hdfs namenode -format` : To format HDFS.
+    * `$HADOOP_HOME/sbin/start-dfs.sh` : To start Hadoop.
+    * `$SPARK_HOME/sbin/start-all.sh`: To start Spark.
