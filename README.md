@@ -100,6 +100,7 @@ Alternatively, you can use `SSH` to login to the node: `$ ssh -i /path/to/CloudL
     $ screen -ls
 
 ## Running variant analysis on a cluster of CloudLab nodes
+1. Setup an n-node cluster on CloudLab, following the setup steps described [here](cluster_config)
 
 ***🚧 💻 Under active development 💻 🚧***
 
