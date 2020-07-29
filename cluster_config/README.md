@@ -21,4 +21,4 @@ Alternatively, you can use `SSH` to login to the node: `$ ssh -i /path/to/CloudL
     * `$SPARK_HOME/sbin/start-all.sh`: To start Spark.
 
 ## Acknowledgments
-These scripts are based on earlier versions developed by students of Dr. Praveen Rao's Big Data Lab at UMKC, namely, [Anas Katib](https://github.com/anask), [Daniel Lopez](https://github.com/debarron), and [Hastimal Jangid](https://github.com/hastimal).
+These scripts are based on earlier versions developed by students of Dr. Praveen Rao, namely, [Anas Katib](https://github.com/anask), [Daniel Lopez](https://github.com/debarron), and [Hastimal Jangid](https://github.com/hastimal).
