@@ -17,10 +17,11 @@ scripts=(\
   "set-cluster-iptables" \
   "set-cluster-hadoop" \
   "set-cluster-spark" \
+  "set-cluster-adam" \
   "set-cluster-bashrc")
 
 # Write the node list to cluster-machines.txt.
-for ((i=0;i<=$nodes;i++)); do
+for ((i=0;i<$nodes;i++)); do
   # Generating the node name.
   nodeName="vm"$i
 
@@ -35,7 +36,7 @@ ssh-keygen -q -t rsa -N '' -f /users/$USER/.ssh/id_rsa <<<y 2>&1 >/dev/null
 pubKey=$(cat /users/$USER/.ssh/id_rsa.pub)
 for machine in $(cat $machines)
 do
-  sudo ssh $machine "echo $pubKey >> /users/$USER/.ssh/authorized_keys"
+  sudo ssh -o "StrictHostKeyChecking no" $machine "echo $pubKey >> /users/$USER/.ssh/authorized_keys"
 done
 
 # Generate a file to set a unique variable

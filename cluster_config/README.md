@@ -19,3 +19,6 @@ Alternatively, you can use `SSH` to login to the node: `$ ssh -i /path/to/CloudL
     * `hdfs namenode -format` : To format HDFS.
     * `$HADOOP_HOME/sbin/start-dfs.sh` : To start Hadoop.
     * `$SPARK_HOME/sbin/start-all.sh`: To start Spark.
+
+## Acknowledgements
+Special thanks to [Anas Katib](https://github.com/anask), [Daniel Lopez](https://github.com/debarron) and [Hastimal Jangid](https://github.com/hastimal) for paving the way and enabling easy cluster configure.

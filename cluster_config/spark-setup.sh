@@ -5,8 +5,8 @@ data_dir="$2"
 share_dir="$3"
 
 NUMREP=1
-HADOOP_VER="2.7"
-SPARK_VER="2.4.5"
+HADOOP_VER="3.2"
+SPARK_VER="3.0.0"
 SPARK_HDP_VER=$(echo $HADOOP_VER | cut -d '.' -f1-2)
 
 # check if openssl is installed
@@ -20,30 +20,12 @@ SPARK_SECRET=$(head -1 $secret_file)
 
 cluster_prefix="$share_dir/"
 
-echo "DOWNLOADING SPARK.."
-# how many servers to try:
-SSERV=0
-ISZIP=""
-
-SPARK_URL="https://archive.apache.org/dist/spark/spark-$SPARK_VER/spark-$SPARK_VER-bin-hadoop$HADOOP_VER.tgz"
-curl --connect-timeout 103 -O $SPARK_URL &> /dev/null
-SFT=$(file spark-$SPARK_VER*)
-ISZIP=$(echo $SFT | grep 'gzip compressed data' || echo "")
-SSERV=$((SSERV+1))
-
-
-if [ ${#ISZIP} -eq 0 ]; then
-    echo 'ERROR: COULD NOT DOWNLOAD SPARK '$SPARK_VER
-    exit 1
-fi
-
-
 spark_prefix="$cluster_prefix/spark_$MASTER_NODE_ID"
 MSTR="vm0"
 
 rm -Rf "$spark_prefix"
 mkdir -p "$spark_prefix"
-tar xzf spark-$SPARK_VER*gz -C "$spark_prefix" --strip-components 1
+tar xzf $share_dir/spark-$SPARK_VER*gz -C "$spark_prefix" --strip-components 1
 
 SPARK_DEFAULTS_FILE="$spark_prefix/conf/spark-defaults.conf"
 echo "
@@ -65,7 +47,7 @@ export SPARK_PUBLIC_DNS=$MSTR
 export SPARK_LOCAL_DIRS=$data_dir/spark-tmp
 " > $SPARK_ENV_FILE
 
-cp "$cluster_prefix/hadoop_$MASTER_NODE_ID/etc/hadoop/slaves" "$spark_prefix/conf/slaves"
+cp "$cluster_prefix/hadoop_$MASTER_NODE_ID/etc/hadoop/workers" "$spark_prefix/conf/slaves"
 
 rm "$secret_file"
 

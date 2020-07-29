@@ -3,7 +3,7 @@ INSTALL_ID="$1"
 data_dir="$2"
 share_dir="$3"
 
-HADOOP_VER="2.7.6"
+HADOOP_VER="3.3.0"
 master_node="vm0"
 node_prefix="vm"
 node_start=1
@@ -16,30 +16,13 @@ HSTNAME=$(hostname | cut -d '.' -f 1)
 HOST_PRIVATE_IP=$(grep $HSTNAME /etc/hosts | cut -f 1)
 HSTNAME_LEN=${#HSTNAME}
 
-echo "DOWNLOADING HADOOP.."
-# how many servers to try:
-NUM_HSEV=$(curl -s 'http://www.apache.org/dyn/closer.cgi?as_json=1' | jq --raw-output '.http[]' | wc -l)
-HSERV=0
-ISZIP=""
-
-HADOOP_URL="https://archive.apache.org/dist/hadoop/common/hadoop-$HADOOP_VER/hadoop-$HADOOP_VER.tar.gz"
-curl --connect-timeout 103 -O $HADOOP_URL &> /dev/null
-HDFT=$(file hadoop-$HADOOP_VER*)
-ISZIP=$(echo $HDFT | grep 'gzip compressed data' || echo "")
-HSERV=$((HSERV+1))
-
-if [ ${#ISZIP} -eq 0 ]; then
-    echo 'ERROR: COULD NOT DOWNLOAD HADOOP '$HADOOP_VER
-    exit 1
-fi
-
 # Clean in case of previous install
 cluster_prefix="$share_dir/hadoop_$INSTALL_ID"
 rm -Rf "$cluster_prefix"
 mkdir -p "$cluster_prefix"
 
 # Extract hadoop in the prefix dir
-tar xzf hadoop-$HADOOP_VER*gz -C "$cluster_prefix" --strip-components 1
+tar xzf $share_dir/hadoop-$HADOOP_VER*gz -C "$cluster_prefix" --strip-components 1
 hadoop_prefix="$cluster_prefix"
 
 ######################
@@ -155,7 +138,7 @@ echo '<?xml version="1.0" encoding="UTF-8"?>
 </configuration>
 ' > "$HDFS_SITE_FILE.datanode"
 
-SLAVES_FILE="$hadoop_prefix/etc/hadoop/slaves"
+SLAVES_FILE="$hadoop_prefix/etc/hadoop/workers"
 cp /dev/null $SLAVES_FILE
 for node in `seq $node_start $node_end`
 do
