@@ -20,5 +20,5 @@ Alternatively, you can use `SSH` to login to the node: `$ ssh -i /path/to/CloudL
     * `$HADOOP_HOME/sbin/start-dfs.sh` : To start Hadoop.
     * `$SPARK_HOME/sbin/start-all.sh`: To start Spark.
 
-## Acknowledgements
-Special thanks to [Anas Katib](https://github.com/anask), [Daniel Lopez](https://github.com/debarron) and [Hastimal Jangid](https://github.com/hastimal) for paving the way and enabling easy cluster configure.
+## Acknowledgments
+These scripts are based on earlier versions developed by students of Dr. Praveen Rao's Big Data Lab at UMKC, namely, [Anas Katib](https://github.com/anask), [Daniel Lopez](https://github.com/debarron), and [Hastimal Jangid](https://github.com/hastimal).
