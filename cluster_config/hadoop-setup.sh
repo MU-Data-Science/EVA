@@ -22,7 +22,7 @@ rm -Rf "$cluster_prefix"
 mkdir -p "$cluster_prefix"
 
 # Extract hadoop in the prefix dir
-tar xzf $share_dir/hadoop-$HADOOP_VER*gz -C "$cluster_prefix" --strip-components 1
+tar xzf $share_dir/EVA_Tools/hadoop-$HADOOP_VER*gz -C "$cluster_prefix" --strip-components 1
 hadoop_prefix="$cluster_prefix"
 
 ######################

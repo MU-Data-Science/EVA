@@ -23,6 +23,7 @@ echo "
   export M2_HOME='$data_dir'/apache-maven-3.6.3
 
   # Genome Tool Variables
+  export EVA_HOME='$data_dir'/EVA
   export BWA_HOME='$data_dir'/bwa
   export FREEBAYES_HOME='$data_dir'/freebayes
   TMP_DIR='$data_dir'/tmp
