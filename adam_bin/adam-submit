@@ -1,0 +1,70 @@
+#!/usr/bin/env bash
+#
+# Licensed to Big Data Genomics (BDG) under one
+# or more contributor license agreements.  See the NOTICE file
+# distributed with this work for additional information
+# regarding copyright ownership.  The BDG licenses this file
+# to you under the Apache License, Version 2.0 (the
+# "License"); you may not use this file except in compliance
+# with the License.  You may obtain a copy of the License at
+#
+#     http://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
+#
+
+# usage: adam-submit [<spark-args> --] <adam-args>
+
+set -e
+
+# Split args into Spark and ADAM args
+DD=False  # DD is "double dash"
+PRE_DD=()
+POST_DD=()
+for ARG in "$@"; do
+  shift
+  if [[ $ARG == "--" ]]; then
+    DD=True
+    POST_DD=( "$@" )
+    break
+  fi
+  PRE_DD+=("$ARG")
+done
+
+if [[ $DD == True ]]; then
+  SPARK_ARGS=("${PRE_DD[@]}")
+  ADAM_ARGS=("${POST_DD[@]}")
+else
+  SPARK_ARGS=()
+  ADAM_ARGS=("${PRE_DD[@]}")
+fi
+
+# does the user have ADAM_OPTS set? if yes, then warn
+if [[ $DD == False && -n "$ADAM_OPTS" ]]; then
+    echo "WARNING: Passing Spark arguments via ADAM_OPTS was recently removed." 1>&2
+    echo "Run adam-submit instead as adam-submit <spark-args> -- <adam-args>" 1>&2
+fi
+
+ADAM_CLI_JAR=$(bash ${EVA_HOME}/adam_bin/find-adam-assembly.sh)
+
+# Allow main class to be overridden
+if [ -z "$ADAM_MAIN" ]; then
+  ADAM_MAIN="org.bdgenomics.adam.cli.ADAMMain"
+fi
+echo "Using ADAM_MAIN=$ADAM_MAIN" 1>&2
+
+SPARK_SUBMIT=$(bash ${EVA_HOME}/adam_bin/find-spark.sh)
+echo "Using spark-submit=$SPARK_SUBMIT" 1>&2
+
+# submit the job to Spark
+"$SPARK_SUBMIT" \
+  --class $ADAM_MAIN \
+  --conf spark.serializer=org.apache.spark.serializer.KryoSerializer \
+  --conf spark.kryo.registrator=org.bdgenomics.adam.serialization.ADAMKryoRegistrator \
+  "${SPARK_ARGS[@]}" \
+  "$ADAM_CLI_JAR" \
+  "${ADAM_ARGS[@]}"
