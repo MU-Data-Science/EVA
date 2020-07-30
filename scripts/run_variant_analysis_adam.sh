@@ -1,22 +1,24 @@
 #!/usr/bin/env bash
 
 
-if [[ $# -ne 3 ]]; then
-    echo "Usage: run_variant_analysis_adam.sh <HDFS_PATH_OF_FASTQ_file1> <HDFS_PATH_OF_FASTQ_file2> <cluster size>"
+if [[ $# -ne 4 ]]; then
+    echo "Usage: run_variant_analysis_adam.sh <HDFS_PATH_OF_FASTQ_file1> <HDFS_PATH_OF_FASTQ_file2> <cluster size> <data directory>"
     exit
 fi
 
 SPARK_MASTER="spark://vm0:7077"
-CANNOLI_SUBMIT=${HOME}"/cannoli/bin/cannoli-submit"
-ADAM_SUBMIT=${HOME}"/adam/bin/adam-submit"
-ADAM_SHELL=${HOME}"/adam/bin/adam-shell"
+CANNOLI_SUBMIT=${EVA_HOME}"/cannoli_bin/cannoli-submit"
+ADAM_SUBMIT=${EVA_HOME}"/adam_bin/adam-submit"
+ADAM_SHELL=${EVA_HOME}"/adam_bin/adam-shell"
 HDFS_PREFIX="hdfs://vm0:9000"
 EXECUTOR_MEMORY=50g
 DRIVER_MEMORY=50g
 INPUT_FILE=mysequence
-REFERENCE="/mydata/hs38.fa"
-DICT="/mydata/hs38.dict"
-FREE_BAYES=${HOME}"/freebayes/bin/freebayes"
+REFERENCE="/proj/eva-public-PG0/Genome_Data/hs38.fa"
+DICT="/proj/eva-public-PG0/Genome_Data/hs38.dict"
+DATA_DIR=${4}
+FREE_BAYES=${DATA_DIR}"/freebayes/bin/freebayes"
+BWA=${DATA_DIR}"/bwa/bwa"
 OUTPUT_PREFIX="VA-"${USER}"-result"
 
 let NUM_EXECUTORS=${3}
@@ -34,7 +36,7 @@ ${CANNOLI_SUBMIT} --master ${SPARK_MASTER} --driver-memory ${DRIVER_MEMORY} --nu
 echo "👉 Executing bwa for alignment."
 ${CANNOLI_SUBMIT} --master ${SPARK_MASTER} --driver-memory ${DRIVER_MEMORY} --num-executors ${NUM_EXECUTORS} --executor-cores ${NUM_CORES} --executor-memory ${EXECUTOR_MEMORY} \
     -- bwa ${HDFS_PREFIX}/${INPUT_FILE}.ifq ${HDFS_PREFIX}/${INPUT_FILE}.bam \
-    -executable ${HOME}/bwa/bwa -sample_id mysample -index ${REFERENCE} -sequence_dictionary ${DICT} -single -add_files
+    -executable ${BWA} -sample_id mysample -index ${REFERENCE} -sequence_dictionary ${DICT} -single -add_files
 
 echo "👉 Sorting and marking duplicates before variant calling."
 ${ADAM_SUBMIT} --master ${SPARK_MASTER} --driver-memory ${DRIVER_MEMORY} --num-executors ${NUM_EXECUTORS} --executor-cores ${NUM_CORES} --executor-memory ${EXECUTOR_MEMORY} \
