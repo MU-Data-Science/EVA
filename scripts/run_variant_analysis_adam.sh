@@ -45,14 +45,9 @@ ${ADAM_SUBMIT} --master ${SPARK_MASTER} --driver-memory ${DRIVER_MEMORY} --num-e
 
 echo "👉 Variant calling using freebayes."
 ${CANNOLI_SUBMIT} --master ${SPARK_MASTER} --driver-memory ${DRIVER_MEMORY} --num-executors ${NUM_EXECUTORS} --executor-cores ${NUM_CORES} --executor-memory ${EXECUTOR_MEMORY} \
-    -- freebayes ${HDFS_PREFIX}/${INPUT_FILE}.bam.adam ${HDFS_PREFIX}/${INPUT_FILE}.variants.adam \
-    -executable ${FREE_BAYES} -reference ${REFERENCE} -add_files
+    -- freebayes ${HDFS_PREFIX}/${INPUT_FILE}.bam.adam ${HDFS_PREFIX}/${INPUT_FILE}.vcf \
+    -executable ${FREE_BAYES} -reference ${REFERENCE} -add_files -single
 
-VCF_CMD1="import org.bdgenomics.adam.rdd.ADAMContext._ \n" 
-VCF_CMD2="var variants = sc.loadParquetVariantContexts(\""${HDFS_PREFIX}"/"${INPUT_FILE}".variants.adam\") \n"
-VCF_CMD3="variants.saveAsVcf(\""${HDFS_PREFIX}"/"${INPUT_FILE}".vcf\")"
-
-echo -e ${VCF_CMD1}${VCF_CMD2}${VCF_CMD3} | ${ADAM_SHELL} --master ${SPARK_MASTER}
 hdfs dfs -copyToLocal ${HDFS_PREFIX}/${INPUT_FILE}.vcf ${HOME}/${OUTPUT_PREFIX}-fbayes-output.vcf
 echo "👉 Done with variant analysis. See ${HOME}/${OUTPUT_PREFIX}-fbayes-output.vcf."
 date
