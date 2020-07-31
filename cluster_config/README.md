@@ -15,10 +15,7 @@ Alternatively, you can use `SSH` to login to the node: `$ ssh -i /path/to/CloudL
 
 4. To setup Hadoop and Spark, execute `bash cluster-configure.sh no_of_nodes CloudLab_username /mydata` in the shell/terminal:
 
-5. After successful setup, re-connect to the master node and execute:
-    * `hdfs namenode -format` : To format HDFS.
-    * `$HADOOP_HOME/sbin/start-dfs.sh` : To start Hadoop.
-    * `$SPARK_HOME/sbin/start-all.sh`: To start Spark.
+5. After successful setup, re-connect to the master node.
 
 ## Acknowledgments
 These scripts are based on earlier versions developed by students of Dr. Praveen Rao, namely, [Anas Katib](https://github.com/anask), [Daniel Lopez](https://github.com/debarron), and [Hastimal Jangid](https://github.com/hastimal).

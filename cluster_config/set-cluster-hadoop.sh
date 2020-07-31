@@ -86,5 +86,11 @@ DATE=$(date| tr '[:lower:]' '[:upper:]')
 echo $DATE
 wait
 
+# Starting hadoop
+echo "Starting up hadoop."
+$data_dir/hadoop/bin/hdfs namenode -format
+$data_dir/hadoop/sbin/start-dfs.sh
+$data_dir/hadoop/sbin/start-yarn.sh
+
 echo -e ">> SETUP FINISHED 🌮"
 exit 0

@@ -19,9 +19,6 @@ echo "
   # Spark Variables
   export SPARK_HOME='$data_dir'/spark
 
-  # Maven Variables
-  export M2_HOME='$data_dir'/apache-maven-3.6.3
-
   # Genome Tool Variables
   export EVA_HOME='$data_dir'/EVA
   export BWA_HOME='$data_dir'/bwa
@@ -29,7 +26,7 @@ echo "
   TMP_DIR='$data_dir'/tmp
 
   # New Path
-  export PATH=\$PATH:\$HADOOP_HOME/bin:\$HADOOP_HOME/sbin:\$SPARK_HOME/bin:\$M2_HOME/bin
+  export PATH=\$PATH:\$HADOOP_HOME/bin:\$HADOOP_HOME/sbin:\$SPARK_HOME/bin
   " >> ~/.bashrc
 '
 

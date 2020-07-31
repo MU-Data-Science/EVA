@@ -8,6 +8,10 @@ data_dir="$4"
 share_dir="$5"
 genome_tools_setup_script="genome-tools-setup.sh"
 
+#Set EVA_HOME.
+EVA_HOME=${PWD}/../EVA
+echo "EVA_HOME=$EVA_HOME" >> ~/.bashrc
+
 for machine in $(cat "$cluster_machines")
 do
   scp -i "$private_key" "$genome_tools_setup_script" "$username@$machine:~" &> /dev/null
