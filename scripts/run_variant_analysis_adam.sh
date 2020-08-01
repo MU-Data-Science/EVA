@@ -7,9 +7,8 @@ if [[ $# -ne 4 ]]; then
 fi
 
 SPARK_MASTER="spark://vm0:7077"
-CANNOLI_SUBMIT=${EVA_HOME}"/cannoli_bin/cannoli-submit"
-ADAM_SUBMIT=${EVA_HOME}"/adam_bin/adam-submit"
-ADAM_SHELL=${EVA_HOME}"/adam_bin/adam-shell"
+CANNOLI_SUBMIT=${CANNOLI_HOME}"/exec/cannoli-submit"
+ADAM_SUBMIT=${ADAM_HOME}"/exec/adam-submit"
 HDFS_PREFIX="hdfs://vm0:9000"
 EXECUTOR_MEMORY=50g
 DRIVER_MEMORY=50g
