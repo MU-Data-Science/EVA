@@ -8,9 +8,13 @@ data_dir="$4"
 share_dir="$5"
 genome_tools_setup_script="genome-tools-setup.sh"
 
-#Set EVA_HOME.
-EVA_HOME=${PWD}/../EVA
-echo "EVA_HOME=$EVA_HOME" >> ~/.bashrc
+# Setup Adam.
+git clone https://github.com/Arun-George-Zachariah/adam.git $data_dir/adam
+echo "ADAM_HOME=$data_dir/adam" >> ~/.bashrc
+
+# Setup Cannoli.
+git clone https://github.com/Arun-George-Zachariah/cannoli.git $data_dir/cannoli
+echo "CANNOLI_HOME=$data_dir/cannoli" >> ~/.bashrc
 
 for machine in $(cat "$cluster_machines")
 do
