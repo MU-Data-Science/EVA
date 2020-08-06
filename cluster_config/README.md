@@ -13,7 +13,7 @@ Alternatively, you can use `SSH` to login to the node: `$ ssh -i /path/to/CloudL
 
 3. Connect to the master node `vm0` and clone the repository. 
 
-4. To setup Hadoop and Spark, execute `bash cluster-configure.sh no_of_nodes CloudLab_username /mydata` in the shell/terminal:
+4. To setup Hadoop and Spark, execute `./cluster-configure.sh no_of_nodes CloudLab_username /mydata` in the shell/terminal:
 
 5. After successful setup, re-connect to the master node.
 
