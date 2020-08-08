@@ -13,16 +13,20 @@ Alternatively, you can use `SSH` to login to the node: `$ ssh -i /path/to/CloudL
 
 3. Connect to the master node `vm0` and clone the repository:
 
-   `$ git clone https://github.com/MU-Data-Science/EVA.git`
+```
+   $ git clone https://github.com/MU-Data-Science/EVA.git
+```
 
-4. To setup Hadoop, Spark, and other tools, execute the following in the shell/terminal:
+4. To setup Hadoop, Spark, and other tools, execute the following in the
+   shell/terminal. Suppose your cluster has 16 nodes. (Replace the
+   second argument with your CloudLab username.)
 
-   `$ cd EVA/cluster_config`
+```
+   $ cd EVA/cluster_config
+   $ ./cluster-configure.sh 16 CloudLab_username /mydata
+```
 
-   `$ ./cluster-configure.sh cluster_size CloudLab_username /mydata`
-
-   Note that `cluster_size` is typically 16, 20, etc. This step takes
-   several minutes; so please be patient.
+   This step takes several minutes; so please be patient.
 
 5. After successful setup, quit the SSH session by typing `exit` and
    re-connect to `vm0`. Go to Step 2 of
