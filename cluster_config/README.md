@@ -19,10 +19,10 @@ Alternatively, you can use `SSH` to login to the node: `$ ssh -i /path/to/CloudL
 
    `$ cd EVA/cluster_config`
 
-   `$ ./cluster-configure.sh no_of_nodes CloudLab_username /mydata`
+   `$ ./cluster-configure.sh cluster_size CloudLab_username /mydata`
 
-   Note that `no_of_nodes` is the cluster size such as 16, 20, etc. This
-   step takes several minutes; so please be patient.
+   Note that `cluster_size` is typically 16, 20, etc. This step takes
+   several minutes; so please be patient.
 
 5. After successful setup, quit the SSH session by typing `exit` and
    re-connect to `vm0`. Go to Step 2 of
