@@ -25,7 +25,8 @@ Alternatively, you can use `SSH` to login to the node: `$ ssh -i /path/to/CloudL
    step takes several minutes; so please be patient.
 
 5. After successful setup, quit the SSH session by typing `exit` and
-   re-connect to `vm0`. Go to Step 2 of [[Variant analysis (cluster)]]
+   re-connect to `vm0`. Go to Step 2 of
+   [Variant analysis (cluster)](https://github.com/MU-Data-Science/EVA/blob/master/README.md#running-variant-analysis-on-a-cluster-of-cloudlab-nodes)
    instructions.
 
 ## Acknowledgments
