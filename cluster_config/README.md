@@ -11,11 +11,22 @@ It will take a few minutes to start the experiment; so please be patient.
 Alternatively, you can use `SSH` to login to the node: `$ ssh -i /path/to/CloudLab/private_key_file  CloudLab_username@CloudLab_hostname`.
 (You can also run [ssh-agent](https://www.ssh.com/ssh/agent) on your local machine to add your private key.)
 
-3. Connect to the master node `vm0` and clone the repository. 
+3. Connect to the master node `vm0` and clone the repository:
 
-4. To setup Hadoop and Spark, execute `./cluster-configure.sh no_of_nodes CloudLab_username /mydata` in the shell/terminal:
+   `$ git clone https://github.com/MU-Data-Science/EVA.git`
 
-5. After successful setup, re-connect to the master node.
+4. To setup Hadoop, Spark, and other tools, execute the following in the shell/terminal:
+
+   `$ cd EVA/cluster_config`
+
+   `$ ./cluster-configure.sh no_of_nodes CloudLab_username /mydata`
+
+   This step takes several minutes; so please be patient.
+
+5. After successful setup, quit the SSH session by typing `exit` and
+   re-connect to `vm0`. Go to Step 2 of
+   [[Variant analysis (cluster)]](#running-variant-analysis-on-a-cluster-of-cloudlab-nodes)
+   instructions.
 
 ## Acknowledgments
 These scripts are based on earlier versions developed by students of Dr. Praveen Rao, namely, [Anas Katib](https://github.com/anask), [Daniel Lopez](https://github.com/debarron), and [Hastimal Jangid](https://github.com/hastimal).
