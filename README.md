@@ -7,7 +7,7 @@ to risk of severe COVID-19 [(NEJM '2020)](https://www.nejm.org/doi/full/10.1056/
 
 [[CloudLab account]](#signup-for-a-cloudlab-account)
 
-[[Variant analysis (single node)]](#running-variant-analysis-on-human-genomes-using-a-single-cloudlab-node)  
+[[Variant analysis (single node)]](#running-variant-analysis-on-human-genomes-using-a-single-cloudlab-node)
 [[Variant analysis (cluster)]](#running-variant-analysis-on-a-cluster-of-cloudlab-nodes)
 
 [[Report issues]](#report-issues)
@@ -49,11 +49,27 @@ Alternatively, you can use `SSH` to login to the node: `$ ssh -i /path/to/CloudL
 
        $ cd /mydata
 
-    **d.** Set up and index the reference genome (e.g., hs38 ([GRCh38](http://genome.ucsc.edu/cgi-bin/hgTracks?chromInfoPage=&hgsid=857863917_wUC9aW3i9gDVwLAEnS4rRn1MT5Vx)), hs37 ([GRCh37](http://genome.ucsc.edu/cgi-bin/hgTracks?chromInfoPage=&hgsid=857862399_mBXxSwaQbVpPzDMpmtmrA1TeR8WL))). This is a one-time step and can take a hour or so depending on the node hardware type. To avoid killing the process when the SSH session terminates due to disconnection, use the `screen` command.
+    **d.** If you already have the reference genome built, copy all the
+    files to `/mydata`. Otherwise, set up and index the reference genome
+    (e.g., hs38
+    ([GRCh38](http://genome.ucsc.edu/cgi-bin/hgTracks?chromInfoPage=&hgsid=857863917_wUC9aW3i9gDVwLAEnS4rRn1MT5Vx)),
+    hs37
+    ([GRCh37](http://genome.ucsc.edu/cgi-bin/hgTracks?chromInfoPage=&hgsid=857862399_mBXxSwaQbVpPzDMpmtmrA1TeR8WL))).
+    This is a one-time step and can take a hour or so depending on the
+    node hardware type. To avoid killing the process when the SSH
+    session terminates due to disconnection, use the `screen` command.
 
        $ ${HOME}/EVA/scripts/setup_reference_genome.sh hs38
 
-    **f.** Now copy a whole genome sequence (paired-end) sample to the CloudLab node. It is the user's responsibility to ensure that the data are de-identified prior to storing them on the CloudLab node. Also see the [Acceptable Use Policy of CloudLab](https://cloudlab.us/aup.php). Let's use a whole genome sequence sample from [The 1000 Genomes Project](https://www.internationalgenome.org/). The FTP site is `ftp://ftp.1000genomes.ebi.ac.uk/vol1/ftp/phase3/data`.
+    **e.** Now copy a whole genome sequence (paired-end) sample to the
+    CloudLab node. It is the user's responsibility to ensure that the
+    data are de-identified prior to storing them on the CloudLab node.
+    Also see the
+    [Acceptable Use Policy of CloudLab](https://cloudlab.us/aup.php).
+    Let's use a whole genome sequence sample from
+    [The 1000 Genomes Project](https://www.internationalgenome.org/).
+    The FTP site is
+    `ftp://ftp.1000genomes.ebi.ac.uk/vol1/ftp/phase3/data`.
 
        $ wget ftp://ftp.1000genomes.ebi.ac.uk/vol1/ftp/phase3/data/HG00096/sequence_read/SRR062635_1.filt.fastq.gz
        $ wget ftp://ftp.1000genomes.ebi.ac.uk/vol1/ftp/phase3/data/HG00096/sequence_read/SRR062635_2.filt.fastq.gz
@@ -65,7 +81,13 @@ Alternatively, you can use `SSH` to login to the node: `$ ssh -i /path/to/CloudL
 
     If you have deidentified sequences on your local machine to analyze, copy to the CloudLab node using `scp`.
 
-    **g.** There are two variant analysis scripts. Each of them will perform the alignment, sorting, marking duplicates, and variant calling. The script `run_variant_analysis_fbayes.sh` uses Freebayes for variant calling; `run_variant_analysis_gatk.sh` uses GATK's HaplotypeCaller. Run a variant analysis script by passing the required arguments. (See usage statement of the script.)  Here are two examples.
+    **f.** There are two variant analysis scripts. Each of them will
+    perform the alignment, sorting, marking duplicates, and variant
+    calling. The script `run_variant_analysis_fbayes.sh` uses Freebayes
+    for variant calling; `run_variant_analysis_gatk.sh` uses GATK's
+    HaplotypeCaller. Run a variant analysis script by passing the
+    required arguments. (See usage statement of the script.) Here are
+    two examples.
 
        $ ${HOME}/EVA/scripts/run_variant_analysis_fbayes.sh hs38 SRR062635_1.filt.fastq.gz SRR062635_2.filt.fastq.gz
 
@@ -75,13 +97,15 @@ Alternatively, you can use `SSH` to login to the node: `$ ssh -i /path/to/CloudL
 
     Note that for the GATK pipeline, a dummy [read group](https://gatk.broadinstitute.org/hc/en-us/articles/360035890671-Read-groups) is added to the `.bam` file.
 
-    **h.** The output of variant analysis is stored in a `.output.vcf` file. Download to your local machine using `scp`.
+    **g.** The output of variant analysis is stored in a `.output.vcf`
+    file. Download to your local machine using `scp`.
 
        $ scp  -i /path/to/CloudLab/private_key_file  CloudLab_username@CloudLab_hostname:/path/to/the/output_VCF_file
 
     Any `.vcf` file can be further processed using readily available tools such as [scikit-allel](http://alimanfoo.github.io/2017/06/14/read-vcf.html), [VCFtools](https://vcftools.github.io/index.html), and [GATK](https://gatk.broadinstitute.org/hc/en-us/articles/360036711531-VariantsToTable). You can also use visualization tools such as [IGV](https://software.broadinstitute.org/software/igv/download).
 
-    **i.** To perform variant analysis on more genome sequences, go to Step **f**.
+    **h.** To perform variant analysis on more genome sequences, go to
+    Step **e**.
 
 ### Simple steps to run the screen command
 
@@ -100,12 +124,30 @@ Alternatively, you can use `SSH` to login to the node: `$ ssh -i /path/to/CloudL
     $ screen -ls
 
 ## Running variant analysis on a cluster of CloudLab nodes
-1. Setup an n-node cluster on CloudLab, following the setup steps described [here](cluster_config)
+We are currently using [Apache Spark](https://spark.apache.org),
+[Apache Hadoop](https://hadoop.apache.org), and
+[Adam/Cannoli](http://bdgenomics.org/).
 
-***🚧 💻 Under active development 💻 🚧***
+1. Setup an n-node cluster on CloudLab, following the setup steps
+   described [here](cluster_config).
 
-We are currently working with [Apache Spark](https://spark.apache.org), [Apache Hadoop](https://hadoop.apache.org), and [Adam/Cannoli](http://bdgenomics.org/) to enable large-scale variant analysis on CloudLab.
+2. Open a terminal on `vm0`. Setup the reference genome in `/mydata` and
+   copy a (paired-end) sequence sample as shown in Steps 3(c-e)
+   [[above.]](#running-variant-analysis-on-human-genomes-using-a-single-cloudlab-node)
 
+3. Copy the (paired-end) sequence to HDFS.
+```
+$ hdfs dfs -copyFromLocal SRR062635_?.filt.fastq.gz /
+```
+
+4. Run variant analysis using Adam/Cannoli/bwa/Freebayes. Suppose the
+   cluster size is `16` and `hs38` is the reference genome.
+
+```
+$ ${HOME}/EVA/scripts/run_variant_analysis_adam.sh hs38 hdfs://vm0:9000/SRR062635_1.filt.fastq.gz hdfs://vm0:9000/SRR062635_2.filt.fastq.gz 16
+```
+
+5. Download the `.vcf` file.
 
 ## Report Issues
 
