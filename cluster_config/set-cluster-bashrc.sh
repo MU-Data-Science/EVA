@@ -20,7 +20,6 @@ echo "
   export SPARK_HOME='$data_dir'/spark
 
   # Genome Tool Variables
-  export EVA_HOME='$data_dir'/EVA
   export BWA_HOME='$data_dir'/bwa
   export FREEBAYES_HOME='$data_dir'/freebayes
   TMP_DIR='$data_dir'/tmp
