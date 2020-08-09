@@ -132,10 +132,12 @@ We are currently using [Apache Spark](https://spark.apache.org),
    etc.) Open a terminal/shell on `vm0`.
 
 2. Setup the reference genome in `/mydata` on `vm0`. See
-   [Step 3(c,d)](#running-variant-analysis-on-human-genomes-using-a-single-cloudlab-node).
+   [Step 3(c,d)](#running-variant-analysis-on-human-genomes-using-a-single-cloudlab-node)
+   above.
 
 3. Download a (paired-end) sequence sample as shown in
-   [Steps 3(e)](#running-variant-analysis-on-human-genomes-using-a-single-cloudlab-node).
+   [Step 3(e)](#running-variant-analysis-on-human-genomes-using-a-single-cloudlab-node)
+   above.
 
 3. Copy the (paired-end) sequence to HDFS.
    ```
