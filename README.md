@@ -135,21 +135,21 @@ We are currently using [Apache Spark](https://spark.apache.org),
    [[above.]](#running-variant-analysis-on-human-genomes-using-a-single-cloudlab-node)
 
 3. Copy the (paired-end) sequence to HDFS.
-```
-$ hdfs dfs -copyFromLocal SRR062635_?.filt.fastq.gz /
-```
+   ```
+   $ hdfs dfs -copyFromLocal SRR062635_?.filt.fastq.gz / 
+   ```
 
 4. Run variant analysis using Adam/Cannoli/bwa/Freebayes. Suppose the
    cluster size is `16` and `hs38` is the reference genome.
 
-```
-$ ${HOME}/EVA/scripts/run_variant_analysis_adam.sh hs38 hdfs://vm0:9000/SRR062635_1.filt.fastq.gz hdfs://vm0:9000/SRR062635_2.filt.fastq.gz 16
-```
+   ```
+   $ ${HOME}/EVA/scripts/run_variant_analysis_adam.sh hs38 hdfs://vm0:9000/SRR062635_1.filt.fastq.gz hdfs://vm0:9000/SRR062635_2.filt.fastq.gz 16
+   ```
 
 5. Download the `.vcf` file. 
-```
-$ hdfs dfs -copyToLocal /mysequence.vcf
-```
+   ```
+   $ hdfs dfs -copyToLocal /mysequence.vcf
+   ```
 
 ## Report Issues
 
