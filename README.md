@@ -110,7 +110,6 @@ Alternatively, you can use `SSH` to login to the node: `$ ssh -i /path/to/CloudL
 ### Simple steps to run the screen command
 
     $ screen -s my_session_name
-    $ ${HOME}/EVA/scripts/run_variant_analysis.sh hs38 SRR062635_1.fastq.gz SRR062635_2.fastq.gz
 
    Press "Ctrl-a" "d" (i.e., control-a followed by d) to detach from the screen session.
 
