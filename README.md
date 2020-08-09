@@ -147,9 +147,6 @@ We are currently using [Apache Spark](https://spark.apache.org),
    ```
 
 5. Download the `.vcf` file. 
-   ```
-   $ hdfs dfs -copyToLocal /mysequence.vcf
-   ```
 
 ## Report Issues
 
