@@ -128,12 +128,14 @@ We are currently using [Apache Spark](https://spark.apache.org),
 [Adam/Cannoli](http://bdgenomics.org/).
 
 1. Setup an n-node cluster on CloudLab, following the setup steps
-   described [here](cluster_config). The nodes are named `vm0`, `vm1`,
-   etc.
+   described [here](cluster_config). (The nodes are named `vm0`, `vm1`,
+   etc.) Open a terminal/shell on `vm0`.
 
-2. Open a terminal on `vm0`. Setup the reference genome in `/mydata` and
-   copy a (paired-end) sequence sample as shown in Steps 3(c-e)
-   [[above.]](#running-variant-analysis-on-human-genomes-using-a-single-cloudlab-node)
+2. Setup the reference genome in `/mydata` on `vm0`. See
+   [Step 3(c,d)](#running-variant-analysis-on-human-genomes-using-a-single-cloudlab-node).
+
+3. Download a (paired-end) sequence sample as shown in
+   [Steps 3(e)](#running-variant-analysis-on-human-genomes-using-a-single-cloudlab-node).
 
 3. Copy the (paired-end) sequence to HDFS.
    ```
@@ -147,7 +149,7 @@ We are currently using [Apache Spark](https://spark.apache.org),
    $ ${HOME}/EVA/scripts/run_variant_analysis_adam.sh hs38 hdfs://vm0:9000/SRR062635_1.filt.fastq.gz hdfs://vm0:9000/SRR062635_2.filt.fastq.gz 16
    ```
 
-5. Download the `.vcf` file in your local directory on `vm0`.
+6. Download the `.vcf` file in the local directory on `vm0`.
 
 ## Report Issues
 
