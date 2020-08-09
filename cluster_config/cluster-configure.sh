@@ -4,6 +4,12 @@ nodes="$1"
 user_name="$2"
 data_dir="$3"
 
+if [[ "$user_name" != "$USER" ]]; then
+    echo "Usage: cluster-configure.sh <no. of nodes> <CloudLab username> <data dir>"
+    echo "Please replace the argument "\"$user_name\"" with your CloudLab username."
+    exit
+fi
+
 # configuration constants.
 machines="cluster-machines.txt"
 shareDir="/proj/eva-public-PG0"

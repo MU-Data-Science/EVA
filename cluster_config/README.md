@@ -1,6 +1,6 @@
 # ClusterConfig
 
-ClusterConfig holds the necessary setup scripts required to set up Hadoop and Spark on cluster mode.
+ClusterConfig holds the necessary setup scripts required to set up [Apache Spark](https://spark.apache.org), [Apache Hadoop](https://hadoop.apache.org), and [Adam/Cannoli](http://bdgenomics.org/) to run in the cluster.
 
 ## Setup
 1. Start an experiment using the profile `EVA-multi-node-profile` on CloudLab. (Or just click [here](https://www.cloudlab.us/p/EVA-public/EVA-multi-node-profile).)
