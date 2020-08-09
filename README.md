@@ -146,7 +146,10 @@ $ hdfs dfs -copyFromLocal SRR062635_?.filt.fastq.gz /
 $ ${HOME}/EVA/scripts/run_variant_analysis_adam.sh hs38 hdfs://vm0:9000/SRR062635_1.filt.fastq.gz hdfs://vm0:9000/SRR062635_2.filt.fastq.gz 16
 ```
 
-5. Download the `.vcf` file.
+5. Download the `.vcf` file. 
+```
+$ hdfs dfs -copyToLocal /mysequence.vcf
+```
 
 ## Report Issues
 
