@@ -8,7 +8,7 @@ to risk of severe COVID-19 [(NEJM '2020)](https://www.nejm.org/doi/full/10.1056/
 [[CloudLab account]](#signup-for-a-cloudlab-account)
 
 [[Variant analysis (single node)]](#running-variant-analysis-on-human-genomes-using-a-single-cloudlab-node)
-[[Variant analysis (cluster)]](#running-variant-analysis-on-a-cluster-of-cloudlab-nodes)
+<br/>[[Variant analysis (cluster)]](#running-variant-analysis-on-a-cluster-of-cloudlab-nodes)
 
 [[Report issues]](#report-issues)
 
