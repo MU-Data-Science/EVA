@@ -15,19 +15,16 @@ It will take a few minutes to start the experiment; so please be patient.
    [ssh-agent](https://www.ssh.com/ssh/agent) on your local machine to
    add your private key.)
 3. After connecting to the master node `vm0`, clone the repository:
-
-```
+   ```
    $ git clone https://github.com/MU-Data-Science/EVA.git
-```
+   ```
 
-4. To setup Hadoop, Spark, and other tools, execute the following in the
-   shell/terminal. Suppose your cluster has 16 nodes. (Replace the
-   second argument with your CloudLab username.)
+4. To setup Hadoop, Spark, and other tools, execute the following in the shell/terminal. Suppose your cluster has 16 nodes.
 
-```
+   ```
    $ cd EVA/cluster_config
-   $ ./cluster-configure.sh 16 CloudLab_username /mydata
-```
+   $ ./cluster-configure.sh 16
+   ```
 
    This step takes several minutes; so please be patient.
 
