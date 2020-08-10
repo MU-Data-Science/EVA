@@ -1,13 +1,12 @@
 #!/usr/bin/env bash
 
 nodes="$1"
-user_name="$2"
-data_dir="$3"
+user_name="$USER"
+data_dir="/mydata"
 
-if [[ "$user_name" != "$USER" ]]; then
-    echo "Usage: cluster-configure.sh <no. of nodes> <CloudLab username> <data dir>"
-    echo "Please replace the argument "\"$user_name\"" with your CloudLab username."
-    exit
+if [ "$#" -ne 1 ]; then
+  echo "Usage: cluster-configure.sh <no. of nodes>"
+  exit -1
 fi
 
 # configuration constants.
