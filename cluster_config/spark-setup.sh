@@ -3,10 +3,11 @@ MASTER_NODE_ID="$1"
 MSTR='vm0'
 data_dir="$2"
 share_dir="$3"
+hadoop_ver="$4"
+spark_ver="$5"
 
 NUMREP=1
-HADOOP_VER="3.2"
-SPARK_VER="3.0.0"
+
 SPARK_HDP_VER=$(echo $HADOOP_VER | cut -d '.' -f1-2)
 
 # check if openssl is installed

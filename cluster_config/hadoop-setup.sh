@@ -2,8 +2,8 @@
 INSTALL_ID="$1"
 data_dir="$2"
 share_dir="$3"
+hadoop_ver="$4"
 
-HADOOP_VER="3.3.0"
 master_node="vm0"
 node_prefix="vm"
 node_start=1
@@ -22,7 +22,7 @@ rm -Rf "$cluster_prefix"
 mkdir -p "$cluster_prefix"
 
 # Extract hadoop in the prefix dir
-tar xzf $share_dir/EVA_Tools/hadoop-$HADOOP_VER*gz -C "$cluster_prefix" --strip-components 1
+tar xzf $share_dir/EVA_Tools/hadoop-$hadoop_ver*gz -C "$cluster_prefix" --strip-components 1
 hadoop_prefix="$cluster_prefix"
 
 ######################

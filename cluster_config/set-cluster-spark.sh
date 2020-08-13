@@ -4,6 +4,8 @@ username="$2"
 private_key="$3"
 data_dir="$4"
 share_dir="$5"
+hadoop_ver="$6"
+spark_ver="$7"
 
 # 1 Copy spark-setupsh to master node and execute it
 spark_script="spark-setup.sh"
@@ -12,7 +14,7 @@ install_id=$(head -1 "$cluster_machines-INSTALL_ID.txt")
 echo -e ">> EXECUTING: $spark_script\n"
 master_node=$(head -1 "$cluster_machines")
 scp -i "$private_key" "$spark_script" "$username@$master_node:~" &> /dev/null
-ssh -i "$private_key" "$username@$master_node" "~/$spark_script $install_id $data_dir $share_dir" &> /dev/null
+ssh -i "$private_key" "$username@$master_node" "~/$spark_script $install_id $data_dir $share_dir $hadoop_ver $spark_ver" &> /dev/null
 
 # 2 Configure nodes
 echo -e ">> CONFIGURING NODES 🤖\n"

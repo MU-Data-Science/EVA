@@ -4,6 +4,7 @@ username="$2"
 private_key="$3"
 data_dir="$4"
 share_dir=$5
+hadoop_ver=$6
 
 master_node=$(head -1 "$cluster_machines")
 data_nodes=$(tail -n+2 "$cluster_machines")
@@ -15,7 +16,7 @@ install_id=$(head -1 "$cluster_machines-INSTALL_ID.txt")
 echo -e ">> EXECUTING: $hadoop_script\n"
 master_node=$(head -1 "$cluster_machines")
 scp -o "StrictHostKeyChecking no" -i "$private_key" "$hadoop_script" "$username@$master_node:~" &> /dev/null
-ssh -o "StrictHostKeyChecking no" -i "$private_key" "$username@$master_node" "~/$hadoop_script $install_id $data_dir $share_dir && hostname | cut -d'.' -f1 > ~/masters" &> /dev/null
+ssh -o "StrictHostKeyChecking no" -i "$private_key" "$username@$master_node" "~/$hadoop_script $install_id $data_dir $share_dir $hadoop_ver && hostname | cut -d'.' -f1 > ~/masters" &> /dev/null
 
 # 2 Configure masternode
 echo -e ">> CONFIGURING MASTER NODE 😎\n"

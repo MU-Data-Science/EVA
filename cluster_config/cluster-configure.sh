@@ -12,6 +12,8 @@ fi
 # configuration constants.
 machines="cluster-machines.txt"
 shareDir="/proj/eva-public-PG0"
+hadoopVer=2.10
+sparkVer=2.4.6
 
 experiment=$(basename $machines)
 scripts=(\
@@ -52,7 +54,7 @@ echo ">> WAIT FOR IT YOUNG BLOOD 👽 ID: $install_id"
 for script in "${scripts[@]}"
 do
   log_file="LOG-"$script"-"$experiment".log"
-  cmd="./$script.sh $machines $user_name ~/.ssh/id_rsa $data_dir $shareDir&> $log_file"
+  cmd="./$script.sh $machines $user_name ~/.ssh/id_rsa $data_dir $shareDir $hadoopVer $sparkVer &> $log_file"
   
   eval "$cmd"
   echo ">> FINISHED $script.sh LOG $log_file 🕶"
