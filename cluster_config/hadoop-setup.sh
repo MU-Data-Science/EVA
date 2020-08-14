@@ -144,3 +144,5 @@ for node in `seq $node_start $node_end`
 do
     echo "$node_prefix$node" >> $SLAVES_FILE 
 done
+# Copying workers file as slaves, for older hadoop versions.
+cp $SLAVES_FILE $hadoop_prefix/etc/hadoop/slaves

@@ -4,7 +4,7 @@ nodes="$1"
 user_name="$USER"
 data_dir="/mydata"
 
-if [ "$#" -ne 1 ]; then
+if [ "$#" -ne 2 ]; then
   echo "Usage: cluster-configure.sh <no. of nodes> <adam|gatk>"
   exit -1
 fi
