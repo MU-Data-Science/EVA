@@ -149,7 +149,7 @@ We are currently support using [Apache Spark](https://spark.apache.org),
     **a.** Using Adam/Cannoli/bwa/Freebayes:
         Suppose the cluster size is `16` and `hs38` is the reference genome.
         
-        ${HOME}/EVA/scripts/run_variant_analysis_gatk_spark.sh hs38 SRR062635_1.filt.fastq.gz SRR062635_2.filt.fastq.gz
+        ${HOME}/EVA/scripts/run_variant_analysis_adam.sh hs38 hdfs://vm0:9000/SRR062635_1.filt.fastq.gz hdfs://vm0:9000/SRR062635_2.filt.fastq.gz 16
         
     **b.** Using GATK/Spark:
         Suppose `hs38` is the reference genome.
