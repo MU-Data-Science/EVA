@@ -58,26 +58,26 @@ echo "👉 Adding Read Group to BAM file."
 #samtools -view -H
 
 java -jar ${PICARD_JAR} AddOrReplaceReadGroups \
-    I=${OUTPUT_PREFIX}.bam \
-    O=${OUTPUT_PREFIX}-rg.bam \
-    RGSM=mysample \
-    RGPU=myunit \
-    RGID=mygroupID \
-    RGLB=mylib \
-    RGPL=Illumina
+    -I=${OUTPUT_PREFIX}.bam \
+    -O=${OUTPUT_PREFIX}-rg.bam \
+    -RGSM=mysample \
+    -RGPU=myunit \
+    -RGID=mygroupID \
+    -RGLB=mylib \
+    -RGPL=Illumina
 
 echo "👉 Performing sorting of BAM file."
 
 java -jar ${PICARD_JAR} SortSam \
-    I=${OUTPUT_PREFIX}-rg.bam \
-    O=${OUTPUT_PREFIX}-rg-sorted.bam \
-    SORT_ORDER=coordinate
+    -I=${OUTPUT_PREFIX}-rg.bam \
+    -O=${OUTPUT_PREFIX}-rg-sorted.bam \
+    -SORT_ORDER=coordinate
 
 echo "👉 Marking duplicates in BAM file."
 java -jar ${PICARD_JAR} MarkDuplicates \
-    I=${OUTPUT_PREFIX}-rg-sorted.bam \
-    O=${OUTPUT_PREFIX}-rg-sorted-final.bam \
-    M=${OUTPUT_PREFIX}-rg-sorted-final-dup_metrics.txt
+    -I=${OUTPUT_PREFIX}-rg-sorted.bam \
+    -O=${OUTPUT_PREFIX}-rg-sorted-final.bam \
+    -M=${OUTPUT_PREFIX}-rg-sorted-final-dup_metrics.txt
 
 echo "👉 Index processed BAM file before variant calling."
 samtools index ${OUTPUT_PREFIX}-rg-sorted-final.bam
