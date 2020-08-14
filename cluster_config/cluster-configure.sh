@@ -60,7 +60,7 @@ do
   echo ">> FINISHED $script.sh LOG $log_file 🕶"
 done
 
-echo "Cleaning up."
+echo ">> CLEANING UP"
 rm -rf $shareDir/hadoop_$install_id
 rm -rf $shareDir/spark_$install_id
 
