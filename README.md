@@ -127,6 +127,8 @@ We are currently using [Apache Spark](https://spark.apache.org),
 [Apache Hadoop](https://hadoop.apache.org), and
 [Adam/Cannoli](http://bdgenomics.org/).
 
+### Using Adam/Cannoli
+
 1. Setup an n-node cluster on CloudLab, following the setup steps
    described [here](cluster_config). (The nodes are named `vm0`, `vm1`,
    etc.) Open a terminal/shell on `vm0`.
@@ -139,19 +141,40 @@ We are currently using [Apache Spark](https://spark.apache.org),
    [Step 3(e)](#running-variant-analysis-on-human-genomes-using-a-single-cloudlab-node)
    above.
 
-3. Copy the (paired-end) sequence to HDFS.
+4. Copy the (paired-end) sequence to HDFS.
    ```
    $ hdfs dfs -copyFromLocal SRR062635_?.filt.fastq.gz / 
    ```
 
-4. Run variant analysis using Adam/Cannoli/bwa/Freebayes. Suppose the
+5. Run variant analysis using Adam/Cannoli/bwa/Freebayes. Suppose the
    cluster size is `16` and `hs38` is the reference genome.
 
    ```
-   $ ${HOME}/EVA/scripts/run_variant_analysis_adam.sh hs38 hdfs://vm0:9000/SRR062635_1.filt.fastq.gz hdfs://vm0:9000/SRR062635_2.filt.fastq.gz 16
+   $ ${HOME}/EVA/scripts/run_variant_analysis_gatk_spark.sh hs38 SRR062635_1.filt.fastq.gz SRR062635_2.filt.fastq.gz
    ```
 
 6. Download the `.vcf` file in the local directory on `vm0`.
+
+### Using GATK
+1. Setup an n-node cluster on CloudLab, following the setup steps
+   described [here](cluster_config). (The nodes are named `vm0`, `vm1`,
+   etc.) Open a terminal/shell on `vm0`.
+ 
+2. Setup the reference genome in `/mydata` on `vm0`. See
+   [Step 3(c,d)](#running-variant-analysis-on-human-genomes-using-a-single-cloudlab-node)
+   above.
+
+3. Download a (paired-end) sequence sample as shown in
+   [Step 3(e)](#running-variant-analysis-on-human-genomes-using-a-single-cloudlab-node)
+   above.
+   
+4. Run variant analysis using bwa/gatk. Suppose `hs38` is the reference genome.
+
+   ```
+   $ ${HOME}/EVA/scripts/run_variant_analysis_gatk_spark.sh hs38 SRR062635_1.filt.fastq.gz SRR062635_2.filt.fastq.gz
+   ```
+  
+5. Download the `.vcf` file in the local directory on `vm0`.
 
 ## Report Issues
 
