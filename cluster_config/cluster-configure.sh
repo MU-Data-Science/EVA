@@ -5,15 +5,20 @@ user_name="$USER"
 data_dir="/mydata"
 
 if [ "$#" -ne 1 ]; then
-  echo "Usage: cluster-configure.sh <no. of nodes>"
+  echo "Usage: cluster-configure.sh <no. of nodes> <adam|gatk>"
   exit -1
 fi
 
 # configuration constants.
 machines="cluster-machines.txt"
 shareDir="/proj/eva-public-PG0"
-hadoopVer=2.10
-sparkVer=2.4.6
+hadoopVer=3.3.0
+sparkVer=3.0.0
+
+if [ $2 = gatk ]; then
+  hadoopVer=2.10
+  sparkVer=2.4.6
+fi
 
 experiment=$(basename $machines)
 scripts=(\

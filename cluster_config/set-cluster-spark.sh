@@ -65,7 +65,7 @@ DATE=$(date| tr '[:lower:]' '[:upper:]')
 echo $DATE
 wait
 
-echo"Starting Spark."
+echo "Starting Spark."
 $data_dir/spark/sbin/start-all.sh
 
 echo -e ">> SETUP FINISHED 🌮"

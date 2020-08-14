@@ -23,7 +23,7 @@ MSTR="vm0"
 
 rm -Rf "$spark_prefix"
 mkdir -p "$spark_prefix"
-tar xzf $share_dir/EVA_Tools/spark-$SPARK_VER*gz -C "$spark_prefix" --strip-components 1
+tar xzf $share_dir/EVA_Tools/spark-$spark_ver*gz -C "$spark_prefix" --strip-components 1
 
 SPARK_DEFAULTS_FILE="$spark_prefix/conf/spark-defaults.conf"
 echo "
