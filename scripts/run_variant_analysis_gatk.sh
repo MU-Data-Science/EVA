@@ -83,7 +83,7 @@ echo "👉 Index processed BAM file before variant calling."
 samtools index ${OUTPUT_PREFIX}-rg-sorted-final.bam
 
 echo "👉 Running GATK HaplotypeCaller for variant calling."
-${GATK_HOME}/gatk HaplotypeCaller -R ${1}.fa -I ${OUTPUT_PREFIX}-rg-sorted=final.bam -O ${OUTPUT_PREFIX}-gatk-output.vcf
+${GATK_HOME}/gatk HaplotypeCaller -R ${1}.fa -I ${OUTPUT_PREFIX}-rg-sorted-final.bam -O ${OUTPUT_PREFIX}-gatk-output.vcf
 echo "👉 Done with variant calling. See ${OUTPUT_PREFIX}-gatk-output.vcf file."
 
 echo "👉 Done!"

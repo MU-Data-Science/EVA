@@ -11,7 +11,7 @@ node_end=$(cat /etc/hosts | grep -v 'vm0\|localhost' | wc -l)
 
 NN_DIR="$data_dir/hadoop/hdfs/namenode"
 DN_DIR="$data_dir/hadoop/hdfs/datanode"
-NUMREP="1"
+NUMREP="3"
 HSTNAME=$(hostname | cut -d '.' -f 1)
 HOST_PRIVATE_IP=$(grep $HSTNAME /etc/hosts | cut -f 1)
 HSTNAME_LEN=${#HSTNAME}
