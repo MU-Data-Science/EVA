@@ -55,18 +55,19 @@ done
 install_id=$(date +"%s")
 echo "$install_id" > "$machines-INSTALL_ID.txt"
 
-echo ">> WAIT FOR IT YOUNG BLOOD 👽 ID: $install_id"
+count=1
 for script in "${scripts[@]}"
 do
   log_file="LOG-"$script"-"$experiment".log"
   cmd="./$script.sh $machines $user_name ~/.ssh/id_rsa $data_dir $shareDir $hadoopVer $sparkVer &> $log_file"
   
   eval "$cmd"
-  echo ">> FINISHED $script.sh LOG $log_file 🕶"
+  echo ">> FINISHED ($count/${#scripts[@]}) $script.sh LOG $log_file"
+  count=`expr $count + 1`
 done
 
-echo ">> CLEANING UP"
+echo ">> CLEANING UP."
 rm -rf $shareDir/hadoop_$install_id
 rm -rf $shareDir/spark_$install_id
 
-echo ">> WORK IS DONE 🥃"
+echo ">> WORK IS DONE."
