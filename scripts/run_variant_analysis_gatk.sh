@@ -6,7 +6,8 @@ SAMBAMBA_HOME=${HOME}
 TMP_DIR="/mydata/tmp"
 OUTPUT_PREFIX="VA-"${USER}"-result"
 PICARD_JAR=${HOME}/picard.jar
-GATK_HOME=${HOME}/gatk
+GATK_HOME=${HOME}/gatk-4.1.8.0
+SAMTOOLS_HOME=${HOME}/samtools
 
 if [[ $# -lt 2 || $# -gt 3 ]]; then
     echo "Usage: run_variant_analysis_gatk.sh <hs38|hs38a|hs38DH|hs37|hs37d5> <FASTQ_file1> [FASTQ_file2]"
@@ -45,7 +46,7 @@ else
 fi
 
 echo "👉 Converting to BAM file."
-SAM2BAM_CMD="samtools view -@${num_threads} -b ${OUTPUT_PREFIX}.sam.gz > ${OUTPUT_PREFIX}.bam"
+SAM2BAM_CMD="${SAMTOOLS_HOME}/samtools view -@${num_threads} -b ${OUTPUT_PREFIX}.sam.gz > ${OUTPUT_PREFIX}.bam"
 eval ${SAM2BAM_CMD}
 if [[ $? -eq 0 ]]; then
     echo "👉 Done with BAM conversion."
@@ -55,32 +56,31 @@ else
 fi
 
 echo "👉 Adding Read Group to BAM file."
-#samtools -view -H
 
 java -jar ${PICARD_JAR} AddOrReplaceReadGroups \
-    -I=${OUTPUT_PREFIX}.bam \
-    -O=${OUTPUT_PREFIX}-rg.bam \
-    -RGSM=mysample \
-    -RGPU=myunit \
-    -RGID=mygroupID \
-    -RGLB=mylib \
-    -RGPL=Illumina
+    I=${OUTPUT_PREFIX}.bam \
+    O=${OUTPUT_PREFIX}-rg.bam \
+    RGSM=mysample \
+    RGPU=myunit \
+    RGID=mygroupID \
+    RGLB=mylib \
+    RGPL=Illumina
 
 echo "👉 Performing sorting of BAM file."
 
 java -jar ${PICARD_JAR} SortSam \
-    -I=${OUTPUT_PREFIX}-rg.bam \
-    -O=${OUTPUT_PREFIX}-rg-sorted.bam \
-    -SORT_ORDER=coordinate
+    I=${OUTPUT_PREFIX}-rg.bam \
+    O=${OUTPUT_PREFIX}-rg-sorted.bam \
+    SORT_ORDER=coordinate
 
 echo "👉 Marking duplicates in BAM file."
 java -jar ${PICARD_JAR} MarkDuplicates \
-    -I=${OUTPUT_PREFIX}-rg-sorted.bam \
-    -O=${OUTPUT_PREFIX}-rg-sorted-final.bam \
-    -M=${OUTPUT_PREFIX}-rg-sorted-final-dup_metrics.txt
+    I=${OUTPUT_PREFIX}-rg-sorted.bam \
+    O=${OUTPUT_PREFIX}-rg-sorted-final.bam \
+    M=${OUTPUT_PREFIX}-rg-sorted-final-dup_metrics.txt
 
 echo "👉 Index processed BAM file before variant calling."
-samtools index ${OUTPUT_PREFIX}-rg-sorted-final.bam
+${SAMTOOLS_HOME}/samtools index ${OUTPUT_PREFIX}-rg-sorted-final.bam
 
 echo "👉 Running GATK HaplotypeCaller for variant calling."
 ${GATK_HOME}/gatk HaplotypeCaller -R ${1}.fa -I ${OUTPUT_PREFIX}-rg-sorted-final.bam -O ${OUTPUT_PREFIX}-gatk-output.vcf
