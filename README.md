@@ -152,7 +152,7 @@ We are currently support using [Apache Spark](https://spark.apache.org),
         
     **b.** Using GATK/Spark:
 
-        ${HOME}/EVA/scripts/run_variant_analysis_gatk_spark.sh hdfs://vm0:9000/SRR062635_1.filt.fastq.gz hdfs://vm0:9000/SRR062635_2.filt.fastq.gz 16
+        ${HOME}/EVA/scripts/run_variant_analysis_gatk_spark.sh hs38 hdfs://vm0:9000/SRR062635_1.filt.fastq.gz hdfs://vm0:9000/SRR062635_2.filt.fastq.gz 16
 
 6. Download the `.vcf` file in the local directory on `vm0`.
 
