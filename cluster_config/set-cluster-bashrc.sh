@@ -24,6 +24,9 @@ echo "
   export FREEBAYES_HOME='$data_dir'/freebayes
   TMP_DIR='$data_dir'/tmp
 
+  # For YARN
+  export HADOOP_CONF_DIR=$HADOOP_HOME/etc/hadoop
+
   # New Path
   export PATH=\$PATH:\$HADOOP_HOME/bin:\$HADOOP_HOME/sbin:\$SPARK_HOME/bin
   " >> ~/.bashrc
