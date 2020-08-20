@@ -1,7 +1,6 @@
 /**
- * Praveen Rao
  * University of Missouri-Columbia
- * 2019
+ * 2020
  */
 
 import sys.process._
@@ -17,8 +16,7 @@ import java.util.Calendar
 
 import org.apache.spark.HashPartitioner
 
-// http://www.russellspitzer.com/2017/02/27/Concurrency-In-Spark/
-
+// Futures code is taken from http://www.russellspitzer.com/2017/02/27/Concurrency-In-Spark/
 object ConcurrentContext {
   import scala.util._
   import scala.concurrent._
@@ -54,31 +52,28 @@ object GenerateDenovoReference {
     Spark options: --master, --num-executors, etc.
 
     Required jar options:
-      -i | --input <file>     input HDFS file containing sequence IDs one per line
+      -i | --input <file>     input HDFS file containing sample IDs; one per line
       -o | --output <file>    output HDFS directory to store the denovo reference sequences
     """)
   }
 
 
-  /** Immediately returns the input **/
-  def fastFoo[T](x: T): T = {
-    println(s"fastFoo($x)")
-    x
-  }
-
-  def slowFoo[T](x: T):T = {
-    println(s"slowFoo start ($x)")
-    Thread.sleep(5000)
-    //val ret = "touch hello.txt".!
-    val now = Calendar.getInstance()
+  def runSpade[T](x: T):T = {
+    println(s"Starting Spades on ($x)")
+    //Thread.sleep(15000)
+    //val now = Calendar.getInstance()
+    val sampleID = x.toString
+    val cleanUp = "rm -rf /mydata/$sampleID-*"
+    val cleanRet = Process(cleanUp).!
     val cmd =
-      "/mydata/bwa/bwa mem -t 16 /proj/eva-public-PG0/Genome_Data/hs38.fa " +
-        "/proj/eva-public-PG0/Genome_Data/SRR062635_1.filt.fastq.gz " +
-        "/proj/eva-public-PG0/Genome_Data/SRR062635_2.filt.fastq.gz "
+      s"/proj/eva-public-PG0/SPAdes-3.14.1-Linux/bin/spades.py -m 54 -t 16 --tmp-dir /mydata/$sampleID-tmp" +
+      s" -1 /proj/eva-public-PG0/denovo/$sampleID" + "_1.filt.fastq.gz" +
+      s" -2 /proj/eva-public-PG0/denovo/$sampleID" + "_2.filt.fastq.gz" +
+      s" -o /mydata/$sampleID-output"
 
     val ret = Process(cmd).!
     //val ret = System.getenv("HOSTNAME")
-    println(s"slowFoo end($x) $ret")
+    println(s"Completed ($x); $cmd; execution status: $ret")
     x
   }
 
@@ -106,17 +101,18 @@ object GenerateDenovoReference {
 
     val options = nextOption(Map(),argList)
 
-    val spark = SparkSession.builder.appName("De novo reference sequence generation").getOrCreate()
+    val spark = SparkSession.builder.appName("De novo sequence generation").getOrCreate()
     spark.sparkContext.setLogLevel("INFO")
     val log = Logger.getLogger(getClass.getName)
     log.info("\uD83D\uDC49 Starting the generation")
 
     val fileName = options('input).toString
     val sequenceList = spark.sparkContext.textFile(fileName)
-    val pairList = sequenceList.map(x => (x,1)).partitionBy(new HashPartitioner(47))
+    val pairList = sequenceList.map(x => (x,1)).partitionBy(
+      new HashPartitioner(sequenceList.count().toInt))
 
     pairList
-      .map(x => ConcurrentContext.executeAsync(slowFoo(x._1)))
+      .map(x => ConcurrentContext.executeAsync(runSpade(x._1)))
       .mapPartitions(it => ConcurrentContext.awaitBatch(it))
       .collect()
       .foreach(x => println(s"Finishing with $x on hostname"))
