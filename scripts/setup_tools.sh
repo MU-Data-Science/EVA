@@ -73,4 +73,13 @@ mv gatk-${GATK_VERSION} gatk
 rm -rf ${GATK_LOCAL_ZIP}
 echo "👉 Done with GATK download 😎"
 
+# setup SPAdes
+cd ${HOME}
+SPADES_VERSION=3.14.1
+wget http://cab.spbu.ru/files/release${SPADES_VERSION}/SPAdes-${SPADES_VERSION}-Linux.tar.gz
+tar -xzf SPAdes-${SPADES_VERSION}-Linux.tar.gz
+mv SPAdes-${SPADES_VERSION}-Linux spades
+rm -rf SPAdes-${SPADES_VERSION}-Linux.tar.gz
+echo "👉 Done with SPAdes download 😎"
+
 echo "👉 Successful installation of the required tools. 😎"

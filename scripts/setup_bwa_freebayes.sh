@@ -60,4 +60,13 @@ sudo apt-get install default-jre -y
 sudo apt-get install default-jdk -y
 echo "👉 Done with Java installation 😎"
 
+# setup SPAdes
+cd ${HOME}
+SPADES_VERSION=3.14.1
+wget http://cab.spbu.ru/files/release${SPADES_VERSION}/SPAdes-${SPADES_VERSION}-Linux.tar.gz
+tar -xzf SPAdes-${SPADES_VERSION}-Linux.tar.gz
+mv SPAdes-${SPADES_VERSION}-Linux spades
+rm -rf SPAdes-${SPADES_VERSION}-Linux.tar.gz
+echo "👉 Done with SPAdes download 😎"
+
 echo "👉 Successful installation of the required tools. 😎"
