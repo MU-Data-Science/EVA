@@ -4,6 +4,7 @@
 BWA_HOME=${HOME}/bwa
 SAMBAMBA_HOME=${HOME}
 FREEBAYES_HOME=${HOME}/freebayes
+SAMTOOLS_HOME=${HOME}/samtools
 TMP_DIR="/mydata/tmp"
 OUTPUT_PREFIX="VA-"${USER}"-result"
 
@@ -44,7 +45,7 @@ else
 fi
 
 echo "👉 Converting to BAM file."
-SAM2BAM_CMD="samtools view -@${num_threads} -b ${OUTPUT_PREFIX}.sam.gz > ${OUTPUT_PREFIX}.bam"
+SAM2BAM_CMD="${SAMTOOLS_HOME}/samtools view -@${num_threads} -b ${OUTPUT_PREFIX}.sam.gz > ${OUTPUT_PREFIX}.bam"
 eval ${SAM2BAM_CMD}
 if [[ $? -eq 0 ]]; then
     echo "👉 Done with BAM conversion."
