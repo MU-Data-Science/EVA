@@ -5,14 +5,13 @@ username="$2"
 private_key="$3"
 
 SCALA_VER="2.11.8"
+EMAIL_DOMAIN="eva.com"
 
 ssh_command="
 # >> UPDATING REPOSITORIES AND PACKAGES..
 echo 'deb https://dl.bintray.com/sbt/debian /' | sudo tee -a /etc/apt/sources.list.d/sbt.list
 sudo apt-key adv --keyserver hkp://keyserver.ubuntu.com:80 --recv 2EE0EA64E40A89B84B2DF73499E82A75642AC823
 sudo apt-get update  --yes      # Fetches the list of available updates
-#sudo apt-get upgrade --yes     # Strictly upgrades the current packages
-#sudo apt-get dist-upgrade      # Installs updates (new ones)
 
 # >> INSTALLING OTHERS..
 sudo apt-get install default-jre --yes
@@ -37,6 +36,17 @@ sudo apt-get install sbt --yes
 sudo apt-get remove scala-library scala --yes
 wget http://www.scala-lang.org/files/archive/scala-$SCALA_VER.deb
 sudo dpkg -i scala-$SCALA_VER.deb
+
+# htop installation.
+sudo apt-get install htop
+
+# Mail installation
+export DEBIAN_FRONTEND='noninteractive'
+sudo debconf-set-selections <<< 'postfix postfix/mailname string $EMAIL_DOMAIN'
+sudo debconf-set-selections <<< \"postfix postfix/main_mailer_type string 'Internet Site'\"
+sudo apt-get install -y postfix
+sudo sed -i 's/inet_interfaces = all/inet_interfaces = loopback-only/g' /etc/postfix/main.cf
+sudo service postfix restart
 "
 
 echo ">> NODES:"

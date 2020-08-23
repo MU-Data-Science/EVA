@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+<title>EVA</title>
+<script>
+    function success() {
+        alert("Your request is being processed. You would receive an email notification once completed.");
+    }
+</script>
+<body>
+<h2>EVA</h2>
+<form action="http://localhost:5000/execute" onsubmit="success()">
+    <label>Number of nodes:</label><br><input type="number" id="nodes" name="nodes" value="2"><br>
+    <label>Data Center:</label><br>
+    <select name="site" id="site">
+        <option value="utah">Utah</option>
+        <option value="wisc">Wisconsin</option>
+        <option value="clemson">Clemson</option>
+        <option value="apt">APT</option>
+    </select><br>
+    <label>Email Id:</label><br><input type="email" id="email" name="email"><br>
+    <label>Sequence 1 URL:</label><br><input type="url" id="seq_1_url" name="seq_1_url"><br>
+    <label>Sequence 2 URL:</label><br><input type="url" id="seq_2_url" name="seq_2_url"><br>
+    <input type="submit" value="Submit">
+</form>
+</body>
+</html>
+

@@ -1,0 +1,4 @@
+flask
+geni-lib
+configparser
+paramiko

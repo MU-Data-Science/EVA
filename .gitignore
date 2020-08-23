@@ -6,6 +6,10 @@ cluster_config/pswd.txt
 */*.log
 cluster_config/*.txt
 cluster_config/cluster-machines.txt
-.DS_Storetarget/
+.DS_Store
 project/
 target/
+xml_processor/build
+xml_processor/build.number
+venv
+*/*.pyc

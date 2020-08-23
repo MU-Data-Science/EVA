@@ -3,9 +3,6 @@
 DATA_DIR="$1"
 SHARE_DIR="$2"
 
-# htop installation.
-sudo apt-get install htop
-
 # get bwa
 tar -xvf $SHARE_DIR/EVA_Tools/bwa.tar -C $DATA_DIR
 ln -sf $DATA_DIR/bwa $HOME/bwa
