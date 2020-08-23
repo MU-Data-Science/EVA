@@ -30,6 +30,7 @@ echo "👉 Installing Apache Tomcat"
 cd $HOME && wget https://archive.apache.org/dist/tomcat/tomcat-9/v9.0.20/bin/apache-tomcat-9.0.20.zip
 unzip apache-tomcat-9.0.20.zip
 mv apache-tomcat-9.0.20 apache-tomcat
+mkdir $HOME/apache-tomcat/webapps/download
 chmod +x apache-tomcat/bin/*
 bash apache-tomcat/bin/startup.sh
 

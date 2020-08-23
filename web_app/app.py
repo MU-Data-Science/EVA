@@ -22,21 +22,27 @@ def execute():
     print("app.py :: execute :: Slice name created :: ", slice_name)
 
     # Setting up the cluster.
-    # node_lst = cloudlab_setup.create_cluster(slice_name, nodes, site)
+    node_lst = cloudlab_setup.create_cluster(slice_name, nodes, site)
 
     # Setting up cluster config.
-    node_lst = ['c220g1-030822.wisc.cloudlab.us', 'c220g1-030621.wisc.cloudlab.us']
     cloudlab_setup.setup_cluster_config(node_lst)
 
     # Performing variant analysis.
     print("app.py :: execute :: Performing variant  analysis.", slice_name)
-    command = 'ssh -o "StrictHostKeyChecking no" %s@%s "${HOME}/EVA/scripts/autorun_variant_analysis.sh hs38 %s %s %s"' % (constants.USER_NAME, node_lst[0], seq_1_url, seq_2_url, len(node_lst))
-    process = subprocess.Popen('/bin/bash', stdin=subprocess.PIPE, stdout=subprocess.PIPE)
-    out, err = process.communicate(command.encode('utf-8'))
+    command = 'ssh -o "StrictHostKeyChecking no" %s@%s "\${HOME}/EVA/scripts/autorun_variant_analysis.sh hs38 %s %s %s"' % (constants.USER_NAME, node_lst[0], seq_1_url, seq_2_url, len(node_lst))
+    out, err = subprocess.Popen('/bin/bash', stdin=subprocess.PIPE, stdout=subprocess.PIPE).communicate(command.encode('utf-8'))
     print(out.decode('utf-8'))
-    print "cloudlab_setup.py :: setup_cluster_config :: Completed setting up Hadoop and Spark on the nodes."
+    print "cloudlab_setup.py :: setup_cluster_config :: Completed performing variant  analysis."
 
-    # Copy the vcf file to a file server(give a unique identifier.
+    # Copying the vcf file to a file server(give a unique identifier.
+    command = 'scp -o "StrictHostKeyChecking no" %s@%s:VA-${USER}-result-fbayes-output.vcf ${HOME}/apache-tomcat/webapps/download/%s-result-fbayes-output.vcf' % (constants.USER_NAME, node_lst[0], slice_name)
+    out, err = subprocess.Popen('/bin/bash', stdin=subprocess.PIPE, stdout=subprocess.PIPE).communicate(command.encode('utf-8'))
+    print(out.decode('utf-8'))
+
+    # Sending out the email with the download urls.
+    command = 'mail -s "Variant Analysis Complete!" %s <<< "Hello,\n\nYour Variant Analysis job has been successfully completed. It can be downloaded from http://$(hostname -i):8080/download/%s \n\nThanks,\nEVA-Team"' % (email, slice_name + "-result-fbayes-output.vcf")
+    out, err = subprocess.Popen('/bin/bash', stdin=subprocess.PIPE, stdout=subprocess.PIPE).communicate(command.encode('utf-8'))
+    print(out.decode('utf-8'))
 
     return "Successfully completed processing. Watch out for the email containing the links to download the .vcf."
 

@@ -10,16 +10,16 @@ if [[ $# -ne 4 ]]; then
 fi
 
 # Temporary command to setup hs38.
-#echo "Copying hs38 from the share directory"
-#cp -r $HS38_DIR/hs38* $DATA_DIR
+echo "Copying hs38 from the share directory"
+cp -r $HS38_DIR/hs38* $DATA_DIR
 #
 #echo "Downloading the FASTQ files. (Presently only .gz extensions are supported.)"
-#wget $2 -O $DATA_DIR/"Input_1.filt.fastq.gz"
-#wget $3 -O $DATA_DIR/"Input_2.filt.fastq.gz"
+wget $2 -O $DATA_DIR/"Input_1.filt.fastq.gz"
+wget $3 -O $DATA_DIR/"Input_2.filt.fastq.gz"
 
 echo "Uploading the files to HDFS."
-#hdfs dfs -copyFromLocal $DATA_DIR/"Input_1.filt.fastq.gz" /
-#hdfs dfs -copyFromLocal $DATA_DIR/"Input_2.filt.fastq.gz" /
+hdfs dfs -copyFromLocal $DATA_DIR/"Input_1.filt.fastq.gz" /
+hdfs dfs -copyFromLocal $DATA_DIR/"Input_2.filt.fastq.gz" /
 
 echo "Performing variant analysis using adam."
-#${HOME}/EVA/scripts/run_variant_analysis_adam.sh hs38 hdfs://vm0:9000/Input_1.filt.fastq.gz hdfs://vm0:9000/Input_2.filt.fastq.gz $4
+${HOME}/EVA/scripts/run_variant_analysis_adam.sh hs38 hdfs://vm0:9000/Input_1.filt.fastq.gz hdfs://vm0:9000/Input_2.filt.fastq.gz $4
