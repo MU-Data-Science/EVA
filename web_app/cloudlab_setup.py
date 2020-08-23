@@ -117,7 +117,7 @@ def setup_cluster_config(node_lst):
     print "cloudlab_setup.py :: setup_cluster_config :: Setting up Hadoop and Spark on the nodes."
 
     # Executing the cluster config script. (Note: We are setting up adam presently.)
-    command = 'ssh %s@%s "git clone %s && cd EVA/cluster_config && ./cluster-configure.sh %s adam"' % (constants.USER_NAME, node_lst[0], constants.GIT_URL, len(node_lst))
+    command = 'ssh -o "StrictHostKeyChecking no" %s@%s "git clone %s && cd EVA/cluster_config && ./cluster-configure.sh %s adam"' % (constants.USER_NAME, node_lst[0], constants.GIT_URL, len(node_lst))
     process = subprocess.Popen('/bin/bash', stdin=subprocess.PIPE, stdout=subprocess.PIPE)
     out, err = process.communicate(command.encode('utf-8'))
     print(out.decode('utf-8'))
