@@ -48,8 +48,9 @@ echo "👉 Done with GATK copy 😎"
 SPADES_VERSION=3.14.1
 if [ ! -f $SHARE_DIR/EVA_Tools/SPAdes-${SPADES_VERSION}-Linux.tar.gz ]; then
     wget http://cab.spbu.ru/files/release${SPADES_VERSION}/SPAdes-${SPADES_VERSION}-Linux.tar.gz -P $SHARE_DIR/EVA_Tools/
+    gunzip $SHARE_DIR/EVA_Tools/SPAdes-${SPADES_VERSION}-Linux.tar.gz
 fi
-tar -xfz $SHARE_DIR/EVA_Tools/SPAdes-${SPADES_VERSION}-Linux.tar.gz -C $DATA_DIR
+tar -xvf $SHARE_DIR/EVA_Tools/SPAdes-${SPADES_VERSION}-Linux.tar -C $DATA_DIR
 ln -sf $DATA_DIR/SPAdes-${SPADES_VERSION}-Linux $HOME/spades
 echo "👉 Done with SPAdes setup 😎"
 
