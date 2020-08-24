@@ -1,7 +1,6 @@
-#!/usr/bin/env bash
+#!/bin/bash -i
 
 # Constants
-HADOOP_HOME="/mydata/hadoop"
 HS38_DIR="/proj/eva-public-PG0/Genome_Data"
 DATA_DIR="/mydata"
 
@@ -19,8 +18,8 @@ wget $2 -O ${DATA_DIR}/Input_1.filt.fastq.gz
 wget $3 -O ${DATA_DIR}/Input_2.filt.fastq.gz
 
 echo "Uploading the files to HDFS."
-${HADOOP_HOME}/bin/hdfs dfs -copyFromLocal ${DATA_DIR}/Input_1.filt.fastq.gz /
-${HADOOP_HOME}/bin/hdfs dfs -copyFromLocal ${DATA_DIR}/Input_2.filt.fastq.gz /
+hdfs dfs -copyFromLocal ${DATA_DIR}/Input_1.filt.fastq.gz /
+hdfs dfs -copyFromLocal ${DATA_DIR}/Input_2.filt.fastq.gz /
 
 echo "Performing variant analysis using adam."
 ${HOME}/EVA/scripts/run_variant_analysis_adam.sh hs38 hdfs://vm0:9000/Input_1.filt.fastq.gz hdfs://vm0:9000/Input_2.filt.fastq.gz $4
