@@ -21,5 +21,5 @@
 ```
 python app.py
 ```
-The UI can be accessed at http://<IP>:5000
+The UI can be accessed at http://\<IP\>:5000
 
