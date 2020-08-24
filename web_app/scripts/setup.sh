@@ -6,10 +6,6 @@ EVA_HOME=${PWD}/..
 echo "👉 Installing python libraries."
 sudo apt-get -y update
 sudo apt-get -y install libffi-dev
-wget https://bootstrap.pypa.io/get-pip.py
-sudo python2.7 get-pip.py
-export PATH=${HOME}/.local/bin:$PATH
-echo 'export PATH='$HOME'/.local/bin:$PATH' >> /users/$USER/.profile
 pip install -r $EVA_HOME/"web_app/requirements.txt"
 
 # Installing Java.
