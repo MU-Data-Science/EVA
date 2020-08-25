@@ -1,12 +1,10 @@
 #!/usr/bin/env bash
 
-EVA_HOME=${PWD}/..
-
 # Install python requirements
 echo "👉 Installing python libraries."
 sudo apt-get -y update
 sudo apt-get -y install libffi-dev
-pip install -r $EVA_HOME/"web_app/requirements.txt"
+pip install -r ../requirements.txt
 
 # Installing Java.
 echo "👉 Installing Java."
@@ -32,7 +30,7 @@ bash apache-tomcat/bin/startup.sh
 
 # Building XML Processor.
 echo "👉 Building XML Processor."
-cd $EVA_HOME"/xml_processor" && ant jar
+cd ../xml_processor && ant jar
 
 # Email Setup.
 echo "👉 Setting up email configurations."
