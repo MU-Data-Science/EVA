@@ -9,7 +9,7 @@ cluster_config/cluster-machines.txt
 .DS_Store
 project/
 target/
-xml_processor/build
-xml_processor/build.number
+web_app/xml_processor/build
+web_app/xml_processor/build.number
 venv
 */*.pyc
