@@ -4,12 +4,12 @@
 echo "👉 Installing python libraries."
 sudo apt-get -y update
 sudo apt-get -y install libffi-dev
-pip install -r ../requirements.txt
+pip install -r requirements.txt
 
 # Installing Java.
 echo "👉 Installing Java."
 wget -c --header "Cookie: oraclelicense=accept-securebackup-cookie" http://download.oracle.com/otn-pub/java/jdk/8u131-b11/d54c1d3a095b4ff2b6607d096fa80163/jdk-8u131-linux-x64.tar.gz -O $HOME/jdk-8u131-linux-x64.tar.gz
-tar -xvf jdk-8u131-linux-x64.tar.gz -C $HOME
+tar -xvf $HOME/jdk-8u131-linux-x64.tar.gz -C $HOME
 export JAVA_HOME="$HOME/jdk1.8.0_131"
 export PATH="$PATH:$JAVA_HOME/bin"
 echo 'export PATH=$PATH:$JAVA_HOME/bin' >> /users/$USER/.profile
@@ -21,7 +21,7 @@ sudo apt-get -y install ant
 
 # Building XML Processor.
 echo "👉 Building XML Processor."
-cd ../xml_processor && ant jar
+cd xml_processor && ant jar
 
 # Setting up Tomcat.
 echo "👉 Installing Apache Tomcat"
