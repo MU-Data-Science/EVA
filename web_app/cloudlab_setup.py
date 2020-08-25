@@ -63,14 +63,14 @@ def create_cluster(slice_name, nodes, site):
 
     # Extracting the nodes from the status.
     output = subprocess.check_output(shlex.split(
-        "java -cp ../xml_processor/build/XMLProcessor.jar edu.missouri.core.XPathProcessor '" + aggregate.listresources(
+        "java -cp xml_processor/build/XMLProcessor.jar edu.missouri.core.XPathProcessor '" + aggregate.listresources(
             context, slice_name).__dict__.get("_xml") + "' '//login/@hostname'")).rstrip()
     node_lst = [x.strip() for x in output[1:-1].split(",")]
     print "cloudlab_setup.py :: create_cluster :: node_lst:: ", node_lst
 
     # Extracting the ports from the status.
     output = subprocess.check_output(shlex.split(
-        "java -cp ../xml_processor/build/XMLProcessor.jar edu.missouri.core.XPathProcessor '" + aggregate.listresources(
+        "java -cp xml_processor/build/XMLProcessor.jar edu.missouri.core.XPathProcessor '" + aggregate.listresources(
             context, slice_name).__dict__.get("_xml") + "' '//login/@port'")).rstrip()
     port_lst = [x.strip() for x in output[1:-1].split(",")]
     print "cloudlab_setup.py :: create_cluster :: port_lst:: ", port_lst
