@@ -100,10 +100,15 @@ body {
 	text-decoration: underline;
 }
 </style>
+<script>
+    function success() {
+        alert("Your request is being processed. You can close the tab after clicking on OK. You would receive an email notification once completed.");
+    }
+</script>
 </head>
 <body>
 <div class="signup-form">
-    <form action="/examples/actions/confirmation.php" method="post">
+    <form action="/execute" onsubmit="success()">
 		<h2>EVA</h2>
 		<p class="hint-text">Exhaustive Variant Analysis on Genome Sequences</p>
         <div class="form-group">
