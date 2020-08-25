@@ -1,6 +1,6 @@
 # EVA Web Application
 ## Setup
-1. Ensure that python2 & pip are setup. We recommend using [anaconda](https://www.anaconda.com). Steps to creating a conda evironment could be found [here](https://gist.github.com/Arun-George-Zachariah/3cfd2e249b5eda609d5c0f50d0c4db43).
+1. Ensure that python 2.7 & pip are setup. We recommend using [anaconda](https://www.anaconda.com). Steps to creating a conda evironment could be found [here](https://gist.github.com/Arun-George-Zachariah/3cfd2e249b5eda609d5c0f50d0c4db43).
 2. Setup all necessary tools with `scripts/setup.sh`
     ```
     ./scripts/setup.sh
