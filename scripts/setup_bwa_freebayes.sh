@@ -69,4 +69,7 @@ mv SPAdes-${SPADES_VERSION}-Linux spades
 rm -rf SPAdes-${SPADES_VERSION}-Linux.tar.gz
 echo "👉 Done with SPAdes download 😎"
 
+# Install Abyss
+brew install abyss
+
 echo "👉 Successful installation of the required tools. 😎"

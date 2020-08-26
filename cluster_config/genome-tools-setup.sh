@@ -50,4 +50,7 @@ tar -xzf $SHARE_DIR/EVA_Tools/SPAdes-${SPADES_VERSION}-Linux.tar.gz -C $DATA_DIR
 ln -sf $DATA_DIR/SPAdes-${SPADES_VERSION}-Linux $HOME/spades
 echo "👉 Done with SPAdes setup 😎"
 
+# Install Abyss
+brew install abyss
+
 echo "👉 Successful installation of the required tools. 😎"
