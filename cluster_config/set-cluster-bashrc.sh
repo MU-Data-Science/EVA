@@ -22,7 +22,8 @@ echo "
   # Genome Tool Variables
   export BWA_HOME='$data_dir'/bwa
   export FREEBAYES_HOME='$data_dir'/freebayes
-  TMP_DIR='$data_dir'/tmp
+  export TMP_DIR='$data_dir'/tmp
+  export TMPDIR='$data_dir'/tmp
 
   # For YARN
   export HADOOP_CONF_DIR=\$HADOOP_HOME/etc/hadoop
