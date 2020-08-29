@@ -52,5 +52,7 @@ echo "👉 Done with SPAdes setup 😎"
 
 # Install Abyss
 brew install abyss
+ln -sf /home/linuxbrew/.linuxbrew/bin/abyss-pe $HOME/abyss-pe
+mkdir -p $DATA_DIR/tmp
 
 echo "👉 Successful installation of the required tools. 😎"
