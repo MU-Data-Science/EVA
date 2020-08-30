@@ -55,7 +55,7 @@ brew install abyss
 ABYSS_PE_PATH=/home/linuxbrew/.linuxbrew/bin
 ln -sf ${ABYSS_PE_PATH}/abyss-pe $HOME/abyss-pe
 sudo chmod +w ${ABYSS_PE_PATH}/abyss-pe
-sudo echo 'PATH:=$(HOMEBREW_PREFIX)/bin:$(PATH)' >> $HOME/abyss-pe
+sudo echo 'PATH:=$(HOMEBREW_PREFIX)/bin:$(PATH)' >> ${ABYSS_PE_PATH}/abyss-pe
 mkdir -p $DATA_DIR/tmp
 
 echo "👉 Successful installation of the required tools. 😎"
