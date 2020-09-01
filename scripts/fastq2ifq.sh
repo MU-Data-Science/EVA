@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-if [[ $# -ne 2 ]]; then
+if [[ $# -ne 1 ]]; then
     echo "Usage: fastq2ifq.sh <Sample ID>"
     echo "    "
     echo " The FASTQ files for Sample ID are assumed to be in HDFS."
