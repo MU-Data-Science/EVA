@@ -18,5 +18,5 @@ SITE_APT = "apt"
 # User Configurable Constants
 MAX_RETRIES = 10
 USER_NAME = "arung"
-PRIVATE_KEY_PATH = "/Users/arung/.ssh/id_rsa"
+PRIVATE_KEY_PATH = "/users/arung/.ssh/id_rsa"
 PASS_PHRASE = "XXX"

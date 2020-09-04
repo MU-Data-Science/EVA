@@ -13,7 +13,7 @@
     ```
     eg:
     ```
-    build-context --type cloudlab --cert conf/cloudlab.pem --pubkey ~/.ssh/id_rsa.pub --project EVA-public
+    build-context --type cloudlab --cert /mydata/cloudlab.pem --pubkey ~/.ssh/id_rsa.pub --project EVA-public
    ```
 6. Update user configurable constants, i.e `USER_NAME`, `PASS_PHRASE`, `PRIVATE_KEY_PATH` in `constants.py` with the CloudLab username and password and path to private key respectively. 
 

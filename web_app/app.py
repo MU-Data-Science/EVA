@@ -47,9 +47,13 @@ def execute():
 
     return "Successfully completed processing. Watch out for the email containing the links to download the .vcf."
 
-@app.route("/")
+@app.route("/standalone")
 def home():
-  return render_template("index.html")
+  return render_template("standalone.html")
+
+@app.route("/cluster")
+def home():
+  return render_template("cluster.html")
 
 if __name__ == '__main__':
     app.run(host='0.0.0.0')
