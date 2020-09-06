@@ -15,6 +15,10 @@ SITE_WISCONSIN = "wisc"
 SITE_CLEMSON = "clemson"
 SITE_APT = "apt"
 
+# Cluster Constants
+CLUSTER_SIZE = 4
+MASTER_NODE = "vm0"
+
 # User Configurable Constants
 MAX_RETRIES = 10
 USER_NAME = "arung"
