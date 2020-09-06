@@ -8,8 +8,8 @@ from flask import Flask, request, render_template
 
 app = Flask(__name__)
 
-@app.route('/execute')
-def execute_cluster():
+@app.route('/execute_standalone')
+def execute_standalone():
     # Reading data from the request.
     nodes = int(request.args.get("nodes"))
     site = request.args.get("site")
@@ -20,7 +20,7 @@ def execute_cluster():
 
     # Slice name
     slice_name = ''.join(random.choice(string.ascii_uppercase + string.digits) for _ in range(10))
-    print("app.py :: execute_cluster :: Slice name created :: ", slice_name)
+    print("app.py :: execute_standalone :: Slice name created :: ", slice_name)
 
     # Setting up the cluster.
     node_lst = cloudlab_setup.create_cluster(slice_name, nodes, site)
@@ -55,8 +55,8 @@ def execute_va(node, seq_1_url, seq_2_url, ref, cluster_size, id):
     print "app.py :: execute_va :: Completed downloading the file."
 
 
-@app.route('/execute')
-def execute():
+@app.route('/execute_cluster')
+def execute_cluster():
     # Reading data from the request.
     email = request.args.get("email")
     seq_1_url = request.args.get("seq_1_url")
@@ -65,7 +65,7 @@ def execute():
 
     # Creating an id for the experiment.
     id = ''.join(random.choice(string.ascii_uppercase + string.digits) for _ in range(10))
-    print("app.py :: execute :: Experiment Id :: ", id)
+    print("app.py :: execute_cluster :: Experiment Id :: ", id)
 
     # Performing variant analysis.
     execute_va(constants.MASTER_NODE, seq_1_url, seq_2_url, ref, constants.CLUSTER_SIZE, id)
