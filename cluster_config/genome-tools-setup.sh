@@ -60,12 +60,12 @@ mkdir -p $DATA_DIR/tmp
 echo "👉 Done with Abyss setup 😎"
 
 # Setup Adam.
-git clone https://github.com/Arun-George-Zachariah/adam.git $data_dir/adam
+git clone https://github.com/Arun-George-Zachariah/adam.git $DATA_DIR/adam
 echo "export ADAM_HOME=$data_dir/adam" >> ~/.bashrc
 echo "👉 Done with Adam setup 😎"
 
 # Setup Cannoli.
-git clone https://github.com/Arun-George-Zachariah/cannoli.git $data_dir/cannoli
+git clone https://github.com/Arun-George-Zachariah/cannoli.git $DATA_DIR/cannoli
 echo "export CANNOLI_HOME=$data_dir/cannoli" >> ~/.bashrc
 echo "👉 Done with Cannoli setup 😎"
 
