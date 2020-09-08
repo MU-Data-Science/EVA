@@ -69,5 +69,6 @@ done
 echo ">> CLEANING UP."
 rm -rf $shareDir/hadoop_$install_id
 rm -rf $shareDir/spark_$install_id
+rm -rf $machines
 
 echo ">> WORK IS DONE."
