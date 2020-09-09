@@ -14,7 +14,7 @@ install_id=$(head -1 "$cluster_machines-INSTALL_ID.txt")
 echo -e ">> EXECUTING: $spark_script\n"
 master_node=$(head -1 "$cluster_machines")
 scp -i "$private_key" "$spark_script" "$username@$master_node:~" &> /dev/null
-ssh -i "$private_key" "$username@$master_node" "~/$spark_script $install_id $data_dir $share_dir $spark_ver" &> /dev/null
+ssh -i "$private_key" "$username@$master_node" "~/$spark_script $install_id $data_dir $share_dir $spark_ver $hadoop_ver" &> /dev/null
 
 # 2 Configure nodes
 echo -e ">> CONFIGURING NODES 🤖\n"
