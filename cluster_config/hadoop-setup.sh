@@ -2,7 +2,7 @@
 INSTALL_ID="$1"
 data_dir="$2"
 share_dir="$3"
-hadoop_ver="$4"
+hadoop_ver="$4".0
 
 master_node="vm0"
 node_prefix="vm"
@@ -21,8 +21,13 @@ cluster_prefix="$share_dir/hadoop_$INSTALL_ID"
 rm -Rf "$cluster_prefix"
 mkdir -p "$cluster_prefix"
 
+# Verify if the hadoop distribution is available in the share directory.
+if [ ! -f $share_dir/EVA_Tools/hadoop-$hadoop_ver.tar.gz ]; then
+    wget https://archive.apache.org/dist/hadoop/core/hadoop-$hadoop_ver/hadoop-$hadoop_ver.tar.gz -P $share_dir/EVA_Tools/
+fi
+
 # Extract hadoop in the prefix dir
-tar xzf $share_dir/EVA_Tools/hadoop-$hadoop_ver*gz -C "$cluster_prefix" --strip-components 1
+tar zxf $share_dir/EVA_Tools/hadoop-$hadoop_ver.tar.gz -C "$cluster_prefix" --strip-components 1
 hadoop_prefix="$cluster_prefix"
 
 ######################

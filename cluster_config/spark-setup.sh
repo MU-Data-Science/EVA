@@ -4,6 +4,7 @@ MSTR='vm0'
 data_dir="$2"
 share_dir="$3"
 spark_ver="$4"
+hadoop_ver="$5"
 
 NUMREP=1
 
@@ -23,7 +24,11 @@ MSTR="vm0"
 
 rm -Rf "$spark_prefix"
 mkdir -p "$spark_prefix"
-tar xzf $share_dir/EVA_Tools/spark-$spark_ver*gz -C "$spark_prefix" --strip-components 1
+
+if [ ! -f $share_dir/EVA_Tools/spark-$spark_ver-bin-hadoop$hadoop_ver.tgz ]; then
+    wget https://archive.apache.org/dist/spark/spark-$spark_ver/spark-$spark_ver-bin-hadoop$hadoop_ver.tgz -P $share_dir/EVA_Tools/
+fi
+tar zxf $share_dir/EVA_Tools/spark-$spark_ver-bin-hadoop$hadoop_ver.tgz -C "$spark_prefix" --strip-components 1
 
 SPARK_DEFAULTS_FILE="$spark_prefix/conf/spark-defaults.conf"
 echo "

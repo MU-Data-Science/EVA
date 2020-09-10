@@ -8,14 +8,6 @@ data_dir="$4"
 share_dir="$5"
 genome_tools_setup_script="genome-tools-setup.sh"
 
-# Setup Adam.
-git clone https://github.com/Arun-George-Zachariah/adam.git $data_dir/adam
-echo "export ADAM_HOME=$data_dir/adam" >> ~/.bashrc
-
-# Setup Cannoli.
-git clone https://github.com/Arun-George-Zachariah/cannoli.git $data_dir/cannoli
-echo "export CANNOLI_HOME=$data_dir/cannoli" >> ~/.bashrc
-
 for machine in $(cat "$cluster_machines")
 do
   scp -i "$private_key" "$genome_tools_setup_script" "$username@$machine:~" &> /dev/null

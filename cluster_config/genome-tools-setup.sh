@@ -57,5 +57,16 @@ ln -sf ${ABYSS_PE_PATH}/abyss-pe $HOME/abyss-pe
 sudo chmod +w ${ABYSS_PE_PATH}/abyss-pe
 sudo echo 'PATH:=$(HOMEBREW_PREFIX)/bin:$(PATH)' >> ${ABYSS_PE_PATH}/abyss-pe
 mkdir -p $DATA_DIR/tmp
+echo "👉 Done with Abyss setup 😎"
+
+# Setup Adam.
+git clone https://github.com/Arun-George-Zachariah/adam.git $DATA_DIR/adam
+echo "export ADAM_HOME=$DATA_DIR/adam" >> ~/.bashrc
+echo "👉 Done with Adam setup 😎"
+
+# Setup Cannoli.
+git clone https://github.com/Arun-George-Zachariah/cannoli.git $DATA_DIR/cannoli
+echo "export CANNOLI_HOME=$DATA_DIR/cannoli" >> ~/.bashrc
+echo "👉 Done with Cannoli setup 😎"
 
 echo "👉 Successful installation of the required tools. 😎"

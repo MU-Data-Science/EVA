@@ -12,11 +12,11 @@ fi
 # configuration constants.
 machines="cluster-machines.txt"
 shareDir="/proj/eva-public-PG0"
-hadoopVer=3.3.0
+hadoopVer=3.2
 sparkVer=3.0.0
 
 if [ $2 = gatk ]; then
-  hadoopVer=2.10
+  hadoopVer=2.7
   sparkVer=2.4.6
 fi
 
@@ -29,7 +29,7 @@ scripts=(\
   "set-cluster-iptables" \
   "set-cluster-hadoop" \
   "set-cluster-spark" \
-  "set-cluster-adam" \
+  "set-cluster-genome-tools" \
   "set-cluster-bashrc")
 
 # Write the node list to cluster-machines.txt.
@@ -69,5 +69,6 @@ done
 echo ">> CLEANING UP."
 rm -rf $shareDir/hadoop_$install_id
 rm -rf $shareDir/spark_$install_id
+rm -rf $machines
 
 echo ">> WORK IS DONE."
