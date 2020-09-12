@@ -29,8 +29,9 @@ cd $HOME && wget https://archive.apache.org/dist/tomcat/tomcat-9/v9.0.20/bin/apa
 unzip apache-tomcat-9.0.20.zip
 mv apache-tomcat-9.0.20 apache-tomcat
 mkdir $HOME/apache-tomcat/webapps/download
+cp $HOME/EVA/web_app/conf/server.xml apache-tomcat/conf
 chmod +x apache-tomcat/bin/*
-bash apache-tomcat/bin/startup.sh
+./apache-tomcat/bin/startup.sh
 
 # Email Setup.
 echo "👉 Setting up email configurations."
