@@ -71,7 +71,7 @@ def execute_cluster():
     execute_va(constants.MASTER_NODE, seq_1_url, seq_2_url, ref, constants.CLUSTER_SIZE, id)
 
     # Sending out the email with the download urls.
-    command = 'mail -s "Variant Analysis Complete!" %s <<< "Hello,\n\nYour Variant Analysis job has been successfully completed. It can be downloaded from http://$(hostname -i):8080/download/%s \n\nThanks,\nEVA-Team"' % (email, id + "-result-fbayes-output.vcf")
+    command = 'mail -s "Variant Analysis Complete!" %s <<< "Hello,\n\nYour Variant Analysis job has been successfully completed. It can be downloaded from http://$(hostname -i):8000/download/%s \n\nThanks,\nEVA-Team"' % (email, id + "-result-fbayes-output.vcf")
     out, err = subprocess.Popen('/bin/bash', stdin=subprocess.PIPE, stdout=subprocess.PIPE).communicate(command.encode('utf-8'))
     print(out.decode('utf-8'))
 
