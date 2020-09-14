@@ -32,7 +32,9 @@ for ((i=0;i<$nodes;i++)); do
 
   # Installing colplot
   colplot_cmd="\
-  cd $INSTALL_DIR && git clone https://github.com/robert-schmidtke/colplot.git &&\
+  sudo apt install -y apache2 && \
+  sudo apt install -y gnuplot && \
+  cd $INSTALL_DIR && git clone https://github.com/Arun-George-Zachariah/colplot.git && \
   cd colplot && sudo ./INSTALL"
   ssh "vm"$i "$colplot_cmd"
 done
