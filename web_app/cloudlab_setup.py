@@ -27,7 +27,7 @@ def create_slice(slicename, context):
 def verify_setup():
     return
 
-def create_cluster(slice_name, nodes, site):
+def create_cluster(slice_name, nodes=constants.DEFAULT_CLUSTER_SIZE, site=constants.DEFAULT_SITE):
     # Creating the context.
     context = geniutil.loadContext(key_passphrase=constants.PASS_PHRASE)
 

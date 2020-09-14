@@ -15,12 +15,14 @@ SITE_WISCONSIN = "wisc"
 SITE_CLEMSON = "clemson"
 SITE_APT = "apt"
 
-# Cluster Constants
-CLUSTER_SIZE = 4
+# Cluster Default values
+DEFAULT_SITE = "utah"
+DEFAULT_CLUSTER_SIZE = "16"
 MASTER_NODE = "vm0"
 
 # User Configurable Constants
 MAX_RETRIES = 10
+UPTIME = 10
 USER_NAME = "arung"
 PRIVATE_KEY_PATH = "/users/arung/.ssh/id_rsa"
 PASS_PHRASE = "XXX"
