@@ -1,9 +1,17 @@
 # Exhaustive Variant Analysis (EVA) on Human Genome Sequences
 
-The goal of this [NSF RAPID project](https://nsf.gov/awardsearch/showAward?AWD_ID=2034247) is to democratize genome sequence analysis so
-that researchers can better understand how COVID-19 affects individuals based on their genetic makeup. Using [CloudLab](https://cloudlab.us), researchers can perform
-variant analysis on genomes ***at no charge***. A recent genomic-wide association study linked genes and blood type of individuals
-to risk of severe COVID-19 [(NEJM '2020)](https://www.nejm.org/doi/full/10.1056/NEJMoa2020283).
+The goal of this
+[NSF RAPID project](https://nsf.gov/awardsearch/showAward?AWD_ID=2034247)
+is to democratize genome sequence analysis so that researchers can
+better understand how COVID-19 affects individuals based on their
+genetic makeup. Using [CloudLab](https://cloudlab.us), researchers can
+perform variant analysis on genomes ***at no charge***. A recent
+genomic-wide association study linked genes and blood type of
+individuals to risk of severe COVID-19
+[(NEJM '2020)](https://www.nejm.org/doi/full/10.1056/NEJMoa2020283).
+Another study from
+[23andMe](https://www.statnews.com/2020/09/14/23andme-study-covid-19-genetic-link/)
+hints at links between a person's genes and COVID-19.
 
 [[CloudLab account]](#signup-for-a-cloudlab-account)
 
