@@ -45,8 +45,8 @@ for dir in os.listdir(GENOME_DIR):
 
                     # Removing the file from HDFS.
                     print("collect_stats.py :: Deleting the sequence files from HDFS for :: ", seq_id)
-                    del_1 = "hdfs dfs rm /%s" % (seq_id + "_1.filt.fastq.gz")
-                    del_2 = "hdfs dfs rm /%s" % (seq_id + "_2.filt.fastq.gz")
+                    del_1 = "hdfs dfs -rm /%s" % (seq_id + "_1.filt.fastq.gz")
+                    del_2 = "hdfs dfs -rm /%s" % (seq_id + "_2.filt.fastq.gz")
 
                     process = subprocess.Popen('/bin/bash', stdin=subprocess.PIPE, stdout=subprocess.PIPE)
                     out, err = process.communicate(del_1.encode('utf-8'))
