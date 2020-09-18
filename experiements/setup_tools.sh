@@ -39,11 +39,15 @@ for ((i=0;i<$nodes;i++)); do
   ssh "vm"$i "$colplot_cmd"
 done
 
-echo "👉 Starting darkstat and collectl on the nodes."
+echo "👉 Starting darkstat, collectl and tcpdump on the nodes."
 for ((i=0;i<$nodes;i++)); do
   # Starting darkstat
   ssh "vm"$i "sudo $INSTALL_DIR/darkstat-3.0.719/darkstat -i $ETH_ID"
 
   # Starting collectl.
   ssh "vm"$i "sudo collectl -file -P -F0 -oz -f /var/log/collectl &>/dev/null & "
+
+  # Starting tcpdump collection.
+  ssh "vm"$i "sudo tcpdump &>> $INSTALL_DIR/TCP_Dump_vm$i &"
+
 done
