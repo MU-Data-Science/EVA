@@ -30,13 +30,16 @@ def execute_va(node, seq_1_url, seq_2_url, ref, cluster_size, exp_id):
 def get_uptime():
     command = "uptime"
     out, err = subprocess.Popen('/bin/bash', stdin=subprocess.PIPE, stdout=subprocess.PIPE).communicate(command.encode('utf-8'))
+    print("get_uptime :: ", out.decode('utf-8').strip().split(" ")[-1])
     return out.decode('utf-8').strip().split(" ")[-1]
 
 
 @app.route('/execute_standalone')
 def execute_standalone():
     # Reading data from the request.
-    nodes = int(request.args.get("nodes"))
+    nodes = constants.DEFAULT_CLUSTER_SIZE
+    if request.args.get("nodes") is not None:
+        nodes = int(request.args.get("nodes"))
     site = request.args.get("site")
     email = request.args.get("email")
     seq_1_url = request.args.get("seq_1_url")
@@ -77,7 +80,7 @@ def execute_cluster():
     print("app.py :: execute_cluster :: Experiment Id :: ", exp_id)
 
     # Obtaining the cluster uptime.
-    uptime = get_uptime()
+    uptime = float(get_uptime())
     if uptime > constants.UPTIME:
         # Perform variant analysis by creating a separate cluster.
         execute_standalone()
