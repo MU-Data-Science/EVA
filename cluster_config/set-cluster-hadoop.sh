@@ -28,6 +28,8 @@ mv ~/masters $data_dir/hadoop/etc/hadoop/
 rm $data_dir/hadoop/etc/hadoop/hdfs-site.xml
 rm $data_dir/hadoop/etc/hadoop/hdfs-site.datanode
 mv $data_dir/hadoop/etc/hadoop/hdfs-site.masternode $data_dir/hadoop/etc/hadoop/hdfs-site.xml
+
+sed  -i -e 's/<value>0.1<\/value>/<value>0.8<\/value>/' $data_dir/hadoop/etc/hadoop/capacity-scheduler.xml
 "
 ssh -o "StrictHostKeyChecking no" -i "$private_key" "$username@$master_node" "$ssh_command" &> /dev/null
 
@@ -41,6 +43,7 @@ sudo chown -R $username $data_dir/hadoop
 rm $data_dir/hadoop/etc/hadoop/hdfs-site.xml
 rm $data_dir/hadoop/etc/hadoop/hdfs-site.masternode
 mv $data_dir/hadoop/etc/hadoop/hdfs-site.datanode $data_dir/hadoop/etc/hadoop/hdfs-site.xml
+sed  -i -e 's/<value>0.1<\/value>/<value>0.8<\/value>/' $data_dir/hadoop/etc/hadoop/capacity-scheduler.xml
 "
 echo ">> READY TO DISTRIBUTE COMMAND: "
 echo -e "$ssh_command \n"
