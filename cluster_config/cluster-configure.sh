@@ -66,6 +66,9 @@ do
   count=`expr $count + 1`
 done
 
+# Printing Hadoop report
+$data_dir/hadoop/bin/hadoop dfsadmin -report | grep 'Name: ' > hadoop-status.log
+
 echo ">> CLEANING UP."
 rm -rf $shareDir/hadoop_$install_id
 rm -rf $shareDir/spark_$install_id
