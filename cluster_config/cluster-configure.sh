@@ -67,7 +67,9 @@ do
 done
 
 # Printing Hadoop report
-$data_dir/hadoop/bin/hadoop dfsadmin -report | grep 'Name: ' > hadoop-status.log
+HADOOP_STATUS_LOG="hadoop-data-nodes-alive.log"
+$data_dir/hadoop/bin/hdfs dfsadmin -report | grep 'Name: ' > ${HADOOP_STATUS_LOG}
+echo ">> Check ${HADOOP_STATUS_LOG} for live data nodes"
 
 echo ">> CLEANING UP."
 rm -rf $shareDir/hadoop_$install_id
