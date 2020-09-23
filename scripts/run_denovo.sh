@@ -16,11 +16,12 @@ if [[ $# -lt 3 ]]; then
     echo ""
     echo "Required arguments:"
     echo "<file1> - file containing sample IDs (e.g., SRR077487), one per line"
-    echo "<file2> - file containing URLs of FASTQ files, one per line"
+    echo "<file2> or NONE - file containing URLs of FASTQ files to download (one per line)"
+    echo "                  NONE means don't download any FASTQ files"
     echo "<num_nodes> - number of nodes in the cluster"
     echo ""
     echo "Optional arguments: "
-    echo "[kmer_len] - k-mer length; default is 51"
+    echo "[kmer_len] - k-mer length [default: 51]"
     exit
 elif [[ $# -eq 3 ]]; then
     KMER_LEN=${DEFAULT_KMER_LEN}
