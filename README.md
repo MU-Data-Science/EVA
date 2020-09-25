@@ -175,12 +175,63 @@ We are currently support using [Apache Spark](https://spark.apache.org),
 
 We tested the performance of different approaches for variant analysis on Clemson `c6420` nodes. We report the size of the paired-end sequences and time taken in the below table.
 
-| Approach | No. of nodes| SRR060292 (size, time) | SRR060294 (size, time) | SRR060295 (size, time) |
-|----------|-------------|-----------|-----------|----------|
-|run_variant_analysis_adam.sh | 7 | (4.8 GB; 4.8 GB), 21.61 minutes| (5.1 GB; 5.1 GB), 20.48 minutes| (4.7 GB; 4.7 GB), 20.13 minutes|
-|run_variant_analysis_gatk_spark.sh | 7 | (4.8 GB; 4.8 GB) | (5.1 GB; 5.1 GB) | (4.7 GB; 4.7 GB) |
-|run_variant_analysis_fbayes.sh | 1 | (4.8 GB; 4.8 GB), 1.32 hours | (5.1 GB; 5.1 GB), 1.25 hours | (4.7 GB; 4.7 GB), 1.19 hours |
-|run_variant_analysis_gatk.sh | 1 | (4.8 GB; 4.8 GB), 3.55 hours | (5.1 GB; 5.1 GB), 3.67 hours | (4.7 GB; 4.7 GB), 3.51 hours |
+<table>
+    <tr>
+      <td rowspan="2">Approach</td>
+      <td rowspan="2">No. of nodes</td>
+      <td colspan="2">SRR060292</td>
+      <td colspan="2">SRR060294</td>
+      <td colspan="2">SRR060292</td>
+    </tr>
+    <tr>
+      <td>Size (GB)</td>
+      <td>Time</td>
+      <td>Size (GB)</td>
+      <td>Time</td>
+      <td>Size (GB)</td>
+      <td>Time</td>
+    </tr>
+    <tr>
+      <td>run_variant_analysis_adam.sh</td>
+      <td>7</td>
+      <td>9.6</td>
+      <td>21.61 minutes</td>
+      <td>10.2</td>
+      <td>20.48 minutes</td>
+      <td>9.4</td>
+      <td>20.13 minutes</td>
+    </tr>
+    <tr>
+      <td>run_variant_analysis_gatk_spark.sh</td>
+      <td>7</td>
+      <td>9.6</td>
+      <td></td>
+      <td>10.2</td>
+      <td></td>
+      <td>9.4</td>
+      <td></td>
+    </tr>
+    <tr>
+      <td>run_variant_analysis_fbayes.sh</td>
+      <td>7</td>
+      <td>9.6</td>
+      <td>1.32 hours</td>
+      <td>10.2</td>
+      <td>1.25 hours</td>
+      <td>9.4</td>
+      <td>1.19 hours</td>
+    </tr>
+    <tr>
+      <td>run_variant_analysis_gatk.sh</td>
+      <td>7</td>
+      <td>9.6</td>
+      <td>3.55 hours</td>
+      <td>10.2</td>
+      <td>3.67 hours</td>
+      <td>9.4</td>
+      <td>3.51 hours</td>
+    </tr>
+</table>
 
 ## Report Issues
 
