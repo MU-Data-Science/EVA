@@ -177,10 +177,10 @@ We tested the performance of different approaches for variant analysis on Clemso
 
 | Approach | No. of nodes| SRR060292 (size, time) | SRR060294 (size, time) | SRR060295 (size, time) |
 |----------|-------------|-----------|-----------|----------|
-|run_variant_analysis_adam.sh | 7 | | | |
-|run_variant_analysis_gatk_spark.sh | 7 | | | |
-|run_variant_analysis_fbayes.sh | 1 | | | |
-|run_variant_analysis_gatk.sh | 1 | | | |
+|run_variant_analysis_adam.sh | 7 | (4.8 GB; 4.8 GB), 21.61 minutes| (5.1 GB; 5.1 GB), 20.48 minutes| (4.7 GB; 4.7 GB), 20.13 minutes|
+|run_variant_analysis_gatk_spark.sh | 7 | (4.8 GB; 4.8 GB) | (5.1 GB; 5.1 GB) | (4.7 GB; 4.7 GB) |
+|run_variant_analysis_fbayes.sh | 1 | (4.8 GB; 4.8 GB), 1.32 hours | (5.1 GB; 5.1 GB), 1.25 hours | (4.7 GB; 4.7 GB), 1.19 hours |
+|run_variant_analysis_gatk.sh | 1 | (4.8 GB; 4.8 GB), 3.55 hours | (5.1 GB; 5.1 GB), 3.67 hours | (4.7 GB; 4.7 GB), 3.51 hours |
 
 ## Report Issues
 
