@@ -21,6 +21,8 @@ genomes.
 [[Variant analysis (single node)]](#running-variant-analysis-on-human-genomes-using-a-single-cloudlab-node)
 <br/>[[Variant analysis (cluster)]](#running-variant-analysis-on-a-cluster-of-cloudlab-nodes)
 
+[[Performance evaluation]](#performance-evaluation)
+
 [[Report issues]](#report-issues)
 
 [[Team]](#team)
@@ -168,6 +170,17 @@ We are currently support using [Apache Spark](https://spark.apache.org),
     ```
 
 6. Download the `.vcf` file in the local directory on `vm0`.
+
+## Performance Evaluation
+
+We tested the performance of different approaches for variant analysis on Clemson `c6420` nodes. We report the size of the paired-end sequences and time taken in the below table.
+
+| Approach | No. of nodes| SRR060292 (size, time) | SRR060294 (size, time) | SRR060295 (size, time) |
+|----------|-------------|-----------|-----------|----------|
+|run_variant_analysis_adam.sh | 7 | | | |
+|run_variant_analysis_gatk_spark.sh | 7 | | | |
+|run_variant_analysis_fbayes.sh | 1 | | | |
+|run_variant_analysis_gatk.sh | 1 | | | |
 
 ## Report Issues
 
