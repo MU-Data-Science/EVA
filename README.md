@@ -184,51 +184,42 @@ We tested the performance of different approaches for variant analysis on Clemso
       <td colspan="2">SRR060292</td>
     </tr>
     <tr>
-      <td><b>Size (GB)</b></td>
+      <td><b>FASTQ Size</b></td>
       <td><b>Time Taken</b></td>
-      <td><b>Size (GB)</b></td>
+      <td><b>FASTQ Size</b></td>
       <td><b>Time Taken</b></td>
-      <td><b>Size (GB)</b></td>
+      <td><b>FASTQ Size</b></td>
       <td><b>Time Taken</b></td>
     </tr>
     <tr>
       <td>run_variant_analysis_adam.sh</td>
       <td>7</td>
-      <td>9.6</td>
+      <td rowspan="4">9.6 GB</td>
       <td>21.61 min</td>
-      <td>10.2</td>
+      <td rowspan="4">10.2 GB</td>
       <td>20.48 min</td>
-      <td>9.4</td>
+      <td rowspan="4">9.4 GB</td>
       <td>20.13 min</td>
     </tr>
     <tr>
       <td>run_variant_analysis_gatk_spark.sh</td>
       <td>7</td>
-      <td>9.6</td>
       <td></td>
-      <td>10.2</td>
       <td></td>
-      <td>9.4</td>
       <td></td>
     </tr>
     <tr>
       <td>run_variant_analysis_fbayes.sh</td>
       <td>1</td>
-      <td>9.6</td>
       <td>1.32 hr</td>
-      <td>10.2</td>
       <td>1.25 hr</td>
-      <td>9.4</td>
       <td>1.19 hr</td>
     </tr>
     <tr>
       <td>run_variant_analysis_gatk.sh</td>
       <td>1</td>
-      <td>9.6</td>
       <td>3.55 hr</td>
-      <td>10.2</td>
       <td>3.67 hr</td>
-      <td>9.4</td>
       <td>3.51 hr</td>
     </tr>
 </table>
