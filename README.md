@@ -177,29 +177,29 @@ We tested the performance of different approaches for variant analysis on Clemso
 
 <table>
     <tr>
-      <td rowspan="2">Approach</td>
-      <td rowspan="2">No. of nodes</td>
+      <td rowspan="2"><b>Approach</b></td>
+      <td rowspan="2"><b>No. of nodes</b></td>
       <td colspan="2">SRR060292</td>
       <td colspan="2">SRR060294</td>
       <td colspan="2">SRR060292</td>
     </tr>
     <tr>
-      <td>Size (GB)</td>
-      <td>Time</td>
-      <td>Size (GB)</td>
-      <td>Time</td>
-      <td>Size (GB)</td>
-      <td>Time</td>
+      <td><b>Size (GB)</b></td>
+      <td><b>Time Taken</b></td>
+      <td><b>Size (GB)</b></td>
+      <td><b>Time Taken</b></td>
+      <td><b>Size (GB)</b></td>
+      <td><b>Time Taken</b></td>
     </tr>
     <tr>
       <td>run_variant_analysis_adam.sh</td>
       <td>7</td>
       <td>9.6</td>
-      <td>21.61 minutes</td>
+      <td>21.61 min</td>
       <td>10.2</td>
-      <td>20.48 minutes</td>
+      <td>20.48 min</td>
       <td>9.4</td>
-      <td>20.13 minutes</td>
+      <td>20.13 min</td>
     </tr>
     <tr>
       <td>run_variant_analysis_gatk_spark.sh</td>
@@ -213,23 +213,23 @@ We tested the performance of different approaches for variant analysis on Clemso
     </tr>
     <tr>
       <td>run_variant_analysis_fbayes.sh</td>
-      <td>7</td>
+      <td>1</td>
       <td>9.6</td>
-      <td>1.32 hours</td>
+      <td>1.32 hr</td>
       <td>10.2</td>
-      <td>1.25 hours</td>
+      <td>1.25 hr</td>
       <td>9.4</td>
-      <td>1.19 hours</td>
+      <td>1.19 hr</td>
     </tr>
     <tr>
       <td>run_variant_analysis_gatk.sh</td>
-      <td>7</td>
+      <td>1</td>
       <td>9.6</td>
-      <td>3.55 hours</td>
+      <td>3.55 hr</td>
       <td>10.2</td>
-      <td>3.67 hours</td>
+      <td>3.67 hr</td>
       <td>9.4</td>
-      <td>3.51 hours</td>
+      <td>3.51 hr</td>
     </tr>
 </table>
 
