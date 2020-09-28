@@ -173,7 +173,7 @@ We are currently support using [Apache Spark](https://spark.apache.org),
 
 ## Performance Evaluation
 
-We tested the performance of different approaches for variant analysis on Clemson `c6420` nodes. We report the size of the paired-end sequences and time taken in the below table.
+We tested the performance of different approaches for variant analysis on Clemson `c6420` nodes. The reference genome used was `hs38`. We report the size of the paired-end sequences and time taken in the below table.
 
 <table>
     <tr>
