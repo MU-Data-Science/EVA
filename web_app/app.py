@@ -19,7 +19,7 @@ def execute_va(node, seq_1_url, seq_2_url, ref, cluster_size, exp_id):
     print "app.py :: execute_va :: Completed performing variant analysis."
 
     # Copying the vcf file to a file server(give a unique identifier.
-    command = 'scp -o "StrictHostKeyChecking no" %s@%s:VA-${USER}-result-fbayes-output.vcf ${HOME}/apache-tomcat/webapps/download/%s-result-fbayes-output.vcf' % (
+    command = 'scp -o "StrictHostKeyChecking no" %s@%s:VA-${USER}-result-fbayes-output.vcf.zip ${HOME}/apache-tomcat/webapps/download/%s-result-fbayes-output.vcf.zip' % (
     constants.USER_NAME, node, exp_id)
     out, err = subprocess.Popen('/bin/bash', stdin=subprocess.PIPE, stdout=subprocess.PIPE).communicate(
         command.encode('utf-8'))
@@ -60,7 +60,7 @@ def execute_standalone():
     execute_va(node_lst[0], seq_1_url, seq_2_url, ref, len(node_lst), slice_name)
 
     # Sending out the email with the download urls.
-    command = 'mail -s "Variant Analysis Complete!" %s <<< "Hello,\n\nYour Variant Analysis job has been successfully completed. It can be downloaded from http://$(hostname -i):8080/download/%s \n\nThanks,\nEVA-Team"' % (email, slice_name + "-result-fbayes-output.vcf")
+    command = 'mail -s "Variant Analysis Complete!" %s <<< "Hello,\n\nYour Variant Analysis job has been successfully completed. It can be downloaded from http://$(hostname -i):8080/download/%s \n\nThanks,\nEVA-Team"' % (email, slice_name + "-result-fbayes-output.vcf.zip")
     out, err = subprocess.Popen('/bin/bash', stdin=subprocess.PIPE, stdout=subprocess.PIPE).communicate(command.encode('utf-8'))
     print(out.decode('utf-8'))
 
