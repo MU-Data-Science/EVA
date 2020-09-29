@@ -13,11 +13,13 @@ fi
 machines="cluster-machines.txt"
 shareDir="/proj/eva-public-PG0"
 hadoopVer=3.2
+hadoopSubVer=0
 sparkVer=3.0.0
 
 if [ $2 = gatk ]; then
   hadoopVer=2.7
-  sparkVer=2.4.6
+  hadoopSubVer=6
+  sparkVer=2.4.7
 fi
 
 experiment=$(basename $machines)
@@ -59,7 +61,7 @@ count=1
 for script in "${scripts[@]}"
 do
   log_file="LOG-"$script"-"$experiment".log"
-  cmd="./$script.sh $machines $user_name ~/.ssh/id_rsa $data_dir $shareDir $hadoopVer $sparkVer &> $log_file"
+  cmd="./$script.sh $machines $user_name ~/.ssh/id_rsa $data_dir $shareDir $hadoopVer $sparkVer $hadoopSubVer &> $log_file"
   
   eval "$cmd"
   echo ">> FINISHED ($count/${#scripts[@]}) $script.sh LOG $log_file"

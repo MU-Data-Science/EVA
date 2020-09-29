@@ -2,7 +2,7 @@
 INSTALL_ID="$1"
 data_dir="$2"
 share_dir="$3"
-hadoop_ver="$4".0
+hadoop_ver="$4"."$5"
 
 master_node="vm0"
 node_prefix="vm"
