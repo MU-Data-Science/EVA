@@ -226,6 +226,9 @@ We tested the performance of different approaches for variant analysis on Clemso
 
 We tested the performance of de novo assemly using ABySS and our Spark implementation. (See `scripts/run_denovo.sh`.) The k-mer value was 51.
 It took nearly 40 hours on a 4-node CloudLab cluster (`c8220`) for 21 samples. HDFS used 1.34 TB of storage (`.ifq` files were compressed).
+
+List of sample IDs used from the 1000 Genomes Project:
+
 <table>
 ERR013140,
 ERR015479,
