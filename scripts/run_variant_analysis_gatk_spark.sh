@@ -12,19 +12,14 @@ EXECUTOR_MEMORY=50g
 DRIVER_MEMORY=50g
 INPUT_FILE=mysequence
 DATA_DIR="/mydata"
-REFERENCE=${DATA_DIR}"/"${1}".fa"
-DICT=${DATA_DIR}"/"${1}".dict"
+REFERENCE="file://"${DATA_DIR}"/"${1}".fa"
+DICT="file://"${DATA_DIR}"/"${1}".dict"
 BWA=${DATA_DIR}"/bwa/bwa"
 GATK=${DATA_DIR}"/gatk-4.1.8.0/gatk"
 OUTPUT_PREFIX="VA-"${USER}"-result"
 
 let NUM_EXECUTORS=${4}
 let NUM_CORES=$(nproc)-4
-
-if [[ ! -f "${REFERENCE}" ]]; then
-    echo "😡 Missing reference genome. Run setup_reference_genome.sh."
-    exit
-fi
 
 echo "👉 Deleting files..."
 hdfs dfs -rm -r ${HDFS_PREFIX}/${INPUT_FILE}.*

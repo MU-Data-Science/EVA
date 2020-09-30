@@ -43,3 +43,6 @@ hdfs dfs -copyFromLocal ${DATA_DIR}/Input_2.filt.fastq.gz /
 
 echo "👉 Performing variant analysis using adam."
 ${HOME}/EVA/scripts/run_variant_analysis_adam.sh ${1} hdfs://vm0:9000/Input_1.filt.fastq.gz hdfs://vm0:9000/Input_2.filt.fastq.gz ${4}
+
+echo "👉 Compressing the output obtained."
+zip ${HOME}/${OUTPUT_PREFIX}-fbayes-output.vcf.zip ${HOME}/${OUTPUT_PREFIX}-fbayes-output.vcf
