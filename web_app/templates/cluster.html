@@ -111,20 +111,33 @@ body {
     <form action="/execute_cluster" onsubmit="success()">
 		<h2>EVA</h2>
 		<p class="hint-text">Exhaustive Variant Analysis on Genome Sequences</p>
+<!--        First Release: Defining geneome sequences.-->
         <div class="form-group">
-            <input type="url" class="form-control" name="seq_1_url" placeholder="URL for Sequence 1" required="required">
+            <select class="form-control" name="sequence">
+                <option hidden >Sequence Reads</option>
+                <option value="SRR060292">SRR060292</option>
+                <option value="SRR060293">SRR060293</option>
+                <option value="SRR060294">SRR060294</option>
+                <option value="SRR060295">SRR060295</option>
+                <option value="SRR060296">SRR060296</option>
+            </select>
         </div>
-        <div class="form-group">
-            <input type="url" class="form-control" name="seq_2_url" placeholder="URL for Sequence 2" required="required">
-        </div>
+<!--        Commenting for future release-->
+<!--        <div class="form-group">-->
+<!--            <input type="url" class="form-control" name="seq_1_url" placeholder="URL for Sequence 1" required="required">-->
+<!--        </div>-->
+<!--        <div class="form-group">-->
+<!--            <input type="url" class="form-control" name="seq_2_url" placeholder="URL for Sequence 2" required="required">-->
+<!--        </div>-->
         <div class="form-group">
             <select class="form-control" name="ref">
                 <option hidden >Reference Genome</option>
-                <option value="hs38">hs38</option>
-                <option value="hs38a">hs38a</option>
-                <option value="hs38DH">hs38DH</option>
-                <option value="hs37">hs37</option>
-                <option value="hs37d5">hs37d5</option>
+                <option value="hs38">hg38</option>
+<!--                Commenting for future release-->
+<!--                <option value="hs38a">hs38a</option>-->
+<!--                <option value="hs38DH">hs38DH</option>-->
+<!--                <option value="hs37">hs37</option>-->
+<!--                <option value="hs37d5">hs37d5</option>-->
             </select>
         </div>
         <div class="form-group">

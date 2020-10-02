@@ -75,6 +75,11 @@ def execute_cluster():
     seq_2_url = request.args.get("seq_2_url")
     ref = request.args.get("ref")
 
+    # For release 1:
+    seq = request.args.get("sequence")
+    seq_1_url = "ftp://ftp.1000genomes.ebi.ac.uk/vol1/ftp/phase3/data/HG00123/sequence_read/" + seq + "_1.filt.fastq.gz"
+    seq_2_url = "ftp://ftp.1000genomes.ebi.ac.uk/vol1/ftp/phase3/data/HG00123/sequence_read/" + seq + "_2.filt.fastq.gz"
+
     # Creating an id for the experiment.
     exp_id = ''.join(random.choice(string.ascii_uppercase + string.digits) for _ in range(10))
     print("app.py :: execute_cluster :: Experiment Id :: ", exp_id)
