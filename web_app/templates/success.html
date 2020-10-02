@@ -16,29 +16,21 @@ body {
 	background: #63738a;
 	font-family: 'Roboto', sans-serif;
 }
-.form-control {
-	height: 40px;
-	box-shadow: none;
-	color: #969fa4;
-}
-.form-control:focus {
-	border-color: #5cb85c;
-}
-.form-control, .btn {
-	border-radius: 3px;
-}
+
 .eva-form {
     position:absolute;
 	top: 50%;
   	left: 50%;
   	transform: translate(-50%, -50%);
 }
+
 .eva-form h2 {
 	color: #636363;
 	margin: 0 0 15px;
 	position: relative;
 	text-align: center;
 }
+
 .eva-form h2:before, .eva-form h2:after {
 	content: "";
 	height: 2px;
@@ -48,17 +40,21 @@ body {
 	top: 50%;
 	z-index: 2;
 }
+
 .eva-form h2:before {
 	left: 0;
 }
+
 .eva-form h2:after {
 	right: 0;
 }
+
 .eva-form .hint-text {
 	color: #999;
 	margin-bottom: 30px;
 	text-align: center;
 }
+
 .eva-form form {
 	color: #999;
 	border-radius: 3px;
@@ -67,18 +63,11 @@ body {
 	box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.3);
 	padding: 30px;
 }
+
 .eva-form .form-group {
 	margin-bottom: 20px;
 }
-.eva-form input[type="checkbox"] {
-	margin-top: 3px;
-}
-.eva-form .btn {
-	font-size: 16px;
-	font-weight: bold;
-	min-width: 140px;
-	outline: none !important;
-}
+
 .eva-form .row div:first-child {
 	padding-right: 10px;
 }
@@ -100,11 +89,6 @@ body {
 	text-decoration: underline;
 }
 </style>
-<script>
-    function success() {
-        alert("Your request is being processed. You can close the tab after clicking on OK. You would receive an email notification once completed.");
-    }
-</script>
 </head>
 <body>
 <div class="eva-form">
@@ -112,42 +96,8 @@ body {
 		<h2>EVA</h2>
 		<p class="hint-text">Exhaustive Variant Analysis on Genome Sequences</p>
         <div class="form-group">
-            <input type="url" class="form-control" name="seq_1_url" placeholder="URL for Sequence 1" required="required">
-        </div>
-        <div class="form-group">
-            <input type="url" class="form-control" name="seq_2_url" placeholder="URL for Sequence 2" required="required">
-        </div>
-        <div class="form-group">
-            <select class="form-control" name="ref">
-                <option hidden >Reference Genome</option>
-                <option value="hs38">hs38</option>
-                <option value="hs38a">hs38a</option>
-                <option value="hs38DH">hs38DH</option>
-                <option value="hs37">hs37</option>
-                <option value="hs37d5">hs37d5</option>
-            </select>
-        </div>
-        <div class="form-group">
-            <input type="number" class="form-control" name="nodes" placeholder="Number of CloudLab nodes" required="required">
-        </div>
-        <div class="form-group">
-            <select class="form-control" name="site">
-                <option hidden >CloudLab Site</option>
-                <option value="utah">Utah</option>
-                <option value="wisc">Wisconsin</option>
-                <option value="clemson">Clemson</option>
-                <option value="apt">APT</option>
-            </select>
-        </div>
-        <div class="form-group">
-        	<input type="email" class="form-control" name="email" placeholder="Email Id" required="required">
-        </div>
-        <div class="form-group">
-			<label class="form-check-label"><input type="checkbox" required="required"> I agree to use only de-identified data &amp; adhere to the <a href="https://cloudlab.us/aup.php">CloudLab Terms of Usage</a> </label>
+			<label class="form-check-label">Your request is being processed. You would receive an email notification once completed. Click <a href="/cluster">here</a> to submit a new job.</label>
 		</div>
-		<div class="form-group">
-            <button type="submit" class="btn btn-success btn-lg btn-block">Execute</button>
-        </div>
     </form>
 </div>
 </body>

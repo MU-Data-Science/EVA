@@ -64,7 +64,7 @@ def execute_standalone():
     out, err = subprocess.Popen('/bin/bash', stdin=subprocess.PIPE, stdout=subprocess.PIPE).communicate(command.encode('utf-8'))
     print(out.decode('utf-8'))
 
-    return "Successfully completed processing. Watch out for the email containing the links to download the .vcf."
+    return render_template("success.html")
 
 
 @app.route('/execute_cluster')
@@ -93,7 +93,7 @@ def execute_cluster():
         out, err = subprocess.Popen('/bin/bash', stdin=subprocess.PIPE, stdout=subprocess.PIPE).communicate(command.encode('utf-8'))
         print(out.decode('utf-8'))
 
-    return "Successfully completed processing. Watch out for the email containing the links to download the .vcf."
+    return render_template("success.html")
 
 
 @app.route("/standalone")
