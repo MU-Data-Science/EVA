@@ -105,6 +105,10 @@ def standalone():
 def cluster():
   return render_template("cluster.html")
 
+@app.route("/success")
+def success():
+  return render_template("success.html")
+
 
 if __name__ == '__main__':
     app.run(host='0.0.0.0')
