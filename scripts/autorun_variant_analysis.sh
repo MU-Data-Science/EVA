@@ -27,7 +27,7 @@ let NUM_EXECUTORS=${4}
 let NUM_CORES=$(nproc)-4
 
 # Input Validation
-if [[ $# -ne 4 ]]; then
+if [[ $# -lt 4 ]]; then
     echo "Usage: autorun_variant_analysis.sh <hs38|hs38a|hs38DH|hs37|hs37d5> <FASTQ_FILE_1_URL> <FASTQ_FILE_2_URL> <CLUSTER_SIZE> <EXPERIMENT_ID>"
     exit
 fi
@@ -77,7 +77,8 @@ ${CANNOLI_SUBMIT} --master ${SPARK_MASTER} --driver-memory ${DRIVER_MEMORY} --nu
     -- freebayes ${HDFS_PREFIX}/${exp_id}.bam.adam ${HDFS_PREFIX}/${exp_id}.vcf \
     -executable ${FREE_BAYES} -reference ${REFERENCE} -add_files -single
 
-hdfs dfs -copyToLocal ${HDFS_PREFIX}/${exp_id}.vcf ${HOME}/${exp_id}-fbayes-output.vcf
+echo "👉 Copying the vcf to ${DATA_DIR}."
+hdfs dfs -copyToLocal ${HDFS_PREFIX}/${exp_id}.vcf ${DATA_DIR}/${exp_id}-fbayes-output.vcf
 
 echo "👉 Compressing the output obtained."
-zip -j ${HOME}/${exp_id}-fbayes-output.vcf.zip ${HOME}/${exp_id}-fbayes-output.vcf
+zip -j ${DATA_DIR}/${exp_id}-fbayes-output.vcf.zip ${DATA_DIR}/${exp_id}-fbayes-output.vcf

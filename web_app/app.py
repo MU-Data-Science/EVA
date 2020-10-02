@@ -19,10 +19,8 @@ def execute_va(node, seq_1_url, seq_2_url, ref, cluster_size, exp_id):
     print "app.py :: execute_va :: Completed performing variant analysis."
 
     # Copying the vcf file to a file server(give a unique identifier.
-    command = 'scp -o "StrictHostKeyChecking no" %s@%s:VA-${USER}-result-fbayes-output.vcf.zip ${HOME}/apache-tomcat/webapps/download/%s-result-fbayes-output.vcf.zip' % (
-    constants.USER_NAME, node, exp_id)
-    out, err = subprocess.Popen('/bin/bash', stdin=subprocess.PIPE, stdout=subprocess.PIPE).communicate(
-        command.encode('utf-8'))
+    command = 'scp -o "StrictHostKeyChecking no" %s@%s:%s/%s-fbayes-output.vcf.zip ${HOME}/apache-tomcat/webapps/download/%s-fbayes-output.vcf.zip' % (constants.USER_NAME, node, constants.BLOCKSTORE_DIRECTORY, exp_id, exp_id)
+    out, err = subprocess.Popen('/bin/bash', stdin=subprocess.PIPE, stdout=subprocess.PIPE).communicate(command.encode('utf-8'))
     print(out.decode('utf-8'))
     print "app.py :: execute_va :: Completed downloading the file."
 
