@@ -12,8 +12,8 @@ app = Flask(__name__)
 def execute_va(node, seq_1_url, seq_2_url, ref, cluster_size, exp_id):
     # Performing variant analysis.
     print("app.py :: execute :: Performing variant  analysis.")
-    command = 'ssh -o "StrictHostKeyChecking no" %s@%s "\${HOME}/EVA/scripts/autorun_variant_analysis.sh %s %s %s %s"' % (
-    constants.USER_NAME, node, ref, seq_1_url, seq_2_url, cluster_size)
+    command = 'ssh -o "StrictHostKeyChecking no" %s@%s "\${HOME}/EVA/scripts/autorun_variant_analysis.sh %s %s %s %s %s"' % (
+    constants.USER_NAME, node, ref, seq_1_url, seq_2_url, cluster_size, exp_id)
     out, err = subprocess.Popen('/bin/bash', stdin=subprocess.PIPE, stdout=subprocess.PIPE).communicate(command.encode('utf-8'))
     print(out.decode('utf-8'))
     print "app.py :: execute_va :: Completed performing variant analysis."
