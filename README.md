@@ -184,8 +184,8 @@ The file `sampleIDs.txt` contains a sample ID per line. The file `sampleURLs.txt
 ```
 ${HOME}/EVA/scripts/run_denovo.sh ${HOME}/EVA/misc/sampleIDs.txt ${HOME}/EVA/misc/sampleURLs.txt 31
 ```
-4. Once this task completes, the `.fa` files will be written to HDFS. Check the `.log` file written to `/mydata`.
-5. To re-run with a different k-mer length but to avoid downloading the FASTQ files again, try this:
+3. Once this task completes, the `.fa` files will be written to HDFS. Check the `.log` file written to `/mydata`.
+4. To re-run with a different k-mer length but to avoid downloading the FASTQ files again, try this:
 ```
 ${HOME}/EVA/scripts/run_denovo.sh ${HOME}/EVA/misc/sampleIDs.txt NONE 41
 ```
@@ -243,34 +243,8 @@ We tested the performance of different approaches for variant analysis on Clemso
     </tr>
 </table>
 
-We tested the performance of de novo assemly using ABySS and our Spark implementation. (See `scripts/run_denovo.sh`.) The k-mer value was 51.
-It took nearly 40 hours on a 4-node CloudLab cluster (`c8220`) for 21 samples. HDFS used 1.34 TB of storage (`.ifq` files were compressed).
-
-List of sample IDs used from the 1000 Genomes Project:
-
-<table>
-ERR013140,
-ERR015479,
-ERR016352,
-ERR018503,
-ERR022118,
-ERR050085,
-ERR251089,
-SRR057357,
-SRR062634,
-SRR062635,
-SRR062641,
-SRR077487,
-SRR081241,
-SRR709958,
-SRR741385,
-SRR741411,
-SRR741412,
-SRR764681,
-SRR765989,
-SRR765993,
-SRR768275
-</table>
+We tested the performance of de novo assemly by executing `scripts/run_denovo.sh` on [sampleIDs.txt](misc/sampleIDs.txt). The k-mer value was 51.
+It took nearly 40 hours on a 4-node CloudLab cluster (`c8220`) for 21 samples. The download time is not included. HDFS used 1.34 TB of storage (`.ifq` files were compressed).
 
 ## Report Issues
 
