@@ -20,6 +20,7 @@ genomes.
 
 [[Variant analysis (single node)]](#running-variant-analysis-on-human-genomes-using-a-single-cloudlab-node)
 <br/>[[Variant analysis (cluster)]](#running-variant-analysis-on-a-cluster-of-cloudlab-nodes)
+<br/>[[De novo assembly (cluster)]](#running-de-novo-assembly-on-a-cluster-of-cloudlab-nodes)
 
 [[Performance evaluation]](#performance-evaluation)
 
@@ -171,6 +172,24 @@ We are currently support using [Apache Spark](https://spark.apache.org),
 
 6. Download the `.vcf` file in the local directory on `vm0`.
 
+
+## Running de novo assembly on a cluster of CloudLab nodes
+
+We used Apache Spark to parallelize execution of de novo assembly using [ABySS](https://github.com/bcgsc/abyss).
+Multiple assemblies will be run on each cluster node using a combination of HDFS and local file systems. Assuming the cluster has been set up to run variant analysis, do the following:
+
+1. Login to `vm0`. The two files [sampleIDs.txt](misc/sampleIDs.txt) and [sampleURLs.txt](misc/sampleURLs.txt) can be used. You can create your own files.
+The file `sampleIDs.txt` contains a sample ID per line. The file `sampleURLs.txt` contains URLs of the FASTQ paired-end sequences.
+2. Execute the following command for k-mer length of `31` (default: `51`):
+```
+${HOME}/EVA/scripts/run_denovo.sh ${HOME}/EVA/misc/sampleIDs.txt ${HOME}/EVA/misc/sampleURLs.txt 31
+```
+4. Once this task completes, the `.fa` files will be written to HDFS. Check the `.log` file written to `/mydata`.
+5. To re-run with a different k-mer length but to avoid downloading the FASTQ files again, try this:
+```
+${HOME}/EVA/scripts/run_denovo.sh ${HOME}/EVA/misc/sampleIDs.txt NONE 41
+```
+
 ## Performance Evaluation
 
 We tested the performance of different approaches for variant analysis on Clemson [c6420](https://www.clemson.cloudlab.us/portal/show-nodetype.php?type=c6420) nodes. The reference genome used was `hs38`. We report the size of the paired-end sequences and time taken in the below table.
@@ -280,4 +299,4 @@ This work is supported by the National Science Foundation under [Grant No. 20342
 11. https://biohpc.cornell.edu/lab/doc/Variant_workshop_Part1.pdf
 12. https://github.com/broadinstitute/picard
 13. https://github.com/broadinstitute/gatk
-
+14. https://github.com/bcgsc/abyss
