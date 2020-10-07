@@ -137,7 +137,7 @@ Alternatively, you can use `SSH` to login to the node: `$ ssh -i /path/to/CloudL
     $ screen -ls
 
 ## Running variant analysis on a cluster of CloudLab nodes
-We are currently support using [Apache Spark](https://spark.apache.org),
+We are using [Apache Spark](https://spark.apache.org),
 [Apache Hadoop](https://hadoop.apache.org), [GATK](https://gatk.broadinstitute.org), and 
 [Adam/Cannoli](http://bdgenomics.org/).
 
