@@ -5,8 +5,9 @@ The goal of this
 is to democratize genome sequence analysis so that researchers can
 better understand how COVID-19 affects individuals based on their
 genetic makeup. Using [CloudLab](https://cloudlab.us), researchers can
-perform variant analysis on genomes ***at no charge***. A recent
-genomic-wide association study linked genes and blood type of
+perform variant analysis on genomes ***at no charge***. There is growing
+evidence that our genomes may hold the answers to fight COVID-19.
+A recent genomic-wide association study linked genes and blood type of
 individuals to risk of severe COVID-19
 [(NEJM '2020)](https://www.nejm.org/doi/full/10.1056/NEJMoa2020283).
 Another study from
