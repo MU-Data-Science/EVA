@@ -23,6 +23,8 @@ genomes.
 <br/>[[Variant analysis (cluster)]](#running-variant-analysis-on-a-cluster-of-cloudlab-nodes)
 <br/>[[De novo assembly (cluster)]](#running-de-novo-assembly-on-a-cluster-of-cloudlab-nodes)
 
+[[Public Datasets]](#public-datasets)
+
 [[Performance evaluation]](#performance-evaluation)
 
 [[Report issues]](#report-issues)
@@ -190,6 +192,12 @@ ${HOME}/EVA/scripts/run_denovo.sh ${HOME}/EVA/misc/sampleIDs.txt ${HOME}/EVA/mis
 ```
 ${HOME}/EVA/scripts/run_denovo.sh ${HOME}/EVA/misc/sampleIDs.txt NONE 41
 ```
+
+## Public Datasets
+
+[The 1000 Genomes Project](https://www.internationalgenome.org/data) has a few thousand human whole genome sequences to test variant analysis tasks at scale.
+However, these sequences are not from COVID-19 studies. [The COVID-19 Data Portal](https://www.covid19dataportal.org/host-sequences?db=hostSequences)
+has 700+ human genome sequences from COVID-19 studies using the RNA-sequencing (RNA-Seq) technique.
 
 ## Performance Evaluation
 
