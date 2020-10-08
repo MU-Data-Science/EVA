@@ -4,6 +4,8 @@ GIT_URL = "https://github.com/MU-Data-Science/EVA.git"
 # Sequence URL's.
 # SEQ_URL = "ftp://ftp.1000genomes.ebi.ac.uk/vol1/ftp/phase3/data/HG00123/sequence_read/"  # 1000 Genomes Project.
 SEQ_URL = "ftp://ftp.sra.ebi.ac.uk/vol1/fastq/SRR121/014/"  # European Nucleotide Archive URL.
+FILE_EXTENSION_1 = ".filt.fastq.gz"
+FILE_EXTENSION_2 = ".filt.fastq.gz"
 
 # Cloudlab Constants
 EXPERIMENT_VALIDITY_MINS = 120
