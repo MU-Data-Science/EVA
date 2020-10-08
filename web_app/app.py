@@ -75,8 +75,8 @@ def execute_cluster():
 
     # For release 1:
     seq = request.args.get("sequence")
-    seq_1_url = "ftp://ftp.1000genomes.ebi.ac.uk/vol1/ftp/phase3/data/HG00123/sequence_read/" + seq + "_1.filt.fastq.gz"
-    seq_2_url = "ftp://ftp.1000genomes.ebi.ac.uk/vol1/ftp/phase3/data/HG00123/sequence_read/" + seq + "_2.filt.fastq.gz"
+    seq_1_url = constants.SEQ_URL + seq + "/" + seq + "_1" + constants.FILE_EXTENSION_1
+    seq_2_url = constants.SEQ_URL + seq + "/" + seq + "_2" + constants.FILE_EXTENSION_1
 
     # Creating an id for the experiment.
     exp_id = ''.join(random.choice(string.ascii_uppercase + string.digits) for _ in range(10))
