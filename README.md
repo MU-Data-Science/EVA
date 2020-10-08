@@ -76,7 +76,7 @@ Alternatively, you can use `SSH` to login to the node: `$ ssh -i /path/to/CloudL
 
        $ ${HOME}/EVA/scripts/setup_reference_genome.sh hs38
 
-    **e.** Now copy a whole genome sequence (paired-end) sample to the
+    **e.** Now copy a whole genome sequence (paired-end) sequence to the
     CloudLab node. It is the user's responsibility to ensure that the
     data are de-identified prior to storing them on the CloudLab node.
     Also see the
@@ -89,7 +89,7 @@ Alternatively, you can use `SSH` to login to the node: `$ ssh -i /path/to/CloudL
        $ wget ftp://ftp.1000genomes.ebi.ac.uk/vol1/ftp/phase3/data/HG00096/sequence_read/SRR062635_1.filt.fastq.gz
        $ wget ftp://ftp.1000genomes.ebi.ac.uk/vol1/ftp/phase3/data/HG00096/sequence_read/SRR062635_2.filt.fastq.gz
 
-    If you want to perform variant analysis on a whole exome sequence (paired-end) sample, try the following.
+    If you want to perform variant analysis on a whole exome sequence (paired-end), try the following.
 
        $ wget ftp://ftp.sra.ebi.ac.uk/vol1/fastq/SRR077/SRR077312/SRR077312_1.fastq.gz
        $ wget ftp://ftp.sra.ebi.ac.uk/vol1/fastq/SRR077/SRR077312/SRR077312_2.fastq.gz 
@@ -150,7 +150,7 @@ We are using [Apache Spark](https://spark.apache.org),
    [Step 3(c,d)](#running-variant-analysis-on-human-genomes-using-a-single-cloudlab-node)
    above.
 
-3. Download a (paired-end) sequence sample as shown in
+3. Download a (paired-end) sequence as shown in
    [Step 3(e)](#running-variant-analysis-on-human-genomes-using-a-single-cloudlab-node)
    above.
 
@@ -180,7 +180,7 @@ We used Apache Spark to parallelize execution of de novo assembly using [ABySS](
 Multiple assemblies will be run on each cluster node using a combination of HDFS and local file systems. Assuming the cluster has been set up to run variant analysis, do the following:
 
 1. Login to `vm0`. The two files [sampleIDs.txt](misc/sampleIDs.txt) and [sampleURLs.txt](misc/sampleURLs.txt) can be used. You can create your own files.
-The file `sampleIDs.txt` contains a sample ID per line. The file `sampleURLs.txt` contains URLs of the FASTQ paired-end sequences.
+The file `sampleIDs.txt` contains a [run accession ID](https://www.ncbi.nlm.nih.gov/books/NBK56913/) per line. The file `sampleURLs.txt` contains URLs of the FASTQ paired-end sequences.
 2. Execute the following command for k-mer length of `31` (default: `51`):
 ```
 ${HOME}/EVA/scripts/run_denovo.sh ${HOME}/EVA/misc/sampleIDs.txt ${HOME}/EVA/misc/sampleURLs.txt 31
@@ -245,7 +245,7 @@ We tested the performance of different approaches for variant analysis on Clemso
 </table>
 
 We tested the performance of de novo assemly by executing `scripts/run_denovo.sh` on [sampleIDs.txt](misc/sampleIDs.txt). The k-mer value was 51.
-It took nearly 40 hours on a 4-node CloudLab cluster (`c8220`) for 21 samples. The download time is not included. HDFS used 1.34 TB of storage (`.ifq` files were compressed).
+It took nearly 40 hours on a 4-node CloudLab cluster (`c8220`) for 21 paired-end sequences. The download time is not included. HDFS used 1.34 TB of storage (`.ifq` files were compressed).
 
 ## Report Issues
 
