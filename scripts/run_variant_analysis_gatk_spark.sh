@@ -13,6 +13,7 @@ DRIVER_MEMORY=50g
 INPUT_FILE=mysequence
 DATA_DIR="/mydata"
 REFERENCE="file://"${DATA_DIR}"/"${1}".fa"
+REF_CHECK=${DATA_DIR}"/"${1}."fa"
 DICT="file://"${DATA_DIR}"/"${1}".dict"
 BWA=${DATA_DIR}"/bwa/bwa"
 GATK=${DATA_DIR}"/gatk-4.1.8.0/gatk"
@@ -30,7 +31,7 @@ echo "👉 Interleaving FASTQ files."
 ${CANNOLI_SUBMIT} --master ${SPARK_MASTER} --driver-memory ${DRIVER_MEMORY} --num-executors ${NUM_EXECUTORS} --executor-cores ${NUM_CORES} --executor-memory ${EXECUTOR_MEMORY} \
     -- interleaveFastq ${2} ${3} ${HDFS_PREFIX}/${INPUT_FILE}.ifq
 
-if [[ ! -f "${REFERENCE}" ]]; then
+if [[ ! -f "${REF_CHECK}" ]]; then
     echo "😡 Missing reference genome. Run setup_reference_genome.sh."
     exit
 fi
