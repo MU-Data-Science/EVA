@@ -75,8 +75,11 @@ def execute_cluster():
 
     # For release 1:
     seq = request.args.get("sequence")
-    seq_1_url = seq + "_1" + constants.FILE_EXTENSION_1
-    seq_2_url = seq + "_2" + constants.FILE_EXTENSION_1
+    if seq != "Other":
+        seq_1_url = seq + "_1" + constants.FILE_EXTENSION_1
+        seq_2_url = seq + "_2" + constants.FILE_EXTENSION_1
+
+    print("app.py :: execute_cluster :: Sequence URL's :: ", seq_1_url, " ; ", seq_2_url)
 
     # Creating an id for the experiment.
     exp_id = ''.join(random.choice(string.ascii_uppercase + string.digits) for _ in range(10))

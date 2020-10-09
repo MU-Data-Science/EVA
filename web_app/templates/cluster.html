@@ -118,16 +118,43 @@
     .eva-form form a:hover {
         text-decoration: underline;
     }
+
     .center {
         display: block;
         margin-left: auto;
         margin-right: auto;
     }
+
+    #seq_1_url {
+        display: none;
+    }
+
+    #seq_2_url {
+        display: none;
+    }
+
 </style>
 <script>
     function success() {
         window.open('/success');
     }
+
+    $( document ).ready(function() {
+        console.log( "ready!" );
+        $('#sequence').change(function(){
+            if($(this).val() == "Other") {
+                $('#seq_1_url').show();
+                $('#seq_2_url').show();
+                $('#seq_1_url').removeAttr("disabled");
+                $('#seq_2_url').removeAttr("disabled");
+            } else {
+                $('#seq_1_url').hide();
+                $('#seq_2_url').hide();
+                $('#seq_1_url').attr("disabled", "disabled");
+                $('#seq_2_url').attr("disabled", "disabled");
+            }
+        })
+    });
 </script>
 </head>
 <body>
@@ -135,9 +162,8 @@
     <form action="/execute_cluster" onsubmit="success()">
 		<h2>EVA</h2>
 		<p class="hint-text">Exhaustive Variant Analysis on Genome Sequences</p>
-<!--        First Release: Defining geneome sequences.-->
         <div class="form-group">
-            <select class="form-control" name="sequence">
+            <select id= "sequence" class="form-control" name="sequence">
                 <option hidden >Illumina Sequence Reads from European Nucleotide Archive</option>
                 <option value="ftp://ftp.sra.ebi.ac.uk/vol1/fastq/SRR121/007/SRR12113307/SRR12113307">SRR12113307</option>
                 <option value="ftp://ftp.sra.ebi.ac.uk/vol1/fastq/SRR121/018/SRR12113318/SRR12113318">SRR12113318</option>
@@ -160,15 +186,15 @@
                 <option value="ftp://ftp.sra.ebi.ac.uk/vol1/fastq/SRR121/012/SRR12113312/SRR12113312">SRR12113312</option>
                 <option value="ftp://ftp.sra.ebi.ac.uk/vol1/fastq/SRR123/058/SRR12326758/SRR12326758">SRR12326758</option>
                 <option value="ftp://ftp.sra.ebi.ac.uk/vol1/fastq/SRR123/073/SRR12326773/SRR12326773">SRR12326773</option>
+                <option value="Other">Other</option>
             </select>
         </div>
-<!--        Commenting for future release-->
-<!--        <div class="form-group">-->
-<!--            <input type="url" class="form-control" name="seq_1_url" placeholder="URL for Sequence 1" required="required">-->
-<!--        </div>-->
-<!--        <div class="form-group">-->
-<!--            <input type="url" class="form-control" name="seq_2_url" placeholder="URL for Sequence 2" required="required">-->
-<!--        </div>-->
+        <div class="form-group">
+            <input type="url" class="form-control" id="seq_1_url" name="seq_1_url" placeholder="URL for Sequence 1" required="required">
+        </div>
+        <div class="form-group">
+            <input type="url" class="form-control" id="seq_2_url" name="seq_2_url" placeholder="URL for Sequence 2" required="required">
+        </div>
         <div class="form-group">
             <select class="form-control" name="ref">
                 <option hidden >Reference Genome</option>
