@@ -125,36 +125,14 @@
         margin-right: auto;
     }
 
-    #seq_1_url {
-        display: none;
+    #or {
+        text-align: center;
     }
-
-    #seq_2_url {
-        display: none;
-    }
-
 </style>
 <script>
     function success() {
         window.open('/success');
     }
-
-    $( document ).ready(function() {
-        console.log( "ready!" );
-        $('#sequence').change(function(){
-            if($(this).val() == "Other") {
-                $('#seq_1_url').show();
-                $('#seq_2_url').show();
-                $('#seq_1_url').removeAttr("disabled");
-                $('#seq_2_url').removeAttr("disabled");
-            } else {
-                $('#seq_1_url').hide();
-                $('#seq_2_url').hide();
-                $('#seq_1_url').attr("disabled", "disabled");
-                $('#seq_2_url').attr("disabled", "disabled");
-            }
-        })
-    });
 </script>
 </head>
 <body>
@@ -163,17 +141,17 @@
 		<h2>EVA</h2>
 		<p class="hint-text">Exhaustive Variant Analysis on Genome Sequences</p>
         <div class="form-group">
-            <input type="url" class="form-control" id="seq_1_url" name="seq_1_url" placeholder="URL for Sequence 1" required="required">
+            <input type="url" class="form-control" id="seq_1_url" name="seq_1_url" placeholder="URL for Sequence 1">
         </div>
         <div class="form-group">
-            <input type="url" class="form-control" id="seq_2_url" name="seq_2_url" placeholder="URL for Sequence 2" required="required">
+            <input type="url" class="form-control" id="seq_2_url" name="seq_2_url" placeholder="URL for Sequence 2">
         </div>
-        <div class="form-group">
+        <div class="form-group" id="or">
 			<label class="form-check-label">OR</label>
 		</div>
         <div class="form-group">
             <select id= "sequence" class="form-control" name="sequence">
-                <option hidden >Illumina Sequence Reads from the COVID-19 Data Portal</option>
+                <option hidden value="Other">Illumina Sequence Reads from the COVID-19 Data Portal</option>
                 <option value="ftp://ftp.sra.ebi.ac.uk/vol1/fastq/SRR121/007/SRR12113307/SRR12113307">SRR12113307</option>
                 <option value="ftp://ftp.sra.ebi.ac.uk/vol1/fastq/SRR121/018/SRR12113318/SRR12113318">SRR12113318</option>
                 <option value="ftp://ftp.sra.ebi.ac.uk/vol1/fastq/SRR121/019/SRR12113319/SRR12113319">SRR12113319</option>

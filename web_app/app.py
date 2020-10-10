@@ -75,6 +75,7 @@ def execute_cluster():
 
     # For release 1:
     seq = request.args.get("sequence")
+    print("Arun: app.py :: execute_cluster :: Sequence URL's :: seq", seq)
     if seq != "Other":
         seq_1_url = seq + "_1" + constants.FILE_EXTENSION_1
         seq_2_url = seq + "_2" + constants.FILE_EXTENSION_1
