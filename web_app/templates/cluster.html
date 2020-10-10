@@ -163,8 +163,17 @@
 		<h2>EVA</h2>
 		<p class="hint-text">Exhaustive Variant Analysis on Genome Sequences</p>
         <div class="form-group">
+            <input type="url" class="form-control" id="seq_1_url" name="seq_1_url" placeholder="URL for Sequence 1" required="required">
+        </div>
+        <div class="form-group">
+            <input type="url" class="form-control" id="seq_2_url" name="seq_2_url" placeholder="URL for Sequence 2" required="required">
+        </div>
+        <div class="form-group">
+			<label class="form-check-label">OR</label>
+		</div>
+        <div class="form-group">
             <select id= "sequence" class="form-control" name="sequence">
-                <option hidden >Illumina Sequence Reads from European Nucleotide Archive</option>
+                <option hidden >Illumina Sequence Reads from the COVID-19 Data Portal</option>
                 <option value="ftp://ftp.sra.ebi.ac.uk/vol1/fastq/SRR121/007/SRR12113307/SRR12113307">SRR12113307</option>
                 <option value="ftp://ftp.sra.ebi.ac.uk/vol1/fastq/SRR121/018/SRR12113318/SRR12113318">SRR12113318</option>
                 <option value="ftp://ftp.sra.ebi.ac.uk/vol1/fastq/SRR121/019/SRR12113319/SRR12113319">SRR12113319</option>
@@ -186,14 +195,7 @@
                 <option value="ftp://ftp.sra.ebi.ac.uk/vol1/fastq/SRR121/012/SRR12113312/SRR12113312">SRR12113312</option>
                 <option value="ftp://ftp.sra.ebi.ac.uk/vol1/fastq/SRR123/058/SRR12326758/SRR12326758">SRR12326758</option>
                 <option value="ftp://ftp.sra.ebi.ac.uk/vol1/fastq/SRR123/073/SRR12326773/SRR12326773">SRR12326773</option>
-                <option value="Other">Other</option>
             </select>
-        </div>
-        <div class="form-group">
-            <input type="url" class="form-control" id="seq_1_url" name="seq_1_url" placeholder="URL for Sequence 1" required="required">
-        </div>
-        <div class="form-group">
-            <input type="url" class="form-control" id="seq_2_url" name="seq_2_url" placeholder="URL for Sequence 2" required="required">
         </div>
         <div class="form-group">
             <select class="form-control" name="ref">
