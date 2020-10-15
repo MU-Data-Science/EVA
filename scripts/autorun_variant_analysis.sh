@@ -47,15 +47,19 @@ for extension in "${EXTENSIONS[@]}"; do
   fi
 done
 
-echo "👉 Downloading the FASTQ files. (Presently only .gz extensions are supported.)"
-wget ${2} -O ${DATA_DIR}/Input_1_${exp_id}.filt.fastq.gz
-wget ${3} -O ${DATA_DIR}/Input_2_${exp_id}.filt.fastq.gz
+#echo "👉 Downloading the FASTQ files. (Presently only .gz extensions are supported.)"
+#wget ${2} -O ${DATA_DIR}/Input_1_${exp_id}.filt.fastq.gz
+#wget ${3} -O ${DATA_DIR}/Input_2_${exp_id}.filt.fastq.gz
 
-echo "👉 Uploading the files to HDFS."
-hdfs dfs -copyFromLocal ${DATA_DIR}/Input_1_${exp_id}.filt.fastq.gz /
-hdfs dfs -copyFromLocal ${DATA_DIR}/Input_2_${exp_id}.filt.fastq.gz /
+#echo "👉 Uploading the files to HDFS."
+#hdfs dfs -copyFromLocal ${DATA_DIR}/Input_1_${exp_id}.filt.fastq.gz /
+#hdfs dfs -copyFromLocal ${DATA_DIR}/Input_2_${exp_id}.filt.fastq.gz /
 
-echo "👉 Performing variant analysis using adam."
+echo "👉 Downloading FASTQ files and copying to HDFS"
+curl -sS ${2} | hdfs dfs -put - /Input_1_${exp_id}.filt.fastq.gz
+curl -sS ${3} | hdfs dfs -put - /Input_2_${exp_id}.filt.fastq.gz
+
+echo "👉 Performing variant analysis using Adam."
 ${HOME}/EVA/scripts/run_variant_analysis_adam.sh ${1} hdfs://vm0:9000/Input_1_${exp_id}.filt.fastq.gz hdfs://vm0:9000/Input_2_${exp_id}.filt.fastq.gz ${4}
 
 echo "👉 Interleaving FASTQ files."
@@ -82,3 +86,6 @@ hdfs dfs -copyToLocal ${HDFS_PREFIX}/${exp_id}.vcf ${DATA_DIR}/${exp_id}-fbayes-
 
 echo "👉 Compressing the output obtained."
 zip -j ${DATA_DIR}/${exp_id}-fbayes-output.vcf.zip ${DATA_DIR}/${exp_id}-fbayes-output.vcf
+
+echo "👉 Deleting HDFS copy of the files."
+hdfs dfs -rm -f /Input_?_${exp_id}.filt.fastq.gz
