@@ -110,12 +110,12 @@ body {
 <div class="eva-form">
     <form action="/execute_standalone" onsubmit="success()">
 		<h2>EVA</h2>
-		<p class="hint-text">Exhaustive Variant Analysis on Genome Sequences</p>
+		<p class="hint-text">Exhaustive Variant Analysis on Whole Genome Sequences</p>
         <div class="form-group">
-            <input type="url" class="form-control" name="seq_1_url" placeholder="URL for Sequence 1" required="required">
+            <input type="url" class="form-control" name="seq_1_url" placeholder="URL for Paired Fastq Fragment 1 (.fq or .fq.gz)" required="required">
         </div>
         <div class="form-group">
-            <input type="url" class="form-control" name="seq_2_url" placeholder="URL for Sequence 2" required="required">
+            <input type="url" class="form-control" name="seq_2_url" placeholder="URL for Paired Fastq Fragment 2 (.fq or .fq.gz)" required="required">
         </div>
         <div class="form-group">
             <select class="form-control" name="ref">
