@@ -23,7 +23,7 @@ let NUM_EXECUTORS=${4}
 let NUM_CORES=$(nproc)-4
 
 echo "👉 Deleting files..."
-hdfs dfs -rm -r ${HDFS_PREFIX}/${INPUT_FILE}.*
+hdfs dfs -rm -r ${HDFS_PREFIX}/${INPUT_FILE}*
 rm -rvf ${HOME}/${OUTPUT_PREFIX}-gatk-spark-output.vcf
 
 date

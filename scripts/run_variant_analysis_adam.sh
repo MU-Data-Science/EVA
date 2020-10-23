@@ -26,7 +26,7 @@ let NUM_CORES=$(nproc)-4
 
 # Cleanup
 echo "👉 Deleting files..."
-hdfs dfs -rm -r ${HDFS_PREFIX}/${INPUT_FILE}.*
+hdfs dfs -rm -r ${HDFS_PREFIX}/${INPUT_FILE}*
 rm -rvf ${HOME}/${OUTPUT_PREFIX}-fbayes-output.vcf
 
 date
