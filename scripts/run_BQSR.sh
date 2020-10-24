@@ -60,7 +60,7 @@ ${GATK} SelectVariants --exclude-filtered \
         -O ${3}-BQSR-indels.vcf
 
 ${GATK} BQSRPipelineSpark -R ${REFERENCE} \
-    -I ${HDFS_PREFIX}/${3}-sorted.bam \
+    -I ${HDFS_PREFIX}/${3}-rg-sorted-final.bam \
     --known-sites ${3}-BQSR-snps.vcf --known-sites ${3}-BQSR-indels.vcf \
     -O ${HDFS_PREFIX}/${3}-BQSR-output.bam \
     --spark-runner SPARK --spark-master ${SPARK_MASTER} \
