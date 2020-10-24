@@ -62,14 +62,14 @@ ${GATK} SelectVariants --exclude-filtered \
 ${GATK} BQSRPipelineSpark -R ${REFERENCE} \
     -I ${HDFS_PREFIX}/${3}-sorted.bam \
     --known-sites ${3}-BQSR-snps.vcf --known-sites ${3}-BQSR-indels.vcf \
-    -O ${HDFS_PREFIX}/${3}-output.bam \
+    -O ${HDFS_PREFIX}/${3}-BQSR-output.bam \
     --spark-runner SPARK --spark-master ${SPARK_MASTER} \
     --conf "spark.executor.cores=${NUM_CORES}" --conf "spark.executor.memory=${EXECUTOR_MEMORY}" \
     --conf "spark.executor.instances=${NUM_EXECUTORS}"
 
 ${GATK} HaplotypeCallerSpark \
     -R ${REFERENCE} \
-    -I ${HDFS_PREFIX}/${3}-output.bam \
+    -I ${HDFS_PREFIX}/${3}-BQSR-output.bam \
     -O ${HDFS_PREFIX}/${3}-output-gatk-spark-BQSR-output.vcf \
     --spark-runner SPARK --spark-master ${SPARK_MASTER} \
     --conf "spark.executor.cores=${NUM_CORES}" --conf "spark.executor.memory=${EXECUTOR_MEMORY}" \
