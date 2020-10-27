@@ -68,7 +68,7 @@ ${CANNOLI_SUBMIT} --master ${SPARK_MASTER} --driver-memory ${DRIVER_MEMORY} --nu
 
 echo "👉 Executing bwa for alignment."
 ${CANNOLI_SUBMIT} --master ${SPARK_MASTER} --driver-memory ${DRIVER_MEMORY} --num-executors ${NUM_EXECUTORS} --executor-cores ${NUM_CORES} --executor-memory ${EXECUTOR_MEMORY} \
-    -- bwa ${HDFS_PREFIX}/${exp_id}.ifq ${HDFS_PREFIX}/${exp_id}.bam \
+    -- bwaMem ${HDFS_PREFIX}/${exp_id}.ifq ${HDFS_PREFIX}/${exp_id}.bam \
     -executable ${BWA} -sample_id $exp_id -index ${REFERENCE} -sequence_dictionary ${DICT} -single -add_files
 
 echo "👉 Sorting and marking duplicates before variant calling."
