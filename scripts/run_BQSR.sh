@@ -31,14 +31,14 @@ fi
 
 # Step 5
 ${GATK} SelectVariants -R ${REFERENCE} \
-    -V ${2} --select-type-to-include SNP -O ${3}-orig-snps.vcf
+    -V ${2} --select-type-to-include SNP -O ${DATA_DIR}/${3}-orig-snps.vcf
 
 ${GATK} SelectVariants -R ${REFERENCE} \
-    -V ${2} --select-type-to-include INDEL -O ${3}-orig-indels.vcf
+    -V ${2} --select-type-to-include INDEL -O ${DATA_DIR}/${3}-orig-indels.vcf
 
 # Step 6
-${GATK} VariantFiltration -R ${REFERENCE} -V ${3}-orig-snps.vcf \
-    -O ${3}-filtered-snps.vcf \
+${GATK} VariantFiltration -R ${REFERENCE} -V ${DATA_DIR}/${3}-orig-snps.vcf \
+    -O ${DATA_DIR}/${3}-filtered-snps.vcf \
     --filter-name "QD_filter" --filter-expression "QD < 2.0" \
     --filter-name "FS_filter" --filter-expression "FS > 60.0" \
     --filter-name "MQ_filter" --filter-expression "MQ < 40.0" \
@@ -47,25 +47,25 @@ ${GATK} VariantFiltration -R ${REFERENCE} -V ${3}-orig-snps.vcf \
     --filter-name "ReadPosRankSum_filter" --filter-expression "ReadPosRankSum < -8.0"
 
 # Step 7
-${GATK} VariantFiltration -R ${REFERENCE} -V ${3}-orig-indels.vcf \
-    -O ${3}-filtered-indels.vcf \
+${GATK} VariantFiltration -R ${REFERENCE} -V ${DATA_DIR}/${3}-orig-indels.vcf \
+    -O ${DATA_DIR}/${3}-filtered-indels.vcf \
     --filter-name "QD_filter" --filter-expression "QD < 2.0" \
     --filter-name "FS_filter" --filter-expression "FS > 200.0" \
     --filter-name "SOR_filter" --filter-expression "SOR > 10.0"
 
 # Step 8
 ${GATK} SelectVariants --exclude-filtered \
-        -V ${3}-filtered-snps.vcf \
-        -O ${3}-BQSR-snps.vcf
+        -V ${DATA_DIR}/${3}-filtered-snps.vcf \
+        -O ${DATA_DIR}/${3}-BQSR-snps.vcf
 
 ${GATK} SelectVariants --exclude-filtered \
-        -V ${3}-filtered-indels.vcf \
-        -O ${3}-BQSR-indels.vcf
+        -V ${DATA_DIR}/${3}-filtered-indels.vcf \
+        -O ${DATA_DIR}/${3}-BQSR-indels.vcf
 
 # Step 9-10
 ${GATK} BQSRPipelineSpark -R ${REFERENCE} \
     -I ${HDFS_PREFIX}/${3}-rg-sorted-final.bam \
-    --known-sites ${3}-BQSR-snps.vcf --known-sites ${3}-BQSR-indels.vcf \
+    --known-sites ${DATA_DIR}/${3}-BQSR-snps.vcf --known-sites ${DATA_DIR}/${3}-BQSR-indels.vcf \
     -O ${HDFS_PREFIX}/${3}-BQSR-output.bam \
     --spark-runner SPARK --spark-master ${SPARK_MASTER} \
     --conf "spark.executor.cores=${NUM_CORES}" --conf "spark.executor.memory=${EXECUTOR_MEMORY}" \
@@ -101,10 +101,10 @@ ${GATK} HaplotypeCallerSpark \
     --conf "spark.executor.cores=${NUM_CORES}" --conf "spark.executor.memory=${EXECUTOR_MEMORY}" \
     --conf "spark.executor.instances=${NUM_EXECUTORS}"
 
-hdfs dfs -get ${HDFS_PREFIX}/${3}-output-gatk-spark-BQSR-output.vcf ${HOME}/
+hdfs dfs -get ${HDFS_PREFIX}/${3}-output-gatk-spark-BQSR-output.vcf ${DATA_DIR}/
 
-RECAL_VCF_FILE=${3}-output-gatk-spark-BQSR-output.vcf
-RECAL_FILE_PREFIX=${3}-recalibrated
+RECAL_VCF_FILE=${DATA_DIR}/${3}-output-gatk-spark-BQSR-output.vcf
+RECAL_FILE_PREFIX=${DATA_DIR}/${3}-recalibrated
 
 # Step 14
 ${GATK} SelectVariants -R ${REFERENCE} \
