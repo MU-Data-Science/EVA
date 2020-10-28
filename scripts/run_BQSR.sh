@@ -16,8 +16,8 @@ GATK=${DATA_DIR}"/gatk-4.1.8.0/gatk"
 let NUM_EXECUTORS=${4}
 let NUM_CORES=$(nproc)-4
 
-echo "👉 Deleting files..."
-hdfs dfs -rm -r ${HDFS_PREFIX}/${3}-output.bam
+#echo "👉 Deleting files..."
+#hdfs dfs -rm -r ${HDFS_PREFIX}/${3}-BQSR-output.bam
 
 date
 
@@ -29,13 +29,14 @@ fi
 # We followed the steps provided here by Mohammed Khalfan:
 # https://gencore.bio.nyu.edu/variant-calling-pipeline-gatk4/
 
-
+# Step 5
 ${GATK} SelectVariants -R ${REFERENCE} \
     -V ${2} --select-type-to-include SNP -O ${3}-orig-snps.vcf
 
 ${GATK} SelectVariants -R ${REFERENCE} \
     -V ${2} --select-type-to-include INDEL -O ${3}-orig-indels.vcf
 
+# Step 6
 ${GATK} VariantFiltration -R ${REFERENCE} -V ${3}-orig-snps.vcf \
     -O ${3}-filtered-snps.vcf \
     --filter-name "QD_filter" --filter-expression "QD < 2.0" \
@@ -45,12 +46,14 @@ ${GATK} VariantFiltration -R ${REFERENCE} -V ${3}-orig-snps.vcf \
     --filter-name "MQRankSum_filter" --filter-expression "MQRankSum < -12.5" \
     --filter-name "ReadPosRankSum_filter" --filter-expression "ReadPosRankSum < -8.0"
 
+# Step 7
 ${GATK} VariantFiltration -R ${REFERENCE} -V ${3}-orig-indels.vcf \
     -O ${3}-filtered-indels.vcf \
     --filter-name "QD_filter" --filter-expression "QD < 2.0" \
     --filter-name "FS_filter" --filter-expression "FS > 200.0" \
     --filter-name "SOR_filter" --filter-expression "SOR > 10.0"
 
+# Step 8
 ${GATK} SelectVariants --exclude-filtered \
         -V ${3}-filtered-snps.vcf \
         -O ${3}-BQSR-snps.vcf
@@ -59,6 +62,7 @@ ${GATK} SelectVariants --exclude-filtered \
         -V ${3}-filtered-indels.vcf \
         -O ${3}-BQSR-indels.vcf
 
+# Step 9-10
 ${GATK} BQSRPipelineSpark -R ${REFERENCE} \
     -I ${HDFS_PREFIX}/${3}-rg-sorted-final.bam \
     --known-sites ${3}-BQSR-snps.vcf --known-sites ${3}-BQSR-indels.vcf \
@@ -67,6 +71,28 @@ ${GATK} BQSRPipelineSpark -R ${REFERENCE} \
     --conf "spark.executor.cores=${NUM_CORES}" --conf "spark.executor.memory=${EXECUTOR_MEMORY}" \
     --conf "spark.executor.instances=${NUM_EXECUTORS}"
 
+# OR Step 9-10
+#${GATK} BaseRecalibratorSpark \
+#    -R ${REFERENCE} \
+#    -I ${HDFS_PREFIX}/${3}-rg-sorted-final.bam \
+#    --known-sites ${3}-BQSR-snps.vcf --known-sites ${3}-BQSR-indels.vcf \
+#    -O ${3}-recalibrated-data.table \
+#    --spark-runner SPARK --spark-master ${SPARK_MASTER} \
+#    --conf "spark.executor.cores=${NUM_CORES}" --conf "spark.executor.memory=${EXECUTOR_MEMORY}" \
+#    --conf "spark.executor.instances=${NUM_EXECUTORS}"
+#
+#${GATK} ApplyBQSRSpark \
+#    -I ${HDFS_PREFIX}/${3}-rg-sorted-final.bam \
+#    -O ${HDFS_PREFIX}/${3}-BQSR-output.bam \
+#    -bqsr ${3}-recalibration-data.table \
+#    --spark-runner SPARK --spark-master ${SPARK_MASTER} \
+#    --conf "spark.executor.cores=${NUM_CORES}" --conf "spark.executor.memory=${EXECUTOR_MEMORY}" \
+#    --conf "spark.executor.instances=${NUM_EXECUTORS}"
+#
+
+# Skipping Steps 11-12 (BQSR again followed by AnalyzeCovariates)
+
+# Step 13
 ${GATK} HaplotypeCallerSpark \
     -R ${REFERENCE} \
     -I ${HDFS_PREFIX}/${3}-BQSR-output.bam \
@@ -75,5 +101,37 @@ ${GATK} HaplotypeCallerSpark \
     --conf "spark.executor.cores=${NUM_CORES}" --conf "spark.executor.memory=${EXECUTOR_MEMORY}" \
     --conf "spark.executor.instances=${NUM_EXECUTORS}"
 
+hdfs dfs -get ${HDFS_PREFIX}/${3}-output-gatk-spark-BQSR-output.vcf ${HOME}/
+
+RECAL_VCF_FILE=${3}-output-gatk-spark-BQSR-output.vcf
+RECAL_FILE_PREFIX=${3}-recalibrated
+
+# Step 14
+${GATK} SelectVariants -R ${REFERENCE} \
+    -V ${RECAl_VCF_FILE} --select-type-to-include SNP -O ${RECAL_FILE_PREFIX}-snps.vcf
+
+${GATK} SelectVariants -R ${REFERENCE} \
+    -V ${RECAL_VCF_FILE} --select-type-to-include INDEL -O ${RECAL_FILE_PREFIX}-indels.vcf
+
+# Step 15
+${GATK} VariantFiltration -R ${REFERENCE} -V ${RECAL_FILE_PREFIX}-snps.vcf \
+    -O ${RECAL_FILE_PREFIX}-filtered-snps.vcf \
+    --filter-name "QD_filter" --filter-expression "QD < 2.0" \
+    --filter-name "FS_filter" --filter-expression "FS > 60.0" \
+    --filter-name "MQ_filter" --filter-expression "MQ < 40.0" \
+    --filter-name "SOR_filter" --filter-expression "SOR > 4.0" \
+    --filter-name "MQRankSum_filter" --filter-expression "MQRankSum < -12.5" \
+    --filter-name "ReadPosRankSum_filter" --filter-expression "ReadPosRankSum < -8.0"
+
+# Step 16
+${GATK} VariantFiltration -R ${REFERENCE} -V ${RECAL_FILE_PREFIX}-indels.vcf \
+    -O  ${RECAL_FILE_PREFIX}-filtered-indels.vcf \
+    --filter-name "QD_filter" --filter-expression "QD < 2.0" \
+    --filter-name "FS_filter" --filter-expression "FS > 200.0" \
+    --filter-name "SOR_filter" --filter-expression "SOR > 10.0"
+
 echo "👉 Completed the BQSR process."
+echo "Output files: (1) ${RECAL_FILE_PREFIX}-filtered-indels.vcf " \
+     "              (2) ${RECAL_FILE_PREFIX}-filtered-snps.vcf" \
+     "              (3) ${RECAl_VCF_FILE}"
 date
