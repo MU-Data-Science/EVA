@@ -101,14 +101,18 @@ ${GATK} HaplotypeCallerSpark \
     --conf "spark.executor.cores=${NUM_CORES}" --conf "spark.executor.memory=${EXECUTOR_MEMORY}" \
     --conf "spark.executor.instances=${NUM_EXECUTORS}"
 
-hdfs dfs -get ${HDFS_PREFIX}/${3}-output-gatk-spark-BQSR-output.vcf ${DATA_DIR}/
-
 RECAL_VCF_FILE=${DATA_DIR}/${3}-output-gatk-spark-BQSR-output.vcf
 RECAL_FILE_PREFIX=${DATA_DIR}/${3}-recalibrated
 
+# Cleanup
+rm -rf ${RECAL_VCF_FILE}
+rm -rf ${RECAL_FILE_PREFIX}*
+
+hdfs dfs -get ${HDFS_PREFIX}/${3}-output-gatk-spark-BQSR-output.vcf ${DATA_DIR}/
+
 # Step 14
 ${GATK} SelectVariants -R ${REFERENCE} \
-    -V ${RECAl_VCF_FILE} --select-type-to-include SNP -O ${RECAL_FILE_PREFIX}-snps.vcf
+    -V ${RECAL_FILE_PREFIX} --select-type-to-include SNP -O ${RECAL_FILE_PREFIX}-snps.vcf
 
 ${GATK} SelectVariants -R ${REFERENCE} \
     -V ${RECAL_VCF_FILE} --select-type-to-include INDEL -O ${RECAL_FILE_PREFIX}-indels.vcf
