@@ -59,4 +59,10 @@ ${GATK} HaplotypeCallerSpark \
 
 hdfs dfs -copyToLocal ${HDFS_PREFIX}/${OUTPUT_PREFIX}-gatk-spark-output.vcf ${HOME}/${OUTPUT_PREFIX}-gatk-spark-output.vcf
 echo "👉 Done with variant calling. See ${OUTPUT_PREFIX}-gatk-spark-output.vcf file."
+
+echo "👉 Running Base Quality Score Recalibration."
+${HOME}/EVA/scripts/run_BQSR.sh ${1} ${HOME}/${OUTPUT_PREFIX}-gatk-spark-output.vcf ${OUTPUT_PREFIX} ${4}
+
+echo "👉 Done!!!"
+
 date
