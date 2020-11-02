@@ -56,4 +56,10 @@ ${CANNOLI_SUBMIT} --master ${SPARK_MASTER} --driver-memory ${DRIVER_MEMORY} --nu
 
 hdfs dfs -copyToLocal ${HDFS_PREFIX}/${INPUT_FILE}.vcf ${HOME}/${OUTPUT_PREFIX}-fbayes-output.vcf
 echo "👉 Done with variant analysis. See ${HOME}/${OUTPUT_PREFIX}-fbayes-output.vcf."
+
+echo "👉 Running Base Quality Score Recalibration."
+${HOME}/EVA/scripts/run_BQSR.sh ${1} ${HOME}/${OUTPUT_PREFIX}-gatk-spark-output.vcf ${OUTPUT_PREFIX} ${4}
+
+echo "👉 Done!!!"
+
 date
