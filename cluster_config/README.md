@@ -20,17 +20,10 @@ It will take a few minutes to start the experiment; so please be patient.
    ```
 
 4. To setup Hadoop, Spark, and other tools, execute the following in the shell/terminal. Suppose your cluster has 16 nodes.
-    * For adam/cannoli:
-        ```
-        $ cd EVA/cluster_config
-        $ ./cluster-configure.sh 16 adam
-        ```
-    * For GATK:
-        ```
-        $ cd EVA/cluster_config
-        $ ./cluster-configure.sh 16 gatk
-        ```
-
+   ```
+   $ cd EVA/cluster_config
+   $ ./cluster-configure.sh 16
+   ```
    This step takes several minutes; so please be patient.
 
 5. After successful setup, quit the SSH session by typing `exit` and
