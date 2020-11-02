@@ -4,8 +4,8 @@
 HS38_DIR="/proj/eva-public-PG0/Genome_Data"
 DATA_DIR="/mydata"
 SPARK_MASTER="spark://vm0:7077"
-CANNOLI_SUBMIT=${CANNOLI_HOME}"/exec/cannoli-submit"
-ADAM_SUBMIT=${ADAM_HOME}"/exec/adam-submit"
+CANNOLI_SUBMIT=${CANNOLI_HOME}"/spark2_exec/cannoli-submit"
+ADAM_SUBMIT=${ADAM_HOME}"/spark2_exec/adam-submit"
 HDFS_PREFIX="hdfs://vm0:9000"
 EXECUTOR_MEMORY=50g
 DRIVER_MEMORY=50g
