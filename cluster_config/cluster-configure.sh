@@ -4,23 +4,17 @@ nodes="$1"
 user_name="$USER"
 data_dir="/mydata"
 
-if [ "$#" -ne 2 ]; then
-  echo "Usage: cluster-configure.sh <no. of nodes> <adam|gatk>"
+if [ "$#" -ne 1 ]; then
+  echo "Usage: cluster-configure.sh <no. of nodes>"
   exit -1
 fi
 
 # configuration constants.
 machines="cluster-machines.txt"
 shareDir="/proj/eva-public-PG0"
-hadoopVer=3.2
-hadoopSubVer=0
-sparkVer=3.0.0
-
-if [ $2 = gatk ]; then
-  hadoopVer=2.7
-  hadoopSubVer=6
-  sparkVer=2.4.7
-fi
+hadoopVer=2.7
+hadoopSubVer=6
+sparkVer=2.4.7
 
 experiment=$(basename $machines)
 scripts=(\
