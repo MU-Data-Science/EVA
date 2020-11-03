@@ -62,7 +62,7 @@ ${GATK} BaseRecalibrator \
 ${GATK} ApplyBQSR \
     -I ${DATA_DIR}/${3}-rg-sorted-final.bam \
     -O ${DATA_DIR}/${3}-BQSR-output.bam \
-    -bqsr ${3}-recalibration-data.table
+    -bqsr ${3}-recalibrated-data.table
 
 # Skipping Steps 11-12 (BQSR again followed by AnalyzeCovariates)
 
