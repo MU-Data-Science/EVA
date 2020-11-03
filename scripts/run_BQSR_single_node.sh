@@ -52,15 +52,6 @@ ${GATK} SelectVariants --exclude-filtered \
         -V ${DATA_DIR}/${3}-filtered-indels.vcf \
         -O ${DATA_DIR}/${3}-BQSR-indels.vcf
 
-# Step 9-10
-#${GATK} BQSRPipelineSpark -R ${REFERENCE} \
-#    -I ${HDFS_PREFIX}/${3}-rg-sorted-final.bam \
-#    --known-sites ${DATA_DIR}/${3}-BQSR-snps.vcf --known-sites ${DATA_DIR}/${3}-BQSR-indels.vcf \
-#    -O ${HDFS_PREFIX}/${3}-BQSR-output.bam \
-#    --spark-runner SPARK --spark-master ${SPARK_MASTER} \
-#    --conf "spark.executor.cores=${NUM_CORES}" --conf "spark.executor.memory=${EXECUTOR_MEMORY}" \
-#    --conf "spark.executor.instances=${NUM_EXECUTORS}"
-
 # OR Step 9-10
 ${GATK} BaseRecalibrator \
     -R ${REFERENCE} \
@@ -79,9 +70,9 @@ ${GATK} ApplyBQSR \
 ${GATK} HaplotypeCaller \
     -R ${REFERENCE} \
     -I ${DATA_DIR}/${3}-BQSR-output.bam \
-    -O ${DATA_DIR}/${3}-output-gatk-spark-BQSR-output.vcf \
+    -O ${DATA_DIR}/${3}-output-gatk-BQSR-output.vcf \
 
-BQSR_VCF_FILE=${DATA_DIR}/${3}-output-gatk-spark-BQSR-output.vcf
+BQSR_VCF_FILE=${DATA_DIR}/${3}-output-gatk-BQSR-output.vcf
 RECAL_FILE_PREFIX=${DATA_DIR}/${3}-recalibrated
 
 # Cleanup
