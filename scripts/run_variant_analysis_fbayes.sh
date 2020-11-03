@@ -86,4 +86,7 @@ else
     exit
 fi
 
-echo "👉 Done!"
+echo "👉 Running Base Quality Score Recalibration."
+${HOME}/EVA/scripts/run_BQSR_single_node.sh ${1} ${OUTPUT_PREFIX}-fbayes-output.vcf ${OUTPUT_PREFIX}
+
+echo "👉 Done!!!"
