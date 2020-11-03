@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
-if [[ $# -ne 4 ]]; then
-    echo "Usage: run_BQSR.sh <hs38|hs38a|hs38DH|hs37|hs37d5> <VCF file> <output_prefix> <cluster size>"
+if [[ $# -ne 3 ]]; then
+    echo "Usage: run_BQSR_single_node.sh <hs38|hs38a|hs38DH|hs37|hs37d5> <VCF file> <output_prefix>"
     exit
 fi
 

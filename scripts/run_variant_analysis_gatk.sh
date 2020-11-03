@@ -86,4 +86,7 @@ echo "👉 Running GATK HaplotypeCaller for variant calling."
 ${GATK_HOME}/gatk HaplotypeCaller -R ${1}.fa -I ${OUTPUT_PREFIX}-rg-sorted-final.bam -O ${OUTPUT_PREFIX}-gatk-output.vcf
 echo "👉 Done with variant calling. See ${OUTPUT_PREFIX}-gatk-output.vcf file."
 
-echo "👉 Done!"
+echo "👉 Running Base Quality Score Recalibration."
+${HOME}/EVA/scripts/run_BQSR_single_node.sh ${1} ${OUTPUT_PREFIX}-gatk-output.vcf ${OUTPUT_PREFIX}
+
+echo "👉 Done!!!"
