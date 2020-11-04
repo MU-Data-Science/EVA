@@ -4,9 +4,11 @@ import subprocess
 import time
 
 # Constants.
+USER = "arung"
+HOME = "/users/"+USER
 GENOME_DIR = "/nfs/GenomeData"
 DATA_DIR = "/mydata"
-EVA_SCRIPTS_DIR = "/users/arung/EVA/scripts"
+EVA_SCRIPTS_DIR = HOME+"/EVA/scripts"
 CLUSTER_SIZE = "16"
 
 # Setting a counter.
@@ -54,6 +56,12 @@ for dir in os.listdir(GENOME_DIR):
 
                     # Printing the execution time.
                     print("collect_stats.py :: Time taken to preocess the sequence :: %s :: was %s seconds." % (seq_id, time.time() - start_time))
+
+                    # Renaming the file.
+                    rename_cmd = "mv %s/VA-%s-result-gatk-spark-output.vcf %s/%s-result-gatk-spark-output.vcf" % (HOME, USER, DATA_DIR, seq_id)
+                    process = subprocess.Popen('/bin/bash', stdin=subprocess.PIPE, stdout=subprocess.PIPE)
+                    out, err = process.communicate(rename_cmd.encode('utf-8'))
+                    print(out.decode('utf-8'))
 
                     # Removing the file from HDFS.
                     print("collect_stats.py :: Deleting the sequence files from HDFS for :: ", seq_id)
