@@ -99,8 +99,8 @@ Alternatively, you can use `SSH` to login to the node: `$ ssh -i /path/to/CloudL
     If you have deidentified sequences on your local machine to analyze, copy to the CloudLab node using `scp`.
 
     **f.** There are two variant analysis scripts. Each of them will
-    perform the alignment, sorting, marking duplicates, and variant
-    calling. The script `run_variant_analysis_fbayes.sh` uses Freebayes
+    perform the alignment, sorting, marking duplicates, variant
+    calling, and [Base Quality Score Recalibration](https://gencore.bio.nyu.edu/variant-calling-pipeline-gatk4/) based on [GATK best practice workflows](https://gatk.broadinstitute.org/). The script `run_variant_analysis_fbayes.sh` uses Freebayes
     for variant calling; `run_variant_analysis_gatk.sh` uses GATK's
     HaplotypeCaller. Run a variant analysis script by passing the
     required arguments. (See usage statement of the script.) Here are
@@ -114,8 +114,8 @@ Alternatively, you can use `SSH` to login to the node: `$ ssh -i /path/to/CloudL
 
     Note that for the GATK pipeline, a dummy [read group](https://gatk.broadinstitute.org/hc/en-us/articles/360035890671-Read-groups) is added to the `.bam` file.
 
-    **g.** The output of variant analysis is stored in a `.output.vcf`
-    file. Download to your local machine using `scp`.
+    **g.** The variants are stored in `.output.vcf`
+    files. The file ending with `BQSR-output.vcf` contains the variants computed on the analysis-ready reads. Download to your local machine using `scp`.
 
        $ scp  -i /path/to/CloudLab/private_key_file  CloudLab_username@CloudLab_hostname:/path/to/the/output_VCF_file
 
