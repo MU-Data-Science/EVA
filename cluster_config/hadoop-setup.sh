@@ -7,7 +7,7 @@ hadoop_ver="$4"."$5"
 master_node="vm0"
 node_prefix="vm"
 node_start=1
-node_end=$(cat /etc/hosts | grep -v 'vm0\|localhost' | wc -l)
+node_end=$(cat /etc/hosts | grep '10.10.1' | wc -l)
 
 NN_DIR="$data_dir/hadoop/hdfs/namenode"
 DN_DIR="$data_dir/hadoop/hdfs/datanode"
@@ -145,7 +145,7 @@ echo '<?xml version="1.0" encoding="UTF-8"?>
 
 SLAVES_FILE="$hadoop_prefix/etc/hadoop/slaves"
 cp /dev/null $SLAVES_FILE
-for node in `seq $node_start $node_end`
+for node in `seq $node_start $(( ${node_end}-1} ))`
 do
     echo "$node_prefix$node" >> $SLAVES_FILE
 done
