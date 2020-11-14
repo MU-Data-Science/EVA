@@ -99,8 +99,8 @@ Alternatively, you can use `SSH` to login to the node: `$ ssh -i /path/to/CloudL
     If you have deidentified sequences on your local machine to analyze, copy to the CloudLab node using `scp`.
 
     **f.** There are two variant analysis scripts. Each of them will
-    perform the alignment, sorting, marking duplicates, and variant
-    calling. The script `run_variant_analysis_fbayes.sh` uses Freebayes
+    perform the alignment, sorting, marking duplicates, variant
+    calling, and [Base Quality Score Recalibration](https://gencore.bio.nyu.edu/variant-calling-pipeline-gatk4/) based on [GATK best practice workflows](https://gatk.broadinstitute.org/). The script `run_variant_analysis_fbayes.sh` uses Freebayes
     for variant calling; `run_variant_analysis_gatk.sh` uses GATK's
     HaplotypeCaller. Run a variant analysis script by passing the
     required arguments. (See usage statement of the script.) Here are
@@ -114,8 +114,8 @@ Alternatively, you can use `SSH` to login to the node: `$ ssh -i /path/to/CloudL
 
     Note that for the GATK pipeline, a dummy [read group](https://gatk.broadinstitute.org/hc/en-us/articles/360035890671-Read-groups) is added to the `.bam` file.
 
-    **g.** The output of variant analysis is stored in a `.output.vcf`
-    file. Download to your local machine using `scp`.
+    **g.** The variants are stored in `.output.vcf`
+    files. The file ending with `BQSR-output.vcf` contains the variants computed on the analysis-ready reads. Download to your local machine using `scp`.
 
        $ scp  -i /path/to/CloudLab/private_key_file  CloudLab_username@CloudLab_hostname:/path/to/the/output_VCF_file
 
@@ -161,7 +161,7 @@ We are using [Apache Spark](https://spark.apache.org),
    $ hdfs dfs -copyFromLocal SRR062635_?.filt.fastq.gz / 
    ```
 
-5. Run variant analysis. Suppose the cluster size is `16` and `hs38` is the reference genome.
+5. Run variant analysis with [Base Quality Score Recalibration](https://gencore.bio.nyu.edu/variant-calling-pipeline-gatk4/) based on [GATK best practice workflows](https://gatk.broadinstitute.org/). Suppose the cluster size is `16` and `hs38` is the reference genome.
     
     **a.** Using Adam/Cannoli/bwa/Freebayes:
     ```
@@ -173,7 +173,7 @@ We are using [Apache Spark](https://spark.apache.org),
     $  ${HOME}/EVA/scripts/run_variant_analysis_gatk_spark.sh hs38 hdfs://vm0:9000/SRR062635_1.filt.fastq.gz hdfs://vm0:9000/SRR062635_2.filt.fastq.gz 16
     ```
 
-6. Download the `.vcf` file in the local directory on `vm0`.
+6. Download the `.vcf` files in the local directories on `vm0`. The file ending with `-BQSR-output.vcf` contains the variants computed on the analysis-ready reads.
 
 
 ## Running de novo assembly on a cluster of CloudLab nodes
@@ -283,3 +283,4 @@ This work is supported by the National Science Foundation under [Grant No. 20342
 12. https://github.com/broadinstitute/picard
 13. https://github.com/broadinstitute/gatk
 14. https://github.com/bcgsc/abyss
+15. https://gencore.bio.nyu.edu/variant-calling-pipeline-gatk4
