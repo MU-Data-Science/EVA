@@ -55,7 +55,7 @@ for dir in os.listdir(GENOME_DIR):
                     print(out.decode('utf-8'))
 
                     # Printing the execution time.
-                    print("collect_stats.py :: Time taken to preocess the sequence :: %s :: was %s seconds." % (seq_id, time.time() - start_time))
+                    print("collect_stats.py :: Time taken to process the sequence :: %s :: was %s seconds." % (seq_id, time.time() - start_time))
 
                     # Renaming the file.
                     rename_cmd = "mv %s/VA-%s-result-gatk-spark-output.vcf %s/%s-result-gatk-spark-output.vcf" % (HOME, USER, DATA_DIR, seq_id)
@@ -76,7 +76,7 @@ for dir in os.listdir(GENOME_DIR):
                     out, err = process.communicate(del_2.encode('utf-8'))
                     print(out.decode('utf-8'))
 
-                    print("collect_stats.py :: Completed processing for sequence :: ", seq_id)
+                    print("collect_stats.py :: Completed processing sequence :: ", seq_id)
                 except:
                     print("collect_stats.py :: Exception encountered while processing sequence :: ", seq_id)
 

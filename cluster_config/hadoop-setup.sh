@@ -6,9 +6,8 @@ hadoop_ver="$4"."$5"
 
 master_node="vm0"
 node_prefix="vm"
-node_start=1
-node_end=$(cat /etc/hosts | grep -v 'vm0\|localhost' | wc -l)
 
+machines="cluster-machines.txt"
 NN_DIR="$data_dir/hadoop/hdfs/namenode"
 DN_DIR="$data_dir/hadoop/hdfs/datanode"
 NUMREP="3"
@@ -143,11 +142,4 @@ echo '<?xml version="1.0" encoding="UTF-8"?>
 </configuration>
 ' > "$HDFS_SITE_FILE.datanode"
 
-SLAVES_FILE="$hadoop_prefix/etc/hadoop/workers"
-cp /dev/null $SLAVES_FILE
-for node in `seq $node_start $node_end`
-do
-    echo "$node_prefix$node" >> $SLAVES_FILE 
-done
-# Copying workers file as slaves, for older hadoop versions.
-cp $SLAVES_FILE $hadoop_prefix/etc/hadoop/slaves
+cp $machines "$hadoop_prefix/etc/hadoop/slaves"
