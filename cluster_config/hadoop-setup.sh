@@ -145,7 +145,7 @@ echo '<?xml version="1.0" encoding="UTF-8"?>
 
 SLAVES_FILE="$hadoop_prefix/etc/hadoop/slaves"
 cp /dev/null $SLAVES_FILE
-for node in `seq $node_start $(( ${node_end}-1} ))`
+for node in `seq $node_start $(( ${node_end}-1 ))`
 do
     echo "$node_prefix$node" >> $SLAVES_FILE
 done
