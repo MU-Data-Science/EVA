@@ -7,7 +7,6 @@ spark_ver="$4"
 hadoop_ver="$5"
 
 NUMREP=1
-machines="cluster-machines.txt"
 
 # check if openssl is installed
 ISOSSL=`which openssl`
@@ -52,7 +51,6 @@ export SPARK_LOCAL_DIRS=$data_dir/spark-tmp
 export SPARK_WORKER_OPTS="-Dspark.worker.cleanup.enabled=true -Dspark.worker.cleanup.interval=7200 -Dspark.worker.cleanup.appDataTtl=1800"
 " > $SPARK_ENV_FILE
 
-cp $machines "$spark_prefix/conf/slaves"
+cp "$cluster_prefix/hadoop_$MASTER_NODE_ID/etc/hadoop/workers" "$spark_prefix/conf/slaves"
 
 rm "$secret_file"
-
