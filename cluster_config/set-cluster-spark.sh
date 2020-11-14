@@ -23,7 +23,7 @@ sudo cp -r $share_dir/spark_$install_id $data_dir/spark
 sudo chown -R $username $data_dir/spark
 
 host_private_name=\$(hostname | cut -d '.' -f 1)
-host_private_ip=\$(grep \"\\<\$host_private_name\\>\" /etc/hosts | cut -f 1)
+host_private_ip=\$(grep \"\\<\$host_private_name\\>$\" /etc/hosts | cut -f 1)
 echo \"export SPARK_LOCAL_IP=\$host_private_ip\" >> $data_dir/spark/conf/spark-env.sh
 "
 
