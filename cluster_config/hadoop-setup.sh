@@ -7,7 +7,7 @@ hadoop_ver="$4"."$5"
 master_node="vm0"
 node_prefix="vm"
 node_start=1
-node_end=$(cat /etc/hosts | grep '10.10.1' | wc -l)
+node_end=$(cat /etc/hosts | grep 'vm' | wc -l)
 
 NN_DIR="$data_dir/hadoop/hdfs/namenode"
 DN_DIR="$data_dir/hadoop/hdfs/datanode"
