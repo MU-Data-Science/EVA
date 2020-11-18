@@ -27,13 +27,9 @@ hdfs dfs -rm -r ${HDFS_PREFIX}/${INPUT_FILE}*
 rm -rvf ${HOME}/${OUTPUT_PREFIX}-gatk-spark-output.vcf
 
 date
-start=`date +%s`
 echo "👉 Interleaving FASTQ files."
 ${CANNOLI_SUBMIT} --master ${SPARK_MASTER} --driver-memory ${DRIVER_MEMORY} --num-executors ${NUM_EXECUTORS} --executor-cores ${NUM_CORES} --executor-memory ${EXECUTOR_MEMORY} \
     -- interleaveFastq ${2} ${3} ${HDFS_PREFIX}/${INPUT_FILE}.ifq
-end_1=`date +%s`
-runtime=$((end_1-start))
-echo "Total time taken for Interleaving FASTQ files: " $runtime
 
 if [[ ! -f "${REF_CHECK}" ]]; then
     echo "😡 Missing reference genome. Run setup_reference_genome.sh."
@@ -44,24 +40,15 @@ echo "👉 Executing bwa for alignment."
 ${CANNOLI_SUBMIT} --master ${SPARK_MASTER} --driver-memory ${DRIVER_MEMORY} --num-executors ${NUM_EXECUTORS} --executor-cores ${NUM_CORES} --executor-memory ${EXECUTOR_MEMORY} \
     -- bwaMem ${HDFS_PREFIX}/${INPUT_FILE}.ifq ${HDFS_PREFIX}/${INPUT_FILE}.bam \
     -executable ${BWA} -sample_id mysample -index ${REFERENCE} -sequence_dictionary ${DICT} -single -add_files
-end_2=`date +%s`
-runtime=$((end_2-end_1))
-echo "Total time taken for Executing bwa for alignment: " $runtime
 
 echo "👉 Sorting the bam file."
 ${GATK} SortSamSpark -I ${HDFS_PREFIX}/${INPUT_FILE}.bam -O ${HDFS_PREFIX}/${INPUT_FILE}-sorted.bam \
     --spark-runner SPARK --spark-master ${SPARK_MASTER} --conf "spark.executor.cores=${NUM_CORES}" --conf "spark.executor.memory=${EXECUTOR_MEMORY}" --conf "spark.executor.instances=${NUM_EXECUTORS}"
-end_3=`date +%s`
-runtime=$((end_3-end_2))
-echo "Total time taken for Sorting the bam file: " $runtime
 
 echo "👉 marking duplicates before variant calling."
 ${GATK} MarkDuplicatesSpark -I ${HDFS_PREFIX}/${INPUT_FILE}-sorted.bam -O ${HDFS_PREFIX}/${OUTPUT_PREFIX}-rg-sorted-final.bam \
     --spark-runner SPARK --spark-master ${SPARK_MASTER} --conf "spark.executor.cores=${NUM_CORES}" --conf "spark.executor.memory=${EXECUTOR_MEMORY}" --conf "spark.executor.instances=${NUM_EXECUTORS}" \
     --tmp-dir ${DATA_DIR}/gatk-tmp
-end_4=`date +%s`
-runtime=$((end_4-end_3))
-echo "Total time taken for marking duplicates before variant calling: " $runtime
 
 echo "👉 Running GATK HaplotypeCaller on spark for variant calling."
 ${GATK} HaplotypeCallerSpark \
@@ -69,11 +56,13 @@ ${GATK} HaplotypeCallerSpark \
     -I ${HDFS_PREFIX}/${OUTPUT_PREFIX}-rg-sorted-final.bam \
     -O ${HDFS_PREFIX}/${OUTPUT_PREFIX}-gatk-spark-output.vcf \
     --spark-runner SPARK --spark-master ${SPARK_MASTER} --conf "spark.executor.cores=${NUM_CORES}" --conf "spark.executor.memory=${EXECUTOR_MEMORY}" --conf "spark.executor.instances=${NUM_EXECUTORS}"
-end_5=`date +%s`
-runtime=$((end_5-end_4))
-echo "Total time taken for Running GATK HaplotypeCaller on spark for variant calling: " $runtime
 
 hdfs dfs -copyToLocal ${HDFS_PREFIX}/${OUTPUT_PREFIX}-gatk-spark-output.vcf ${HOME}/${OUTPUT_PREFIX}-gatk-spark-output.vcf
 echo "👉 Done with variant calling. See ${OUTPUT_PREFIX}-gatk-spark-output.vcf file."
+
+echo "👉 Running Base Quality Score Recalibration."
+${HOME}/EVA/scripts/run_BQSR.sh ${1} ${HOME}/${OUTPUT_PREFIX}-gatk-spark-output.vcf ${OUTPUT_PREFIX} ${4}
+
+echo "👉 Done!!!"
 
 date
