@@ -6,10 +6,7 @@ DATA_DIR="$1"
 
 # Download & Install Conda.
 wget $CONDA_URL -O $DATA_DIR/Anaconda3.sh
-bash $DATA_DIR/Anaconda3.sh -b -p $DATA_DIR/anaconda3
+bash $DATA_DIR/Anaconda3.sh -b -p $DATA_DIR/Anaconda3
 
 # Initialize Conda.
 conda init
-
-# Installing GATK dependencies.
-conda env create -n gatk -f gatkcondaenv.yml

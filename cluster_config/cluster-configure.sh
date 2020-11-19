@@ -25,8 +25,8 @@ scripts=(\
   "set-cluster-iptables" \
   "set-cluster-hadoop" \
   "set-cluster-spark" \
-  "set-cluster-genome-tools" \
   "set-cluster-conda" \
+  "set-cluster-genome-tools" \
   "set-cluster-bashrc")
 
 # Write the node list to cluster-machines.txt.

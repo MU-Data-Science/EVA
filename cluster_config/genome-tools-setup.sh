@@ -9,8 +9,8 @@ ln -sf $DATA_DIR/bwa $HOME/bwa
 echo "👉 Done with bwa setup 😎"
 
 # get brew
-/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install.sh)" < /dev/null
-echo 'eval $(/home/linuxbrew/.linuxbrew/bin/brew shellenv)' >> /users/${USER}/.profile
+/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install.sh)" </dev/null
+echo 'eval $(/home/linuxbrew/.linuxbrew/bin/brew shellenv)' >>/users/${USER}/.profile
 eval $(/home/linuxbrew/.linuxbrew/bin/brew shellenv)
 echo "👉 Done with Brew installation 😎"
 
@@ -45,7 +45,7 @@ echo "👉 Done with GATK copy 😎"
 # setup SPAdes
 SPADES_VERSION=3.14.1
 if [ ! -f $SHARE_DIR/EVA_Tools/SPAdes-${SPADES_VERSION}-Linux.tar.gz ]; then
-    wget http://cab.spbu.ru/files/release${SPADES_VERSION}/SPAdes-${SPADES_VERSION}-Linux.tar.gz -P $SHARE_DIR/EVA_Tools/
+  wget http://cab.spbu.ru/files/release${SPADES_VERSION}/SPAdes-${SPADES_VERSION}-Linux.tar.gz -P $SHARE_DIR/EVA_Tools/
 fi
 tar -xzf $SHARE_DIR/EVA_Tools/SPAdes-${SPADES_VERSION}-Linux.tar.gz -C $DATA_DIR
 ln -sf $DATA_DIR/SPAdes-${SPADES_VERSION}-Linux $HOME/spades
@@ -56,18 +56,21 @@ brew install abyss
 ABYSS_PE_PATH=/home/linuxbrew/.linuxbrew/bin
 ln -sf ${ABYSS_PE_PATH}/abyss-pe $HOME/abyss-pe
 sudo chmod +w ${ABYSS_PE_PATH}/abyss-pe
-sudo echo 'PATH:=$(HOMEBREW_PREFIX)/bin:$(PATH)' >> ${ABYSS_PE_PATH}/abyss-pe
+sudo echo 'PATH:=$(HOMEBREW_PREFIX)/bin:$(PATH)' >>${ABYSS_PE_PATH}/abyss-pe
 mkdir -p $DATA_DIR/tmp
 echo "👉 Done with Abyss setup 😎"
 
 # Setup Adam.
 git clone https://github.com/Arun-George-Zachariah/adam.git $DATA_DIR/adam
-echo "export ADAM_HOME=$DATA_DIR/adam" >> ~/.bashrc
+echo "export ADAM_HOME=$DATA_DIR/adam" >>~/.bashrc
 echo "👉 Done with Adam setup 😎"
 
 # Setup Cannoli.
 git clone https://github.com/Arun-George-Zachariah/cannoli.git $DATA_DIR/cannoli
-echo "export CANNOLI_HOME=$DATA_DIR/cannoli" >> ~/.bashrc
+echo "export CANNOLI_HOME=$DATA_DIR/cannoli" >>~/.bashrc
 echo "👉 Done with Cannoli setup 😎"
+
+# Installing GATK python dependencies.
+$DATA_DIR/Anaconda3/bin/conda env create -n gatk -f ~/gatk-${GATK_VERSION}/gatkcondaenv.yml
 
 echo "👉 Successful installation of the required tools. 😎"
