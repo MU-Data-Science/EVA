@@ -23,7 +23,7 @@ done
 
 # Waiting for the setup in the nodes to finish - start.
 echo -e "WAITING FOR SETUP TO FINISH \n"
-total=$(cat $cluster_machines | wc -l | sed 's/ //')
+total=$(cat $CLUSTER_MACHINES | wc -l | sed 's/ //')
 echo $(date| tr '[:lower:]' '[:upper:]')
 echo -e "CHECKING PIDS STATUS.."
 finished=1
