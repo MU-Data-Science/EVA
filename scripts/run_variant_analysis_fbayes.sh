@@ -7,6 +7,10 @@ FREEBAYES_HOME=${HOME}/freebayes
 SAMTOOLS_HOME=${HOME}/samtools
 TMP_DIR="/mydata/tmp"
 OUTPUT_PREFIX="VA-"${USER}"-result"
+TRANCHE_RESOURCES=(\
+  "${DATA_DIR}/hapmap_3.3.hg38.vcf.gz" \
+  "${DATA_DIR}/1000G_omni2.5.hg38.vcf.gz" \
+  "${DATA_DIR}/1000G_phase1.snps.high_confidence.hg38.vcf.gz")
 
 if [[ $# -lt 2 || $# -gt 3 ]]; then
     echo "Usage: run_variant_analysis.sh <hs38|hs38a|hs38DH|hs37|hs37d5> <FASTQ_file1> [FASTQ_file2]"
@@ -17,6 +21,13 @@ if [[ ! -f "${1}.fa" ]]; then
     echo "😡 Missing reference genome. Run setup_reference_genome.sh."
     exit
 fi
+
+for file in "${TRANCHE_RESOURCES[@]}"; do
+  if [[ (! -f "$file") || (! -f "${file}.tbi")]]; then
+    echo "😡 Trance Resource ${file} or ${file}.tbi missing."
+    exit
+  fi
+done
 
 echo "👉 Starting alignment with bwa."
 num_threads=$(nproc)
@@ -89,4 +100,23 @@ fi
 echo "👉 Running Base Quality Score Recalibration."
 ${HOME}/EVA/scripts/run_BQSR_single_node.sh ${1} ${OUTPUT_PREFIX}-fbayes-output.vcf ${OUTPUT_PREFIX}
 
-echo "👉 Done!!!"
+echo "👉 Filtering annotated variants using Convolutional Neural Net."
+${GATK} CNNScoreVariants \
+  -V ${DATA_DIR}/${OUTPUT_PREFIX}-output-gatk-spark-BQSR-output.vcf \
+	-R ${REFERENCE} \
+	-O ${DATA_DIR}/${OUTPUT_PREFIX}-cnn-annotated.vcf
+
+echo "👉 Applying tranche filters"
+for resource in "${TRANCHE_RESOURCES[@]}"; do
+    resources+=( --resource "$resource" )
+done
+
+${GATK} FilterVariantTranches \
+    -V ${DATA_DIR}/${OUTPUT_PREFIX}-cnn-annotated.vcf \
+    -O ${DATA_DIR}/${OUTPUT_PREFIX}-tranche-filtered-output.vcf.gz \
+    --info-key CNN_1D \
+    "${resources[@]}"
+
+echo "👉 Done!!! See ${DATA_DIR}/${OUTPUT_PREFIX}-tranche-filtered-output.vcf.gz file."
+
+date
