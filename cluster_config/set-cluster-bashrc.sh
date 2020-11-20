@@ -29,10 +29,10 @@ echo "
   export HADOOP_CONF_DIR=\$HADOOP_HOME/etc/hadoop
 
   # Conda Variables
-  export CONDA_HOME=/mydata/anaconda3
+  export CONDA_HOME='$data_dir'/anaconda3
 
   # New Path
-  export PATH=\$CONDA_HOME/bin:\$PATH:\$HADOOP_HOME/bin:\$HADOOP_HOME/sbin:\$SPARK_HOME/bin
+  export PATH=\$CONDA_HOME/envs/gatk/bin:\$CONDA_HOME/bin:\$PATH:\$HADOOP_HOME/bin:\$HADOOP_HOME/sbin:\$SPARK_HOME/bin
   " >> ~/.bashrc
 '
 
