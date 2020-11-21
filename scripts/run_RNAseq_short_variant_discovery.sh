@@ -55,7 +55,7 @@ ${GATK} FastqToSam \
 
 echo "👉 Mapping to Reference using STAR"
 
-if [ -d "${DATA_DIR}/STAR2_5" ]; then
+if [[ (! -d "${DATA_DIR}/STAR2_5") ]]; then
   echo "Creating STAR References"
   ${STAR} \
     --runMode genomeGenerate \
