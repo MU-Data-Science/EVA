@@ -66,7 +66,7 @@ ${CANNOLI_SUBMIT} --master ${SPARK_MASTER} --driver-memory ${DRIVER_MEMORY} --nu
     -executable ${FREE_BAYES} -reference ${REFERENCE} -add_files -single
 
 hdfs dfs -copyToLocal ${HDFS_PREFIX}/${INPUT_FILE}.vcf ${HOME}/${OUTPUT_PREFIX}-fbayes-output.vcf
-echo "👉 Done with variant analysis. See ${HOME}/${OUTPUT_PREFIX}-fbayes-output.vcf."
+echo "👉 Done with variant analysis. See ${DATA_DIR}/${OUTPUT_PREFIX}-fbayes-output.vcf."
 
 echo "👉 Running Base Quality Score Recalibration."
 ${HOME}/EVA/scripts/run_BQSR.sh ${1} ${DATA_DIR}/${OUTPUT_PREFIX}-fbayes-output.vcf ${OUTPUT_PREFIX} ${4}
