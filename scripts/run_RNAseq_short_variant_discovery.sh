@@ -21,6 +21,9 @@ if [[ $# -ne 2 ]]; then
     exit
 fi
 
+echo "👉 Deleting previous execution outputs..."
+rm -rvf ${OUTPUT_PREFIX}*
+
 echo "👉 Validating the Reference files."
 if [[ (! -f "${RNASEQ_REF_FASTA}") || (! -f "${RNASEQ_ANNOTATIONS_GTF}")]]; then
     echo "😡 References ${RNASEQ_REF_FASTA} or ${RNASEQ_ANNOTATIONS_GTF} missing."
@@ -105,7 +108,6 @@ ${GATK} BaseRecalibrator \
   "${knownSites[@]}"
 
 # Reference File URL's.
-# gs://gatk-test-data/intervals/star.gencode.v19.transcripts.patched_contigs.gtf
 # gs://gcp-public-data--broad-references/Homo_sapiens_assembly19_1000genomes_decoy/Homo_sapiens_assembly19_1000genomes_decoy.fasta
 # gs://gcp-public-data--broad-references/Homo_sapiens_assembly19_1000genomes_decoy/Homo_sapiens_assembly19_1000genomes_decoy.fasta.fai
 # gs://gcp-public-data--broad-references/Homo_sapiens_assembly19_1000genomes_decoy/Homo_sapiens_assembly19_1000genomes_decoy.dict
