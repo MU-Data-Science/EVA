@@ -5,8 +5,9 @@ DATA_DIR="/mydata"
 OUTPUT_PREFIX="${DATA_DIR}/VA-"${USER}"-result"
 RNASEQ_REF_FASTA="${DATA_DIR}/Homo_sapiens_assembly19_1000genomes_decoy.fasta"
 RNASEQ_ANNOTATIONS_GTF="${DATA_DIR}/star.gencode.v19.transcripts.patched_contigs.gtf"
+RNASEQ_DBSNP_VCF="${DATA_DIR}/Homo_sapiens_assembly19_1000genomes_decoy.dbsnp138.vcf"
 KNOWN_VCFS=(\
-  "${DATA_DIR}/Homo_sapiens_assembly19_1000genomes_decoy.dbsnp138.vcf" \
+  "${RNASEQ_DBSNP_VCF}" \
   "${DATA_DIR}/Mills_and_1000G_gold_standard.indels.b37.sites.vcf" \
   "${DATA_DIR}/Homo_sapiens_assembly19_1000genomes_decoy.known_indels.vcf")
 KNOWN_VCF_INDEXES=(\
@@ -15,6 +16,7 @@ KNOWN_VCF_INDEXES=(\
 
 GATK=${DATA_DIR}"/gatk-4.1.8.0/gatk"
 STAR="${DATA_DIR}/STAR/bin/Linux_x86_64/STAR"
+PICARD_JAR=${HOME}/picard.jar
 
 if [[ $# -ne 2 ]]; then
     echo "Usage: run_RNAseq_short_variant_discovery.sh <PATH_TO_FASTQ_FILE_1> <PATH_TO_FASTQ_FILE_2>"
@@ -95,17 +97,53 @@ ${GATK} SplitNCigarReads \
   -I ${OUTPUT_PREFIX}-MarkDup.bam \
   -O ${OUTPUT_PREFIX}-SplitNCigarReads.bam
 
-echo "Generating recalibration table for Base Quality Score Recalibration (BQSR)"
+echo "👉 Adding Read Group to BAM file."
+java -jar ${PICARD_JAR} AddOrReplaceReadGroups \
+  I=${OUTPUT_PREFIX}-SplitNCigarReads.bam \
+  O=${OUTPUT_PREFIX}-SplitNCigarReads.read-group.bam \
+  RGSM=mysample \
+  RGPU=myunit \
+  RGID=mygroupID \
+  RGLB=mylib \
+  RGPL=Illumina
+
+echo "👉 Generating recalibration table for Base Quality Score Recalibration (BQSR)"
 for vcf in "${KNOWN_VCFS[@]}"; do
     knownSites+=( --known-sites "${vcf}" )
 done
 
 ${GATK} BaseRecalibrator \
   -R ${RNASEQ_REF_FASTA} \
-  -I ${OUTPUT_PREFIX}-SplitNCigarReads.bam \
+  -I ${OUTPUT_PREFIX}-SplitNCigarReads.read-group.bam \
   --use-original-qualities \
   -O ${OUTPUT_PREFIX}.recal_data.csv \
   "${knownSites[@]}"
+
+echo "👉 Applying BQSR"
+${GATK} ApplyBQSR \
+  --add-output-sam-program-record \
+  -R ${RNASEQ_REF_FASTA} \
+  -I ${OUTPUT_PREFIX}-SplitNCigarReads.read-group.bam \
+  --use-original-qualities \
+  -O ${OUTPUT_PREFIX}-BQSR.bam \
+  --bqsr-recal-file ${OUTPUT_PREFIX}.recal_data.csv
+
+echo "👉 Running GATK HaplotypeCaller for variant calling."
+${GATK} HaplotypeCaller \
+	-R ${RNASEQ_REF_FASTA} \
+	-I ${OUTPUT_PREFIX}-BQSR.bam \
+	-O ${OUTPUT_PREFIX}.vcf.gz \
+	--dbsnp ${RNASEQ_DBSNP_VCF}
+
+echo "👉 Filtering variant calls based on INFO and/or FORMAT annotations"
+${GATK} VariantFiltration \
+  --R ${RNASEQ_REF_FASTA} \
+	--V ${OUTPUT_PREFIX}.vcf.gz \
+	--filter-name "FS" \
+	--filter "FS > 30.0" \
+	--filter-name "QD" \
+	--filter "QD < 2.0" \
+	-O ${OUTPUT_PREFIX}-filtered.vcf
 
 # Reference File URL's.
 # gs://gcp-public-data--broad-references/Homo_sapiens_assembly19_1000genomes_decoy/Homo_sapiens_assembly19_1000genomes_decoy.fasta
