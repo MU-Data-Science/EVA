@@ -145,6 +145,8 @@ ${GATK} VariantFiltration \
 	--filter "QD < 2.0" \
 	-O ${OUTPUT_PREFIX}-filtered.vcf
 
+echo "👉 Done!!! See ${OUTPUT_PREFIX}-filtered.vcf file."
+
 # Reference File URL's.
 # gs://gcp-public-data--broad-references/Homo_sapiens_assembly19_1000genomes_decoy/Homo_sapiens_assembly19_1000genomes_decoy.fasta
 # gs://gcp-public-data--broad-references/Homo_sapiens_assembly19_1000genomes_decoy/Homo_sapiens_assembly19_1000genomes_decoy.fasta.fai
