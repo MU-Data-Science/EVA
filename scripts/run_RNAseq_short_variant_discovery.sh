@@ -2,6 +2,7 @@
 
 # Configurations.
 DATA_DIR="/mydata"
+GATK_TEMP_DIR="${DATA_DIR}/gatk-tmp"
 OUTPUT_PREFIX="${DATA_DIR}/VA-"${USER}"-result"
 RNASEQ_REF_FASTA="${DATA_DIR}/Homo_sapiens_assembly19_1000genomes_decoy.fasta"
 RNASEQ_ANNOTATIONS_GTF="${DATA_DIR}/star.gencode.v19.transcripts.patched_contigs.gtf"
@@ -76,7 +77,7 @@ ${STAR} \
   --outFileNamePrefix ${OUTPUT_PREFIX}.star.
 
 echo "👉 Merging alignment data from the STAR SAM with data in the unmapped BAM file."
-${GATK} MergeBamAlignment \
+${GATK} MergeBamAlignment --java-options "-Djava.io.tmpdir=${GATK_TEMP_DIR}" \
   --REFERENCE_SEQUENCE ${RNASEQ_REF_FASTA} \
   --UNMAPPED_BAM ${OUTPUT_PREFIX}.unmapped.bam \
   --ALIGNED_BAM ${OUTPUT_PREFIX}.star.Aligned.out.sam \
@@ -84,7 +85,7 @@ ${GATK} MergeBamAlignment \
   --INCLUDE_SECONDARY_ALIGNMENTS false
 
 echo "👉 Identifying duplicate reads."
-${GATK} MarkDuplicates \
+${GATK} MarkDuplicates --java-options "-Djava.io.tmpdir=${GATK_TEMP_DIR}" \
   --INPUT ${OUTPUT_PREFIX}-merged.bam \
   --OUTPUT ${OUTPUT_PREFIX}-MarkDup.bam  \
   --CREATE_INDEX true \
@@ -92,7 +93,7 @@ ${GATK} MarkDuplicates \
   --METRICS_FILE ${OUTPUT_PREFIX}.dedupped.metrics
 
 echo "👉 Splitting Reads with N in Cigar"
-${GATK} SplitNCigarReads \
+${GATK} SplitNCigarReads --java-options "-Djava.io.tmpdir=${GATK_TEMP_DIR}" \
   -R ${RNASEQ_REF_FASTA} \
   -I ${OUTPUT_PREFIX}-MarkDup.bam \
   -O ${OUTPUT_PREFIX}-SplitNCigarReads.bam
@@ -112,7 +113,7 @@ for vcf in "${KNOWN_VCFS[@]}"; do
     knownSites+=( --known-sites "${vcf}" )
 done
 
-${GATK} BaseRecalibrator \
+${GATK} BaseRecalibrator --java-options "-Djava.io.tmpdir=${GATK_TEMP_DIR}" \
   -R ${RNASEQ_REF_FASTA} \
   -I ${OUTPUT_PREFIX}-SplitNCigarReads.read-group.bam \
   --use-original-qualities \
@@ -120,7 +121,7 @@ ${GATK} BaseRecalibrator \
   "${knownSites[@]}"
 
 echo "👉 Applying BQSR"
-${GATK} ApplyBQSR \
+${GATK} ApplyBQSR --java-options "-Djava.io.tmpdir=${GATK_TEMP_DIR}" \
   --add-output-sam-program-record \
   -R ${RNASEQ_REF_FASTA} \
   -I ${OUTPUT_PREFIX}-SplitNCigarReads.read-group.bam \
@@ -129,14 +130,14 @@ ${GATK} ApplyBQSR \
   --bqsr-recal-file ${OUTPUT_PREFIX}.recal_data.csv
 
 echo "👉 Running GATK HaplotypeCaller for variant calling."
-${GATK} HaplotypeCaller \
+${GATK} HaplotypeCaller --java-options "-Djava.io.tmpdir=${GATK_TEMP_DIR}" \
 	-R ${RNASEQ_REF_FASTA} \
 	-I ${OUTPUT_PREFIX}-BQSR.bam \
 	-O ${OUTPUT_PREFIX}.vcf.gz \
 	--dbsnp ${RNASEQ_DBSNP_VCF}
 
 echo "👉 Filtering variant calls based on INFO and/or FORMAT annotations"
-${GATK} VariantFiltration \
+${GATK} VariantFiltration --java-options "-Djava.io.tmpdir=${GATK_TEMP_DIR}" \
   --R ${RNASEQ_REF_FASTA} \
 	--V ${OUTPUT_PREFIX}.vcf.gz \
 	--filter-name "FS" \
