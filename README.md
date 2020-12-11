@@ -12,10 +12,13 @@ individuals to risk of severe COVID-19
 [(NEJM '2020)](https://www.nejm.org/doi/full/10.1056/NEJMoa2020283).
 Another study from
 [23andMe](https://www.statnews.com/2020/09/14/23andme-study-covid-19-genetic-link/)
-hints at links between a person's genes and COVID-19. [The COVID Human
-Genetic Effort](https://www.covidhge.com/) is an international
+hints at links between a person's genes and COVID-19. A recent [Nature publication](https://doi.org/10.1038/s41598-020-77632-8)
+identified genes related to five comorbidities that result in severe COVID-19 infection.
+[The COVID Human Genetic Effort](https://www.covidhge.com/) is an international
 consortium focused on better understanding COVID-19 based on human
 genomes.
+
+
 
 [[CloudLab account]](#signup-for-a-cloudlab-account)
 
