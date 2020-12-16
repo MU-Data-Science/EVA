@@ -4,7 +4,7 @@ nodes="$1"
 user_name="$USER"
 data_dir="/mydata"
 
-if [ "$#" -ne 1 ] | [ "$#" -ne 2 ]; then
+if !([ "$#" -ge 1 ] && [ "$#" -le 2 ]); then
   echo "Usage: cluster-configure.sh <no. of nodes> <spark3>"
   exit -1
 fi
@@ -16,7 +16,7 @@ hadoopVer=2.7
 hadoopSubVer=6
 sparkVer=2.4.7
 
-if [ $2 = spark3 ]; then
+if [ "$2" = spark3 ]; then
   hadoopVer=3.2
   hadoopSubVer=0
   sparkVer=3.0.0
