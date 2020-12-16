@@ -149,3 +149,6 @@ for node in `seq $node_start $(( ${node_end}-1 ))`
 do
     echo "$node_prefix$node" >> $SLAVES_FILE
 done
+
+# Adding workers file (for newer versions of hadoop.)
+cp ${SLAVES_FILE} ${hadoop_prefix}/etc/hadoop/workers
