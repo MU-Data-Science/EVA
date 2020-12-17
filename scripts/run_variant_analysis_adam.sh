@@ -1,7 +1,10 @@
 #!/usr/bin/env bash
 
-if [[ $# -ne 4 ]]; then
-    echo "Usage: run_variant_analysis_adam.sh <hs38|hs38a|hs38DH|hs37|hs37d5> <HDFS_PATH_OF_FASTQ_file1> <HDFS_PATH_OF_FASTQ_file2> <cluster size>"
+if [[ $# -lt 4 || $# -gt 6 ]]; then
+    echo "Usage: run_variant_analysis_adam.sh <hs38|hs38a|hs38DH|hs37|hs37d5> <HDFS_PATH_OF_FASTQ_file1> <HDFS_PATH_OF_FASTQ_file2> <cluster size> [sample ID] [y|s]"
+    echo "          Options:"
+    echo "              [sample ID] - ID of the sequence"
+    echo "              [y|s] - y indicates use YARN; s indicates use Spark standalone"
     exit
 fi
 
@@ -11,7 +14,19 @@ ADAM_SUBMIT=${ADAM_HOME}"/spark2_exec/adam-submit"
 HDFS_PREFIX="hdfs://vm0:9000"
 EXECUTOR_MEMORY=50g
 DRIVER_MEMORY=50g
-INPUT_FILE=mysequence
+
+if [[ $# -ge 5 ]]; then
+    INPUT_FILE=${5}
+    OUTPUT_PREFIX=${5}"-VA-"${USER}"-result"
+else
+    INPUT_FILE="mysequence"
+    OUTPUT_PREFIX="VA-"${USER}"-result"
+fi
+
+if [[ $# -eq 6 && ${6} == "y" ]]; then
+    SPARK_MASTER="yarn --deploy-mode client"
+fi
+
 DATA_DIR="/mydata"
 REFERENCE="file://"${DATA_DIR}"/"${1}".fa"
 REF_CHECK=${DATA_DIR}"/"${1}."fa"
@@ -19,7 +34,7 @@ DICT="file://"${DATA_DIR}"/"${1}".dict"
 FREE_BAYES=${DATA_DIR}"/freebayes/bin/freebayes"
 BWA=${DATA_DIR}"/bwa/bwa"
 GATK=${DATA_DIR}"/gatk-4.1.8.0/gatk"
-OUTPUT_PREFIX="VA-"${USER}"-result"
+
 TRANCHE_RESOURCES=(\
   "${DATA_DIR}/hapmap_3.3.hg38.vcf.gz" \
   "${DATA_DIR}/1000G_omni2.5.hg38.vcf.gz" \
@@ -39,7 +54,7 @@ if [[ ! -f "${REF_CHECK}" ]]; then
 fi
 
 for file in "${TRANCHE_RESOURCES[@]}"; do
-  if [[ (! -f "$file") || (! -f "${file}.tbi")]]; then
+  if [[ (! -f "$file") || (! -f "${file}.tbi") ]]; then
     echo "😡 Trance Resource ${file} or ${file}.tbi missing."
     exit
   fi
