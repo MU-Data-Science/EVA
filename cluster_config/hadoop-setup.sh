@@ -75,6 +75,9 @@ echo '<?xml version="1.0"?>
 ' > $MAPRED_SITE_FILE
 
 
+maxMemory=16384
+maxvCores=16
+
 # YARN-SITE
 YARN_SITE_FILE="$hadoop_prefix/etc/hadoop/yarn-site.xml"
 echo '<?xml version="1.0"?>
@@ -99,6 +102,15 @@ echo '<?xml version="1.0"?>
                <name>yarn.resourcemanager.address</name>
                <value>'$master_node':8050</value>
       </property>
+      <property>
+               <name>yarn.scheduler.maximum-allocation-mb</name>
+               <value>'$maxMemory'</value>
+      </property>
+      <property>
+               <name>yarn.scheduler.maximum-allocation-vcores</name>
+               <value>'$maxvCores'</value>
+      </property>
+
 </configuration>
 ' > $YARN_SITE_FILE
 
