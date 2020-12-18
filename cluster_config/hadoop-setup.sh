@@ -115,6 +115,177 @@ echo '<?xml version="1.0"?>
 ' > $YARN_SITE_FILE
 
 
+# CAPACITY-SCHEDULER
+CAPACITY_SCHEDULER_FILE="$hadoop_prefix/etc/hadoop/capacity-scheduler.xml"
+echo '<?xml version="1.0"?>
+<configuration>
+
+  <property>
+    <name>yarn.scheduler.capacity.maximum-applications</name>
+    <value>10000</value>
+    <description>
+      Maximum number of applications that can be pending and running.
+    </description>
+  </property>
+
+  <property>
+    <name>yarn.scheduler.capacity.maximum-am-resource-percent</name>
+    <value>0.8</value>
+    <description>
+      Maximum percent of resources in the cluster which can be used to run
+      application masters i.e. controls number of concurrent running
+      applications.
+    </description>
+  </property>
+
+  <property>
+    <name>yarn.scheduler.capacity.resource-calculator</name>
+    <value>org.apache.hadoop.yarn.util.resource.DefaultResourceCalculator</value>
+    <description>
+      The ResourceCalculator implementation to be used to compare
+      Resources in the scheduler.
+      The default i.e. DefaultResourceCalculator only uses Memory while
+      DominantResourceCalculator uses dominant-resource to compare
+      multi-dimensional resources such as Memory, CPU etc.
+    </description>
+  </property>
+
+  <property>
+    <name>yarn.scheduler.capacity.root.queues</name>
+    <value>default,gold,silver,bronze</value>
+    <description>
+      The queues at the this level (root is the root queue).
+    </description>
+  </property>
+
+  <property>
+    <name>yarn.scheduler.capacity.root.default.capacity</name>
+    <value>25</value>
+    <description>Default queue target capacity.</description>
+  </property>
+
+  <property>
+    <name>yarn.scheduler.capacity.root.gold.capacity</name>
+    <value>25</value>
+    <description>Gold queue target capacity.</description>
+  </property>
+
+  <property>
+    <name>yarn.scheduler.capacity.root.silver.capacity</name>
+    <value>25</value>
+    <description>Silver queue target capacity.</description>
+  </property>
+
+  <property>
+    <name>yarn.scheduler.capacity.root.bronze.capacity</name>
+    <value>25</value>
+    <description>Bronze queue target capacity.</description>
+  </property>
+
+  <property>
+    <name>yarn.scheduler.capacity.root.default.user-limit-factor</name>
+    <value>1</value>
+    <description>
+    </description>
+  </property>
+
+  <property>
+    <name>yarn.scheduler.capacity.root.default.maximum-capacity</name>
+    <value>100</value>
+    <description>
+    </description>
+  </property>
+
+  <property>
+    <name>yarn.scheduler.capacity.root.default.state</name>
+    <value>RUNNING</value>
+    <description>
+    </description>
+  </property>
+
+  <property>
+    <name>yarn.scheduler.capacity.root.default.acl_submit_applications</name>
+    <value>*</value>
+    <description>
+    </description>
+  </property>
+
+  <property>
+    <name>yarn.scheduler.capacity.root.default.acl_administer_queue</name>
+    <value>*</value>
+    <description>
+    </description>
+  </property>
+
+  <property>
+    <name>yarn.scheduler.capacity.root.default.acl_application_max_priority</name>
+    <value>*</value>
+    <description>
+    </description>
+  </property>
+
+   <property>
+     <name>yarn.scheduler.capacity.root.default.maximum-application-lifetime
+     </name>
+     <value>-1</value>
+     <description>
+     </description>
+   </property>
+
+   <property>
+     <name>yarn.scheduler.capacity.root.default.default-application-lifetime
+     </name>
+     <value>-1</value>
+     <description>
+     </description>
+   </property>
+
+  <property>
+    <name>yarn.scheduler.capacity.node-locality-delay</name>
+    <value>40</value>
+    <description>
+    </description>
+  </property>
+
+  <property>
+    <name>yarn.scheduler.capacity.rack-locality-additional-delay</name>
+    <value>-1</value>
+    <description>
+    </description>
+  </property>
+
+  <property>
+    <name>yarn.scheduler.capacity.queue-mappings</name>
+    <value></value>
+    <description>
+    </description>
+  </property>
+
+  <property>
+    <name>yarn.scheduler.capacity.queue-mappings-override.enable</name>
+    <value>false</value>
+    <description>
+    </description>
+  </property>
+
+  <property>
+    <name>yarn.scheduler.capacity.per-node-heartbeat.maximum-offswitch-assignments</name>
+    <value>1</value>
+    <description>
+    </description>
+  </property>
+
+
+  <property>
+    <name>yarn.scheduler.capacity.application.fail-fast</name>
+    <value>false</value>
+    <description>
+    </description>
+  </property>
+
+</configuration>
+' > $CAPACITY_SCHEDULER_FILE
+
 HDFS_SITE_FILE="$hadoop_prefix/etc/hadoop/hdfs-site"
 # HDFS-MASTERNODE
 echo '<?xml version="1.0" encoding="UTF-8"?>
