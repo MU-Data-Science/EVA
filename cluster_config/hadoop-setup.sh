@@ -76,6 +76,7 @@ echo '<?xml version="1.0"?>
 
 
 maxMemory=16384
+maxResourceMemory=20480
 maxvCores=16
 
 # YARN-SITE
@@ -107,10 +108,17 @@ echo '<?xml version="1.0"?>
                <value>'$maxMemory'</value>
       </property>
       <property>
+               <name>yarn.nodemanager.resource.memory-mb</name>
+               <value>'$maxResourceMemory'</value>
+      </property>
+      <property>
                <name>yarn.scheduler.maximum-allocation-vcores</name>
                <value>'$maxvCores'</value>
       </property>
-
+      <property>
+               <name>yarn.nodemanager.resource.cpu-vcores</name>
+               <value>'$maxvCores'</value>
+      </property>
 </configuration>
 ' > $YARN_SITE_FILE
 
@@ -152,7 +160,7 @@ echo '<?xml version="1.0"?>
 
   <property>
     <name>yarn.scheduler.capacity.root.queues</name>
-    <value>default,gold,silver,bronze</value>
+    <value>default</value>
     <description>
       The queues at the this level (root is the root queue).
     </description>
@@ -160,26 +168,8 @@ echo '<?xml version="1.0"?>
 
   <property>
     <name>yarn.scheduler.capacity.root.default.capacity</name>
-    <value>25</value>
+    <value>100</value>
     <description>Default queue target capacity.</description>
-  </property>
-
-  <property>
-    <name>yarn.scheduler.capacity.root.gold.capacity</name>
-    <value>25</value>
-    <description>Gold queue target capacity.</description>
-  </property>
-
-  <property>
-    <name>yarn.scheduler.capacity.root.silver.capacity</name>
-    <value>25</value>
-    <description>Silver queue target capacity.</description>
-  </property>
-
-  <property>
-    <name>yarn.scheduler.capacity.root.bronze.capacity</name>
-    <value>25</value>
-    <description>Bronze queue target capacity.</description>
   </property>
 
   <property>
