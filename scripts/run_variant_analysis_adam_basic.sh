@@ -44,7 +44,7 @@ let NUM_EXECUTORS=${4}
 let NUM_CORES=$(nproc)-4
 
 echo "👉 Deleting files..."
-hdfs dfs -rm -r ${HDFS_PREFIX}/${INPUT_FILE}.ifq ${HDFS_PREFIX}/${INPUT_FILE}.bam \
+hdfs dfs -rm -r ${HDFS_PREFIX}/${INPUT_FILE}.ifq ${HDFS_PREFIX}/${INPUT_FILE}.bam* \
         ${HDFS_PREFIX}/${INPUT_FILE}.bam.adam ${HDFS_PREFIX}/${INPUT_FILE}.vcf
 
 rm -rvf ${DATA_DIR}/${OUTPUT_PREFIX}-*.vcf*
