@@ -138,7 +138,7 @@ echo '<?xml version="1.0"?>
 
   <property>
     <name>yarn.scheduler.capacity.maximum-am-resource-percent</name>
-    <value>0.8</value>
+    <value>0.3</value>
     <description>
       Maximum percent of resources in the cluster which can be used to run
       application masters i.e. controls number of concurrent running
