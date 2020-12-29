@@ -15,11 +15,13 @@ shareDir="/proj/eva-public-PG0"
 hadoopVer=2.7
 hadoopSubVer=6
 sparkVer=2.4.7
+SCALA_VER=2.11.8
 
 if [ "$2" = spark3 ]; then
   hadoopVer=3.2
   hadoopSubVer=0
   sparkVer=3.0.0
+  SCALA_VER=2.12.8
 fi
 
 experiment=$(basename $machines)
@@ -62,7 +64,7 @@ count=1
 for script in "${scripts[@]}"
 do
   log_file="LOG-"$script"-"$experiment".log"
-  cmd="./$script.sh $machines $user_name ~/.ssh/id_rsa $data_dir $shareDir $hadoopVer $sparkVer $hadoopSubVer &> $log_file"
+  cmd="./$script.sh $machines $user_name ~/.ssh/id_rsa $data_dir $shareDir $hadoopVer $sparkVer $hadoopSubVer $SCALA_VER &> $log_file"
   
   eval "$cmd"
   echo ">> FINISHED ($count/${#scripts[@]}) $script.sh LOG $log_file"

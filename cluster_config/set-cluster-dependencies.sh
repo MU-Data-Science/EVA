@@ -3,8 +3,7 @@
 cluster_addresses="$1"
 username="$2"
 private_key="$3"
-
-SCALA_VER="2.11.8"
+SCALA_VER="$9"
 EMAIL_DOMAIN="eva.com"
 
 ssh_command="
