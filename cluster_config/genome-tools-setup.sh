@@ -73,4 +73,8 @@ echo "👉 Done with Cannoli setup 😎"
 # Installing GATK python dependencies.
 $DATA_DIR/Anaconda3/bin/conda env create -n gatk -f ~/gatk-${GATK_VERSION}/gatkcondaenv.yml
 
+# Setup EVA
+git clone https://github.com/MU-Data-Science/EVA.git $HOME/EVA
+echo "👉 Done cloning EVA 😎"
+
 echo "👉 Successful installation of the required tools. 😎"
