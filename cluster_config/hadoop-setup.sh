@@ -75,9 +75,9 @@ echo '<?xml version="1.0"?>
 ' > $MAPRED_SITE_FILE
 
 
-maxMemory=16384
-maxResourceMemory=20480
-maxvCores=16
+maxMemory=32768
+maxResourceMemory=40960
+maxvCores=32
 
 # YARN-SITE
 YARN_SITE_FILE="$hadoop_prefix/etc/hadoop/yarn-site.xml"
