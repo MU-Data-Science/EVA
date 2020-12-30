@@ -76,8 +76,8 @@ echo '<?xml version="1.0"?>
 
 
 maxMemory=32768
-maxResourceMemory=40960
-maxvCores=32
+maxResourceMemory=46080
+maxvCores=24
 
 # YARN-SITE
 YARN_SITE_FILE="$hadoop_prefix/etc/hadoop/yarn-site.xml"

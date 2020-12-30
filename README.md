@@ -204,6 +204,8 @@ has 700+ human genome sequences from COVID-19 studies using the RNA-sequencing (
 
 ## Performance Evaluation
 
+### Experiment 1
+
 We tested the performance of different approaches for variant analysis on Clemson [c6420](https://www.clemson.cloudlab.us/portal/show-nodetype.php?type=c6420) nodes. The reference genome used was `hs38`. We report the size of the paired-end sequences and time taken in the below table.
 
 <table>
@@ -255,8 +257,15 @@ We tested the performance of different approaches for variant analysis on Clemso
     </tr>
 </table>
 
+### Experiment 2
 We tested the performance of de novo assemly by executing `scripts/run_denovo.sh` on [sampleIDs.txt](misc/sampleIDs.txt). The k-mer value was 51.
 It took nearly 40 hours on a 4-node CloudLab cluster (`c8220`) for 21 paired-end sequences. The download time is not included. HDFS used 1.34 TB of storage (`.ifq` files were compressed).
+
+### Experiment 3
+We recently performed variant analysis on 98 whole genome sequences (low-coverage) available from the 1000 Genomes Project. We set up a 9-node cluster on CloudLab using `c220g2` nodes (Wisconsin).
+GATK best practice pipeline was implemented in `run_variant_analysis_gatk_spark.sh`. The below figure shows the time taken for each run accession ID.
+
+![Results](misc/time-taken-variant-analysis.png)
 
 ## Report Issues
 
