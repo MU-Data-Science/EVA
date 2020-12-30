@@ -262,10 +262,12 @@ We tested the performance of de novo assemly by executing `scripts/run_denovo.sh
 It took nearly 40 hours on a 4-node CloudLab cluster (`c8220`) for 21 paired-end sequences. The download time is not included. HDFS used 1.34 TB of storage (`.ifq` files were compressed).
 
 ### Experiment 3
-We recently performed variant analysis on 98 whole genome sequences (low-coverage) available from the 1000 Genomes Project. We set up a 9-node cluster on CloudLab using `c220g2` nodes (Wisconsin).
-GATK best practice pipeline was implemented in `run_variant_analysis_gatk_spark.sh`. The below figure shows the time taken for each run accession ID.
+We recently performed variant analysis on 98 whole genome sequences (low-coverage) available from the 1000 Genomes Project. We used a 9-node cluster on CloudLab containing `c220g2` nodes (Wisconsin).
+GATK best practice pipeline was implemented in `run_variant_analysis_gatk_spark.sh`. The below figures show the time taken for each genome sequence (i.e., run accession ID) and a scatter plot comparing the time taken vs. the sequence size.
 
-![Results](misc/time-taken-variant-analysis.png)
+![Time-taken](misc/time-taken-variant-analysis.png)
+
+![Time-vs-Size](misc/scatter-time-size.png)
 
 ## Report Issues
 
