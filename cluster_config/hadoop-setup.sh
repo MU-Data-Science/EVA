@@ -76,8 +76,8 @@ echo '<?xml version="1.0"?>
 
 
 maxMemory=32768
-maxResourceMemory=46080
-maxvCores=24
+maxResourceMemory=61440
+maxvCores=36
 
 # YARN-SITE
 YARN_SITE_FILE="$hadoop_prefix/etc/hadoop/yarn-site.xml"
@@ -105,7 +105,7 @@ echo '<?xml version="1.0"?>
       </property>
       <property>
                <name>yarn.scheduler.maximum-allocation-mb</name>
-               <value>'$maxMemory'</value>
+               <value>'$maxResourceMemory'</value>
       </property>
       <property>
                <name>yarn.nodemanager.resource.memory-mb</name>
