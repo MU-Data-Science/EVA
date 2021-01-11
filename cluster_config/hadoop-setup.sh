@@ -119,6 +119,10 @@ echo '<?xml version="1.0"?>
                <name>yarn.nodemanager.resource.cpu-vcores</name>
                <value>'$maxvCores'</value>
       </property>
+      <property>
+                <name>yarn.resourcemanager.application-https.policy</name>
+                <value>STRICT</value>
+      </property>
 </configuration>
 ' > $YARN_SITE_FILE
 
