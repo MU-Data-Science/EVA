@@ -123,6 +123,10 @@ echo '<?xml version="1.0"?>
                 <name>yarn.resourcemanager.application-https.policy</name>
                 <value>STRICT</value>
       </property>
+      <property>
+                <name>yarn.log-aggregation-enable</name>
+                <value>true</value>
+      </property>
 </configuration>
 ' > $YARN_SITE_FILE
 
