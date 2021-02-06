@@ -35,7 +35,7 @@ echo "
 #spark.master                spark://$MSTR:7077
 #spark.driver.memory         50g
 spark.executor.memory       10g
-#spark.executor.cores        1
+spark.executor.cores        4
 #spark.eventLog.dir          hdfs://$MSTR:8021/sparkEvntLg
 spark.authenticate           true
 spark.authenticate.secret    $SPARK_SECRET
