@@ -68,6 +68,9 @@ wait
 echo "Starting Spark."
 $data_dir/spark/sbin/start-all.sh
 
+echo "Creating /spark-events directory."
+$data_dir/hadoop/bin/hdfs dfs -mkdir /spark-events
+
 echo -e ">> SETUP FINISHED 🌮"
 exit 0
 
