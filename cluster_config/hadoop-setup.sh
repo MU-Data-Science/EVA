@@ -77,6 +77,7 @@ echo '<?xml version="1.0"?>
 
 maxMemory=32768
 maxResourceMemory=61440
+minResourceMemory=2048
 maxvCores=36
 
 # YARN-SITE
@@ -106,6 +107,10 @@ echo '<?xml version="1.0"?>
       <property>
                <name>yarn.scheduler.maximum-allocation-mb</name>
                <value>'$maxResourceMemory'</value>
+      </property>
+            <property>
+               <name>yarn.scheduler.minimum-allocation-mb</name>
+               <value>'$minResourceMemory'</value>
       </property>
       <property>
                <name>yarn.nodemanager.resource.memory-mb</name>
