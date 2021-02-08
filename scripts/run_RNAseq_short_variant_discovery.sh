@@ -50,7 +50,7 @@ done
 let num_threads=$(nproc)
 
 echo "👉 Converting fastq pairs to ubam"
-${GATK} FastqToSam \
+${GATK} FastqToSam --java-options "-Djava.io.tmpdir=${GATK_TEMP_DIR}" \
   --FASTQ ${1} \
   --FASTQ2 ${2} \
   --SAMPLE_NAME RNASample \
