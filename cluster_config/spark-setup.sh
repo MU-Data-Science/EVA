@@ -34,9 +34,10 @@ SPARK_DEFAULTS_FILE="$spark_prefix/conf/spark-defaults.conf"
 echo "
 #spark.master                spark://$MSTR:7077
 #spark.driver.memory         50g
-spark.executor.memory       10g
-spark.executor.cores        4
-#spark.eventLog.dir          hdfs://$MSTR:8021/sparkEvntLg
+spark.executor.memory        10g
+spark.executor.cores         4
+spark.eventLog.dir           hdfs://$MSTR:9000/spark-events
+spark.eventLog.enabled       true
 spark.authenticate           true
 spark.authenticate.secret    $SPARK_SECRET
 spark.ui.enabled             false
