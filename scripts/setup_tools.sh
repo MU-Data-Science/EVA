@@ -69,7 +69,6 @@ GATK_LOCAL_ZIP=gatk.zip
 GATK_ZIP_RELEASE=https://github.com/broadinstitute/gatk/releases/download/${GATK_VERSION}/gatk-${GATK_VERSION}.zip
 wget ${GATK_ZIP_RELEASE} -O ${GATK_LOCAL_ZIP}
 unzip ${GATK_LOCAL_ZIP}
-mv gatk-${GATK_VERSION} gatk
 rm -rf ${GATK_LOCAL_ZIP}
 echo "👉 Done with GATK download 😎"
 
@@ -84,5 +83,8 @@ echo "👉 Done with SPAdes download 😎"
 
 # Install Abyss
 brew install abyss
+
+# START setup
+cd ${HOME} && git clone https://github.com/alexdobin/STAR.git
 
 echo "👉 Successful installation of the required tools. 😎"
