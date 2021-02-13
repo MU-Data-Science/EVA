@@ -17,7 +17,7 @@ KNOWN_VCF_INDEXES=(\
 
 GATK=${DATA_DIR}"/gatk-4.1.8.0/gatk"
 STAR="${DATA_DIR}/STAR/bin/Linux_x86_64/STAR"
-PICARD_JAR=${HOME}/picard.jar
+PICARD_JAR=${DATA_DIR}/picard.jar
 
 if [[ $# -ne 2 ]]; then
     echo "Usage: run_RNAseq_short_variant_discovery.sh <PATH_TO_FASTQ_FILE_1> <PATH_TO_FASTQ_FILE_2>"
