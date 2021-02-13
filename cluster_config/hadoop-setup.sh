@@ -216,14 +216,14 @@ echo '<?xml version="1.0"?>
 
   <property>
     <name>yarn.scheduler.capacity.root.default.acl_submit_applications</name>
-    <value>*</value>
+    <value>rpraveen,arung</value>
     <description>
     </description>
   </property>
 
   <property>
     <name>yarn.scheduler.capacity.root.default.acl_administer_queue</name>
-    <value>*</value>
+    <value>rpraveen,arung</value>
     <description>
     </description>
   </property>
