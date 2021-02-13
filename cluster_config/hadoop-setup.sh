@@ -132,6 +132,14 @@ echo '<?xml version="1.0"?>
                 <name>yarn.log-aggregation-enable</name>
                 <value>true</value>
       </property>
+      <property>
+                <name>yarn.acl.enable</name>
+                <value>true</value>
+      </property>
+      <property>
+                <name>yarn.admin.acl</name>
+                <value>rpraveen,arung</value>
+      </property>
 </configuration>
 ' > $YARN_SITE_FILE
 
