@@ -79,6 +79,7 @@ maxMemory=32768
 maxResourceMemory=61440
 minResourceMemory=2048
 maxvCores=36
+yarnUser=${USER}
 
 # YARN-SITE
 YARN_SITE_FILE="$hadoop_prefix/etc/hadoop/yarn-site.xml"
@@ -138,7 +139,7 @@ echo '<?xml version="1.0"?>
       </property>
       <property>
                 <name>yarn.admin.acl</name>
-                <value>rpraveen,arung</value>
+                <value>'${yarnUser}'</value>
       </property>
 </configuration>
 ' > $YARN_SITE_FILE
@@ -216,14 +217,14 @@ echo '<?xml version="1.0"?>
 
   <property>
     <name>yarn.scheduler.capacity.root.default.acl_submit_applications</name>
-    <value>rpraveen,arung</value>
+    <value>'${yarnUser}'</value>
     <description>
     </description>
   </property>
 
   <property>
     <name>yarn.scheduler.capacity.root.default.acl_administer_queue</name>
-    <value>rpraveen,arung</value>
+    <value>'${yarnUser}'</value>
     <description>
     </description>
   </property>
