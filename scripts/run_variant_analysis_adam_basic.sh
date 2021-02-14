@@ -75,7 +75,13 @@ ${CANNOLI_SUBMIT} --master ${SPARK_MASTER} --driver-memory ${DRIVER_MEMORY} --nu
     -- freebayes ${HDFS_PREFIX}/${INPUT_FILE}.bam.adam ${HDFS_PREFIX}/${INPUT_FILE}.vcf \
     -executable ${FREE_BAYES} -reference ${REFERENCE} -add_files -single
 
-hdfs dfs -copyToLocal ${HDFS_PREFIX}/${INPUT_FILE}.vcf ${HOME}/${OUTPUT_PREFIX}-fbayes-output.vcf
-echo "👉 Done with variant analysis. See ${DATA_DIR}/${OUTPUT_PREFIX}-fbayes-output.vcf."
+#hdfs dfs -copyToLocal ${HDFS_PREFIX}/${INPUT_FILE}.vcf ${HOME}/${OUTPUT_PREFIX}-fbayes-output.vcf
+
+echo "👉 Deleting temporary files."
+
+hdfs dfs -rm -r ${HDFS_PREFIX}/${INPUT_FILE}.ifq ${HDFS_PREFIX}/${INPUT_FILE}.bam* \
+        ${HDFS_PREFIX}/${INPUT_FILE}.vcf_*
+
+echo "👉 Done with variant analysis. See ${HDFS_PREFIX}/${INPUT_FILE}.vcf."
 
 date
