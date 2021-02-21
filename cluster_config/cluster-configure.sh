@@ -71,6 +71,10 @@ do
   count=`expr $count + 1`
 done
 
+# Replication factor for temporary files
+$data_dir/hadoop/bin/hdfs dfs -mkdir /tmp; $data_dir/hadoop/bin/hdfs dfs -setrep 1 /tmp >& /dev/null
+$data_dir/hadoop/bin/hdfs dfs -mkdir /spark-events; $data_dir/hadoop/bin/hdfs dfs -setrep 1 /spark-events >& /dev/null
+
 # Printing Hadoop report
 HADOOP_STATUS_LOG="hadoop-data-nodes-alive.log"
 $data_dir/hadoop/bin/hdfs dfsadmin -report | grep 'Name: ' > ${HADOOP_STATUS_LOG}
