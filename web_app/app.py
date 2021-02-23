@@ -102,6 +102,33 @@ def execute_cluster():
 
     return render_template("success.html")
 
+@app.route('/remote_cluster')
+def remote_cluster():
+    # Reading data from the request.
+    email = request.args.get("email")
+    seq_1_url = request.args.get("seq_1_url")
+    seq_2_url = request.args.get("seq_2_url")
+    ref = request.args.get("ref")
+
+    # For release 1:
+    seq = request.args.get("sequence")
+    print("Arun: app.py :: remote_cluster :: Sequence URL's :: seq", seq)
+    if seq != "Other":
+        seq_1_url = seq + "_1" + constants.FILE_EXTENSION_1
+        seq_2_url = seq + "_2" + constants.FILE_EXTENSION_1
+
+    print("app.py :: remote_cluster :: Sequence URL's :: ", seq_1_url, " ; ", seq_2_url)
+
+    # Creating an id for the experiment.
+    exp_id = ''.join(random.choice(string.ascii_uppercase + string.digits) for _ in range(10))
+    print("app.py :: remote_cluster :: Experiment Id :: ", exp_id)
+
+    # Performing variant analysis on a remote cluster.
+    execute_va(constants.REMOTE_CLUSTER_MASTER, seq_1_url, seq_2_url, ref, constants.DEFAULT_CLUSTER_SIZE, exp_id)
+
+@app.route('/remote')
+def remote():
+  return render_template("remote.html")
 
 @app.route("/standalone")
 def standalone():

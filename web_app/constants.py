@@ -21,6 +21,7 @@ SITE_APT = "apt"
 DEFAULT_SITE = "utah"
 DEFAULT_CLUSTER_SIZE = "16"
 MASTER_NODE = "vm0"
+REMOTE_CLUSTER_MASTER = "1.2.3.4"
 
 # User Configurable Constants
 MAX_RETRIES = 10
