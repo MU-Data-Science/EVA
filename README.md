@@ -18,7 +18,7 @@ identified genes related to five comorbidities that result in severe COVID-19 in
 consortium focused on better understanding COVID-19 based on human
 genomes.
 
-
+We recently published a data resource containing variant analysis of human genome sequences for COVID-19 research. Please check this out on [IEEE DataPort](https://ieee-dataport.org/open-access/variant-analysis-human-genome-sequences-covid-19-research).
 
 [[CloudLab account]](#signup-for-a-cloudlab-account)
 
