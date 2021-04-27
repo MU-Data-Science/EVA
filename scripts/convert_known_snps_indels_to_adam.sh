@@ -12,7 +12,7 @@ ADAM_SUBMIT=${ADAM_HOME}"/exec/adam-submit"
 HDFS_PREFIX="hdfs://vm0:9000"
 EXECUTOR_MEMORY=50g
 DRIVER_MEMORY=50g
-PROJ_DIR="file:/proj/eva-public-PG0"
+PROJ_DIR="/proj/eva-public-PG0"
 KNOWN_SNPS_VCF=${PROJ_DIR}"/Homo_sapiens_assembly38.dbsnp138.vcf.gz"
 KNOWN_INDELS_VCF=${PROJ_DIR}"/Homo_sapiens_assembly38.known_indels.vcf.gz"
 KNOWN_SNPS_HDFS=${HDFS_PREFIX}"/known_snps"
@@ -38,11 +38,11 @@ hdfs dfs -rm -r ${KNOWN_SNPS_HDFS} ${KNOWN_INDELS_HDFS}
 date
 echo "👉 Converting known SNPs to Adam format."
 ${ADAM_SUBMIT} --master ${SPARK_MASTER} --driver-memory ${DRIVER_MEMORY} --num-executors ${NUM_EXECUTORS} --executor-cores ${NUM_CORES} --executor-memory ${EXECUTOR_MEMORY} \
-    -- transformVariants ${KNOWN_SNPS_VCF} ${KNOWN_SNPS_HDFS}
+    -- transformVariants "file:"${KNOWN_SNPS_VCF} ${KNOWN_SNPS_HDFS}
 
 echo "👉 Converting known INDELs to Adam format."
 ${ADAM_SUBMIT} --master ${SPARK_MASTER} --driver-memory ${DRIVER_MEMORY} --num-executors ${NUM_EXECUTORS} --executor-cores ${NUM_CORES} --executor-memory ${EXECUTOR_MEMORY} \
-    -- transformVariants ${KNOWN_INDELS_VCF} ${KNOWN_INDELS_HDFS}
+    -- transformVariants "file:"${KNOWN_INDELS_VCF} ${KNOWN_INDELS_HDFS}
 
 echo "👉 Done with conversion."
 
