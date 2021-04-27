@@ -52,6 +52,16 @@ if [[ ! -f "${REF_CHECK}" ]]; then
     exit
 fi
 
+if [[ hdfs dfs -test -e "${KNOWN_SNPS_HDFS}" ]]; then
+    echo "😡 Missing ${KNOWN_SNPS_HDFS}. Run convert_known_snps_indels_to_adam.sh."
+    exit
+fi
+
+if [[ hdfs dfs -test -e "${KNOWN_INDELS_HDFS}" ]]; then
+    echo "😡 Missing ${KNOWN_INDELS_HDFS}. Run convert_known_snps_indels_to_adam.sh."
+    exit
+fi
+
 date
 echo "👉 Interleaving FASTQ files."
 ${CANNOLI_SUBMIT} --master ${SPARK_MASTER} --driver-memory ${DRIVER_MEMORY} --num-executors ${NUM_EXECUTORS} --executor-cores ${NUM_CORES} --executor-memory ${EXECUTOR_MEMORY} \
