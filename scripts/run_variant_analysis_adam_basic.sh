@@ -34,11 +34,8 @@ DICT="file://"${DATA_DIR}"/"${1}".dict"
 FREE_BAYES=${DATA_DIR}"/freebayes/bin/freebayes"
 BWA=${DATA_DIR}"/bwa/bwa"
 GATK=${DATA_DIR}"/gatk-4.1.8.0/gatk"
-
-TRANCHE_RESOURCES=(\
-  "${DATA_DIR}/hapmap_3.3.hg38.vcf.gz" \
-  "${DATA_DIR}/1000G_omni2.5.hg38.vcf.gz" \
-  "${DATA_DIR}/1000G_phase1.snps.high_confidence.hg38.vcf.gz")
+KNOWN_SNPS_HDFS=${HDFS_PREFIX}"/known_snps"
+KNOWN_INDELS_HDFS=${HDFS_PREFIX}"/known_indels"
 
 let NUM_EXECUTORS=${4}
 let NUM_CORES=$(nproc)-4
@@ -65,17 +62,16 @@ ${CANNOLI_SUBMIT} --master ${SPARK_MASTER} --driver-memory ${DRIVER_MEMORY} --nu
     -- bwaMem ${HDFS_PREFIX}/${INPUT_FILE}.ifq ${HDFS_PREFIX}/${INPUT_FILE}.bam \
     -executable ${BWA} -sample_id mysample -index ${REFERENCE} -sequence_dictionary ${DICT} -single -add_files
 
-echo "👉 Sorting and marking duplicates before variant calling."
+echo "👉 Sorting, marking duplicates, BQSR and indel realignment before variant calling."
 ${ADAM_SUBMIT} --master ${SPARK_MASTER} --driver-memory ${DRIVER_MEMORY} --num-executors ${NUM_EXECUTORS} --executor-cores ${NUM_CORES} --executor-memory ${EXECUTOR_MEMORY} \
     -- transformAlignments ${HDFS_PREFIX}/${INPUT_FILE}.bam ${HDFS_PREFIX}/${INPUT_FILE}.bam.adam \
+    -recalibrate_base_qualities -known_snps ${KNOWN_SNPS_HDFS} -realign_indels -known_indels ${KNOWN_INDELS_HDFS} \
     -mark_duplicate_reads -sort_by_reference_position_and_index
 
 echo "👉 Variant calling using freebayes."
 ${CANNOLI_SUBMIT} --master ${SPARK_MASTER} --driver-memory ${DRIVER_MEMORY} --num-executors ${NUM_EXECUTORS} --executor-cores ${NUM_CORES} --executor-memory ${EXECUTOR_MEMORY} \
     -- freebayes ${HDFS_PREFIX}/${INPUT_FILE}.bam.adam ${HDFS_PREFIX}/${INPUT_FILE}.vcf \
     -executable ${FREE_BAYES} -reference ${REFERENCE} -add_files -single
-
-#hdfs dfs -copyToLocal ${HDFS_PREFIX}/${INPUT_FILE}.vcf ${HOME}/${OUTPUT_PREFIX}-fbayes-output.vcf
 
 echo "👉 Deleting temporary files."
 
