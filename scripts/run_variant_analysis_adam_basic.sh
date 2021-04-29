@@ -52,12 +52,14 @@ if [[ ! -f "${REF_CHECK}" ]]; then
     exit
 fi
 
-if [[ hdfs dfs -test -e "${KNOWN_SNPS_HDFS}" ]]; then
+hdfs dfs -test -e ${KNOWN_SNPS_HDFS}
+if [[ $? -ne 0 ]]; then
     echo "😡 Missing ${KNOWN_SNPS_HDFS}. Run convert_known_snps_indels_to_adam.sh."
     exit
 fi
 
-if [[ hdfs dfs -test -e "${KNOWN_INDELS_HDFS}" ]]; then
+hdfs dfs -test -e ${KNOWN_INDELS_HDFS}
+if [[ $? -ne 0 ]]; then
     echo "😡 Missing ${KNOWN_INDELS_HDFS}. Run convert_known_snps_indels_to_adam.sh."
     exit
 fi
