@@ -39,6 +39,9 @@ sudo dpkg -i scala-$SCALA_VER.deb
 # htop installation.
 sudo apt-get install htop
 
+# dstat installation.
+sudo apt install dstat
+
 # Mail installation
 export DEBIAN_FRONTEND='noninteractive'
 sudo debconf-set-selections <<< 'postfix postfix/mailname string $EMAIL_DOMAIN'
