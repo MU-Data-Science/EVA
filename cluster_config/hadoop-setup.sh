@@ -106,7 +106,7 @@ echo '<?xml version="1.0"?>
                <value>'$master_node':8050</value>
       </property>
       <property>
-               <name>yarn.scheduler.maximum-allocation-mb</name>  <!-Max RAM-per-container->
+               <name>yarn.scheduler.maximum-allocation-mb</name>  <!--Max RAM-per-container-->
                <value>'$maxResourceMemory'</value>
       </property>
             <property>
@@ -114,7 +114,7 @@ echo '<?xml version="1.0"?>
                <value>'$minResourceMemory'</value>
       </property>
       <property>
-               <name>yarn.nodemanager.resource.memory-mb</name>  <!-Max RAM-per-node->
+               <name>yarn.nodemanager.resource.memory-mb</name>  <!--Max RAM-per-node-->
                <value>'$maxResourceMemory'</value>
       </property>
       <property>
