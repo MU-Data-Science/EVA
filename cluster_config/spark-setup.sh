@@ -36,6 +36,7 @@ echo "
 #spark.driver.memory         50g
 spark.executor.memory        10g
 spark.executor.cores         4
+spark.shuffle.blockTransferService nio
 spark.eventLog.dir           hdfs://$MSTR:9000/spark-events
 spark.eventLog.enabled       true
 spark.authenticate           true

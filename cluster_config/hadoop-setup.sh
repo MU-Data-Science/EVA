@@ -75,10 +75,11 @@ echo '<?xml version="1.0"?>
 ' > $MAPRED_SITE_FILE
 
 
-maxMemory=32768
+maxNodeMemory=91440
 maxResourceMemory=61440
 minResourceMemory=2048
 maxvCores=36
+minvCores=2
 yarnUser=${USER}
 
 # YARN-SITE
@@ -115,11 +116,15 @@ echo '<?xml version="1.0"?>
       </property>
       <property>
                <name>yarn.nodemanager.resource.memory-mb</name>  <!-Max RAM-per-node->
-               <value>'$maxResourceMemory'</value>
+               <value>'$maxNodeMemory'</value>
       </property>
       <property>
                <name>yarn.scheduler.maximum-allocation-vcores</name>
                <value>'$maxvCores'</value>
+      </property>
+      <property>
+               <name>yarn.scheduler.minimum-allocation-vcores</name>
+               <value>'$minvCores'</value>
       </property>
       <property>
                <name>yarn.nodemanager.resource.cpu-vcores</name>
@@ -170,7 +175,7 @@ echo '<?xml version="1.0"?>
 
   <property>
     <name>yarn.scheduler.capacity.resource-calculator</name>
-    <value>org.apache.hadoop.yarn.util.resource.DefaultResourceCalculator</value>
+    <value>org.apache.hadoop.yarn.util.resource.DominantResourceCalculator</value>
     <description>
       The ResourceCalculator implementation to be used to compare
       Resources in the scheduler.
