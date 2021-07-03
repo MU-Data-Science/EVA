@@ -5,6 +5,7 @@ username="$2"
 private_key="$3"
 SCALA_VER="$9"
 EMAIL_DOMAIN="eva.com"
+JAVA8="java-1.8.0-openjdk-amd64"
 
 ssh_command="
 # >> UPDATING REPOSITORIES AND PACKAGES..
@@ -25,11 +26,13 @@ sudo apt-get install jq --yes
 sudo apt-get install sbt --yes
 
 # INSTALL JAVA 8 to replace java-default
-# sudo apt-get install openjdk-8-jdk --yes
-# sudo apt-get install openjdk-8-jre --yes
-# sudo apt-get autoremove --yes
-# sudo update-alternatives --config java
-# sudo update-alternatives --config javac
+sudo apt-get install openjdk-8-jdk --yes
+sudo apt-get install openjdk-8-jre --yes
+sudo apt-get autoremove --yes
+sudo update-alternatives --set java /usr/lib/jvm/$JAVA8/bin/java
+sudo update-alternatives --set javac /usr/lib/jvm/$JAVA8/bin/javac
+sudo unlink default-java
+sudo ln -sf /usr/lib/jvm/$JAVA8 /usr/lib/jvm/default-java
 
 # echo >> INSTALLING SCALA..
 sudo apt-get remove scala-library scala --yes
