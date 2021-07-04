@@ -31,7 +31,7 @@ sudo apt-get install openjdk-8-jre --yes
 sudo apt-get autoremove --yes
 sudo update-alternatives --set java /usr/lib/jvm/$JAVA8/bin/java
 sudo update-alternatives --set javac /usr/lib/jvm/$JAVA8/bin/javac
-sudo unlink default-java
+sudo unlink /usr/lib/jvm/default-java
 sudo ln -sf /usr/lib/jvm/$JAVA8 /usr/lib/jvm/default-java
 
 # echo >> INSTALLING SCALA..
