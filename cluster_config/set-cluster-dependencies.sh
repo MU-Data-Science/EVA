@@ -14,8 +14,8 @@ sudo apt-key adv --keyserver hkp://keyserver.ubuntu.com:80 --recv 2EE0EA64E40A89
 sudo apt-get update  --yes      # Fetches the list of available updates
 
 # >> INSTALLING OTHERS..
-sudo apt-get install default-jre --yes
-sudo apt-get install default-jdk --yes
+#sudo apt-get install default-jre --yes
+#sudo apt-get install default-jdk --yes
 sudo apt-get install vim --yes
 sudo apt-get install openssl --yes
 sudo apt-get -f install
@@ -28,10 +28,10 @@ sudo apt-get install sbt --yes
 # INSTALL JAVA 8 to replace java-default
 sudo apt-get install openjdk-8-jdk --yes
 sudo apt-get install openjdk-8-jre --yes
-sudo apt-get autoremove --yes
-sudo update-alternatives --set java /usr/lib/jvm/$JAVA8/bin/java
-sudo update-alternatives --set javac /usr/lib/jvm/$JAVA8/bin/javac
-sudo unlink /usr/lib/jvm/default-java
+#sudo apt-get autoremove --yes
+#sudo update-alternatives --set java /usr/lib/jvm/$JAVA8/bin/java
+#sudo update-alternatives --set javac /usr/lib/jvm/$JAVA8/bin/javac
+#sudo unlink /usr/lib/jvm/default-java
 sudo ln -sf /usr/lib/jvm/$JAVA8 /usr/lib/jvm/default-java
 
 # echo >> INSTALLING SCALA..
