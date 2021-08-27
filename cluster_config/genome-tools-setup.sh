@@ -15,10 +15,8 @@ eval $(/home/linuxbrew/.linuxbrew/bin/brew shellenv)
 echo "👉 Done with Brew installation 😎"
 
 # get sambamba
-#brew install brewsci/bio/sambamba
-sudo apt install sambamba --yes
-#ln -sf /home/linuxbrew/.linuxbrew/bin/sambamba .
-ln -sf $(which sambamba) .
+brew install brewsci/bio/sambamba
+ln -sf /home/linuxbrew/.linuxbrew/bin/sambamba .
 echo "👉 Done with Sambamba installation 😎"
 
 # get samtools and htslib
