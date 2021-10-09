@@ -52,6 +52,9 @@ sudo debconf-set-selections <<< \"postfix postfix/main_mailer_type string 'Inter
 sudo apt-get install -y postfix
 sudo sed -i 's/inet_interfaces = all/inet_interfaces = loopback-only/g' /etc/postfix/main.cf
 sudo service postfix restart
+
+# tshark installation
+sudo apt install tshark --yes
 "
 
 echo ">> NODES:"
