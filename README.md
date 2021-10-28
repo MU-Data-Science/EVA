@@ -6,24 +6,29 @@ is to democratize genome sequence analysis so that researchers can
 better understand how COVID-19 affects individuals based on their
 genetic makeup. Using [CloudLab](https://cloudlab.us), researchers can
 perform variant analysis on genomes ***at no charge***. There is growing
-evidence that our genomes may hold the answers to fight COVID-19.
-A recent genomic-wide association study linked genes and blood type of
+evidence that our genomes may hold the answers to fight COVID-19. A
+recent genomic-wide association study linked genes and blood type of
 individuals to risk of severe COVID-19
 [(NEJM '2020)](https://www.nejm.org/doi/full/10.1056/NEJMoa2020283).
 Another study from
 [23andMe](https://www.statnews.com/2020/09/14/23andme-study-covid-19-genetic-link/)
-hints at links between a person's genes and COVID-19. A recent [Nature publication](https://doi.org/10.1038/s41598-020-77632-8)
-identified genes related to five comorbidities that result in severe COVID-19 infection.
-[The COVID Human Genetic Effort](https://www.covidhge.com/) is an international
-consortium focused on better understanding COVID-19 based on human
-genomes.
+hints at links between a person's genes and COVID-19. A recent
+[Nature publication](https://doi.org/10.1038/s41598-020-77632-8)
+identified genes related to five comorbidities that result in severe
+COVID-19 infection.
+[The COVID Human Genetic Effort](https://www.covidhge.com/) is an
+international consortium focused on better understanding COVID-19 based
+on human genomes.
 
-We recently published a data resource containing variant analysis of human genome sequences for COVID-19 research. Please check this out on [IEEE DataPort](https://ieee-dataport.org/open-access/variant-analysis-human-genome-sequences-covid-19-research).
+We recently published a data resource containing variant analysis of
+human genome sequences for COVID-19 research. Please check this out on
+[IEEE DataPort](https://ieee-dataport.org/open-access/variant-analysis-human-genome-sequences-covid-19-research).
 
 [[CloudLab account]](#signup-for-a-cloudlab-account)
 
 [[Variant analysis (single node)]](#running-variant-analysis-on-human-genomes-using-a-single-cloudlab-node)
 <br/>[[Variant analysis (cluster)]](#running-variant-analysis-on-a-cluster-of-cloudlab-nodes)
+<br/>[[Variant analysis using AVAH (cluster)]](#running-variant-analysis-on-a-cluster-of-cloudlab-nodes-using-avah)
 <br/>[[De novo assembly (cluster)]](#running-de-novo-assembly-on-a-cluster-of-cloudlab-nodes)
 
 [[Publications]](#publications)
@@ -40,8 +45,11 @@ We recently published a data resource containing variant analysis of human genom
 
 ## Signup for a CloudLab account
 
-1. Create an account on CloudLab by signing up [here](https://cloudlab.us/signup.php).  Select "Join Existing Project" with `EVA-public` as the project name.
-(If you already have a CloudLab account, then join the project `EVA-public` after logging in to CloudLab.)
+1. Create an account on CloudLab by signing up
+   [here](https://cloudlab.us/signup.php). Select "Join Existing
+   Project" with `EVA-public` as the project name. (If you already have
+   a CloudLab account, then join the project `EVA-public` after logging
+   in to CloudLab.)
 <!--[(Screenshot)](images/CloudLab_signup.png?raw=true)("CloudLab Signup")-->
 2. By signing up, you agree to follow the [Acceptable Use Policy of CloudLab](https://cloudlab.us/aup.php).
 3. After your account is approved, you can login to your account. Read the [CloudLab manual](http://docs.cloudlab.us/) on how to start an experiment.
@@ -131,7 +139,7 @@ Alternatively, you can use `SSH` to login to the node: `$ ssh -i /path/to/CloudL
 
 ### Simple steps to run the screen command
 
-    $ screen -s my_session_name
+    $ screen -S my_session_name
 
    Press "Ctrl-a" "d" (i.e., control-a followed by d) to detach from the screen session.
 
@@ -180,6 +188,74 @@ We are using [Apache Spark](https://spark.apache.org),
 
 6. Download the `.vcf` files in the local directories on `vm0`. The file ending with `-BQSR-output.vcf` contains the variants computed on the analysis-ready reads.
 
+## Running variant analysis on a cluster of CloudLab nodes Using AVAH
+We are using [AVAH](https://github.com/raopr/AVAH) [CIKM '21],
+[Apache Spark](https://spark.apache.org),
+[Apache Hadoop](https://hadoop.apache.org), and
+[Adam/Cannoli](http://bdgenomics.org/).
+
+1. Setup an 16-node cluster on CloudLab, following the setup steps
+   described [here](cluster_config). (The nodes are named `vm0`, `vm1`, ..., `vm15`.)
+
+2. Connect to `vm0` using SSH to open a terminal/shell.
+
+3. Setup the reference genome in `/mydata` on all nodes.
+
+   ```
+   $ ${HOME}/EVA/script/copy_files.sh 16
+   ```
+   Use of `screen` is recommended as copying the files takes several
+   minutes.
+
+4. On `vm0`, clone the AVAH repo.
+   ```
+   $ cd ; git clone https://github.com/raopr/AVAH.git
+   $ cp ${HOME}/AVAH/misc/sample*-vlarge.txt /proj/eva-public-PG0/
+   ```
+
+5. Run the following command to create the required files for BQSR/Indel
+   realignment. The known SNPs and INDELs folders will be created on
+   HDFS.
+   ```
+   $ ${HOME}/EVA/scripts/convert_known_snps_indels_to_adam.sh 16
+   ```
+
+6. Run variant analysis using AVAH. Adam/Cannoli, Freebayes, and BWA are
+   used. For usage, type:
+    ```
+    $ ${HOME}/AVAH/scripts/run_variant_analysis_at_scale.sh -h
+    ```
+
+   **a.** If sequences are not present in HDFS (and must be downloaded),
+   then run the following command:
+   ```
+   $ hdfs dfs -rm -r /tmp/logs; hdfs dfs -rm -r /spark-events/*
+   $ ${HOME}/AVAH/scripts/run_variant_analysis_at_scale.sh -i /proj/eva-public-PG0/sampleIDs-vlarge.txt -d /proj/eva-public-PG0/sampleURLs-vlarge.txt -n 16 -b 2 -p 15 -P H -B
+   ```
+   The file
+   [`sampleIDs-vlarge.txt`](https://github.com/raopr/AVAH/blob/master/misc/sampleIDs-vlarge.txt)
+   contains the IDs of the sequences and sizes (e.g., one FASTQ file
+   size). The file
+   [`sampleURLs-vlarge.txt`](https://github.com/raopr/AVAH/blob/master/misc/sampleURLs-vlarge.txt)
+   contains the URLs of the (pair-end) FASTQ files. You can also
+   download the sequences directly to CloudLab nodes using `wget` and
+   then copy them to HDFS. This is recommended if the above script does
+   not download the sequences correctly due to issues with CloudLab's
+   network. After that, you can run the command in Step (b).
+
+   **b.** If sequences are already present in HDFS (and correctly
+   downloaded), then run the following command:
+   ```
+   $ hdfs dfs -rm -r /tmp/logs; hdfs dfs -rm -r /spark-events/*
+   $ ${HOME}/AVAH/scripts/run_variant_analysis_at_scale.sh -i /proj/eva-public-PG0/sampleIDs-vlarge.txt -d NONE -n 16 -b 2 -p 15 -P H -B
+   ```
+   To skip BQSR/indel realignment, drop the `-B` option.
+
+   To re-execute failed sequences during variant analysis, use the `-e`
+   option.
+
+7. The `.vcf` files containing raw variants will be stored in HDFS.
+   Check the files using this command: `hdfs dfs -ls /*.vcf`.
 
 ## Running de novo assembly on a cluster of CloudLab nodes
 
@@ -199,8 +275,12 @@ ${HOME}/EVA/scripts/run_denovo.sh ${HOME}/EVA/misc/sampleIDs.txt NONE 41
 ```
 
 ## Publications
-* Praveen Rao, Arun Zachariah, Deepthi Rao, Peter Tonellato, Wesley Warren, and Eduardo Simoes. <strong>Accelerating Variant Calling on Human Genomes Using a Commodity Cluster.</strong>
-In 30th ACM International Conference on Information and Knowledge Management (CIKM), 5 pages, Australia, 2021. (to appear)
+* Praveen Rao, Arun Zachariah, Deepthi Rao, Peter Tonellato, Wesley
+  Warren, and Eduardo Simoes. <strong>Accelerating Variant Calling on
+  Human Genomes Using a Commodity Cluster.</strong> In 30th ACM
+  International Conference on Information and Knowledge Management
+  (CIKM), 5 pages, Australia, 2021.
+  [[PDF]](https://mailmissouri-my.sharepoint.com/personal/raopr_umsystem_edu/_layouts/15/onedrive.aspx?id=%2Fpersonal%2Fraopr%5Fumsystem%5Fedu%2FDocuments%2FCIKM%2D2021%2Frgsp2725%2DraoA%2Epdf&parent=%2Fpersonal%2Fraopr%5Fumsystem%5Fedu%2FDocuments%2FCIKM%2D2021&originalPath=aHR0cHM6Ly9tYWlsbWlzc291cmktbXkuc2hhcmVwb2ludC5jb20vOmI6L2cvcGVyc29uYWwvcmFvcHJfdW1zeXN0ZW1fZWR1L0VkNkNxVm85R2NWRXQ2YkduOEVQakQwQjFXajI4YXY4cDRBeVdIVkRzckswX0E%5FcnRpbWU9Yi10blJ5YWEyVWc)
 
 (Code will be available soon.)
 
