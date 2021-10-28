@@ -33,7 +33,7 @@
    ```
    $ screen -S setup
    $ cd ${HOME}/EVA/cluster_config
-   $ ./cluster-configure.sh 16
+   $ ./cluster-configure.sh 16 spark3
    ```
    Press "Ctrl-a" "Ctrl-d" (i.e., control-a followed by control-d) to
    detach from the screen session. To reattach, use `screen -r`.
