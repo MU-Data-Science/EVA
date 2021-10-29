@@ -202,7 +202,7 @@ We are using [AVAH](https://github.com/raopr/AVAH) [CIKM '21],
 3. Setup the reference genome in `/mydata` on all nodes.
 
    ```
-   $ ${HOME}/EVA/script/copy_files.sh 16
+   $ ${HOME}/EVA/scripts/copy_files.sh 16
    ```
    Use of `screen` is recommended as copying the files takes several
    minutes.
@@ -219,6 +219,7 @@ We are using [AVAH](https://github.com/raopr/AVAH) [CIKM '21],
    ```
    $ ${HOME}/EVA/scripts/convert_known_snps_indels_to_adam.sh 16
    ```
+   This step will take several minutes to complete.
 
 6. Run variant analysis using AVAH. Adam/Cannoli, Freebayes, and BWA are
    used. For usage, type:
@@ -253,6 +254,8 @@ We are using [AVAH](https://github.com/raopr/AVAH) [CIKM '21],
 
    To re-execute failed sequences during variant analysis, use the `-e`
    option.
+
+   For changing the YARN settings, refer to this [page](YARN-README.md).
 
 7. The `.vcf` files containing raw variants will be stored in HDFS.
    Check the files using this command: `hdfs dfs -ls /*.vcf`.
