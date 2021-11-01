@@ -280,12 +280,10 @@ ${HOME}/EVA/scripts/run_denovo.sh ${HOME}/EVA/misc/sampleIDs.txt NONE 41
 ## Publications
 * Praveen Rao, Arun Zachariah, Deepthi Rao, Peter Tonellato, Wesley
   Warren, and Eduardo Simoes. <strong>Accelerating Variant Calling on
-  Human Genomes Using a Commodity Cluster.</strong> In 30th ACM
+  Human Genomes Using a Commodity Cluster.</strong> In Proc. of 30th ACM
   International Conference on Information and Knowledge Management
   (CIKM), 5 pages, Australia, 2021.
   [[PDF]](https://mailmissouri-my.sharepoint.com/personal/raopr_umsystem_edu/_layouts/15/onedrive.aspx?id=%2Fpersonal%2Fraopr%5Fumsystem%5Fedu%2FDocuments%2FCIKM%2D2021%2Frgsp2725%2DraoA%2Epdf&parent=%2Fpersonal%2Fraopr%5Fumsystem%5Fedu%2FDocuments%2FCIKM%2D2021&originalPath=aHR0cHM6Ly9tYWlsbWlzc291cmktbXkuc2hhcmVwb2ludC5jb20vOmI6L2cvcGVyc29uYWwvcmFvcHJfdW1zeXN0ZW1fZWR1L0VkNkNxVm85R2NWRXQ2YkduOEVQakQwQjFXajI4YXY4cDRBeVdIVkRzckswX0E%5FcnRpbWU9Yi10blJ5YWEyVWc)
-
-(Code will be available soon.)
 
 ## Public Datasets
 
