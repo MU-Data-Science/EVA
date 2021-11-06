@@ -8,6 +8,14 @@ tar -xvf $SHARE_DIR/EVA_Tools/bwa.tar -C $DATA_DIR
 ln -sf $DATA_DIR/bwa $HOME/bwa
 echo "👉 Done with bwa setup 😎"
 
+# Setup bwa-mem2
+#git clone --recursive https://github.com/bwa-mem2/bwa-mem2
+#cd bwa-mem2
+#make
+tar -xvf $SHARE_DIR/EVA_Tools/bwa-mem2.tar -C $DATA_DIR
+ln -sf $DATA_DIR/bwa-mem2 $HOME/bwa-mem2
+echo "👉 Done with bwa-mem2 setup 😎"
+
 # get brew
 /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install.sh)" </dev/null
 echo 'eval $(/home/linuxbrew/.linuxbrew/bin/brew shellenv)' >>/users/${USER}/.profile
