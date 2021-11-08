@@ -12,6 +12,8 @@ FILES=(\
 	"hs38.fa.fai" \
 	"hs38.fa.pac" \
 	"hs38.fa.sa" \
+	"hs38.fa.bwt.2bit.64" \
+	"hs38.fa.0123" \
   )
 
 if [[ $# -ne 1 ]]; then
