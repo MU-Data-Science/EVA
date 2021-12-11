@@ -19,6 +19,10 @@ ssh -i "$private_key" "$username@$master_node" "~/$spark_script $install_id $dat
 # 2 Configure nodes
 echo -e ">> CONFIGURING NODES 🤖\n"
 ssh_command="
+if [ ! -d $share_dir/spark_$install_id ]; then
+    echo "Copying Spark files"
+    tar zxf $share_dir/EVA_Tools/spark-$spark_ver-bin-hadoop$hadoop_ver.tgz -C $share_dir/spark_$install_id --strip-components 1
+fi
 sudo cp -r $share_dir/spark_$install_id $data_dir/spark
 sudo chown -R $username $data_dir/spark
 
