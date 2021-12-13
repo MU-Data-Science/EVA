@@ -39,7 +39,7 @@ ssh -o "StrictHostKeyChecking no" -i "$private_key" "$username@$master_node" "$s
 echo -e ">> CONFIGURING DATA NODES 🤓"
 ssh_command="
 if [ ! -d $share_dir/hadoop_$install_id ]; then
-    echo "Copying Hadoop files"
+    echo 'Copying Hadoop files'
     tar zxf $share_dir/EVA_Tools/hadoop-$hadoop_ver.tar.gz -C $share_dir/hadoop_$install_id --strip-components 1
 fi
 sudo cp -r $share_dir/hadoop_$install_id $data_dir/hadoop
