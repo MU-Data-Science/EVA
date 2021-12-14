@@ -22,7 +22,7 @@ ssh -o "StrictHostKeyChecking no" -i "$private_key" "$username@$master_node" "~/
 # 2 Configure masternode
 echo -e ">> CONFIGURING MASTER NODE 😎\n"
 ssh_command="
-sudo cp -r $share_dir/hadoop_$install_id $data_dir/hadoop
+sudo cp -r $share_dir/hadoop_$install_id/* $data_dir/hadoop/
 sudo chown -R $username $data_dir/hadoop
 mv ~/masters $data_dir/hadoop/etc/hadoop/
 

@@ -24,7 +24,7 @@ if [ ! -d $share_dir/spark_$install_id ]; then
     mkdir -p $share_dir/spark_$install_id
     tar zxf $share_dir/EVA_Tools/spark-$spark_ver-bin-hadoop$hadoop_ver.tgz -C $share_dir/spark_$install_id --strip-components 1
 fi
-sudo cp -r $share_dir/spark_$install_id $data_dir/spark
+sudo cp -r $share_dir/spark_$install_id/* $data_dir/spark/
 sudo chown -R $username $data_dir/spark
 
 host_private_name=\$(hostname | cut -d '.' -f 1)
