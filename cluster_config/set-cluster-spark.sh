@@ -22,9 +22,10 @@ ssh_command="
 if [ ! -d $share_dir/spark_$install_id ]; then
     echo 'Copying Spark files'
     mkdir -p $share_dir/spark_$install_id
-    tar zxf $share_dir/EVA_Tools/spark-$spark_ver-bin-hadoop$hadoop_ver.tgz -C $share_dir/spark_$install_id --strip-components 1
+    #tar zxf $share_dir/EVA_Tools/spark-$spark_ver-bin-hadoop$hadoop_ver.tgz -C $share_dir/spark_$install_id --strip-components 1
+    scp -r vm0:$share_dir/spark_$install_id $share_dir/spark_$install_id
 fi
-sudo cp -r $share_dir/spark_$install_id/* $data_dir/spark/
+sudo cp -r $share_dir/spark_$install_id $data_dir/spark
 sudo chown -R $username $data_dir/spark
 
 host_private_name=\$(hostname | cut -d '.' -f 1)
