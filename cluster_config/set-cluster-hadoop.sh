@@ -40,7 +40,7 @@ echo -e ">> CONFIGURING DATA NODES 🤓"
 ssh_command="
 if [ ! -d $share_dir/hadoop_$install_id ]; then
     echo 'Copying Hadoop files'
-    mkdir -p $share_dir/hadoop_$install_id
+    #mkdir -p $share_dir/hadoop_$install_id
     #tar zxf $share_dir/EVA_Tools/hadoop-$hadoop_ver.$hadoop_sub_ver.tar.gz -C $share_dir/hadoop_$install_id --strip-components 1
     scp -r vm0:$share_dir/hadoop_$install_id $share_dir/hadoop_$install_id
 fi
