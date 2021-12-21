@@ -33,8 +33,8 @@ tar zxf $share_dir/EVA_Tools/spark-$spark_ver-bin-hadoop$hadoop_ver.tgz -C "$spa
 SPARK_DEFAULTS_FILE="$spark_prefix/conf/spark-defaults.conf"
 echo "
 #spark.master                spark://$MSTR:7077
-spark.driver.memory          20g
-spark.executor.memory        20g
+#spark.driver.memory          20g
+spark.executor.memory        12g
 spark.executor.cores         4
 spark.shuffle.blockTransferService nio
 spark.network.timeout        840000
