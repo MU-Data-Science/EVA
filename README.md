@@ -287,6 +287,11 @@ ${HOME}/EVA/scripts/run_denovo.sh ${HOME}/EVA/misc/sampleIDs.txt NONE 41
 
   [Nominated for Best Short Paper Award](https://www.cikm2021.org/programme/best-paper-nominations)
 
+* Shivika Prasanna and Praveen Rao. <strong>A Data Science Perspective of
+  Real-World COVID-19 Databases.</strong> Leveraging Artificial Intelligence
+  in Global Epidemics, pages 133-163, Elsevier, 2021. (Editors: Gruenwald, Jain, Groppe)
+  [[PDF]](https://www.ncbi.nlm.nih.gov/pmc/articles/PMC8342407/pdf/main.pdf)
+
 ## Public Datasets
 
 [The 1000 Genomes Project](https://www.internationalgenome.org/data) has a few thousand human whole genome sequences to test variant analysis tasks at scale.
