@@ -284,7 +284,6 @@ ${HOME}/EVA/scripts/run_denovo.sh ${HOME}/EVA/misc/sampleIDs.txt NONE 41
   International Conference on Information and Knowledge Management
   (CIKM), pages 3388-3392, Australia, 2021.
   [[PDF]](https://dl.acm.org/doi/10.1145/3459637.3482047)
-
   [Nominated for Best Short Paper Award](https://www.cikm2021.org/programme/best-paper-nominations)
 
 * Shivika Prasanna and Praveen Rao. <strong>A Data Science Perspective of
