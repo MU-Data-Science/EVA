@@ -368,7 +368,7 @@ Please report them [here](https://github.com/MU-Data-Science/EVA/issues).
 
 **Faculty:** Drs. Praveen Rao (**PI**), Deepthi Rao, Peter Tonellato, Wesley Warren, and Eduardo Simoes
 
-**Ph.D. Students:** Arun Zachariah
+**Ph.D. Students:** Arun Zachariah, Shivika Prasanna
 
 # Acknowledgments
 This work is supported by the National Science Foundation under [Grant No. 2034247](https://nsf.gov/awardsearch/showAward?AWD_ID=2034247).
