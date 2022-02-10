@@ -278,6 +278,11 @@ ${HOME}/EVA/scripts/run_denovo.sh ${HOME}/EVA/misc/sampleIDs.txt NONE 41
 ```
 
 ## Publications
+
+* Praveen Rao and Arun Zachariah. <strong>Enabling Large-Scale Human
+  Genome Sequence Analysis on CloudLab.</strong> In IEEE INFOCOM Workshops: Computer
+  and Networking Experimental Research using Testbeds (CNERT 2022). (to appear)
+
 * Praveen Rao, Arun Zachariah, Deepthi Rao, Peter Tonellato, Wesley
   Warren, and Eduardo Simoes. <strong>Accelerating Variant Calling on
   Human Genomes Using a Commodity Cluster.</strong> In Proc. of 30th ACM
