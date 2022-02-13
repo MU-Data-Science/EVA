@@ -1,6 +1,7 @@
 #!/usr/bin/env bash
 # Variant calling using GATK
 
+DATA_DIR="/mydata"
 BWA_HOME=${HOME}/bwa
 SAMBAMBA_HOME=${HOME}
 TMP_DIR="/mydata/tmp"
@@ -14,7 +15,6 @@ TRANCHE_RESOURCES=(\
   "${DATA_DIR}/1000G_phase1.snps.high_confidence.hg38.vcf.gz")
 
 echo "👉 Deleting files..."
-hdfs dfs -rm -r ${HDFS_PREFIX}/${INPUT_FILE}*
 rm -rvf ${DATA_DIR}/${OUTPUT_PREFIX}-*.vcf*
 
 echo "👉 Validating the cluster."
