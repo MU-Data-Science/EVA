@@ -6,6 +6,7 @@ private_key="$3"
 SCALA_VER="$9"
 EMAIL_DOMAIN="eva.com"
 JAVA8="java-1.8.0-openjdk-amd64"
+OPENJDK8="java-8-openjdk-amd64"
 
 ssh_command="
 # >> UPDATING REPOSITORIES AND PACKAGES..
@@ -29,8 +30,9 @@ sudo apt-get install sbt --yes
 sudo apt-get install openjdk-8-jdk --yes
 sudo apt-get install openjdk-8-jre --yes
 sudo apt-get autoremove --yes
-sudo update-alternatives --set java /usr/lib/jvm/$JAVA8/jre/bin/java
-sudo update-alternatives --set javac /usr/lib/jvm/$JAVA8/bin/javac
+sudo update-alternatives --set java /usr/lib/jvm/$OPENJDK8/jre/bin/java
+sudo update-alternatives --set javac /usr/lib/jvm/$OPENJDK8/bin/javac
+sudo update-alternatives --set jar /usr/lib/jvm/$OPENJDK8/bin/jar
 sudo unlink /usr/lib/jvm/default-java
 sudo ln -sf /usr/lib/jvm/$JAVA8 /usr/lib/jvm/default-java
 
