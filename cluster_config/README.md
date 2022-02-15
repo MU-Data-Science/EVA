@@ -6,11 +6,15 @@
  [Adam/Cannoli](http://bdgenomics.org/) to run in the cluster.
 
 ## Setup
-1.  Start an experiment using the profile `EVA-multi-node-profile` on
-    CloudLab. (Or just click
-    [here](https://www.cloudlab.us/p/EVA-public/EVA-multi-node-profile).)
-    Provide your CloudLab user name, and the number of nodes required
-    (which must be a value greater than 2) and a node/hardware type such
+1.  Start an experiment by clicking any one of the profiles on CloudLab.
+
+    1. [Profile1](https://www.cloudlab.us/p/EVA-public/EVA-multi-node-profile/4) - Homogeneous cluster in one site (e.g., Clemson or Wisc)
+    2. [Profile2](https://www.cloudlab.us/p/EVA-public/EVA-singlesite-lan-profile/1) - Heterogeneous cluster in one site (e.g., Clemson or Wisc)
+    3. [Profile3](https://www.cloudlab.us/p/EVA-public/EVA-multisite-lan-profile/1) - Heterogeneous cluster across two sites (e.g., Clemson and Wisc)
+
+    The profile will ask for information such as your CloudLab user name,
+    and the number of nodes required (which must be a value greater than 2)
+    and a node/hardware type such
     as `c8220` (Clemson), `c240g2` (Wisc), etc. (Choose a node type that
     provides large amounts of RAM (> 128GB).) You must agree to use only
     deidentified data. The experiment will take a few minutes to start;
