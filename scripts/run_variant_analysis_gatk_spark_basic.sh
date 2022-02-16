@@ -54,7 +54,7 @@ ${GATK} BwaAndMarkDuplicatesPipelineSpark -I ${HDFS_PREFIX}/${INPUT_FILE}_unalig
 echo "👉 Running GATK HaplotypeCaller on Spark for variant calling."
 ${GATK} HaplotypeCallerSpark \
     -R ${REFERENCE} \
-    -I ${HDFS_PREFIX}/${OUTPUT_PREFIX}-final.bam \
+    -I ${HDFS_PREFIX}/${INPUT_FILE}-final.bam \
     -O ${HDFS_PREFIX}/${OUTPUT_PREFIX}-gatk-spark-output.vcf \
     -- --spark-runner SPARK --spark-master ${SPARK_MASTER} --conf "spark.executor.cores=${NUM_CORES}" --conf "spark.executor.memory=${EXECUTOR_MEMORY}" --conf "spark.executor.instances=${NUM_EXECUTORS}"
 
