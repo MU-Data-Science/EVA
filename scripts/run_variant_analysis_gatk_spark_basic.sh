@@ -51,10 +51,14 @@ echo "👉 Using BWA/Mark Duplicates pipeline."
 ${GATK} BwaAndMarkDuplicatesPipelineSpark -I ${HDFS_PREFIX}/${INPUT_FILE}_unaligned.bam -O ${HDFS_PREFIX}/${INPUT_FILE}-final.bam -R ${REFERENCE} \
     -- --spark-runner SPARK --spark-master ${SPARK_MASTER} --conf "spark.executor.cores=${NUM_CORES}" --conf "spark.executor.memory=${EXECUTOR_MEMORY}" --conf "spark.executor.instances=${NUM_EXECUTORS}"
 
+echo "👉 Sorting before variant calling."
+${GATK} SortSamSpark -I ${HDFS_PREFIX}/${INPUT_FILE}-final.bam -O ${HDFS_PREFIX}/${INPUT_FILE}-final-sorted.bam \
+    -- --spark-runner SPARK --spark-master ${SPARK_MASTER} --conf "spark.executor.cores=${NUM_CORES}" --conf "spark.executor.memory=${EXECUTOR_MEMORY}" --conf "spark.executor.instances=${NUM_EXECUTORS}"
+
 echo "👉 Running GATK HaplotypeCaller on Spark for variant calling."
 ${GATK} HaplotypeCallerSpark \
     -R ${REFERENCE} \
-    -I ${HDFS_PREFIX}/${INPUT_FILE}-final.bam \
+    -I ${HDFS_PREFIX}/${INPUT_FILE}-final-sorted.bam \
     -O ${HDFS_PREFIX}/${OUTPUT_PREFIX}-gatk-spark-output.vcf \
     -- --spark-runner SPARK --spark-master ${SPARK_MASTER} --conf "spark.executor.cores=${NUM_CORES}" --conf "spark.executor.memory=${EXECUTOR_MEMORY}" --conf "spark.executor.instances=${NUM_EXECUTORS}"
 
