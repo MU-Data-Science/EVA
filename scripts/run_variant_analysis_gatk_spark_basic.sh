@@ -24,6 +24,7 @@ let NUM_CORES=$(nproc)-4
 
 echo "👉 Deleting files..."
 hdfs dfs -rm -r ${HDFS_PREFIX}/${INPUT_FILE}*
+hdfs dfs -rm -r ${HDFS_PREFIX}/${OUTPUT_PREFIX}*
 rm -rvf ${DATA_DIR}/${OUTPUT_PREFIX}-*.vcf*
 rm -rf ${DATA_DIR}/temp.bam
 rm -rf ${DATA_DIR}/temp_?.fastq.gz
@@ -46,27 +47,18 @@ ${GATK} FastqToSam -F1 ${DATA_DIR}/temp_1.fastq.gz -F2 ${DATA_DIR}/temp_1.fastq.
 echo "👉 Copying the .bam file to HDFS."
 hdfs dfs -put ${DATA_DIR}/temp.bam /${INPUT_FILE}_unaligned.bam
 
-echo "👉 Using BWA for alignment."
-${GATK} BwaSpark -I ${HDFS_PREFIX}/${INPUT_FILE}_unaligned.bam -O ${HDFS_PREFIX}/${INPUT_FILE}.bam -R ${REFERENCE} \
+echo "👉 Using BWA/Mark Duplicates pipeline."
+${GATK} BwaAndMarkDuplicatesPipelineSpark -I ${HDFS_PREFIX}/${INPUT_FILE}_unaligned.bam -O ${HDFS_PREFIX}/${INPUT_FILE}-final.bam -R ${REFERENCE} \
     -- --spark-runner SPARK --spark-master ${SPARK_MASTER} --conf "spark.executor.cores=${NUM_CORES}" --conf "spark.executor.memory=${EXECUTOR_MEMORY}" --conf "spark.executor.instances=${NUM_EXECUTORS}"
-
-echo "👉 Sorting the bam file."
-${GATK} SortSamSpark -I ${HDFS_PREFIX}/${INPUT_FILE}.bam -O ${HDFS_PREFIX}/${INPUT_FILE}-sorted.bam \
-    -- --spark-runner SPARK --spark-master ${SPARK_MASTER} --conf "spark.executor.cores=${NUM_CORES}" --conf "spark.executor.memory=${EXECUTOR_MEMORY}" --conf "spark.executor.instances=${NUM_EXECUTORS}"
-
-echo "👉 Marking duplicates before variant calling."
-${GATK} MarkDuplicatesSpark -I ${HDFS_PREFIX}/${INPUT_FILE}-sorted.bam -O ${HDFS_PREFIX}/${OUTPUT_PREFIX}-rg-sorted-final.bam \
-    -- --spark-runner SPARK --spark-master ${SPARK_MASTER} --conf "spark.executor.cores=${NUM_CORES}" --conf "spark.executor.memory=${EXECUTOR_MEMORY}" --conf "spark.executor.instances=${NUM_EXECUTORS}" \
-    --tmp-dir ${DATA_DIR}/gatk-tmp
 
 echo "👉 Running GATK HaplotypeCaller on Spark for variant calling."
 ${GATK} HaplotypeCallerSpark \
     -R ${REFERENCE} \
-    -I ${HDFS_PREFIX}/${OUTPUT_PREFIX}-rg-sorted-final.bam \
+    -I ${HDFS_PREFIX}/${OUTPUT_PREFIX}-final.bam \
     -O ${HDFS_PREFIX}/${OUTPUT_PREFIX}-gatk-spark-output.vcf \
     -- --spark-runner SPARK --spark-master ${SPARK_MASTER} --conf "spark.executor.cores=${NUM_CORES}" --conf "spark.executor.memory=${EXECUTOR_MEMORY}" --conf "spark.executor.instances=${NUM_EXECUTORS}"
 
-hdfs dfs -copyToLocal ${HDFS_PREFIX}/${OUTPUT_PREFIX}-gatk-spark-output.vcf ${DATA_DIR}/${OUTPUT_PREFIX}-gatk-spark-output.vcf
+hdfs dfs -get ${HDFS_PREFIX}/${OUTPUT_PREFIX}-gatk-spark-output.vcf ${DATA_DIR}/${OUTPUT_PREFIX}-gatk-spark-output.vcf
 echo "👉 Done with variant calling. See ${OUTPUT_PREFIX}-gatk-spark-output.vcf file."
 
 date
