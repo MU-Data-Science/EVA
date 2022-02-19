@@ -15,13 +15,12 @@ shareDir="/proj/eva-public-PG0"
 hadoopVer=2.7
 hadoopSubVer=6
 sparkVer=2.4.7
-SCALA_VER=2.11.8
+SCALA_VER=2.12.8
 
 if [ "$2" = spark3 ]; then
   hadoopVer=3.2
   hadoopSubVer=0
   sparkVer=3.0.0
-  SCALA_VER=2.12.8
 fi
 
 experiment=$(basename $machines)
