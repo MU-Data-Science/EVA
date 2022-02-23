@@ -12,6 +12,7 @@ FILES=(\
 	"hs38.fa.fai" \
 	"hs38.fa.pac" \
 	"hs38.fa.sa" \
+	"hs38.fa.img" \
 #	"hs38.fa.bwt.2bit.64" \
 #	"hs38.fa.0123" \
   )
