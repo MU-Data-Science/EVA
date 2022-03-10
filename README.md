@@ -194,12 +194,12 @@ We are using [AVAH](https://github.com/raopr/AVAH) [CIKM '21],
 [Apache Hadoop](https://hadoop.apache.org), and
 [Adam/Cannoli](http://bdgenomics.org/).
 
-1. Setup an 16-node cluster on CloudLab, following the setup steps
+1. Create and set up a 16-node cluster on CloudLab, following the steps
    described [here](cluster_config). (The nodes are named `vm0`, `vm1`, ..., `vm15`.)
 
 2. Connect to `vm0` using SSH to open a terminal/shell.
 
-3. Setup the reference genome in `/mydata` on all nodes.
+3. Set up the reference genome in `/mydata` on all nodes.
 
    ```
    $ ${HOME}/EVA/scripts/copy_files.sh 16
