@@ -228,10 +228,10 @@ We are using [AVAH](https://github.com/raopr/AVAH) [CIKM '21],
     $ ${HOME}/AVAH/scripts/run_variant_analysis_at_scale.sh -h
     ```
 
-   **a.** If sequences are not present in HDFS (and must be downloaded),
+   **a.** If sequences need to be downloaded to HDFS,
    then run the following command:
    ```
-   $ hdfs dfs -rm -r /tmp/logs; hdfs dfs -rm -r /spark-events/*
+   $ hdfs dfs -rm -r /tmp/logs; hdfs dfs -rm -r /spark-events/*; hdfs dfs -rm /*.fastq.gz
    $ ${HOME}/AVAH/scripts/run_variant_analysis_at_scale.sh -i /proj/eva-public-PG0/${USER}-sampleIDs-vlarge.txt -d /proj/eva-public-PG0/${USER}-sampleURLs-vlarge.txt -n 16 -b 2 -p 15 -P H -B
    ```
    The file
