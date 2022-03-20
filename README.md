@@ -249,7 +249,7 @@ We are using [AVAH](https://github.com/raopr/AVAH) [CIKM '21],
    downloaded), then run the following command:
    ```
    $ hdfs dfs -rm -r /tmp/logs; hdfs dfs -rm -r /spark-events/*
-   $ ${HOME}/AVAH/scripts/run_variant_analysis_at_scale.sh -i /proj/eva-public-PG0/sampleIDs-vlarge.txt -d NONE -n 16 -b 2 -p 15 -P H -B
+   $ ${HOME}/AVAH/scripts/run_variant_analysis_at_scale.sh -i /proj/eva-public-PG0/${USER}-sampleIDs-vlarge.txt -d NONE -n 16 -b 2 -p 15 -P H -B
    ```
    To skip BQSR/indel realignment, drop the `-B` option.
 
