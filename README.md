@@ -210,7 +210,8 @@ We are using [AVAH](https://github.com/raopr/AVAH) [CIKM '21],
 4. On `vm0`, clone the AVAH repo.
    ```
    $ cd ; git clone https://github.com/raopr/AVAH.git
-   $ cp ${HOME}/AVAH/misc/sample*-vlarge.txt /proj/eva-public-PG0/
+   $ cp ${HOME}/AVAH/misc/sampleIDs-vlarge.txt /proj/eva-public-PG0/${USER}-sampleIDs-vlarge.txt
+   $ cp ${HOME}/AVAH/misc/sampleURLs-vlarge.txt /proj/eva-public-PG0/${USER}-sampleURLs-vlarge.txt   
    ```
 
 5. Run the following command to create the required files for BQSR/Indel
@@ -231,14 +232,14 @@ We are using [AVAH](https://github.com/raopr/AVAH) [CIKM '21],
    then run the following command:
    ```
    $ hdfs dfs -rm -r /tmp/logs; hdfs dfs -rm -r /spark-events/*
-   $ ${HOME}/AVAH/scripts/run_variant_analysis_at_scale.sh -i /proj/eva-public-PG0/sampleIDs-vlarge.txt -d /proj/eva-public-PG0/sampleURLs-vlarge.txt -n 16 -b 2 -p 15 -P H -B
+   $ ${HOME}/AVAH/scripts/run_variant_analysis_at_scale.sh -i /proj/eva-public-PG0/${USER}-sampleIDs-vlarge.txt -d /proj/eva-public-PG0/${USER}-sampleURLs-vlarge.txt -n 16 -b 2 -p 15 -P H -B
    ```
    The file
-   [`sampleIDs-vlarge.txt`](https://github.com/raopr/AVAH/blob/master/misc/sampleIDs-vlarge.txt)
+   [`${USER}-sampleIDs-vlarge.txt`](https://github.com/raopr/AVAH/blob/master/misc/sampleIDs-vlarge.txt)
    contains the IDs of the sequences and sizes (e.g., one FASTQ file
    size). The file
-   [`sampleURLs-vlarge.txt`](https://github.com/raopr/AVAH/blob/master/misc/sampleURLs-vlarge.txt)
-   contains the URLs of the (pair-end) FASTQ files. You can also
+   [`${USER}-sampleURLs-vlarge.txt`](https://github.com/raopr/AVAH/blob/master/misc/sampleURLs-vlarge.txt)
+   contains the URLs of the (paired-end) FASTQ files. You can also
    download the sequences directly to CloudLab nodes using `wget` and
    then copy them to HDFS. This is recommended if the above script does
    not download the sequences correctly due to issues with CloudLab's
