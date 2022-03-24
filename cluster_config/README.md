@@ -8,9 +8,9 @@
 ## Setup
 1.  Start an experiment by clicking any one of the profiles on CloudLab.
 
-    1. [Profile1](https://www.cloudlab.us/p/EVA-public/EVA-multi-node-profile/4) - Homogeneous cluster in one site (e.g., Clemson or Wisc)
-    2. [Profile2](https://www.cloudlab.us/p/EVA-public/EVA-singlesite-lan-profile/1) - Heterogeneous cluster in one site (e.g., Clemson or Wisc)
-    3. [Profile3](https://www.cloudlab.us/p/EVA-public/EVA-multisite-lan-profile/1) - Heterogeneous cluster across two sites (e.g., Clemson and Wisc)
+    1. [Profile1](https://www.cloudlab.us/p/EVA-public/EVA-multi-node-profile) - Homogeneous cluster in one site (e.g., Clemson or Wisc)
+    2. [Profile2](https://www.cloudlab.us/p/EVA-public/EVA-singlesite-lan-profile) - Heterogeneous cluster in one site (e.g., Clemson or Wisc)
+    3. [Profile3](https://www.cloudlab.us/p/EVA-public/EVA-multisite-lan-profile) - Heterogeneous cluster across two sites (e.g., Clemson and Wisc)
 
     The profile will ask for information such as your CloudLab user name,
     and the number of nodes required (which must be a value greater than 2)
