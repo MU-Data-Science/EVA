@@ -41,7 +41,7 @@
    ```
    Press "Ctrl-a" "Ctrl-d" (i.e., control-a followed by control-d) to
    detach from the screen session. To reattach, use `screen -r`.
-   The configuration script can take more than 15 minutes to complete;
+   The configuration script can take more than 30 minutes to complete;
    so please be patient.
 
 5. After successful cluster setup, quit the SSH session by typing
