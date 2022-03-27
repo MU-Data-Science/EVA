@@ -200,12 +200,10 @@ We are using [AVAH](https://github.com/raopr/AVAH) [CIKM '21],
 2. Connect to `vm0` using SSH to open a terminal/shell.
 
 3. Set up the reference genome in `/mydata` on all nodes.
-
    ```
    $ ${HOME}/EVA/scripts/copy_files.sh 16
    ```
-   Use of `screen` is recommended as copying the files takes several
-   minutes.
+   Use of `screen` is recommended as copying the files can take more than 15 minutes.
 
 4. On `vm0`, clone the AVAH repo.
    ```
