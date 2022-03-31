@@ -53,6 +53,7 @@ human genome sequences for COVID-19 research. Please check this out on
 <!--[(Screenshot)](images/CloudLab_signup.png?raw=true)("CloudLab Signup")-->
 2. By signing up, you agree to follow the [Acceptable Use Policy of CloudLab](https://cloudlab.us/aup.php).
 3. After your account is approved, you can login to your account. Read the [CloudLab manual](http://docs.cloudlab.us/) on how to start an experiment.
+4. After you login to Cloudlab, go to "Manage Account" (by clicking the leftmost dropdown menu), and choose `bash` as the default shell.
 
 ## Running variant analysis on human genomes using a single CloudLab node
 
