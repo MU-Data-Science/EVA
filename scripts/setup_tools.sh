@@ -30,11 +30,13 @@ cd htslib
 sudo apt-get update
 sudo apt-get install libbz2-dev -y
 sudo apt-get install liblzma-dev -y
+git submodule update --init --recursive
 autoheader; autoconf -Wno-syntax; ./configure; make
 sudo make install
 echo "👉 Done with Hstlib installation 😎"
 
 cd ../samtools
+sudo apt-get install libncurses5-dev libncursesw5-dev -y
 autoheader; autoconf -Wno-syntax; ./configure; make
 sudo make install
 
