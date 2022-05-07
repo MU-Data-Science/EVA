@@ -58,7 +58,7 @@ human genome sequences for COVID-19 research. Please check this out on
 ## Running variant analysis on human genomes using a single CloudLab node
 
 1. Start an experiment using the profile `EVA-single-node-profile` on CloudLab. (Or just click [here](https://www.cloudlab.us/p/8d74b0b9-bfd5-11ea-b1eb-e4434b2381fc).)
-You will need to select a node/hardware type such as `xl170` (Utah), `c240g5` (Wisc), etc. The complete list of supported hardware can be found [here](Supported_Machines.txt).  Also provide your CloudLab user name. Check the box to agree to using only deidentified data.
+You will need to select a node/hardware type such as `c8220` (Clemson), `c240g5` (Wisc), etc. The complete list of supported hardware can be found [here](Supported_Machines.txt).  Also provide your CloudLab user name. Check the box to agree to using only deidentified data.
 It will take a few minutes to start the experiment; so please be patient.
 
 2. Go to your experiment and in `Topology View` click the node icon and open a shell/terminal to connect to that node.
@@ -72,7 +72,7 @@ Alternatively, you can use `SSH` to login to the node: `$ ssh -i /path/to/CloudL
        $ cd ${HOME}
        $ git clone https://github.com/MU-Data-Science/EVA.git
 
-    **b.** Set up all the tools such as [bwa](https://github.com/lh3/bwa), [samtools](https://github.com/samtools/samtools), [sambamba](https://github.com/biod/sambamba), [Freebayes](https://github.com/ekg/freebayes), [Picard](https://github.com/broadinstitute/picard), [GATK](https://github.com/broadinstitute/gatk), etc. Feel free to modify our scripts if you intend to use other tools for variant analysis.
+    **b.** Set up all the tools such as [bwa](https://github.com/lh3/bwa), [samtools](https://github.com/samtools/samtools), [sambamba](https://github.com/biod/sambamba), [Freebayes](https://github.com/ekg/freebayes), [Picard](https://github.com/broadinstitute/picard), [GATK](https://github.com/broadinstitute/gatk), etc. Feel free to modify our scripts if you intend to use other tools for variant analysis. (It will take about 6 mins.)
 
        $ ${HOME}/EVA/scripts/setup_tools.sh
 
@@ -86,11 +86,16 @@ Alternatively, you can use `SSH` to login to the node: `$ ssh -i /path/to/CloudL
     ([GRCh38](http://genome.ucsc.edu/cgi-bin/hgTracks?chromInfoPage=&hgsid=857863917_wUC9aW3i9gDVwLAEnS4rRn1MT5Vx)),
     hs37
     ([GRCh37](http://genome.ucsc.edu/cgi-bin/hgTracks?chromInfoPage=&hgsid=857862399_mBXxSwaQbVpPzDMpmtmrA1TeR8WL))).
-    This is a one-time step and can take a hour or so depending on the
+    This is a one-time step and can take one hour or more depending on the
     node hardware type. To avoid killing the process when the SSH
     session terminates due to disconnection, use the `screen` command.
 
+       $ screen -S ref
        $ ${HOME}/EVA/scripts/setup_reference_genome.sh hs38
+
+    Press "Ctrl-a" "d" (i.e., control-a followed by d) to detach from the screen session. To reconnect to the screen, use `screen -r`.
+
+    The above step will create new files `hs38.*` in `/mydata/`.
 
     **e.** Now copy a whole genome sequence (paired-end) sequence to the
     CloudLab node. It is the user's responsibility to ensure that the
@@ -102,34 +107,36 @@ Alternatively, you can use `SSH` to login to the node: `$ ssh -i /path/to/CloudL
     The FTP site is
     `ftp://ftp.1000genomes.ebi.ac.uk/vol1/ftp/phase3/data`.
 
-       $ wget ftp://ftp.1000genomes.ebi.ac.uk/vol1/ftp/phase3/data/HG00096/sequence_read/SRR062635_1.filt.fastq.gz
-       $ wget ftp://ftp.1000genomes.ebi.ac.uk/vol1/ftp/phase3/data/HG00096/sequence_read/SRR062635_2.filt.fastq.gz
-
-    If you want to perform variant analysis on a whole exome sequence (paired-end), try the following.
-
-       $ wget ftp://ftp.sra.ebi.ac.uk/vol1/fastq/SRR077/SRR077312/SRR077312_1.fastq.gz
-       $ wget ftp://ftp.sra.ebi.ac.uk/vol1/fastq/SRR077/SRR077312/SRR077312_2.fastq.gz 
+    ```
+    $ wget ftp://ftp.sra.ebi.ac.uk/vol1/fastq/ERR016/ERR016314/ERR016314_1.fastq.gz
+    $ wget ftp://ftp.sra.ebi.ac.uk/vol1/fastq/ERR016/ERR016314/ERR016314_2.fastq.gz
+    ```
 
     If you have deidentified sequences on your local machine to analyze, copy to the CloudLab node using `scp`.
 
-    **f.** There are two variant analysis scripts. Each of them will
+    **f.** There are three variant analysis scripts. The first one performs alignment, sorting, marking duplicates, variant
+    calling using FreeBayes. The other two will
     perform the alignment, sorting, marking duplicates, variant
     calling, and [Base Quality Score Recalibration](https://gencore.bio.nyu.edu/variant-calling-pipeline-gatk4/) based on [GATK best practice workflows](https://gatk.broadinstitute.org/). The script `run_variant_analysis_fbayes.sh` uses Freebayes
     for variant calling; `run_variant_analysis_gatk.sh` uses GATK's
     HaplotypeCaller. Run a variant analysis script by passing the
-    required arguments. (See usage statement of the script.) Here are
-    two examples.
-
-       $ ${HOME}/EVA/scripts/run_variant_analysis_fbayes.sh hs38 SRR062635_1.filt.fastq.gz SRR062635_2.filt.fastq.gz
-
-   OR
-
-       $ ${HOME}/EVA/scripts/run_variant_analysis_gatk.sh hs38 SRR062635_1.filt.fastq.gz SRR062635_2.filt.fastq.gz
-
+    required arguments. (See usage statement of the script.) Here are the
+    three examples.
+    ```
+    $ ${HOME}/EVA/scripts/run_variant_analysis_fbayes_basic.sh hs38 ERR016314_1.fastq.gz ERR016314_2.fastq.gz
+    ```
+    OR
+    ```
+    $ ${HOME}/EVA/scripts/run_variant_analysis_fbayes.sh hs38 ERR016314_1.fastq.gz ERR016314_2.fastq.gz
+    ```
+    OR
+    ```
+    $ ${HOME}/EVA/scripts/run_variant_analysis_gatk.sh hs38 ERR016314_1.fastq.gz ERR016314_2.fastq.gz
+    ```
     Note that for the GATK pipeline, a dummy [read group](https://gatk.broadinstitute.org/hc/en-us/articles/360035890671-Read-groups) is added to the `.bam` file.
 
     **g.** The variants are stored in `.output.vcf`
-    files. The file ending with `BQSR-output.vcf` contains the variants computed on the analysis-ready reads. Download to your local machine using `scp`.
+    files. If BQSR is used, the file ending with `BQSR-output.vcf` contains the variants computed on the analysis-ready reads. Download to your local machine using `scp`.
 
        $ scp  -i /path/to/CloudLab/private_key_file  CloudLab_username@CloudLab_hostname:/path/to/the/output_VCF_file
 
