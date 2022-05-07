@@ -44,7 +44,7 @@ echo "👉 Done with Samtools installation 😎"
 
 # get freebayes
 cd  ${HOME}
-git clone --recursive git://github.com/ekg/freebayes.git
+git clone --recursive https://github.com/freebayes/freebayes.git
 sudo apt-get install cmake -y
 cd freebayes
 make
