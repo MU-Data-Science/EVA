@@ -1,5 +1,8 @@
 #!/usr/bin/env bash
 
+SHARE_DIR="/proj/eva-public-PG0"
+DATA_DIR="/mydata"
+
 cd ${HOME}
 
 # Get bwa
@@ -44,7 +47,8 @@ echo "👉 Done with Samtools installation 😎"
 
 # get freebayes
 cd  ${HOME}
-sudo apt -y install freebayes
+tar -xvf $SHARE_DIR/EVA_Tools/freebayes.tar -C $DATA_DIR
+ln -sf $DATA_DIR/freebayes $HOME/freebayes
 echo "👉 Done with Freebayes installation 😎"
 
 # setup Java
