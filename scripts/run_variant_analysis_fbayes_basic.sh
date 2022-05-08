@@ -3,7 +3,7 @@
 
 BWA_HOME=${HOME}/bwa
 SAMBAMBA_HOME=${HOME}
-FREEBAYES_HOME=${HOME}/freebayes
+FREEBAYES_EXEC=$(which freebayes)
 SAMTOOLS_HOME=${HOME}/samtools
 TMP_DIR="/mydata/tmp"
 OUTPUT_PREFIX="VA-"${USER}"-result"
@@ -78,7 +78,7 @@ else
 fi
 
 echo "👉 Running freebayes for variant calling."
-FREEBAYES_CMD="${FREEBAYES_HOME}/bin/freebayes -f ${1}.fa ${OUTPUT_PREFIX}-final.bam > ${OUTPUT_PREFIX}-fbayes-output.vcf"
+FREEBAYES_CMD="${FREEBAYES_EXEC} -f ${1}.fa ${OUTPUT_PREFIX}-final.bam > ${OUTPUT_PREFIX}-fbayes-output.vcf"
 eval ${FREEBAYES_CMD}
 if [[ $? -eq 0 ]]; then
     echo "👉 Done with variant calling. See ${OUTPUT_PREFIX}-fbayes-output.vcf file."

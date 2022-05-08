@@ -44,11 +44,7 @@ echo "👉 Done with Samtools installation 😎"
 
 # get freebayes
 cd  ${HOME}
-git clone --recursive https://github.com/freebayes/freebayes.git
-sudo apt-get install cmake -y
-cd freebayes
-make
-cd  ${HOME}
+sudo apt -y install freebayes
 echo "👉 Done with Freebayes installation 😎"
 
 # setup Java
