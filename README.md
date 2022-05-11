@@ -63,7 +63,7 @@ It will take a few minutes to start the experiment; so please be patient.
 
 2. Go to your experiment and in `Topology View` click the node icon and open a shell/terminal to connect to that node.
 Alternatively, you can use `SSH` to login to the node: `$ ssh -i /path/to/CloudLab/private_key_file  CloudLab_username@CloudLab_hostname`.
-(You can also run [ssh-agent](https://www.ssh.com/ssh/agent) on your local machine to add your private key.)
+(You can also run [ssh-agent](https://www.ssh.com/ssh/agent) on your local machine to add your private key.) The CloudLab hostname can be found in the tabs `List View` or `Manifest`.
 
 3. Run the following commands in the shell/terminal:
 
@@ -138,7 +138,7 @@ Alternatively, you can use `SSH` to login to the node: `$ ssh -i /path/to/CloudL
     **g.** The variants are stored in `.output.vcf`
     files. If BQSR is used, the file ending with `BQSR-output.vcf` contains the variants computed on the analysis-ready reads. Download to your local machine using `scp`.
 
-       $ scp  -i /path/to/CloudLab/private_key_file  CloudLab_username@CloudLab_hostname:/path/to/the/output_VCF_file
+       $ scp  -i /path/to/CloudLab/private_key_file  CloudLab_username@CloudLab_hostname:/path/to/the/output_VCF_file .
 
     Any `.vcf` file can be further processed using readily available tools such as [scikit-allel](http://alimanfoo.github.io/2017/06/14/read-vcf.html), [VCFtools](https://vcftools.github.io/index.html), and [GATK](https://gatk.broadinstitute.org/hc/en-us/articles/360036711531-VariantsToTable). You can also use visualization tools such as [IGV](https://software.broadinstitute.org/software/igv/download).
 
