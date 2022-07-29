@@ -25,10 +25,17 @@ MSTR="vm0"
 rm -Rf "$spark_prefix"
 mkdir -p "$spark_prefix"
 
-if [ ! -f $share_dir/EVA_Tools/spark-$spark_ver-bin-hadoop$hadoop_ver.tgz ]; then
-    wget https://archive.apache.org/dist/spark/spark-$spark_ver/spark-$spark_ver-bin-hadoop$hadoop_ver.tgz -P $share_dir/EVA_Tools/
+spark_file_name="spark-"$spark_ver"-bin-hadoop"$hadoop_ver".tgz"
+
+# If Spark 2.4.* is used w/ scala 2.12
+if [[ $spark_ver == *"2.4."* ]]; then
+    spark_file_name="spark-"$spark_ver"-bin-without-hadoop-scala-2.12.tgz"
 fi
-tar zxf $share_dir/EVA_Tools/spark-$spark_ver-bin-hadoop$hadoop_ver.tgz -C "$spark_prefix" --strip-components 1
+
+if [ ! -f $share_dir/EVA_Tools/spark-$spark_ver-bin-hadoop$hadoop_ver.tgz ]; then
+    wget https://archive.apache.org/dist/spark/spark-$spark_ver/$spark_file_name -P $share_dir/EVA_Tools/
+fi
+tar zxf $share_dir/EVA_Tools/$spark_file_name -C "$spark_prefix" --strip-components 1
 
 SPARK_DEFAULTS_FILE="$spark_prefix/conf/spark-defaults.conf"
 echo "
