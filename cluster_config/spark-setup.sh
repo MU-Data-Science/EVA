@@ -32,7 +32,7 @@ if [[ $spark_ver == *"2.4."* ]]; then
     spark_file_name="spark-"$spark_ver"-bin-without-hadoop-scala-2.12.tgz"
 fi
 
-if [ ! -f $share_dir/EVA_Tools/spark-$spark_ver-bin-hadoop$hadoop_ver.tgz ]; then
+if [ ! -f $share_dir/EVA_Tools/$spark_file_name ]; then
     wget https://archive.apache.org/dist/spark/spark-$spark_ver/$spark_file_name -P $share_dir/EVA_Tools/
 fi
 tar zxf $share_dir/EVA_Tools/$spark_file_name -C "$spark_prefix" --strip-components 1
