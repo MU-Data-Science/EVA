@@ -28,7 +28,7 @@ mkdir -p "$spark_prefix"
 spark_file_name="spark-"$spark_ver"-bin-hadoop"$hadoop_ver".tgz"
 
 # If Spark 2.4.* is used w/ scala 2.12
-if [[ $spark_ver == *"2.4."* ]]; then
+if [[ $hadoop_ver == "0.0" ]]; then
     spark_file_name="spark-"$spark_ver"-bin-without-hadoop-scala-2.12.tgz"
 fi
 
@@ -62,6 +62,11 @@ export SPARK_PUBLIC_DNS=$MSTR
 export SPARK_LOCAL_DIRS=$data_dir/spark-tmp
 export SPARK_WORKER_OPTS=\"-Dspark.worker.cleanup.enabled=true -Dspark.worker.cleanup.interval=7200 -Dspark.worker.cleanup.appDataTtl=1800\"
 " > $SPARK_ENV_FILE
+
+# If Spark 2.4.* is used w/ scala 2.12 and no Hadoop
+if [[ $hadoop_ver == "0.0" ]]; then
+    echo "export SPARK_DIST_CLASSPATH=$("$data_dir"/hadoop/bin/hadoop classpath)" >> $SPARK_ENV_FILE
+fi
 
 cp "$cluster_prefix/hadoop_$MASTER_NODE_ID/etc/hadoop/slaves" "$spark_prefix/conf/slaves"
 

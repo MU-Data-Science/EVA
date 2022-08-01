@@ -5,7 +5,7 @@ user_name="$USER"
 data_dir="/mydata"
 
 if !([ "$#" -ge 1 ] && [ "$#" -le 2 ]); then
-  echo "Usage: cluster-configure.sh <no. of nodes> <spark3>"
+  echo "Usage: cluster-configure.sh <no. of nodes> <spark3|spark2|spark2nohadoop>"
   exit -1
 fi
 
@@ -21,6 +21,15 @@ if [ "$2" = spark3 ]; then
   hadoopVer=3.2
   hadoopSubVer=0
   sparkVer=3.0.0
+  echo "Installing Spark "$sparkVer
+elif [ "$2" = spark2nohadoop ]; then
+  hadoopVer=0.0
+  hadoopSubVer=0
+  echo "Installing Spark "$sparkVer
+elif [ "$2" = spark2 ]; then
+  echo "Installing Spark "$sparkVer
+else
+  echo "Unrecognized option "$2
 fi
 
 experiment=$(basename $machines)
