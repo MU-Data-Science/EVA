@@ -23,8 +23,7 @@ if [ "$2" = spark3 ]; then
   sparkVer=3.0.0
   echo "Installing Spark "$sparkVer
 elif [ "$2" = spark2nohadoop ]; then
-  hadoopVer=0.0
-  hadoopSubVer=0
+  sparkVer=2.4.7^
   echo "Installing Spark "$sparkVer
 elif [ "$2" = spark2 ]; then
   echo "Installing Spark "$sparkVer

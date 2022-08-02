@@ -40,7 +40,7 @@ echo "
 
 # If Spark 2.4.* is used w/ scala 2.12 and no Hadoop
 ssh_command_spark_dist='echo "Nothing to set for SPARK_DIST_CLASSPATH"'
-if [[ $hadoop_ver == "0.0" ]]; then
+if [[ $spark_ver == *"^"* ]]; then
     ssh_command_spark_dist='echo "export SPARK_DIST_CLASSPATH=$('$data_dir'/hadoop/bin/hadoop classpath)" >> ~/.bashrc'
 fi
 

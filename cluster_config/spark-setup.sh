@@ -25,15 +25,18 @@ MSTR="vm0"
 rm -Rf "$spark_prefix"
 mkdir -p "$spark_prefix"
 
-spark_file_name="spark-"$spark_ver"-bin-hadoop"$hadoop_ver".tgz"
+SPARK_VERSION=$spark_ver
 
 # If Spark 2.4.* is used w/ scala 2.12
-if [[ $hadoop_ver == "0.0" ]]; then
-    spark_file_name="spark-"$spark_ver"-bin-without-hadoop-scala-2.12.tgz"
+if [[ $spark_ver == *"^"* ]]; then
+    SPARK_VERSION=${spark_ver::-1}
+    spark_file_name="spark-"$SPARK_VERSION"-bin-without-hadoop-scala-2.12.tgz"
+else
+    spark_file_name="spark-"$SPARK_VERSION"-bin-hadoop"$hadoop_ver".tgz"
 fi
 
 if [ ! -f $share_dir/EVA_Tools/$spark_file_name ]; then
-    wget https://archive.apache.org/dist/spark/spark-$spark_ver/$spark_file_name -P $share_dir/EVA_Tools/
+    wget https://archive.apache.org/dist/spark/spark-$SPARK_VERSION/$spark_file_name -P $share_dir/EVA_Tools/
 fi
 tar zxf $share_dir/EVA_Tools/$spark_file_name -C "$spark_prefix" --strip-components 1
 
@@ -64,7 +67,7 @@ export SPARK_WORKER_OPTS=\"-Dspark.worker.cleanup.enabled=true -Dspark.worker.cl
 " > $SPARK_ENV_FILE
 
 # If Spark 2.4.* is used w/ scala 2.12 and no Hadoop
-if [[ $hadoop_ver == "0.0" ]]; then
+if [[ $spark_ver == *"^"* ]]; then
     echo "export SPARK_DIST_CLASSPATH=$("$data_dir"/hadoop/bin/hadoop classpath)" >> $SPARK_ENV_FILE
 fi
 
