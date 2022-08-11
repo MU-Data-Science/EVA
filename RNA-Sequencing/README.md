@@ -157,7 +157,7 @@ Run the following commands in the shell/terminal:
 
 13. Run the RNA-sequencing script.
 
-    $ bash rna_seq.sh '<ID1> .. <IDn>'
+    $ bash rna_seq.sh ID1 .. IDn
 
 ## Running scripts for CADD computation
 
