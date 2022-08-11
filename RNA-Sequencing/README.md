@@ -158,7 +158,7 @@ Run the following commands in the shell/terminal:
     ```
 
 
-## Running scripts for RNA-sequencing
+## Running the script for RNA-sequencing
 
 13. Run the RNA-sequencing script.
 
@@ -166,10 +166,10 @@ Run the following commands in the shell/terminal:
     $ bash rna_seq.sh ID1 .. IDn
     ```
 
-## Running scripts for CADD computation
+<!-- ## Running the scripts for CADD computation -->
 
-14. Run the compute script.
+<!-- 14. Run the compute script.
 
     ```
     $ bash compute.sh
-    ```
+    ``` -->
