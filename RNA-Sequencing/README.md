@@ -52,6 +52,7 @@ Run the following commands in the shell/terminal:
 
 5. Download the files required by the Workflow.
 
+    ```
     $ gsutil cp gs://gcp-public-data--broad-references/Homo_sapiens_assembly19_1000genomes_decoy/Homo_sapiens_assembly19_1000genomes_decoy.fasta /mydata/gatk-workflows/inputs
 
     $ gsutil cp gs://gcp-public-data--broad-references/Homo_sapiens_assembly19_1000genomes_decoy/Homo_sapiens_assembly19_1000genomes_decoy.fasta.fai /mydata/gatk-workflows/inputs
@@ -71,6 +72,7 @@ Run the following commands in the shell/terminal:
     $ gsutil cp gs://gcp-public-data--broad-references/Homo_sapiens_assembly19_1000genomes_decoy/Homo_sapiens_assembly19_1000genomes_decoy.known_indels.vcf.idx /mydata/gatk-workflows/inputs
 
     $ gsutil cp gs://gatk-test-data/intervals/star.gencode.v19.transcripts.patched_contigs.gtf /mydata/gatk-workflows/inputs
+    ```
 
 6. Setup EVA.
     **a.** Clone the repository.
@@ -132,16 +134,18 @@ Run the following commands in the shell/terminal:
 
 10. Download the CADD annotations.
 
+    ```
     $ mkdir -p /mydata/CADD-scripts/data/annotations
 
     $ cd /mydata/CADD-scripts/data/annotations && wget -c https://krishna.gs.washington.edu/download/CADD/v1.6/GRCh37/annotationsGRCh37_v1.6.tar.gz
 
     $ cd /mydata/CADD-scripts/data/annotations && gunzip annotationsGRCh37_v1.6.tar.gz && tar -xvf annotationsGRCh37_v1.6.tar
+    ```
 
 11. Copy all the scripts to their respective directory paths, mentioned in the scripts.
 
 12. Create the directories.
-
+    ```
     $ mkdir /mydata/InpSequences
 
     $ mkdir /mydata/Out_uBAM
@@ -151,16 +155,21 @@ Run the following commands in the shell/terminal:
     $ mkdir /mydata/CADD_Inp
 
     $ mkdir /mydata/CADD_Scores
+    ```
 
 
 ## Running scripts for RNA-sequencing
 
 13. Run the RNA-sequencing script.
 
+    ```
     $ bash rna_seq.sh ID1 .. IDn
+    ```
 
 ## Running scripts for CADD computation
 
 14. Run the compute script.
 
+    ```
     $ bash compute.sh
+    ```
