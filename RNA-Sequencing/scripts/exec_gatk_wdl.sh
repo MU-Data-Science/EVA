@@ -1,0 +1,32 @@
+# Path: /mydata/gatk-workflows/exec_gatk_wdl.sh
+
+#!/usr/bin/env bash
+
+# Defining the workflow directory.
+GATK_WDL_DIR="/mydata/gatk-workflows"
+
+# Defining the workflow project name.
+GATK_WDL="gatk4-rnaseq-germline-snps-indels"
+
+# Defining directory containing the unmapped bam files.
+VCF_DIR="/mydata/CADD_Inp"
+
+# Iterating over the sample ID directories.
+for dir in ${GATK_WDL_DIR}/inputs/*.unmapped.bam
+do
+	# Obtaining the unmapped bam.
+	echo "Processing file ${dir}"
+
+    # Adding the file to the template
+    sed '"'"'46 i "RNAseq.inputBam": "'"'"'${dir}'"'"'"'"'"' ${GATK_WDL_DIR}/${GATK_WDL}/template.json > ${GATK_WDL_DIR}/${GATK_WDL}/gatk4-rna-germline-variant-calling.inputs.json
+
+    # Executing the workflow.
+    cd ${GATK_WDL_DIR} && java -jar cromwell-33.1.jar run ./${GATK_WDL}/gatk4-rna-best-practices.wdl --inputs ./${GATK_WDL}/gatk4-rna-germline-variant-calling.inputs.json
+
+	# Obtaining the VCF.
+    sudo find ${GATK_WDL_DIR}/cromwell-executions/RNAseq -name '*variant_filtered.vcf.gz' -exec mv "{}" ${VCF_DIR}  \;
+
+    # Cleaning up.
+    cd ${GATK_WDL_DIR} && sudo rm -rvf cromwell-executions cromwell-workflow-logs
+
+done
