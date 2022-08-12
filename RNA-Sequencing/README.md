@@ -95,13 +95,25 @@ Run the following commands in the shell/terminal:
 
     **a.** Create and activate conda environment.
 
+        $ cd /mydata && wget https://repo.anaconda.com/archive/Anaconda3-2019.03-Linux-x86_64.sh
+
+        $ bash Anaconda3-2019.03-Linux-x86_64.sh -b -p /mydata/anaconda3
+
+        $ export PATH=/mydata/anaconda3/bin:$PATH
+
+        $ echo 'export PATH=/mydata/anaconda3/bin:$PATH' >> ~/.profile && . ~/.profile
+
+        $ conda init
+
+    Repeat Step 4.
+
         $ conda create -n mamba-env python=3.8
 
         $ conda activate mamba-env
 
     **b.** Inside the conda environment, install mamba.
 
-        $ conda install -c conda-forge mamba #Failing
+        $ conda install -c conda-forge mamba
 
         $ mamba create -c conda-forge -c bioconda -n snakemake snakemake
 
