@@ -137,7 +137,9 @@ Run the following commands in the shell/terminal:
     
     **b.** Make the following changes to install.sh at line 215.
 
-        Replace --conda-create-envs-only with ```--create-envs-only```
+        Replace --conda-create-envs-only with 
+        
+        ```--create-envs-only```
 
     **b.** Run the following to feed the answers via script.
 
