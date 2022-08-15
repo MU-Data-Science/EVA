@@ -107,7 +107,7 @@ Run the following commands in the shell/terminal:
 
     Repeat Step 4.
 
-        $ conda create -n mamba-env python=3.8
+        $ conda create -n mamba-env python=3.6
 
         $ conda activate mamba-env
 
@@ -123,7 +123,7 @@ Run the following commands in the shell/terminal:
 
     **d.** Activate the snakemake environment inside the conda environment.
 
-        $ conda activate mamba-env [execute again if deactivated with the above export]
+        $ conda activate mamba-env [execute again if deactivated with the above export, not sure if needed]
 
         $ mamba activate snakemake
 
@@ -134,6 +134,10 @@ Run the following commands in the shell/terminal:
         $ cd /mydata && git clone https://github.com/kircherlab/CADD-scripts.git
 
         $ cd /mydata/CADD-scripts
+    
+    **b.** Make the following changes to install.sh at line 215.
+
+        Replace --conda-create-envs-only with ```--create-envs-only```
 
     **b.** Run the following to feed the answers via script.
 
@@ -178,10 +182,10 @@ Run the following commands in the shell/terminal:
     $ bash rna_seq.sh ID1 .. IDn
     ```
 
-<!-- ## Running the scripts for CADD computation -->
+## Running the scripts for CADD computation
 
-<!-- 14. Run the compute script.
+14. Run the compute script.
 
     ```
     $ bash compute.sh
-    ``` -->
+    ```
