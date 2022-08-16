@@ -103,19 +103,23 @@ Run the following commands in the shell/terminal:
 8. Copy all the scripts/files to their respective directory paths.
 
     **a.** convert_uBAM.sh: /mydata/EVA/scripts/convert_uBAM.sh
+
     NOTE: chmod +x /mydata/EVA/scripts/convert_uBAM.sh
+
     **b.** recursive_convert_uBAM.sh: /mydata/EVA/scripts/recursive_convert_uBAM.sh
+
     NOTE: chmod +x /mydata/EVA/scripts/recursive_convert_uBAM.sh
+
     **c.** template.json: /mydata/gatk-workflows/gatk4-rnaseq-germline-snps-indels/template.json
+
     **d.** exec_gatk_wdl.sh: /mydata/gatk-workflows/exec_gatk_wdl.sh
+
     NOTE: chmod +x exec_gatk_wdl.sh 
     
 
 ## Running the script for RNA-sequencing
 
-    ```
     $ bash rna_seq.sh ID1 .. IDn
-    ```
 
 # Setup steps for CADD score computation.
 
@@ -178,6 +182,4 @@ Run the following commands in the shell/terminal:
 
 ## Running the scripts for CADD computation
 
-    ```
     $ bash compute.sh
-    ```
