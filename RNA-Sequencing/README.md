@@ -173,6 +173,8 @@ Run the following commands in the shell/terminal:
 12. Copy the script to its respective directory path.
 
     **a.** compute.sh: /mydata/EVA/scripts/compute.sh
+    
+    NOTE: chmod +x /mydata/EVA/scripts/compute.sh
 
 13. Create the directory.
 
