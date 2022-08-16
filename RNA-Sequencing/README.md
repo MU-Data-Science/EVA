@@ -53,28 +53,29 @@ Run the following commands in the shell/terminal:
 5. Download the files required by the Workflow.
 
     ```
-    $ gsutil cp gs://gcp-public-data--broad-references/Homo_sapiens_assembly19_1000genomes_decoy/Homo_sapiens_assembly19_1000genomes_decoy.fasta /mydata/gatk-workflows/inputs
+    gsutil cp gs://gcp-public-data--broad-references/Homo_sapiens_assembly19_1000genomes_decoy/Homo_sapiens_assembly19_1000genomes_decoy.fasta /mydata/gatk-workflows/inputs
 
-    $ gsutil cp gs://gcp-public-data--broad-references/Homo_sapiens_assembly19_1000genomes_decoy/Homo_sapiens_assembly19_1000genomes_decoy.fasta.fai /mydata/gatk-workflows/inputs
+    gsutil cp gs://gcp-public-data--broad-references/Homo_sapiens_assembly19_1000genomes_decoy/Homo_sapiens_assembly19_1000genomes_decoy.fasta.fai /mydata/gatk-workflows/inputs
 
-    $ gsutil cp gs://gcp-public-data--broad-references/Homo_sapiens_assembly19_1000genomes_decoy/Homo_sapiens_assembly19_1000genomes_decoy.dict /mydata/gatk-workflows/inputs
+    gsutil cp gs://gcp-public-data--broad-references/Homo_sapiens_assembly19_1000genomes_decoy/Homo_sapiens_assembly19_1000genomes_decoy.dict /mydata/gatk-workflows/inputs
 
-    $ gsutil cp gs://gcp-public-data--broad-references/Homo_sapiens_assembly19_1000genomes_decoy/Homo_sapiens_assembly19_1000genomes_decoy.dbsnp138.vcf /mydata/gatk-workflows/inputs
+    gsutil cp gs://gcp-public-data--broad-references/Homo_sapiens_assembly19_1000genomes_decoy/Homo_sapiens_assembly19_1000genomes_decoy.dbsnp138.vcf /mydata/gatk-workflows/inputs
 
-    $ gsutil cp gs://gcp-public-data--broad-references/Homo_sapiens_assembly19_1000genomes_decoy/Homo_sapiens_assembly19_1000genomes_decoy.dbsnp138.vcf.idx /mydata/gatk-workflows/inputs
+    gsutil cp gs://gcp-public-data--broad-references/Homo_sapiens_assembly19_1000genomes_decoy/Homo_sapiens_assembly19_1000genomes_decoy.dbsnp138.vcf.idx /mydata/gatk-workflows/inputs
 
-    $ gsutil cp gs://gcp-public-data--broad-references/Homo_sapiens_assembly19_1000genomes_decoy/Mills_and_1000G_gold_standard.indels.b37.sites.vcf /mydata/gatk-workflows/inputs
+    gsutil cp gs://gcp-public-data--broad-references/Homo_sapiens_assembly19_1000genomes_decoy/Mills_and_1000G_gold_standard.indels.b37.sites.vcf /mydata/gatk-workflows/inputs
 
-    $ gsutil cp gs://gcp-public-data--broad-references/Homo_sapiens_assembly19_1000genomes_decoy/Homo_sapiens_assembly19_1000genomes_decoy.known_indels.vcf /mydata/gatk-workflows/inputs
+    gsutil cp gs://gcp-public-data--broad-references/Homo_sapiens_assembly19_1000genomes_decoy/Homo_sapiens_assembly19_1000genomes_decoy.known_indels.vcf /mydata/gatk-workflows/inputs
 
-    $ gsutil cp gs://gcp-public-data--broad-references/Homo_sapiens_assembly19_1000genomes_decoy/Mills_and_1000G_gold_standard.indels.b37.sites.vcf.idx /mydata/gatk-workflows/inputs
+    gsutil cp gs://gcp-public-data--broad-references/Homo_sapiens_assembly19_1000genomes_decoy/Mills_and_1000G_gold_standard.indels.b37.sites.vcf.idx /mydata/gatk-workflows/inputs
 
-    $ gsutil cp gs://gcp-public-data--broad-references/Homo_sapiens_assembly19_1000genomes_decoy/Homo_sapiens_assembly19_1000genomes_decoy.known_indels.vcf.idx /mydata/gatk-workflows/inputs
+    gsutil cp gs://gcp-public-data--broad-references/Homo_sapiens_assembly19_1000genomes_decoy/Homo_sapiens_assembly19_1000genomes_decoy.known_indels.vcf.idx /mydata/gatk-workflows/inputs
 
-    $ gsutil cp gs://gatk-test-data/intervals/star.gencode.v19.transcripts.patched_contigs.gtf /mydata/gatk-workflows/inputs
+    gsutil cp gs://gatk-test-data/intervals/star.gencode.v19.transcripts.patched_contigs.gtf /mydata/gatk-workflows/inputs
     ```
 
 6. Setup EVA.
+
     **a.** Clone the repository.
 
         $ cd /mydata && git clone https://github.com/MU-Data-Science/EVA.git
@@ -89,15 +90,42 @@ Run the following commands in the shell/terminal:
 
         $ bash setup_tools.sh
 
-7. Copy all the processing scripts to the node.
+7. Create the following directories.
 
-8. Setup Conda, Mamba and Snakemake.
+    ```
+    $ mkdir /mydata/InpSequences
+
+    $ mkdir /mydata/Out_uBAM
+
+    $ mkdir /mydata/CADD_Inp
+    ```
+
+8. Copy all the scripts/files to their respective directory paths.
+
+    **a.** convert_uBAM.sh: /mydata/EVA/scripts/convert_uBAM.sh
+    NOTE: chmod +x /mydata/EVA/scripts/convert_uBAM.sh
+    **b.** recursive_convert_uBAM.sh: /mydata/EVA/scripts/recursive_convert_uBAM.sh
+    NOTE: chmod +x /mydata/EVA/scripts/recursive_convert_uBAM.sh
+    **c.** template.json: /mydata/gatk-workflows/gatk4-rnaseq-germline-snps-indels/template.json
+    **d.** exec_gatk_wdl.sh: /mydata/gatk-workflows/exec_gatk_wdl.sh
+    NOTE: chmod +x exec_gatk_wdl.sh 
+    
+
+## Running the script for RNA-sequencing
+
+    ```
+    $ bash rna_seq.sh ID1 .. IDn
+    ```
+
+# Setup steps for CADD score computation.
+
+9. Setup Conda, Mamba and Snakemake.
 
     **a.** Create and activate conda environment.
 
-        $ cd /mydata && wget https://repo.anaconda.com/archive/Anaconda3-2019.03-Linux-x86_64.sh
+        $ cd /mydata && wget https://repo.anaconda.com/archive/Anaconda3-2022.05-Linux-x86_64.sh
 
-        $ bash Anaconda3-2019.03-Linux-x86_64.sh -b -p /mydata/anaconda3
+        $ bash Anaconda3-2022.05-Linux-x86_64.sh -b -p /mydata/anaconda3
 
         $ export PATH=/mydata/anaconda3/bin:$PATH
 
@@ -107,27 +135,9 @@ Run the following commands in the shell/terminal:
 
     Repeat Step 4.
 
-        $ conda create -n mamba-env python=3.6
+        $ conda install -c conda-forge -c bioconda snakemake mamba
 
-        $ conda activate mamba-env
-
-    **b.** Inside the conda environment, install mamba.
-
-        $ conda install -c conda-forge mamba
-
-        $ mamba create -c conda-forge -c bioconda -n snakemake snakemake
-
-    **c.** Export the snakemake path.
-
-        $ echo 'export PATH=/mydata/anaconda3/envs/snakemake/bin::$PATH' >> ~/.profile && . ~/.profile
-
-    **d.** Activate the snakemake environment inside the conda environment.
-
-        $ conda activate mamba-env [execute again if deactivated with the above export, not sure if needed]
-
-        $ mamba activate snakemake
-
-9. Setup CADD scripts.
+10. Setup CADD scripts.
 
     **a.** Clone the repository and navigate into the directory.
 
@@ -137,16 +147,16 @@ Run the following commands in the shell/terminal:
     
     **b.** In install.sh, go to line 215 and replace --conda-create-envs-only with --create-envs-only
 
-    **b.** Run the following to feed the answers via script.
+    **b.** Run the following to feed the answers to install.sh.
 
         $ echo "y
                 y
-                n
-                n
+                y
+                y
                 n
                 y" | bash install.sh
 
-10. Download the CADD annotations.
+11. Download the CADD annotations. Recommended to use screen at this step.
 
     ```
     $ mkdir -p /mydata/CADD-scripts/data/annotations
@@ -156,33 +166,17 @@ Run the following commands in the shell/terminal:
     $ cd /mydata/CADD-scripts/data/annotations && gunzip annotationsGRCh37_v1.6.tar.gz && tar -xvf annotationsGRCh37_v1.6.tar
     ```
 
-11. Copy all the scripts to their respective directory paths, mentioned in the scripts.
+12. Copy the script to its respective directory path.
 
-12. Create the directories.
+    **a.** compute.sh: /mydata/EVA/scripts/compute.sh
+
+13. Create the directory.
+
     ```
-    $ mkdir /mydata/InpSequences
-
-    $ mkdir /mydata/Out_uBAM
-
-    $ chmod +x /mydata/EVA/scripts/convert_uBAM.sh
-
-    $ mkdir /mydata/CADD_Inp
-
     $ mkdir /mydata/CADD_Scores
     ```
 
-
-## Running the script for RNA-sequencing
-
-13. Run the RNA-sequencing script.
-
-    ```
-    $ bash rna_seq.sh ID1 .. IDn
-    ```
-
 ## Running the scripts for CADD computation
-
-14. Run the compute script.
 
     ```
     $ bash compute.sh

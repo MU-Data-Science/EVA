@@ -44,5 +44,5 @@
     "#RNAseq.zippedStarReferences": "(optional) File?",
     "#RNAseq.readLength": "(optional) Int?",
   
-    "##_COMMENT7": "Input"
-  }
+    "##_COMMENT7": "Input",
+}
