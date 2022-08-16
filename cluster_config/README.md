@@ -37,14 +37,21 @@
    ```
    $ screen -S setup
    $ cd ${HOME}/EVA/cluster_config
+   ```
+   To use ADAM-Cannoli, do this:
+   ```
    $ ./cluster-configure.sh 16 spark3
+   ```
+   To use GATK, do this:
+   ```
+   $ ./cluster-configure.sh 16 spark2
    ```
    Press "Ctrl-a" "Ctrl-d" (i.e., control-a followed by control-d) to
    detach from the screen session. To reattach, use `screen -r`.
    The configuration script can take more than 30 minutes to complete;
    so please be patient.
 
-5. After successful cluster setup, quit the SSH session by typing
+5. After successful cluster setup, quit the SSH session to `vm0` by typing
    `exit`. You are ready for the next steps!
 
 ## Acknowledgments
