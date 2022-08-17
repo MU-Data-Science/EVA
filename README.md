@@ -200,7 +200,7 @@ We are using [Apache Spark](https://spark.apache.org),
 We are using [AVAH](https://github.com/raopr/AVAH) [CIKM '21],
 [Apache Spark](https://spark.apache.org),
 [Apache Hadoop](https://hadoop.apache.org), and
-[Adam/Cannoli](http://bdgenomics.org/).
+[Adam-Cannoli](http://bdgenomics.org/) or [GATK4](https://gatk.broadinstitute.org/hc/en-us).
 
 1. Create and set up a 16-node cluster on CloudLab, following the steps
    described [here](cluster_config). (The nodes are named `vm0`, `vm1`, ..., `vm15`.)
@@ -213,14 +213,16 @@ We are using [AVAH](https://github.com/raopr/AVAH) [CIKM '21],
    ```
    Use of `screen` is recommended as copying the files can take more than 15 minutes.
 
-4. On `vm0`, clone the AVAH repo.
+4. If using GATK4, do the changes mentioned on this [page](GATK-README.md).
+
+5. On `vm0`, clone the AVAH repo.
    ```
    $ cd ; git clone https://github.com/raopr/AVAH.git
    $ cp ${HOME}/AVAH/misc/sampleIDs-vlarge.txt /proj/eva-public-PG0/${USER}-sampleIDs-vlarge.txt
    $ cp ${HOME}/AVAH/misc/sampleURLs-vlarge.txt /proj/eva-public-PG0/${USER}-sampleURLs-vlarge.txt   
    ```
 
-5. Run the following command to create the required files for BQSR/Indel
+6. If using ADAM-Cannoli, run the following command to create the required files for BQSR/Indel
    realignment. The known SNPs and INDELs folders will be created on
    HDFS.
    ```
@@ -228,13 +230,12 @@ We are using [AVAH](https://github.com/raopr/AVAH) [CIKM '21],
    ```
    This step will take several minutes to complete.
 
-6. Run variant analysis using AVAH. Adam/Cannoli, Freebayes, and BWA are
-   used. For usage, type:
+7. Run variant analysis using AVAH. For usage, type:
     ```
     $ ${HOME}/AVAH/scripts/run_variant_analysis_at_scale.sh -h
     ```
-
-   **a.** If sequences need to be downloaded to HDFS,
+   a. For ADAM-Cannoli (w/ BWA and Freebayes):
+     1. If sequences need to be downloaded to HDFS,
    then run the following command:
    ```
    $ hdfs dfs -rm -r /tmp/logs; hdfs dfs -rm -r /spark-events/*; hdfs dfs -rm /*.fastq.gz
@@ -249,22 +250,48 @@ We are using [AVAH](https://github.com/raopr/AVAH) [CIKM '21],
    download the sequences directly to CloudLab nodes using `wget` and
    then copy them to HDFS. This is recommended if the above script does
    not download the sequences correctly due to issues with CloudLab's
-   network. After that, you can run the command in Step (b).
+   network. After that, you can run the below step.
 
-   **b.** If sequences are already present in HDFS (and correctly
+   2. If sequences are already present in HDFS (and correctly
    downloaded), then run the following command:
    ```
    $ hdfs dfs -rm -r /tmp/logs; hdfs dfs -rm -r /spark-events/*
    $ ${HOME}/AVAH/scripts/run_variant_analysis_at_scale.sh -i /proj/eva-public-PG0/${USER}-sampleIDs-vlarge.txt -d NONE -n 16 -b 2 -p 15 -P H -B
    ```
-   To skip BQSR/indel realignment, drop the `-B` option.
+   3. To skip BQSR/indel realignment, drop the `-B` option.
 
-   To re-execute failed sequences during variant analysis, use the `-e`
+
+   b. For GATK4 (w/ BWA and HaplotypeCaller):
+     1. If sequences need to be downloaded to HDFS,
+   then run the following command:
+   ```
+   $ hdfs dfs -rm -r /tmp/logs; hdfs dfs -rm -r /spark-events/*; hdfs dfs -rm /*.fastq.gz
+   $ ${HOME}/AVAH/scripts/run_variant_analysis_at_scale.sh -i /proj/eva-public-PG0/${USER}-sampleIDs-vlarge.txt -d /proj/eva-public-PG0/${USER}-sampleURLs-vlarge.txt -n 16 -b 2 -p 15 -P H -G
+   ```
+   The file
+   [`${USER}-sampleIDs-vlarge.txt`](https://github.com/raopr/AVAH/blob/master/misc/sampleIDs-vlarge.txt)
+   contains the IDs of the sequences and sizes (e.g., one FASTQ file
+   size). The file
+   [`${USER}-sampleURLs-vlarge.txt`](https://github.com/raopr/AVAH/blob/master/misc/sampleURLs-vlarge.txt)
+   contains the URLs of the (paired-end) FASTQ files. You can also
+   download the sequences directly to CloudLab nodes using `wget` and
+   then copy them to HDFS. This is recommended if the above script does
+   not download the sequences correctly due to issues with the
+   network/FTP servers. After that, you can run the below step.
+
+   2. If sequences are already present in HDFS (and correctly
+   downloaded), then run the following command:
+   ```
+   $ hdfs dfs -rm -r /tmp/logs; hdfs dfs -rm -r /spark-events/*
+   $ ${HOME}/AVAH/scripts/run_variant_analysis_at_scale.sh -i /proj/eva-public-PG0/${USER}-sampleIDs-vlarge.txt -d NONE -n 16 -b 2 -p 15 -P H -G
+   ```
+
+7. To re-execute failed sequences during variant analysis, use the `-e`
    option.
 
    For changing the YARN settings, refer to this [page](YARN-README.md).
 
-7. The `.vcf` files containing raw variants will be stored in HDFS.
+8. The `.vcf` files containing raw variants will be stored in HDFS.
    Check the files using this command: `hdfs dfs -ls /*.vcf`.
 
 ## Running de novo assembly on a cluster of CloudLab nodes
