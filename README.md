@@ -235,8 +235,7 @@ We are using [AVAH](https://github.com/raopr/AVAH) [CIKM '21],
     $ ${HOME}/AVAH/scripts/run_variant_analysis_at_scale.sh -h
     ```
    a. For ADAM-Cannoli (w/ BWA and Freebayes):
-     1. If sequences need to be downloaded to HDFS,
-   then run the following command:
+   - If sequences need to be downloaded to HDFS, then run the following command:
    ```
    $ hdfs dfs -rm -r /tmp/logs; hdfs dfs -rm -r /spark-events/*; hdfs dfs -rm /*.fastq.gz
    $ ${HOME}/AVAH/scripts/run_variant_analysis_at_scale.sh -i /proj/eva-public-PG0/${USER}-sampleIDs-vlarge.txt -d /proj/eva-public-PG0/${USER}-sampleURLs-vlarge.txt -n 16 -b 2 -p 15 -P H -B
@@ -252,17 +251,17 @@ We are using [AVAH](https://github.com/raopr/AVAH) [CIKM '21],
    not download the sequences correctly due to issues with CloudLab's
    network. After that, you can run the below step.
 
-   2. If sequences are already present in HDFS (and correctly
+   - If sequences are already present in HDFS (and correctly
    downloaded), then run the following command:
    ```
    $ hdfs dfs -rm -r /tmp/logs; hdfs dfs -rm -r /spark-events/*
    $ ${HOME}/AVAH/scripts/run_variant_analysis_at_scale.sh -i /proj/eva-public-PG0/${USER}-sampleIDs-vlarge.txt -d NONE -n 16 -b 2 -p 15 -P H -B
    ```
-   3. To skip BQSR/indel realignment, drop the `-B` option.
+   - To skip BQSR/indel realignment, drop the `-B` option.
 
 
    b. For GATK4 (w/ BWA and HaplotypeCaller):
-     1. If sequences need to be downloaded to HDFS,
+   - If sequences need to be downloaded to HDFS,
    then run the following command:
    ```
    $ hdfs dfs -rm -r /tmp/logs; hdfs dfs -rm -r /spark-events/*; hdfs dfs -rm /*.fastq.gz
@@ -279,7 +278,7 @@ We are using [AVAH](https://github.com/raopr/AVAH) [CIKM '21],
    not download the sequences correctly due to issues with the
    network/FTP servers. After that, you can run the below step.
 
-   2. If sequences are already present in HDFS (and correctly
+   - If sequences are already present in HDFS (and correctly
    downloaded), then run the following command:
    ```
    $ hdfs dfs -rm -r /tmp/logs; hdfs dfs -rm -r /spark-events/*
