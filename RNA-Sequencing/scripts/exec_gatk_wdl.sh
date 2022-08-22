@@ -18,7 +18,7 @@ do
 	echo "Processing file ${dir}"
 
     # Adding the file to the template
-    sed '"'"'46 i "RNAseq.inputBam": "'"'"'${dir}'"'"'"'"'"' ${GATK_WDL_DIR}/${GATK_WDL}/template.json > ${GATK_WDL_DIR}/${GATK_WDL}/gatk4-rna-germline-variant-calling.inputs.json
+    echo 'sed '"'"'46 i "RNAseq.inputBam": "'${dir}'"'"'"' '${GATK_WDL_DIR}'/'${GATK_WDL}'/template.json > '${GATK_WDL_DIR}'/'${GATK_WDL}'/gatk4-rna-germline-variant-calling.inputs.json' > temp.sh && bash temp.sh
 
     # Executing the workflow.
     cd ${GATK_WDL_DIR} && java -jar cromwell-33.1.jar run ./${GATK_WDL}/gatk4-rna-best-practices.wdl --inputs ./${GATK_WDL}/gatk4-rna-germline-variant-calling.inputs.json

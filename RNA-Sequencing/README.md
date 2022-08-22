@@ -34,7 +34,7 @@ Run the following commands in the shell/terminal:
 
         $ cd /mydata && curl -O https://dl.google.com/dl/cloudsdk/channels/rapid/downloads/google-cloud-sdk-326.0.0-linux-x86_64.tar.gz && tar -xvf google-cloud-sdk-326.0.0-linux-x86_64.tar.gz && /mydata/google-cloud-sdk/install.sh
 
-    If prompted to enter a path to an rc file to update or leave blank to use, enter: /users/<username>/.bashrc.
+    If prompted to enter a path to an rc file to update or leave blank to use, enter: /users/username/.bashrc.
 
 3. GATK Workflow Setup.
 
@@ -114,7 +114,7 @@ Run the following commands in the shell/terminal:
 
     **d.** exec_gatk_wdl.sh: /mydata/gatk-workflows/exec_gatk_wdl.sh
 
-    NOTE: chmod +x exec_gatk_wdl.sh 
+    NOTE: chmod +x /mydata/gatk-workflows/exec_gatk_wdl.sh
     
 
 ## Running the script for RNA-sequencing
