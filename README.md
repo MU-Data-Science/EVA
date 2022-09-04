@@ -314,7 +314,8 @@ ${HOME}/EVA/scripts/run_denovo.sh ${HOME}/EVA/misc/sampleIDs.txt NONE 41
 
 * Praveen Rao and Arun Zachariah. <strong>Enabling Large-Scale Human
   Genome Sequence Analysis on CloudLab.</strong> In IEEE INFOCOM Workshops: Computer
-  and Networking Experimental Research using Testbeds (CNERT 2022). (to appear)
+  and Networking Experimental Research using Testbeds (CNERT 2022), 2 pages, 2022.
+  [[PDF]](https://ieeexplore.ieee.org/document/9798223)
 
 * Praveen Rao, Arun Zachariah, Deepthi Rao, Peter Tonellato, Wesley
   Warren, and Eduardo Simoes. <strong>Accelerating Variant Calling on
@@ -336,6 +337,8 @@ However, these sequences are not from COVID-19 studies. [The COVID-19 Data Porta
 has 700+ human genome sequences from COVID-19 studies using the RNA-sequencing (RNA-Seq) technique.
 
 ## Performance Evaluation
+
+Note: For AVAH's performance evaluation using ADAM-Cannoli, please refer to our [publications](#publications).
 
 ### Experiment 1
 
