@@ -1,6 +1,4 @@
 {
-    "##_COMMENT_PATH" : "/mydata/gatk-workflows/gatk4-rnaseq-germline-snps-indels/template.json", 
-    
     "##_COMMENT1": "REFERENCE FILES",
     "RNAseq.refFasta": "/mydata/gatk-workflows/inputs/Homo_sapiens_assembly19_1000genomes_decoy.fasta",
     "RNAseq.refFastaIndex": "/mydata/gatk-workflows/inputs/Homo_sapiens_assembly19_1000genomes_decoy.fasta.fai",

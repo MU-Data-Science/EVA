@@ -46,3 +46,4 @@ cd ${CADD_SCRIPTS_DIR} && bash compute.sh
 
 echo "Completed processing. Sending out an email notification."
 mail -s "Completed process notification" ${EMAIL} <<< "VCF and CADD Scores have been computed for ${SEQ_ID_LIST_STR}."
+    
