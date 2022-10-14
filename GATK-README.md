@@ -12,7 +12,7 @@
    </property>
    ```
 
-   If you need to change the node memory/cores allocated for YARN jobs, refer to this [page](YARN-README.md).
+   If you need to change the node memory/cores allocated for YARN jobs, refer to this [page](YARN-README.md). Please change the default values of memory to `91440` for `yarn.scheduler.maximum-allocation-mb` and `231440` for `yarn.nodemanager.resource.memory-mb`. This is necessary as GATK's executes all the variant calling tasks inside the JVM.
 
    Execute the following commands to update `yarn-site.xml` on all the worker nodes and restart YARN:
    ```
