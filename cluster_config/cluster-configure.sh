@@ -1,12 +1,15 @@
-#!/usr/bin/env bash
+set-cluster-docker-gpus.sh#!/usr/bin/env bash
 
 nodes="$1"
 user_name="$USER"
 data_dir="/mydata"
 
-if !([ "$#" -ge 1 ] && [ "$#" -le 2 ]); then
-  echo "Usage: cluster-configure.sh <no. of nodes> <spark3|spark2|spark2nohadoop>"
-  exit -1
+if [[ $# -lt 2 ]]; then
+  echo "Usage: cluster-configure.sh <no. of nodes> <spark3|spark2> [flag]"
+  echo ""
+  echo "Options:"
+  echo "  flag: 1 for installing Docker/NVIDIA GPU drivers; 0 otherwise (default: 0)"
+  exit
 fi
 
 # configuration constants.
@@ -15,20 +18,13 @@ shareDir="/proj/eva-public-PG0"
 hadoopVer=2.7
 hadoopSubVer=6
 sparkVer=2.4.7
-SCALA_VER=2.12.8
+SCALA_VER=2.11.8
 
 if [ "$2" = spark3 ]; then
   hadoopVer=3.2
   hadoopSubVer=0
   sparkVer=3.0.0
-  echo "Installing Spark "$sparkVer
-elif [ "$2" = spark2nohadoop ]; then
-  sparkVer=2.4.7^
-  echo "Installing Spark "$sparkVer
-elif [ "$2" = spark2 ]; then
-  echo "Installing Spark "$sparkVer
-else
-  echo "Unrecognized option "$2
+  SCALA_VER=2.12.8
 fi
 
 experiment=$(basename $machines)
@@ -43,6 +39,10 @@ scripts=(\
   "set-cluster-conda" \
   "set-cluster-genome-tools" \
   "set-cluster-bashrc")
+
+if [ "$3" = 1 ]; then
+  scripts+=("set-cluster-docker-gpus")
+fi
 
 # Write the node list to cluster-machines.txt.
 for ((i=0;i<$nodes;i++)); do
