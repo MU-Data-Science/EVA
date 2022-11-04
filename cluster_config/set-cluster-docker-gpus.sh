@@ -30,3 +30,4 @@ sudo apt-get update
 sudo apt-get install -y nvidia-docker2
 sudo systemctl start docker
 sudo sed -i -e 's/dockerd -H/dockerd -g \/mydata\/docker -H/g' /lib/systemd/system/docker.service
+echo "👉 Done!"
