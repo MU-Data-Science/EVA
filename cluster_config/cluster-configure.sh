@@ -1,4 +1,4 @@
-set-cluster-docker-gpus.sh#!/usr/bin/env bash
+#!/usr/bin/env bash
 
 nodes="$1"
 user_name="$USER"
