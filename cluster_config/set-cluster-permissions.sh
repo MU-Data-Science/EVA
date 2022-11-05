@@ -7,6 +7,10 @@ data_dir="$4"
 
 ssh_command="
 sudo chown -R '$USR' '$data_dir'
+sudo mkdir '$data_dir'/var
+sudo mv /var/* '$data_dir'/var
+sudo mv /var /var.old
+sudo ln -s '$data_dir'/var /var
 "
 
 echo ">> READY TO DISTRIBUTE COMMAND:"
