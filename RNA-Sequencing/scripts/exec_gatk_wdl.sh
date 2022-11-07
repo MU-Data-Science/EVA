@@ -30,3 +30,6 @@ do
     cd ${GATK_WDL_DIR} && sudo rm -rvf cromwell-executions cromwell-workflow-logs
 
 done
+echo 'sed '"'"'46 i "RNAseq.inputBam": "'/mydata/gatk-workflows/inputs/ERR5429524.unmapped.bam'"'"'"' /mydata/gatk-workflows/gatk4-rnaseq-germline-snps-indels/template.json > /mydata/gatk-workflows/gatk4-rnaseq-germline-snps-indels/gatk4-rna-germline-variant-calling.inputs.json' > temp.sh && bash temp.sh
+
+ cd /mydata/gatk-workflows && java -jar cromwell-33.1.jar run ./gatk4-rnaseq-germline-snps-indels/gatk4-rna-best-practices.wdl --inputs ./gatk4-rnaseq-germline-snps-indels/gatk4-rna-germline-variant-calling.inputs.json

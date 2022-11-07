@@ -172,9 +172,9 @@ Run the following commands in the shell/terminal:
 
 12. Copy the script to its respective directory path.
 
-    **a.** compute.sh: /mydata/EVA/scripts/compute.sh
+    **a.** compute.sh: /mydata/CADD-scripts/compute.sh
     
-    NOTE: chmod +x /mydata/EVA/scripts/compute.sh
+    NOTE: chmod +x /mydata/CADD-scripts/compute.sh
 
 13. Create the directory.
 
@@ -185,3 +185,5 @@ Run the following commands in the shell/terminal:
 ## Running the scripts for CADD computation
 
     $ bash compute.sh
+
+<b>NOTE:</b> After installation, please check if Docker has been successfully installed. You can do so by running "docker" in your terminal.
