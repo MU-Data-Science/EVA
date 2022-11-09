@@ -1,33 +1,54 @@
 #!/usr/bin/env bash
 
-DATA_DIR="$1"
-UBUNTU_VERSION="ubuntu1804"
-CUDA_VERSION="11.0.2"
-CUDA_PACKAGE="cuda-11.0"
-DRIVER_NAME="450.51.05-1_amd64"
+# Configurations.
+CLUSTER_MACHINES="$1"
+USER_NAME="$2"
+PRIVATE_KEY="$3"
+DATA_DIR="$4"
+DOCKER_SETUP_SCRIPT="docker-gpus-setup.sh"
 
-cd ${DATA_DIR}
+# Iterating over the machines.
+for machine in $(cat "$CLUSTER_MACHINES")
+do
+  # Copying the node setup script to the nodes.
+  scp -i "$PRIVATE_KEY" "$DOCKER_SETUP_SCRIPT" "$USER_NAME@$machine:~" &> /dev/null
 
-echo "👉Installing CUDA ${CUDA_VERSION} for ${UBUNTU_VERSION}..."
-wget https://developer.download.nvidia.com/compute/cuda/repos/${UBUNTU_VERSION}/x86_64/cuda-${UBUNTU_VERSION}.pin
-sudo mv cuda-${UBUNTU_VERSION}.pin /etc/apt/preferences.d/cuda-repository-pin-600
-wget http://developer.download.nvidia.com/compute/cuda/${CUDA_VERSION}/local_installers/cuda-repo-${UBUNTU_VERSION}-11-0-local_${CUDA_VERSION}-${DRIVER_NAME}.deb
-sudo dpkg -i cuda-repo-${UBUNTU_VERSION}-11-0-local_${CUDA_VERSION}-${DRIVER_NAME}.deb
-sudo apt-key add /var/cuda-repo-${UBUNTU_VERSION}-11-0-local/7fa2af80.pub
-sudo apt-get update
-sudo apt-get -y install ${CUDA_PACKAGE}
-echo "👉 Done! A reboot is needed to load the driver."
+  # Executing the setup script.
+  ssh -o "StrictHostKeyChecking no" -i "$PRIVATE_KEY" "$USER_NAME@$machine" "~/$DOCKER_SETUP_SCRIPT $DATA_DIR $" &> /dev/null &
 
-echo "👉 Installing Docker..."
-sudo apt update
-sudo apt install docker.io -y
-distribution=$(. /etc/os-release;echo $ID$VERSION_ID) \
-      && curl -fsSL https://nvidia.github.io/libnvidia-container/gpgkey | sudo gpg --dearmor -o /usr/share/keyrings/nvidia-container-toolkit-keyring.gpg \
-      && curl -s -L https://nvidia.github.io/libnvidia-container/$distribution/libnvidia-container.list | \
-            sed 's#deb https://#deb [signed-by=/usr/share/keyrings/nvidia-container-toolkit-keyring.gpg] https://#g' | \
-            sudo tee /etc/apt/sources.list.d/nvidia-container-toolkit.list
-sudo apt-get update
-sudo apt-get install -y nvidia-docker2
-sudo systemctl start docker
-sudo sed -i -e 's/dockerd -H/dockerd -g \/mydata\/docker -H/g' /lib/systemd/system/docker.service
-echo "👉 Done!"
+  # Adding the pid to a list.
+  bp_list="$bp_list $!"
+  echo -e "\t + $machine ... OK ☕"
+done
+
+# Waiting for the setup in the nodes to finish - start.
+echo -e "WAITING FOR SETUP TO FINISH \n"
+total=$(cat $CLUSTER_MACHINES | wc -l | sed 's/ //')
+echo $(date| tr '[:lower:]' '[:upper:]')
+echo -e "CHECKING PIDS STATUS.."
+finished=1
+while [[ $finished -gt 0 ]]; do
+	finished=$total
+
+  states=""
+	for pid in $bp_list; do
+		state=$(ps -o state $pid  |tail -n +2)
+		states="$states $state"
+		if [[ ${#state} -eq 0 ]]; then
+			finished=$((finished-1))
+		fi;
+	done;
+
+  echo "REMAINING: "$finished"/"$total
+	states=${states// /}
+	if [[ ${#states} -gt 0 ]]; then
+		sleep 30
+	fi
+done;
+
+echo $(date| tr '[:lower:]' '[:upper:]')
+wait
+# Waiting for the setup in the nodes to finish - end.
+
+echo -e ">> DOCKER/GPUs SETUP FINISHED 🌮"
+exit 0

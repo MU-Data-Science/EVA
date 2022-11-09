@@ -13,3 +13,4 @@ web_app/xml_processor/build
 web_app/xml_processor/build.number
 venv
 */*.pycproject/
+.bsp
