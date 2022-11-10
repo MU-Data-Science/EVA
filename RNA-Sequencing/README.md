@@ -187,3 +187,5 @@ Run the following commands in the shell/terminal:
     $ bash compute.sh
 
 <b>NOTE:</b> After installation, please check if Docker has been successfully installed. You can do so by running "docker" in your terminal.
+
+If you see that docker has not been installed successfully, especially inside a screen, please repeat Steps 1(a) to 1(f).
