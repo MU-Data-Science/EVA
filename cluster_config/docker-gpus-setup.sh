@@ -5,6 +5,7 @@ UBUNTU_VERSION="ubuntu1804"
 CUDA_VERSION="11.0.2"
 CUDA_PACKAGE="cuda-11.0"
 DRIVER_NAME="450.51.05-1_amd64"
+PARABRICKS="nvcr.io/nvidia/clara/clara-parabricks:4.0.0-1"
 
 cd ${DATA_DIR}
 
@@ -30,4 +31,7 @@ sudo apt-get update
 sudo apt-get install -y nvidia-docker2
 sudo systemctl start docker
 sudo sed -i -e 's/dockerd -H/dockerd -g \/mydata\/docker -H/g' /lib/systemd/system/docker.service
+sudo systemctl daemon-reload
+sudo systemctl start docker
+sudo docker pull ${PARABRICKS}
 echo "👉 Done!"
