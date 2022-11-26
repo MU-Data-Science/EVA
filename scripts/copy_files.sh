@@ -13,6 +13,10 @@ FILES=(\
 	"hs38.fa.pac" \
 	"hs38.fa.sa" \
 	"hs38.fa.img" \
+	"../Homo_sapiens_assembly38.dbsnp138.vcf.gz" \
+	"../Homo_sapiens_assembly38.dbsnp138.vcf.gz.tbi" \
+	"../Homo_sapiens_assembly38.known_indels.vcf.gz" \
+	"../Homo_sapiens_assembly38.known_indels.vcf.gz.tbi" \
 #	"hs38.fa.bwt.2bit.64" \
 #	"hs38.fa.0123" \
   )
