@@ -1,4 +1,4 @@
-# Exhaustive Variant Analysis (EVA) on Human Genome Sequences
+# Efficient Variant Analysis (EVA) on Large-Scale Human Genome Sequences
 
 The goal of this
 [NSF RAPID project](https://nsf.gov/awardsearch/showAward?AWD_ID=2034247)
