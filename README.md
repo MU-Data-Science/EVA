@@ -27,9 +27,7 @@ human genome sequences for COVID-19 research. Please check this out on
 [[CloudLab account]](#signup-for-a-cloudlab-account)
 
 [[Variant analysis (single node)]](#running-variant-analysis-on-human-genomes-using-a-single-cloudlab-node)
-<br/>[[Variant analysis (cluster)]](#running-variant-analysis-on-a-cluster-of-cloudlab-nodes)
 <br/>[[Variant analysis using AVAH (cluster)]](#running-variant-analysis-on-a-cluster-of-cloudlab-nodes-using-avah)
-<br/>[[De novo assembly (cluster)]](#running-de-novo-assembly-on-a-cluster-of-cloudlab-nodes)
 
 [[Publications]](#publications)
 
@@ -160,6 +158,7 @@ Alternatively, you can use `SSH` to login to the node: `$ ssh -i /path/to/CloudL
 
     $ screen -ls
 
+<!--
 ## Running variant analysis on a cluster of CloudLab nodes
 We are using [Apache Spark](https://spark.apache.org),
 [Apache Hadoop](https://hadoop.apache.org), [GATK](https://gatk.broadinstitute.org), and 
@@ -195,6 +194,7 @@ We are using [Apache Spark](https://spark.apache.org),
     ```
 
 6. Download the `.vcf` files in the local directories on `vm0`. The file ending with `-BQSR-output.vcf` contains the variants computed on the analysis-ready reads.
+-->
 
 ## Running variant analysis on a cluster of CloudLab nodes Using AVAH
 We are using [AVAH](https://github.com/raopr/AVAH) [CIKM '21],
