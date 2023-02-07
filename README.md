@@ -108,10 +108,16 @@ Alternatively, you can use `SSH` to login to the node: `$ ssh -i /path/to/CloudL
     ```
     $ wget ftp://ftp.sra.ebi.ac.uk/vol1/fastq/ERR016/ERR016314/ERR016314_1.fastq.gz
     $ wget ftp://ftp.sra.ebi.ac.uk/vol1/fastq/ERR016/ERR016314/ERR016314_2.fastq.gz
-    ```
+    ``` 
 
     If you have deidentified sequences on your local machine to analyze, copy to the CloudLab node using `scp`.
-
+    
+    Copy the necessary genome files stored in `Genome_Data` under `/proj/eva-public-PG0/`, needed for running variant analysis using FreeBayes and GATK in        the next steps using the following command 
+    
+    ```
+    ${HOME}/EVA/scripts/copy_1kgenome_files.sh
+    ```
+    
     **f.** There are three variant analysis scripts. The first one performs alignment, sorting, marking duplicates, variant
     calling using FreeBayes. The other two will
     perform the alignment, sorting, marking duplicates, variant
