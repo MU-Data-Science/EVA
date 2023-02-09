@@ -7,6 +7,8 @@ FREEBAYES_EXEC=$(which freebayes)
 SAMTOOLS_HOME=${HOME}/samtools
 TMP_DIR="/mydata/tmp"
 OUTPUT_PREFIX="VA-"${USER}"-result"
+DATA_DIR="/mydata"
+
 TRANCHE_RESOURCES=(\
   "${DATA_DIR}/hapmap_3.3.hg38.vcf.gz" \
   "${DATA_DIR}/1000G_omni2.5.hg38.vcf.gz" \
