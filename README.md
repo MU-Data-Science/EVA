@@ -213,14 +213,14 @@ We are using [AVAH](https://github.com/raopr/AVAH) [CIKM '21],
    ```
    Use of `screen` is recommended as copying the files can take more than 15 minutes.
 
-4. If using GATK4, do the changes mentioned on this [page](GATK-README.md).
-
-5. On `vm0`, clone the AVAH repo.
+4. On `vm0`, clone the AVAH repo.
    ```
    $ cd ; git clone https://github.com/raopr/AVAH.git
    $ cp ${HOME}/AVAH/misc/sampleIDs-vlarge.txt /proj/eva-public-PG0/${USER}-sampleIDs-vlarge.txt
    $ cp ${HOME}/AVAH/misc/sampleURLs-vlarge.txt /proj/eva-public-PG0/${USER}-sampleURLs-vlarge.txt   
    ```
+
+5. If using GATK4, do the changes mentioned on this [page](GATK-README.md).
 
 6. If using ADAM-Cannoli, run the following command to create the required files for BQSR/Indel
    realignment. The known SNPs and INDELs folders will be created on
