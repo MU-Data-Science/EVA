@@ -92,4 +92,6 @@ rm -rf $shareDir/hadoop_$install_id
 rm -rf $shareDir/spark_$install_id
 rm -rf $machines
 
+exec python3 ./install_exporters.py $nodes
+
 echo ">> WORK IS DONE."
