@@ -14,7 +14,7 @@ if len(sys.argv) < 2:
 num_hosts = int(sys.argv[1])
 
 # Scripts to execute (may need to add more as more metrics are needed)
-cmds = ['kill -SIGKILL $(pidof node_exporter)', './install_node_exporter.sh']
+cmds = ['./install_node_exporter.sh', './run_gpu_exporter.sh']
 
 # Execute a command as a subprocess
 def execute_command(ssh_cmd):
