@@ -1,0 +1,326 @@
+@prefix ns1: <http://sg.org/> .
+@prefix ns1_m: <http://sg.org/model> .
+@prefix ns1_e: <http://sg.org/entity> .
+@prefix ns1_et: <http://sg.org/entity_type> .
+@prefix wiki: <https://wikidata.org/> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+
+ns1:study rdf:type rdfs:Class .
+ns1:has_primary_id rdf:type rdf:Property ;
+    rdfs:range xsd:string ;
+    rdfs:domain ns1:study .
+
+ns1:has_secondary_id rdf:type rdf:Property ;
+    rdfs:range xsd:string ;
+    rdfs:domain ns1:study .
+
+ns1:has_submitter_id rdf:type rdf:Property ;
+    rdfs:range xsd:string ;
+    rdfs:domain ns1:study .
+
+ns1:has_external_id rdf:type rdf:Property ;
+    rdfs:range xsd:string ;
+    rdfs:domain ns1:study .
+
+ns1:has_title rdf:type rdf:Property ;
+    rdfs:range xsd:string ;
+    rdfs:domain ns1:study .
+
+ns1:has_abstract rdf:type rdf:Property ;
+    rdfs:range xsd:string ;
+    rdfs:domain ns1:study .
+
+ns1:has_center_project_name rdf:type rdf:Property ;
+    rdfs:range xsd:string ;
+    rdfs:domain ns1:study .
+
+ns1:has_description rdf:type rdf:Property ;
+    rdfs:range xsd:string ;
+    rdfs:domain ns1:study .
+
+ns1:has_study_links rdf:type rdf:Property ;
+    rdfs:range ns1:url_link ;
+    rdfs:range ns1:xref_link ;
+    rdfs:domain ns1:study .
+
+ns1:url_link rdf:type rdf:Class .
+ns1:has_label rdf:type rdf:Property ;
+    rdfs:range xsd:string ;
+    rdfs:domain ns1:url_link .
+
+ns1:has_url rdf:type rdf:Property ;
+    rdfs:range xsd:string;
+    rdfs:domain ns1:url_link .
+
+ns1:xref_link rdf:type rdf:Class .
+ns1:has_db rdf:type rdf:Property ;
+    rdfs:range xsd:string ;
+    rdfs:domain ns1:xref_link .
+
+ns1:has_xref_link_id rdf:type rdf:Property ;
+    rdfs:range xsd:string;
+    rdfs:domain ns1:xref_link .
+
+ns1:study_attribute rdf:type rdf:Class .
+ns1:has_tag rdf:type rdf:Property ;
+    rdfs:range xsd:string ;
+    rdfs:domain ns1:study_attribute .
+
+ns1:has_value rdf:type rdf:Property ;
+    rdfs:range xsd:string ;
+    rdfs:domain ns1:study_attribute .
+
+ns1:has_study_attribute rdf:type rdf:Property ;
+    rdfs:range ns1:study_attribute ;
+    rdfs:domain ns1:study .
+
+ns1:experiment rdf:type rdfs:Class .
+ns1:has_primary_id rdf:type rdf:Property ;
+    rdfs:range xsd:string ;
+    rdfs:domain ns1:experiment .
+
+ns1:has_submitter_id rdf:type rdf:Property ;
+    rdfs:range xsd:string ;
+    rdfs:domain ns1:experiment .
+
+ns1:has_title rdf:type rdf:Property ;
+    rdfs:range xsd:string ;
+    rdfs:domain ns1:experiment .
+
+ns1:study_ref rdf:type rdfs:Class .
+ns1:exp_has_study_ref rdf:type rdf:Property ;
+    rdfs:range ns1:study_ref ;
+    rdfs:domain ns1:experiment .
+
+ns1:study_ref_primary_id rdf:type rdf:Property ;
+    rdfs:range xsd:string ;
+    rdfs:domain ns1:study_ref .
+
+ns1:study_ref_secondary_id rdf:type rdf:Property ;
+    rdfs:range xsd:string ;
+    rdfs:domain ns1:study_ref .
+
+ns1:has_design_description rdf:type rdf:Property ;
+    rdfs:range xsd:string ;
+    rdfs:domain ns1:experiment .
+
+ns1:sample_descriptor rdf:type rdfs:Class .
+ns1:design_has_descriptors rdf:type rdf:Property ;
+    rdfs:range ns1:sample_descriptor ;
+    rdfs:range ns1:library_descriptor ;
+    rdfs:domain ns1:experiment .
+
+ns1:has_sample_descriptor_primary_id rdf:type rdf:Property ;
+    rdfs:range xsd:string ;
+    rdfs:domain ns1:sample_descriptor .
+
+ns1:has_sample_descriptor_external_id rdf:type rdf:Property ;
+    rdfs:range xsd:string ;
+    rdfs:domain ns1:sample_descriptor .
+
+ns1:library_descriptor rdf:type rdfs:Class .
+ns1:has_library_name rdf:type rdf:Property ;
+    rdfs:range xsd:string ;
+    rdfs:domain ns1:library_descriptor .
+
+ns1:has_library_strategy rdf:type rdf:Property ;
+    rdfs:range xsd:string ;
+    rdfs:domain ns1:library_descriptor .
+
+ns1:has_library_source rdf:type rdf:Property ;
+    rdfs:range xsd:string ;
+    rdfs:domain ns1:library_descriptor .
+
+ns1:has_library_selection rdf:type rdf:Property ;
+    rdfs:range xsd:string ;
+    rdfs:domain ns1:library_descriptor .
+
+ns1:has_library_layout rdf:type rdf:Property ;
+    rdfs:range xsd:string ;
+    rdfs:domain ns1:library_descriptor .
+
+ns1:has_library_construction_protocol rdf:type rdf:Property ;
+    rdfs:range xsd:string ;
+    rdfs:domain ns1:library_descriptor .
+
+ns1:illumina_platform rdf:type rdfs:Class .
+ns1:has_illumina_platform rdf:type rdf:Property ;
+    rdfs:range ns1:illumina_platform ;
+    rdfs:domain ns1:experiment .
+
+ns1:has_instrument_model rdf:type rdf:Property ;
+    rdfs:range xsd:string ;
+    rdfs:domain ns1:illumina_platform .
+
+ns1:has_experiment_link rdf:type rdf:Property ;
+    rdfs:range ns1:xref_link ;
+    rdfs:domain ns1:experiment .
+
+ns1:xref_link rdf:type rdf:Class .
+ns1:has_db rdf:type rdf:Property ;
+    rdfs:range xsd:string ;
+    rdfs:domain ns1:xref_link .
+
+ns1:has_xref_link_id rdf:type rdf:Property ;
+    rdfs:range xsd:string;
+    rdfs:domain ns1:xref_link .
+
+ns1:has_experiment_attribute rdf:type rdf:Property ;
+    rdfs:range ns1:experiment_attribute ;
+    rdfs:domain ns1:experiment .
+
+ns1:experiment_attribute rdf:type rdf:Class .
+ns1:has_tag rdf:type rdf:Property ;
+    rdfs:range xsd:string ;
+    rdfs:domain ns1:experiment_attribute .
+
+ns1:has_value rdf:type rdf:Property ;
+    rdfs:range xsd:string;
+    rdfs:domain ns1:experiment_attribute .
+
+ns1:model rdf:type rdfs:Class .
+ns1:has_model rdf:type rdf:Property ;
+    rdfs:range ns1:model ;
+    rdfs:domain ns1:experiment .
+
+ns1_m:has_name rdf:type rdf:Property ;
+    rdfs:range xsd:string ;
+    rdfs:domain ns1:model .
+
+ns1:entity_type rdf:type rdfs:Class .
+ns1_et:has_name rdf:type rdf:Property ;
+    rdfs:range xsd:string ;
+    rdfs:domain ns1:entity_type .
+
+ns1_m:has_entity_type rdf:type rdf:Property ;
+    rdfs:range ns1:entity_type ;
+    rdfs:domain ns1:model .
+
+ns1:entity rdf:type rdfs:Class .
+ns1_m:has_entity rdf:type rdf:Property ;
+    rdfs:range ns1:entity ;
+    rdfs:domain ns1:model .
+
+ns1_e:has_type rdf:type rdf:Property ;
+    rdfs:range ns1:entity_type ;
+    rdfs:domain ns1:entity .
+
+ns1_e:has_value rdf:type rdf:Property ;
+    rdfs:range xsd:string ;
+    rdfs:domain ns1:entity .
+
+ns1:run rdf:type rdfs:Class .
+ns1:has_primary_id rdf:type rdf:Property ;
+    rdfs:range xsd:string ;
+    rdfs:domain ns1:run .
+
+ns1:has_submitter_id rdf:type rdf:Property ;
+    rdfs:range xsd:string ;
+    rdfs:domain ns1:run .
+
+ns1:has_title rdf:type rdf:Property ;
+    rdfs:range xsd:string ;
+    rdfs:domain ns1:run .
+
+ns1:experiment_ref rdf:type rdfs:Class .
+ns1:run_has_exp_ref rdf:type rdf:Property ;
+    rdfs:range ns1:experiment_ref ;
+    rdfs:domain ns1:run .
+
+ns1:exp_ref_primary_id rdf:type rdf:Property ;
+    rdfs:range xsd:string ;
+    rdfs:domain ns1:experiment_ref .
+
+ns1:illumina_platform rdf:type rdfs:Class .
+ns1:has_illumina_platform rdf:type rdf:Property ;
+    rdfs:range ns1:illumina_platform ;
+    rdfs:domain ns1:run .
+
+ns1:data_block_files rdf:type rdfs:Class .
+ns1:run_data_block_files rdf:type rdf:Property ;
+    rdfs:range ns1:data_block_files ;
+    rdfs:domain ns1:run .
+
+ns1:has_file rdf:type rdf:Property ;
+    rdfs:range xsd:string ;
+    rdfs:domain ns1:data_block_files .
+
+ns1:has_xref_link rdf:type rdf:Property ;
+    rdfs:range ns1:xref_link ;
+    rdfs:domain ns1:run .
+
+ns1:xref_link rdf:type rdfs:Class .
+ns1:has_db rdf:type rdf:Property ;
+    rdfs:range xsd:string ;
+    rdfs:domain ns1:xref_link .
+
+ns1:has_xref_link_id rdf:type rdf:Property ;
+    rdfs:range xsd:string;
+    rdfs:domain ns1:xref_link .
+
+ns1:has_run_attribute rdf:type rdf:Property ;
+    rdfs:range ns1:run_attribute ;
+    rdfs:domain ns1:run .
+
+ns1:run_attribute rdf:type rdf:Class .
+ns1:has_tag rdf:type rdf:Property ;
+    rdfs:range xsd:string ;
+    rdfs:domain ns1:run_attribute .
+
+ns1:has_value rdf:type rdf:Property ;
+    rdfs:range xsd:string;
+    rdfs:domain ns1:run_attribute .
+
+ns1:chromosome rdfs:subClassOf wiki:Q37748 .
+ns1:has_chromosome_number rdf:type rdf:Property ;
+    rdfs:range ns1:chromosome_number ;
+    rdfs:domain ns1:chromosome .
+
+ns1:chromosome_number rdf:type rdf:Class .
+ns1:has_number rdf:type rdf:Property ;
+    rdfs:range xsd:int ;
+    rdfs:domain ns1:chromosome_number .
+    
+ns1:variant rdf:type rdf:Class . 
+ns1:has_variant rdf:type rdf:Property ;
+    rdfs:range ns1:variant .
+    rdfs:domain ns1:chromosome_number .
+
+ns1:has_pos rdf:type rdf:Property ;
+    rdfs:range xsd:int ;
+    rdfs:domain ns1:variant .
+
+ns1:has_ref_genome rdf:type rdf:Property ;
+    rdfs:range xsd:string ;
+    rdfs:domain ns1:variant .
+
+ns1:has_alt_genome rdf:type rdf:Property ;
+    rdfs:range xsd:string ;
+    rdfs:domain ns1:variant .
+
+ns1:cadd rdf:type rdf:Class .
+ns1:has_cadd_scores rdf:type rdf:Property ;
+    rdfs:range ns1:cadd ;
+    rdfs:domain ns1:variant .
+
+ns1:raw_score rdf:type rdf:Property ;
+    rdfs:range xsd:long ;
+    rdfs:domain ns1:cadd .
+
+ns1:phred rdf:type rdf:Property ;
+    rdfs:range xsd:long ;
+    rdfs:domain ns1:cadd .
+
+ns1:origin rdf:type rdf:Class .
+
+ns1:has_gene_id rdf:type rdf:Property ;
+    rdfs:range xsd:string ;
+    rdfs:domain ns1:origin .
+
+ns1:has_gene_name rdf:type rdf:Property ;
+    rdfs:range xsd:string ;
+    rdfs:domain ns1:origin .
+
+
