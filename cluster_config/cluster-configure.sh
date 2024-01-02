@@ -9,6 +9,7 @@ if [[ $# -lt 2 ]]; then
   echo ""
   echo "Options:"
   echo "  flag: 1 for installing Docker/NVIDIA GPU drivers; 0 otherwise (default: 0)"
+  echo "  monitoring: 1 to enable monitoring; 0 otherwise (default: 0)"
   exit
 fi
 
