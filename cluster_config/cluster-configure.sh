@@ -5,7 +5,7 @@ user_name="$USER"
 data_dir="/mydata"
 
 if [[ $# -lt 2 ]]; then
-  echo "Usage: cluster-configure.sh <no. of nodes> <spark3|spark2> [flag]"
+  echo "Usage: cluster-configure.sh <no. of nodes> <spark3|spark2> [flag] [monitoring?]"
   echo ""
   echo "Options:"
   echo "  flag: 1 for installing Docker/NVIDIA GPU drivers; 0 otherwise (default: 0)"
@@ -96,6 +96,8 @@ rm -rf $shareDir/spark_$install_id
 rm -rf $machines
 
 # SCRIPT_DIR=$( cd -- "$( dirname -- "${BASH_SOURCE[0]}" )" &> /dev/null && pwd )
-exec $exporter_install_cmd
+if [ "$4" = 1]; then
+  exec $exporter_install_cmd
+fi
 
 echo ">> WORK IS DONE."
