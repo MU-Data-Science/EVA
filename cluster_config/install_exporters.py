@@ -14,7 +14,10 @@ if len(sys.argv) < 2:
 num_hosts = int(sys.argv[1])
 
 # Scripts to execute (may need to add more as more metrics are needed)
-cmds = ['./install_node_exporter.sh', './run_gpu_exporter.sh']
+cmds = ['./install_node_exporter.sh']
+
+if len(sys.argv) >= 3 and sys.argv[2] == 1:
+    cmds.append("./run_gpu_exporter.sh")
 
 # Execute a command as a subprocess
 def execute_command(ssh_cmd):

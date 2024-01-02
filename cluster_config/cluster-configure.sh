@@ -40,8 +40,11 @@ scripts=(\
   "set-cluster-genome-tools" \
   "set-cluster-bashrc")
 
+exporter_install_cmd="python3 install_exporters.py $nodes"
+
 if [ "$3" = 1 ]; then
   scripts+=("set-cluster-docker-gpus")
+  exporter_install_cmd="python3 install_exporters.py $nodes 1"
 fi
 
 # Write the node list to cluster-machines.txt.
@@ -92,7 +95,7 @@ rm -rf $shareDir/hadoop_$install_id
 rm -rf $shareDir/spark_$install_id
 rm -rf $machines
 
-SCRIPT_DIR=$( cd -- "$( dirname -- "${BASH_SOURCE[0]}" )" &> /dev/null && pwd )
-exec python3 $SCRIPT_DIR/install_exporters.py $nodes
+# SCRIPT_DIR=$( cd -- "$( dirname -- "${BASH_SOURCE[0]}" )" &> /dev/null && pwd )
+exec $exporter_install_cmd
 
 echo ">> WORK IS DONE."
