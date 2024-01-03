@@ -97,7 +97,7 @@ rm -rf $shareDir/spark_$install_id
 rm -rf $machines
 
 # SCRIPT_DIR=$( cd -- "$( dirname -- "${BASH_SOURCE[0]}" )" &> /dev/null && pwd )
-if [ "$4" = 1]; then
+if [ "$4" = 1 ]; then
   exec $exporter_install_cmd
 fi
 
