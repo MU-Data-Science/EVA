@@ -149,7 +149,7 @@ Run the following commands in the shell/terminal:
 
         $ cd /mydata/CADD-scripts
     
-    **b.** In install.sh, go to line 215 and replace --conda-create-envs-only with --create-envs-only
+    **b.** In install.sh, go to line 318 and replace --conda-create-envs-only with --create-envs-only
 
     **b.** Run the following to feed the answers to install.sh.
 
