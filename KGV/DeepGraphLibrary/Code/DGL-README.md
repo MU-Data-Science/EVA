@@ -59,8 +59,7 @@
         bash Anaconda3-2022.05-Linux-x86_64.sh -b -p /mydata/anaconda3
         export PATH=/mydata/anaconda3/bin:$PATH
         echo 'export PATH=/mydata/anaconda3/bin:$PATH' >> ~/.profile && . ~/.profile
-        conda init
-        exit
+        conda init && exit
 
     2. SSH back into the node.
 
@@ -68,12 +67,12 @@
 
         pip install --pre dgl -f https://data.dgl.ai/wheels/repo.html
         pip install --pre dglgo -f https://data.dgl.ai/wheels-test/repo.html
-        pip3 install torch pandas matplotlib tqdm requests
+        pip3 install torch==2.1.2 pandas matplotlib tqdm requests pymantic pyarrow torch-geometric
         pip3 install --upgrade psutil
-        sudo add-apt-repository ppa:ubuntu-toolchain-r/test
-        sudo apt-get update
+        sudo add-apt-repository ppa:ubuntu-toolchain-r/test -y
+        sudo apt-get update -y 
         sudo apt-get install gcc-4.9
-        sudo apt-get install --only-upgrade libstdc++6
+        sudo apt-get install --only-upgrade libstdc++6 -y
 
     4. Set Python path
 
@@ -178,3 +177,12 @@
 [1] https://stackoverflow.com/questions/44967202/pip-is-showing-error-lsb-release-a-returned-non-zero-exit-status-1
 
 [2] https://askubuntu.com/questions/1406192/lsb-release-error-bash-usr-bin-lsb-release-usr-bin-python3-bad-interpreter
+
+[3] If you face this error: 
+
+        FileNotFoundError: Cannot find DGL C++ graphbolt library at /mydata/anaconda3/lib/python3.9/site-packages/dgl/graphbolt/libgraphbolt_pytorch_2.2.2.so
+
+    Follow the following steps to fix this:
+
+        sudo rm /usr/bin/lsb_release
+        pip3 install torch==2.1.2
